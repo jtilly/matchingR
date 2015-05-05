@@ -1,5 +1,3 @@
-// main.cpp
-
 #include <queue>
 #include <matchingR.h>
 
@@ -7,6 +5,21 @@
 
 #include "main.h"
 
+//' Compute the Gale-Shapley Algorithm
+//'
+//' This function computes the Gale-Shapley Algorithm with one-to-one matching 
+//' when both sides of the market are of the same size and everybody gets 
+//' matched.
+//'
+//' @param prefM is a matrix with the preference order of the proposing side of 
+//' the market
+//' @param uW is matrix with cardinal utilities of the courted side of the 
+//' market
+//' @return A list with the successful proposals and engagements. 
+//' \code{proposals} is a vector whose nth element contains the id of the female 
+//' that male n is matched to. 
+//' \code{engagements} is a vector whose nth element contains the id of the male 
+//' that female n is matched to.  
 // [[Rcpp::export]]
 List galeShapleyMatching(const umat prefM, const mat uW) {
     
