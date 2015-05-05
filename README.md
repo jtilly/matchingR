@@ -2,9 +2,9 @@
 R Package that quickly computes the Gale-Shapley Algorithm for large scale matching markets.
 
 ## Depends on
-* [http://cran.r-project.org/web/packages/Rcpp/index.html](Rcpp)
-* [http://cran.r-project.org/web/packages/RcppArmadillo/index.html](RcppArmadillo)
-* [http://cran.r-project.org/web/packages/tictoc/index.html](tictoc)
+* [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html)
+* [RcppArmadillo](http://cran.r-project.org/web/packages/RcppArmadillo/index.html)
+* [tictoc](http://cran.r-project.org/web/packages/tictoc/index.html)
 
 ## Installation
 ```
