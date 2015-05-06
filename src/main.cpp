@@ -120,33 +120,53 @@ umat rankIndex(const umat sortedIdx) {
 //' market
 //' @param uW is a matrix with cardinal utilities of the courted side of the 
 //' market
-//' @param proposals is a vector that contains the id of the female that a given
+//' @param proposals is a matrix that contains the id of the female that a given
 //' man is matched to: the first row contains the id of the female that is 
 //' matched with the first man, the second row contains the id of the female 
-//' that is matched with the second man, etc.
-//' @param engagements is a vector that contains the id of the male that a given
-//' female is matched to
+//' that is matched with the second man, etc. The column dimension accommodates
+//' multi-worker firms.
+//' @param engagements is a matrix that contains the id of the male that a given
+//' female is matched to. The column dimension accommodates multi-worker firms.
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat uM, mat uW, const uvec proposals, const uvec engagements) {
-    const int M = uM.n_rows;
-    const int N = uM.n_cols;
-    // check which side of the market is bigger
-    if(N>M) {
-        uW.insert_cols(M, 1);
-        uW.col(M).fill(-1e10);
+bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat engagements) {
+    
+    // number of workers
+    const int M = uWorkers.n_rows;
+    // number of firms
+    const int N = uWorkers.n_cols;
+    // number of slots per firm
+    const int slotsFirms = engagements.n_cols;
+    // number of slots per worker
+    const int slotsWorkers = proposals.n_cols;
+    
+    // more jobs than workers (add utility from being unmatched to firms' preferences)
+    if(N*slotsFirms>M*slotsWorkers) {
+        uFirms.insert_cols(M, 1);
+        uFirms.col(M).fill(-1e10);
     }
-    if(M>N) {
-        uM.insert_cols(N, 1);
-        uM.col(N).fill(-1e10);
+    // more workers than jobs (add utility from being unmatched to workers' preferences)
+    if(M*slotsWorkers>N*slotsFirms) {
+        uWorkers.insert_cols(N, 1);
+        uWorkers.col(N).fill(-1e10);
     }
-    for(int mX=0; mX<M; mX++) {
-        for(int wX=0; wX<N; wX++) {
-            if(uW(wX, mX) > uW(wX, engagements(wX)) && uM(mX, wX) > uM(mX, proposals(mX))) {
-                Rprintf("matching is not stable; man %d would rather be matched to woman %d and vice versa.\n", mX, wX);
-                return false;
-            } 
+    // loop over workers
+    for(int wX=0; wX<M; wX++) {
+        // loop over firms
+        for(int fX=0; fX<N; fX++) {
+            // loop over multiple "slots" at the same worker
+            for(int swX=0;swX<slotsWorkers;swX++) {
+                // loop over multiple slots at the same firm
+                for(int sfX=0;sfX<slotsFirms;sfX++) {
+                    // check if wX and fX would rather be matched with each other than with their actual matches
+                    if(uFirms(fX, wX) > uFirms(fX, engagements(fX, sfX)) && uWorkers(wX, fX) > uWorkers(wX, proposals(wX, swX))) {
+                        Rprintf("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
+                        return false;
+                    } 
+                }
+            }
         }
     }
     return true;
 }
+

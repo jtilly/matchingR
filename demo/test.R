@@ -25,7 +25,7 @@ res.one2one = one2one(uFirms, uWorkers)
 toc()
 
 # this will leave 500 workers unmatched
-res.one2one$single.reviewers
+length(res.one2one$single.reviewers)
 
 # check if matching is stable
 checkStability(uFirms, uWorkers, res.one2one$proposals, res.one2one$engagements)
@@ -38,6 +38,9 @@ toc()
 # this will leave 1500 positions vacant
 length(res.one2many$single.reviewers)
 
+# check if matching is stable
+checkStability(uWorkers, uFirms, res.one2many$proposals, res.one2many$engagements)
+
 # multi-worker firms proposing to workers
 tic()
 res.many2one = many2one(uFirms, uWorkers, slots=2)
@@ -45,3 +48,5 @@ toc()
 
 # this will leave 1500 positions vacant
 length(res.many2one$single.proposers)
+# check if matching is stable
+checkStability(uFirms, uWorkers, res.many2one$proposals, res.many2one$engagements)

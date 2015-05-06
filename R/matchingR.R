@@ -60,7 +60,13 @@ one2one = function(proposerUtils = NULL,
     
     res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N],
                       "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]))
+    
+    res$proposals = matrix(res$proposals, ncol=1)
+    res$engagements = matrix(res$engagements, ncol=1)
+    
+    return(res)
 }
+
 
 #' Compute the one-to-many matching
 #'
@@ -130,7 +136,7 @@ one2many = function(proposerUtils = NULL,
     # number of workers
     M = length(res$proposals)
     
-    # number of firms
+    # number of positions
     N = length(res$engagements)
     
     # collect results
@@ -142,10 +148,10 @@ one2many = function(proposerUtils = NULL,
     
     # translate proposals into the id of the original firm
     firm.ids = rep.row(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
-    res$proposals = firm.ids[res$proposals]
+    res$proposals = matrix(firm.ids[res$proposals+1], ncol=1)
     
     # translate single reviewers into the id of the original firm
-    res$single.reviewers = firm.ids[res$single.reviewers]
+    res$single.reviewers = firm.ids[res$single.reviewers+1]
     
     return(res)
 }
@@ -231,10 +237,10 @@ many2one = function(proposerUtils = NULL,
     
     # translate engagements into the id of the original firm
     firm.ids = rep.row(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
-    res$engagements = firm.ids[res$engagements]
+    res$engagements = matrix(firm.ids[res$engagements+1], ncol=1)
     
     # translate single proposers into the id of the original firm
-    res$single.proposers = firm.ids[res$single.proposers]
+    res$single.proposers = firm.ids[res$single.proposers+1]
     
     return(res)
 }

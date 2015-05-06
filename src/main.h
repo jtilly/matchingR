@@ -4,6 +4,6 @@
 List galeShapleyMatching(umat prefM, mat rankW);
 umat sortIndex(mat u);
 umat rankIndex(umat sortedIdx);
-bool checkStability(mat uM, mat uW, uvec proposals, uvec engagements);
+bool checkStability(mat uM, mat uW, umat proposals, umat engagements);
 
 #endif

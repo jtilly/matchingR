@@ -51,14 +51,15 @@ rankIndex <- function(sortedIdx) {
 #' market
 #' @param uW is a matrix with cardinal utilities of the courted side of the 
 #' market
-#' @param proposals is a vector that contains the id of the female that a given
+#' @param proposals is a matrix that contains the id of the female that a given
 #' man is matched to: the first row contains the id of the female that is 
 #' matched with the first man, the second row contains the id of the female 
-#' that is matched with the second man, etc.
-#' @param engagements is a vector that contains the id of the male that a given
-#' female is matched to
+#' that is matched with the second man, etc. The column dimension accommodates
+#' multi-worker firms.
+#' @param engagements is a matrix that contains the id of the male that a given
+#' female is matched to. The column dimension accommodates multi-worker firms.
 #' @return true if the matching is stable, false otherwise
-checkStability <- function(uM, uW, proposals, engagements) {
-    .Call('matchingR_checkStability', PACKAGE = 'matchingR', uM, uW, proposals, engagements)
+checkStability <- function(uWorkers, uFirms, proposals, engagements) {
+    .Call('matchingR_checkStability', PACKAGE = 'matchingR', uWorkers, uFirms, proposals, engagements)
 }
 

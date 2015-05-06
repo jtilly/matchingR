@@ -42,16 +42,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // checkStability
-bool checkStability(mat uM, mat uW, const uvec proposals, const uvec engagements);
-RcppExport SEXP matchingR_checkStability(SEXP uMSEXP, SEXP uWSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
+bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat engagements);
+RcppExport SEXP matchingR_checkStability(SEXP uWorkersSEXP, SEXP uFirmsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< mat >::type uM(uMSEXP);
-    Rcpp::traits::input_parameter< mat >::type uW(uWSEXP);
-    Rcpp::traits::input_parameter< const uvec >::type proposals(proposalsSEXP);
-    Rcpp::traits::input_parameter< const uvec >::type engagements(engagementsSEXP);
-    __result = Rcpp::wrap(checkStability(uM, uW, proposals, engagements));
+    Rcpp::traits::input_parameter< mat >::type uWorkers(uWorkersSEXP);
+    Rcpp::traits::input_parameter< mat >::type uFirms(uFirmsSEXP);
+    Rcpp::traits::input_parameter< const umat >::type proposals(proposalsSEXP);
+    Rcpp::traits::input_parameter< const umat >::type engagements(engagementsSEXP);
+    __result = Rcpp::wrap(checkStability(uWorkers, uFirms, proposals, engagements));
     return __result;
 END_RCPP
 }
