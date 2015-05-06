@@ -4,12 +4,10 @@
 #' Compute the Gale-Shapley Algorithm
 #'
 #' This function computes the Gale-Shapley Algorithm with one-to-one matching 
-#' when both sides of the market are of the same size and everybody gets 
-#' matched.
 #'
 #' @param prefM is a matrix with the preference order of the proposing side of 
 #' the market
-#' @param uW is matrix with cardinal utilities of the courted side of the 
+#' @param uW is a matrix with cardinal utilities of the courted side of the 
 #' market
 #' @return A list with the successful proposals and engagements. 
 #' \code{proposals} is a vector whose nth element contains the id of the female 
@@ -20,10 +18,46 @@ galeShapleyMatching <- function(prefM, uW) {
     .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', prefM, uW)
 }
 
+#' Sort indices of a matrix within row
+#' 
+#' Within each row of a matrix, this function return the indices of each 
+#' element in descending order
+#' 
+#' @param u is the input matrix
+#' @return a matrix with sorted indicies
+#' 
 sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
 }
 
+#' Rank elements within row of a matrix
+#' 
+#' This function assigns the rank to each element within each row of a matrix.
+#' The highest element receives the highest rank.
+#' 
+#' @param u is the input matrix
+#' @return a rank matrix
+#' 
+rankIndex <- function(sortedIdx) {
+    .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
+}
+
+#' Check if a matching is stable
+#'
+#' This function checks if a given matching is stable for a particular set of
+#' preferences
+#'
+#' @param uM is a matrix with cardinal utilities of the proposing side of the 
+#' market
+#' @param uW is a matrix with cardinal utilities of the courted side of the 
+#' market
+#' @param proposals is a vector that contains the id of the female that a given
+#' man is matched to: the first row contains the id of the female that is 
+#' matched with the first man, the second row contains the id of the female 
+#' that is matched with the second man, etc.
+#' @param engagements is a vector that contains the id of the male that a given
+#' female is matched to
+#' @return true if the matching is stable, false otherwise
 checkStability <- function(uM, uW, proposals, engagements) {
     .Call('matchingR_checkStability', PACKAGE = 'matchingR', uM, uW, proposals, engagements)
 }

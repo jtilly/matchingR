@@ -20,27 +20,22 @@ library("matchingR")
 set.seed(1)
 # set commonality
 commonality = 0.5
-# set number of men/women
-N = 2500
+# set number of men
+M = 2500
+# set number of women
+N = 2000
 
 # generate preferences
 tic()
-uM = commonality * matrix(runif(N), nrow=N, ncol=N, byrow = TRUE) + (1-commonality) * runif(N^2)
-uW = commonality * matrix(runif(N), nrow=N, ncol=N, byrow = TRUE) + (1-commonality) * runif(N^2)
+uM = commonality * matrix(runif(N), nrow=M, ncol=N, byrow = TRUE) + (1-commonality) * runif(N*M)
+uW = commonality * matrix(runif(M), nrow=N, ncol=M, byrow = TRUE) + (1-commonality) * runif(M*N)
 toc()
 
-# compute preference and rank matrices
-# ... prefW[1,2] gives us the index of the second-most preferred man by woman 1
-# ... prefM[1,2] gives us the index of the second-most preferred woman by man 1
 tic()
-prefM = sortIndex(uM)
-prefW = sortIndex(uW)
-toc()
-
-# compute matching
-tic()
-resM = galeShapleyMatching(prefM, uW)
-resW = galeShapleyMatching(prefW, uM)
+# male optimal matching
+resM = one2one(uM, uW)
+# female optimal matching
+resW = one2one(uW, uM)
 toc()
 
 # check if matching is stable
