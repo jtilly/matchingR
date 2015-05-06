@@ -35,7 +35,7 @@ one2one = function(proposerUtils = NULL,
         proposerPref = sortIndex(proposerUtils)
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(reviewerPref)
     }
     if(is.null(proposerPref)) {
         stop("missing proposer preferences")   
@@ -100,10 +100,10 @@ one2many = function(proposerUtils = NULL,
     
     # parse inputs
     if(is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = rankIndex(proposerPref)
+        proposerUtils = -rankIndex(proposerPref)
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(reviewerPref)
     }
     if(is.null(proposerUtils)) {
         stop("missing proposer utilities")   
@@ -189,10 +189,10 @@ many2one = function(proposerUtils = NULL,
     
     # parse inputs
     if(is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = rankIndex(proposerPref)
+        proposerUtils = -rankIndex(proposerPref)
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(reviewerPref)
     }
     if(is.null(proposerUtils)) {
         stop("missing proposer utilities")   
