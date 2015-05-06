@@ -8,24 +8,40 @@ require("matchingR")
 set.seed(1)
 # set commonality
 commonality = 0.5
-# set number of men
-M = 2500
-# set number of women
-N = 2000
+# number of firms
+M = 2000
+# number of workers
+N = 2500
 
-# generate preferences
+# generate preferences for firms and workers
 tic()
-uM = commonality * matrix(runif(N), nrow=M, ncol=N, byrow = TRUE) + (1-commonality) * runif(N*M)
-uW = commonality * matrix(runif(M), nrow=N, ncol=M, byrow = TRUE) + (1-commonality) * runif(M*N)
+uFirms = commonality * matrix(runif(N), nrow=M, ncol=N, byrow = TRUE) + (1-commonality) * runif(N*M)
+uWorkers = commonality * matrix(runif(M), nrow=N, ncol=M, byrow = TRUE) + (1-commonality) * runif(M*N)
 toc()
 
+# compute the firm-optimal one-to-one matching
 tic()
-# male optimal matching
-resM = one2one(uM, uW)
-# female optimal matching
-resW = one2one(uW, uM)
+res.one2one = one2one(uFirms, uWorkers)
 toc()
+
+# this will leave 500 workers unmatched
+res.one2one$single.reviewers
 
 # check if matching is stable
-checkStability(uM, uW, resM$proposals, resM$engagements)
-checkStability(uW, uM, resW$proposals, resW$engagements)
+checkStability(uFirms, uWorkers, res.one2one$proposals, res.one2one$engagements)
+
+# workers proposing to multi-worker firms
+tic()
+res.one2many = one2many(uWorkers, uFirms, slots=2)
+toc()
+
+# this will leave 1500 positions vacant
+length(res.one2many$single.reviewers)
+
+# multi-worker firms proposing to workers
+tic()
+res.many2one = many2one(uFirms, uWorkers, slots=2)
+toc()
+
+# this will leave 1500 positions vacant
+length(res.many2one$single.proposers)
