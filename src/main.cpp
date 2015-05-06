@@ -73,7 +73,7 @@ List galeShapleyMatching(const umat prefM, const mat uW) {
 
 //' Sort indices of a matrix within row
 //' 
-//' Within each row of a matrix, this function return the indices of each 
+//' Within each row of a matrix, this function returns the indices of each 
 //' element in descending order
 //' 
 //' @param u is the input matrix
@@ -92,7 +92,7 @@ umat sortIndex(const mat u) {
 
 //' Rank elements within row of a matrix
 //' 
-//' This function assigns the rank to each element within each row of a matrix.
+//' This function returns the rank of each element within each row of a matrix.
 //' The highest element receives the highest rank.
 //' 
 //' @param u is the input matrix
