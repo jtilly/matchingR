@@ -26,6 +26,8 @@ List galeShapleyMatching(const umat prefM, const mat uW) {
     // initialize engagements, proposals
     vec engagements(N), proposals(M);
     queue<int> bachelors;
+    // set all proposals to N (aka no proposals)
+    proposals.fill(N);
     // set all engagements to M (aka no engagements)
     engagements.fill(M);
     // every man is a bachelor
