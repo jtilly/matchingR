@@ -5,8 +5,8 @@ Version: 1.0
 Date: 2015-03-08
 Author: Jan Tilly
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
-Description: This package computes the Gale-Shapley Algorithm efficiently using Rcpp
+Description: This package computes the Gale-Shapley Algorithm efficiently using Rcpp. It provides algorithms to compute the stable matching for the marriage problem and for the matching of workers to multi-worker firms.
 License: GPL (>= 2)
 Depends: Rcpp, RcppArmadillo, tictoc
 LinkingTo: Rcpp, RcppArmadillo
-Imports: Rcpp
+Imports: 
