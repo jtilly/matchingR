@@ -7,6 +7,12 @@
 checkStability(uWorkers, uFirms, proposals, engagements)
 }
 \arguments{
+\item{uWorkers}{is a matrix with cardinal utilities of the proposing side of the
+market}
+
+\item{uFirms}{is a matrix with cardinal utilities of the courted side of the
+market}
+
 \item{proposals}{is a matrix that contains the id of the female that a given
 man is matched to: the first row contains the id of the female that is
 matched with the first man, the second row contains the id of the female
@@ -15,12 +21,6 @@ multi-worker firms.}
 
 \item{engagements}{is a matrix that contains the id of the male that a given
 female is matched to. The column dimension accommodates multi-worker firms.}
-
-\item{uM}{is a matrix with cardinal utilities of the proposing side of the
-market}
-
-\item{uW}{is a matrix with cardinal utilities of the courted side of the
-market}
 }
 \value{
 true if the matching is stable, false otherwise

@@ -95,7 +95,7 @@ umat sortIndex(const mat u) {
 //' This function returns the rank of each element within each row of a matrix.
 //' The highest element receives the highest rank.
 //' 
-//' @param u is the input matrix
+//' @param sortedIdx is the input matrix
 //' @return a rank matrix
 //' 
 // [[Rcpp::export]]
@@ -116,9 +116,9 @@ umat rankIndex(const umat sortedIdx) {
 //' This function checks if a given matching is stable for a particular set of
 //' preferences
 //'
-//' @param uM is a matrix with cardinal utilities of the proposing side of the 
+//' @param uWorkers is a matrix with cardinal utilities of the proposing side of the 
 //' market
-//' @param uW is a matrix with cardinal utilities of the courted side of the 
+//' @param uFirms is a matrix with cardinal utilities of the courted side of the 
 //' market
 //' @param proposals is a matrix that contains the id of the female that a given
 //' man is matched to: the first row contains the id of the female that is 

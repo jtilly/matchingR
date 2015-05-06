@@ -7,7 +7,7 @@
 rankIndex(sortedIdx)
 }
 \arguments{
-\item{u}{is the input matrix}
+\item{sortedIdx}{is the input matrix}
 }
 \value{
 a rank matrix
