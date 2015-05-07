@@ -109,7 +109,7 @@ one2many = function(proposerUtils = NULL,
         stop("missing proposer utilities")   
     }
     if(is.null(reviewerUtils)) {
-        stop("missing reviwer utilities")   
+        stop("missing reviewer utilities")   
     }
     
     # check inputs
@@ -147,7 +147,7 @@ one2many = function(proposerUtils = NULL,
     res$engagements = matrix(res$engagements, ncol=slots, byrow = TRUE)
     
     # translate proposals into the id of the original firm
-    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
+    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms), ncol=1), slots)
     res$proposals = matrix(firm.ids[res$proposals+1], ncol=1)
     
     # translate single reviewers into the id of the original firm
@@ -236,7 +236,7 @@ many2one = function(proposerUtils = NULL,
     res$proposals = matrix(res$proposals, ncol=slots, byrow = TRUE)
     
     # translate engagements into the id of the original firm
-    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
+    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms), ncol=1), slots)
     res$engagements = matrix(firm.ids[res$engagements+1], ncol=1)
     
     # translate single proposers into the id of the original firm
