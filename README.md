@@ -12,7 +12,7 @@ library("devtools")
 install_github("jtilly/matchingR")
 ```
 
-## Example
+## Example: Marriage Market
 ```
 library("matchingR")
 
@@ -21,24 +21,44 @@ set.seed(1)
 # set commonality
 commonality = 0.5
 # set number of men
-M = 2500
+nmen = 2500
 # set number of women
-N = 2000
+nwomen = 2000
 
 # generate preferences
-tic()
-uM = commonality * matrix(runif(N), nrow=M, ncol=N, byrow = TRUE) + (1-commonality) * runif(N*M)
-uW = commonality * matrix(runif(M), nrow=N, ncol=M, byrow = TRUE) + (1-commonality) * runif(M*N)
-toc()
+uM = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen)
+uW = commonality * matrix(runif(nmen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
 
-tic()
 # male optimal matching
-resM = one2one(uM, uW)
+resultsM = one2one(uM, uW)
 # female optimal matching
-resW = one2one(uW, uM)
-toc()
+resultsW = one2one(uW, uM)
 
 # check if matching is stable
-checkStability(uM, uW, resM$proposals, resM$engagements)
-checkStability(uW, uM, resW$proposals, resW$engagements)
+checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
+checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
+```
+
+## Example: Multi Worker Firms
+```
+library("matchingR")
+
+# set seed for replicability
+set.seed(1)
+# set commonality
+commonality = 0.5
+# set number of men
+nworkers = 10
+# set number of women
+nfirms = 5
+
+# generate preferences
+uWorkers = commonality * matrix(runif(nworkers), nrow=nfirms, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(nworkers*nfirms)
+uFirms = commonality * matrix(runif(nworkers), nrow=nworkers, ncol=nfirms, byrow = TRUE) + (1-commonality) * runif(nfirms*nworkers)
+
+# worker optimal matching
+results = one2many(uWorkers, uFirms, slots=2)
+
+# check if matching is stable
+checkStability(uWorkers, uFirms, results$proposals, results$engagements)
 ```
