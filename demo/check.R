@@ -1,15 +1,15 @@
 # check.R
 # This script compares the implementation of this package to the output of the 
-# function matchingMarkets::daa() that is hosted on CRAN. 
+# function matchingMarkets::daa() that is hosted on CRAN after replacing
+# daa.R by https://raw.githubusercontent.com/thiloklein/matchingMarkets/22bf680c8d9a102698834827c20be693f84f3e48/R/daa.R
 library("matchingR")
 
 # install package if needed
 # install.packages("matchingMarkets", dependencies = TRUE)
-
 set.seed(123)
 
-# students are proposing (if you set this to 14 the results won't be the same)
-nStudents = 12
+# students are proposing
+nStudents = 14
 # colleges are reviewing
 nColleges = 12
 
@@ -27,4 +27,8 @@ matching2$engagements[matching2$engagements==nStudents]=-1
 matching2$engagements = matching2$engagements+1
 
 # compare engagements
-cbind(matching1$engagements, matching2$engagements)
+if(any(matching1$engagements != matching2$engagements)) {
+    stop("the two packages produce different results.")
+} else {
+    print("The packages matchingR and matchingMarkets produce identitical results.")
+}
