@@ -7,7 +7,7 @@
 #' @param x is the input matrix
 #' @param n is the number of repetitions
 #' @return matrix with repeated columns
-rep.col<-function(x,n){
+repcol<-function(x,n){
     s = NCOL(x)
     x[,rep(1:s, each=n)]
 }
@@ -19,7 +19,7 @@ rep.col<-function(x,n){
 #' @param x is the input matrix
 #' @param n is the number of repetitions
 #' @return matrix with repeated rows
-rep.row<-function(x,n){
+reprow<-function(x,n){
     s = NROW(x)
     x[rep(1:s, each=n),]
 }

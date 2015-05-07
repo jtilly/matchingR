@@ -16,3 +16,4 @@ vignettes/*.pdf
 *.o
 *.so
 *.Rproj
+src/symbols.rds

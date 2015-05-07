@@ -1,3 +1,5 @@
 useDynLib(matchingR)
 importFrom(Rcpp, evalCpp)
 exportPattern("^[[:alpha:]]+")
+import(RcppArmadillo)
+import(tictoc)

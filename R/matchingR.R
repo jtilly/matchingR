@@ -124,8 +124,8 @@ one2many = function(proposerUtils = NULL,
     number_of_firms = NROW(reviewerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = rep.col(proposerUtils, slots)
-    reviewerUtils = rep.row(reviewerUtils, slots)
+    proposerUtils = repcol(proposerUtils, slots)
+    reviewerUtils = reprow(reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(proposerUtils);
@@ -147,7 +147,7 @@ one2many = function(proposerUtils = NULL,
     res$engagements = matrix(res$engagements, ncol=slots, byrow = TRUE)
     
     # translate proposals into the id of the original firm
-    firm.ids = rep.row(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
+    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
     res$proposals = matrix(firm.ids[res$proposals+1], ncol=1)
     
     # translate single reviewers into the id of the original firm
@@ -213,8 +213,8 @@ many2one = function(proposerUtils = NULL,
     number_of_firms = NROW(proposerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = rep.row(proposerUtils, slots)
-    reviewerUtils = rep.col(reviewerUtils, slots)
+    proposerUtils = reprow(proposerUtils, slots)
+    reviewerUtils = repcol(reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(proposerUtils);
@@ -236,7 +236,7 @@ many2one = function(proposerUtils = NULL,
     res$proposals = matrix(res$proposals, ncol=slots, byrow = TRUE)
     
     # translate engagements into the id of the original firm
-    firm.ids = rep.row(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
+    firm.ids = reprow(matrix(seq(from=0, to=number_of_firms-1), ncol=1), slots)
     res$engagements = matrix(firm.ids[res$engagements+1], ncol=1)
     
     # translate single proposers into the id of the original firm

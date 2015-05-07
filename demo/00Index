@@ -1,0 +1,2 @@
+check   Compares the matching produce by this package to the matching produced by the package matchingMarkets
+test    Runs a few examples for this package and checks whether the produced matchings are stable
