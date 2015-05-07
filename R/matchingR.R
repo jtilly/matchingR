@@ -32,10 +32,10 @@ one2one = function(proposerUtils = NULL,
     
     # parse inputs
     if(is.null(proposerPref) && !is.null(proposerUtils)) {
-        proposerPref = sortIndex(proposerUtils)
+        proposerPref = sortIndex(as.matrix(proposerUtils))
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
     }
     if(is.null(proposerPref)) {
         stop("missing proposer preferences")   
@@ -53,7 +53,7 @@ one2one = function(proposerUtils = NULL,
     }
     
     # use galeShapleyMatching to compute matching
-    res = galeShapleyMatching(proposerPref, reviewerUtils)
+    res = galeShapleyMatching(as.matrix(proposerPref), as.matrix(reviewerUtils))
     
     M = length(res$proposals)
     N = length(res$engagements)
@@ -100,10 +100,10 @@ one2many = function(proposerUtils = NULL,
     
     # parse inputs
     if(is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = -rankIndex(proposerPref)
+        proposerUtils = -rankIndex(as.matrix(proposerPref))
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
     }
     if(is.null(proposerUtils)) {
         stop("missing proposer utilities")   
@@ -128,10 +128,10 @@ one2many = function(proposerUtils = NULL,
     reviewerUtils = reprow(reviewerUtils, slots)
     
     # create preference ordering
-    proposerPref = sortIndex(proposerUtils);
+    proposerPref = sortIndex(as.matrix(proposerUtils));
     
     # use galeShapleyMatching to compute matching
-    res = galeShapleyMatching(proposerPref, reviewerUtils)
+    res = galeShapleyMatching(as.matrix(proposerPref), as.matrix(reviewerUtils))
     
     # number of workers
     M = length(res$proposals)
@@ -192,7 +192,7 @@ many2one = function(proposerUtils = NULL,
         proposerUtils = -rankIndex(proposerPref)
     } 
     if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(reviewerPref)
+        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
     }
     if(is.null(proposerUtils)) {
         stop("missing proposer utilities")   
@@ -217,10 +217,10 @@ many2one = function(proposerUtils = NULL,
     reviewerUtils = repcol(reviewerUtils, slots)
     
     # create preference ordering
-    proposerPref = sortIndex(proposerUtils);
+    proposerPref = sortIndex(as.matrix(proposerUtils));
     
     # use galeShapleyMatching to compute matching
-    res = galeShapleyMatching(proposerPref, reviewerUtils)
+    res = galeShapleyMatching(as.matrix(proposerPref), as.matrix(reviewerUtils))
     
     # number of firms
     M = length(res$proposals)
