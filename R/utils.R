@@ -9,7 +9,7 @@
 #' @return matrix with repeated columns
 repcol<-function(x,n){
     s = NCOL(x)
-    x[,rep(1:s, each=n)]
+    matrix(x[,rep(1:s, each=n)], nrow=NROW(x), ncol=NCOL(x)*n)
 }
 
 #' Repeat each row of a matrix n times
@@ -21,5 +21,5 @@ repcol<-function(x,n){
 #' @return matrix with repeated rows
 reprow<-function(x,n){
     s = NROW(x)
-    x[rep(1:s, each=n),]
+    matrix(x[rep(1:s, each=n),], nrow=NROW(x)*n, ncol=NCOL(x))
 }

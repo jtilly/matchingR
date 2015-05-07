@@ -131,7 +131,7 @@ one2many = function(proposerUtils = NULL,
     proposerPref = sortIndex(as.matrix(proposerUtils));
     
     # use galeShapleyMatching to compute matching
-    res = galeShapleyMatching(as.matrix(proposerPref), as.matrix(reviewerUtils))
+    res = galeShapleyMatching(proposerPref, reviewerUtils)
     
     # number of workers
     M = length(res$proposals)
