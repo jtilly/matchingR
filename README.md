@@ -47,9 +47,9 @@ library("matchingR")
 set.seed(1)
 # set commonality
 commonality = 0.5
-# set number of men
+# set number of workers
 nworkers = 10
-# set number of women
+# set number of firms
 nfirms = 5
 
 # generate preferences
