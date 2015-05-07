@@ -9,4 +9,3 @@ Description: This package computes the Gale-Shapley Algorithm efficiently using 
 License: GPL (>= 2)
 Depends: Rcpp, RcppArmadillo, tictoc
 LinkingTo: Rcpp, RcppArmadillo
-Imports: 
