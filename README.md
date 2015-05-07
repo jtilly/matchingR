@@ -48,9 +48,9 @@ set.seed(1)
 # set commonality
 commonality = 0.5
 # set number of workers
-nworkers = 10
+nworkers = 1000
 # set number of firms
-nfirms = 4
+nfirms = 400
 
 # generate preferences
 uWorkers = commonality * matrix(runif(nfirms), nrow=nworkers, ncol=nfirms, byrow = TRUE) + (1-commonality) * runif(nworkers*nfirms)
