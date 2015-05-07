@@ -21,16 +21,19 @@
 // [[Rcpp::export]]
 List galeShapleyMatching(const umat prefM, const mat uW) {
     
+    // number of proposers (men)
     int M = prefM.n_rows;
+    // number of reviewers (women)
     int N = prefM.n_cols;
     // initialize engagements, proposals
     vec engagements(N), proposals(M);
+    // create an integer queue of bachelors
     queue<int> bachelors;
     // set all proposals to N (aka no proposals)
     proposals.fill(N);
     // set all engagements to M (aka no engagements)
     engagements.fill(M);
-    // every man is a bachelor
+    // every man starts out as a bachelor
     for(int iX=M-1;iX>=0;iX--) {
         bachelors.push(iX);
     }
@@ -41,20 +44,21 @@ List galeShapleyMatching(const umat prefM, const mat uW) {
         int proposer = bachelors.front();
         // get the proposer's preferences
         urowvec prefMrow = prefM.row(proposer);
-        // find the best match
+        // find the best available match
         for(int jX=0;jX<N;jX++) {
             // index of the woman that the proposer is interested in
             int wX = prefMrow(jX);
-            // check if the most preferred woman is available
+            // check if the woman wX is available
             if(engagements(wX)==M) {
                 engagements(wX) = proposer;
                 proposals(proposer) = wX;
                 break;
             }
-            // check if the most preferred woman can be poached
+            // check if the woman wX can be poached
             if(uW(wX, proposer) > uW(wX, engagements(wX))) {
                 // make the guy who was just dropped a bachelor again
                 proposals(engagements(wX)) = N;
+                // and put him back into the bachelor queue
                 bachelors.push(engagements(wX));
                 // hook up
                 engagements(wX) = proposer;
