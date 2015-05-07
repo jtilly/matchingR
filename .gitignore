@@ -4,10 +4,8 @@
 
 # Example code in package build process
 *-Ex.R
-
 # RStudio files
 .Rproj.user/
-
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -17,3 +15,4 @@ vignettes/*.pdf
 *.so
 *.Rproj
 src/symbols.rds
+inst/doc
