@@ -26,8 +26,8 @@ nmen = 2500
 nwomen = 2000
 
 # generate preferences
-uM = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen)
-uW = commonality * matrix(runif(nmen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
+uM = commonality * matrix(runif(nwomen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen)
+uW = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
 
 # male optimal matching
 resultsM = one2one(uM, uW)
@@ -50,11 +50,11 @@ commonality = 0.5
 # set number of workers
 nworkers = 10
 # set number of firms
-nfirms = 5
+nfirms = 4
 
 # generate preferences
-uWorkers = commonality * matrix(runif(nworkers), nrow=nfirms, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(nworkers*nfirms)
-uFirms = commonality * matrix(runif(nworkers), nrow=nworkers, ncol=nfirms, byrow = TRUE) + (1-commonality) * runif(nfirms*nworkers)
+uWorkers = commonality * matrix(runif(nfirms), nrow=nworkers, ncol=nfirms, byrow = TRUE) + (1-commonality) * runif(nworkers*nfirms)
+uFirms = commonality * matrix(runif(nworkers), nrow=nfirms, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(nfirms*nworkers)
 
 # worker optimal matching
 results = one2many(uWorkers, uFirms, slots=2)
