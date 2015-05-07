@@ -1,7 +1,7 @@
 # check.R
 # This script compares the implementation of this package to the output of the 
 # function matchingMarkets::daa() that is hosted on CRAN. 
-library("matchingMarkets")
+library("matchingR")
 
 # install package if needed
 # install.packages("matchingMarkets", dependencies = TRUE)
