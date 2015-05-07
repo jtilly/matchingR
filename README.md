@@ -1,4 +1,4 @@
-# matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++
+# matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++  [![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR)
 R Package that quickly computes the Gale-Shapley Algorithm for large scale matching markets. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
 
 ## Depends on
