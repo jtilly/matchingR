@@ -1,11 +1,10 @@
 # check.R
 # This script compares the implementation of this package to the output of the 
-# function matchingMarkets::daa() that is hosted on CRAN after replacing
-# daa.R by https://raw.githubusercontent.com/thiloklein/matchingMarkets/22bf680c8d9a102698834827c20be693f84f3e48/R/daa.R
+# function matchingMarkets::daa() 
 library("matchingR")
 
 # install package if needed
-# install.packages("matchingMarkets", dependencies = TRUE)
+# devtools::install_github("thiloklein/matchingMarkets")
 set.seed(123)
 
 # students are proposing
