@@ -12,6 +12,9 @@ library("devtools")
 install_github("jtilly/matchingR")
 ```
 
+## Documentation
+[matchingR Documentation as PDF](http://jtilly.io/matchingR/matchingR.pdf)
+
 ## Example: Marriage Market
 ```
 library("matchingR")
