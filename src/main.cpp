@@ -132,11 +132,11 @@ umat rankIndex(const umat sortedIdx) {
 //' worker is matched to: the first row contains the id of the firm that is 
 //' matched with the first worker, the second row contains the id of the firm 
 //' that is matched to the second worker, etc. The column dimension accommodates
-//' the scenario when there are multiple workers of the same type. These can be
-//' in R or C++ indices.
+//' the scenario when there are multiple workers of the same type. These must be
+//' given in R style indexing.
 //' @param engagements is a matrix that contains the id of the worker that a given
 //' firm is matched to. The column dimension accommodates multi-worker firms. These 
-//' can be in R or C++ indices.
+//' must be given in R style indexing.
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool checkStability(mat uWorkers, mat uFirms, umat proposals, umat engagements) {
@@ -149,15 +149,11 @@ bool checkStability(mat uWorkers, mat uFirms, umat proposals, umat engagements) 
     const int slotsFirms = engagements.n_cols;
     // number of slots per worker
     const int slotsWorkers = proposals.n_cols;
-    // turn proposals into C++ indices if necessary
-    if(proposals.min() == 1) {
-        proposals--;
-    }
-    // turn engagements into C++ indices if necessary
-    if(engagements.min() == 1) {
-        engagements--;
-    }
-    
+    // turn proposals into C++ indices 
+    proposals--;
+    // turn engagements into C++ indices
+    engagements--;
+        
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsFirms>M*slotsWorkers) {
         uFirms.insert_cols(M, 1);

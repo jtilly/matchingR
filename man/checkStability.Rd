@@ -17,12 +17,12 @@ market}
 worker is matched to: the first row contains the id of the firm that is
 matched with the first worker, the second row contains the id of the firm
 that is matched to the second worker, etc. The column dimension accommodates
-the scenario when there are multiple workers of the same type. These can be
-in R or C++ indices.}
+the scenario when there are multiple workers of the same type. These must be
+given in R style indexing.}
 
 \item{engagements}{is a matrix that contains the id of the worker that a given
 firm is matched to. The column dimension accommodates multi-worker firms. These
-can be in R or C++ indices.}
+must be given in R style indexing.}
 }
 \value{
 true if the matching is stable, false otherwise
