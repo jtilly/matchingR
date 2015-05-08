@@ -4,23 +4,24 @@
 \alias{checkStability}
 \title{Check if a matching is stable}
 \usage{
-checkStability(uWorkers, uFirms, proposals, engagements)
+checkStability(proposerUtils, reviewerUtils, proposals, engagements)
 }
 \arguments{
-\item{uWorkers}{is a matrix with cardinal utilities of the proposing side of the
+\item{proposerUtils}{is a matrix with cardinal utilities of the proposing side of the
 market}
 
-\item{uFirms}{is a matrix with cardinal utilities of the courted side of the
+\item{reviewerUtils}{is a matrix with cardinal utilities of the courted side of the
 market}
 
-\item{proposals}{is a matrix that contains the id of the female that a given
-man is matched to: the first row contains the id of the female that is
-matched with the first man, the second row contains the id of the female
-that is matched with the second man, etc. The column dimension accommodates
-multi-worker firms.}
+\item{proposals}{is a matrix that contains the id of the reviewer that a given
+proposer is matched to: the first row contains the id of the reviewer that is
+matched with the first proposer, the second row contains the id of the reviewer
+that is matched with the second proposer, etc. The column dimension accommodates
+proposers with multiple slots.}
 
-\item{engagements}{is a matrix that contains the id of the male that a given
-female is matched to. The column dimension accommodates multi-worker firms.}
+\item{engagements}{is a matrix that contains the id of the proposer that a given
+reviewer is matched to. The column dimension accommodates reviewers with multiple
+slots}
 }
 \value{
 true if the matching is stable, false otherwise

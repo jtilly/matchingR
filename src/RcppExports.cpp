@@ -8,14 +8,14 @@
 using namespace Rcpp;
 
 // galeShapleyMatching
-List galeShapleyMatching(const umat prefM, const mat uW);
-RcppExport SEXP matchingR_galeShapleyMatching(SEXP prefMSEXP, SEXP uWSEXP) {
+List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils);
+RcppExport SEXP matchingR_galeShapleyMatching(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const umat >::type prefM(prefMSEXP);
-    Rcpp::traits::input_parameter< const mat >::type uW(uWSEXP);
-    __result = Rcpp::wrap(galeShapleyMatching(prefM, uW));
+    Rcpp::traits::input_parameter< const umat >::type proposerPref(proposerPrefSEXP);
+    Rcpp::traits::input_parameter< const mat >::type reviewerUtils(reviewerUtilsSEXP);
+    __result = Rcpp::wrap(galeShapleyMatching(proposerPref, reviewerUtils));
     return __result;
 END_RCPP
 }
@@ -42,16 +42,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // checkStability
-bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat engagements);
-RcppExport SEXP matchingR_checkStability(SEXP uWorkersSEXP, SEXP uFirmsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
+bool checkStability(mat proposerUtils, mat reviewerUtils, const umat proposals, const umat engagements);
+RcppExport SEXP matchingR_checkStability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< mat >::type uWorkers(uWorkersSEXP);
-    Rcpp::traits::input_parameter< mat >::type uFirms(uFirmsSEXP);
+    Rcpp::traits::input_parameter< mat >::type proposerUtils(proposerUtilsSEXP);
+    Rcpp::traits::input_parameter< mat >::type reviewerUtils(reviewerUtilsSEXP);
     Rcpp::traits::input_parameter< const umat >::type proposals(proposalsSEXP);
     Rcpp::traits::input_parameter< const umat >::type engagements(engagementsSEXP);
-    __result = Rcpp::wrap(checkStability(uWorkers, uFirms, proposals, engagements));
+    __result = Rcpp::wrap(checkStability(proposerUtils, reviewerUtils, proposals, engagements));
     return __result;
 END_RCPP
 }

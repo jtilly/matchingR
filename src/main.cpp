@@ -9,22 +9,22 @@
 //'
 //' This function computes the Gale-Shapley Algorithm with one-to-one matching 
 //'
-//' @param prefM is a matrix with the preference order of the proposing side of 
+//' @param proposerPref is a matrix with the preference order of the proposing side of 
 //' the market
-//' @param uW is a matrix with cardinal utilities of the courted side of the 
+//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
 //' market
 //' @return A list with the successful proposals and engagements. 
-//' \code{proposals} is a vector whose nth element contains the id of the female 
-//' that male n is matched to. 
-//' \code{engagements} is a vector whose nth element contains the id of the male 
-//' that female n is matched to.  
+//' \code{proposals} is a vector whose nth element contains the id of the reviewer 
+//' that proposer n is matched to. 
+//' \code{engagements} is a vector whose nth element contains the id of the proposer 
+//' that reviewer n is matched to.  
 // [[Rcpp::export]]
-List galeShapleyMatching(const umat prefM, const mat uW) {
+List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
     
     // number of proposers (men)
-    int M = prefM.n_rows;
+    int M = proposerPref.n_rows;
     // number of reviewers (women)
-    int N = prefM.n_cols;
+    int N = proposerPref.n_cols;
     // initialize engagements, proposals
     vec engagements(N), proposals(M);
     // create an integer queue of bachelors
@@ -33,7 +33,7 @@ List galeShapleyMatching(const umat prefM, const mat uW) {
     proposals.fill(N);
     // set all engagements to M (aka no engagements)
     engagements.fill(M);
-    // every man starts out as a bachelor
+    // every proposer starts out as a bachelor
     for(int iX=M-1;iX>=0;iX--) {
         bachelors.push(iX);
     }
@@ -43,19 +43,19 @@ List galeShapleyMatching(const umat prefM, const mat uW) {
         // get the index of the proposer
         int proposer = bachelors.front();
         // get the proposer's preferences
-        urowvec prefMrow = prefM.row(proposer);
+        urowvec proposerPrefrow = proposerPref.row(proposer);
         // find the best available match
         for(int jX=0;jX<N;jX++) {
-            // index of the woman that the proposer is interested in
-            int wX = prefMrow(jX);
-            // check if the woman wX is available
+            // index of the reviewer that the proposer is interested in
+            int wX = proposerPrefrow(jX);
+            // check if wX is available
             if(engagements(wX)==M) {
                 engagements(wX) = proposer;
                 proposals(proposer) = wX;
                 break;
             }
-            // check if the woman wX can be poached
-            if(uW(wX, proposer) > uW(wX, engagements(wX))) {
+            // check if the wX can be poached
+            if(reviewerUtils(wX, proposer) > reviewerUtils(wX, engagements(wX))) {
                 // make the guy who was just dropped a bachelor again
                 proposals(engagements(wX)) = N;
                 // and put him back into the bachelor queue
@@ -120,50 +120,51 @@ umat rankIndex(const umat sortedIdx) {
 //' This function checks if a given matching is stable for a particular set of
 //' preferences
 //'
-//' @param uWorkers is a matrix with cardinal utilities of the proposing side of the 
+//' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
 //' market
-//' @param uFirms is a matrix with cardinal utilities of the courted side of the 
+//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
 //' market
-//' @param proposals is a matrix that contains the id of the female that a given
-//' man is matched to: the first row contains the id of the female that is 
-//' matched with the first man, the second row contains the id of the female 
-//' that is matched with the second man, etc. The column dimension accommodates
-//' multi-worker firms.
-//' @param engagements is a matrix that contains the id of the male that a given
-//' female is matched to. The column dimension accommodates multi-worker firms.
+//' @param proposals is a matrix that contains the id of the reviewer that a given
+//' proposer is matched to: the first row contains the id of the reviewer that is 
+//' matched with the first proposer, the second row contains the id of the reviewer 
+//' that is matched with the second proposer, etc. The column dimension accommodates
+//' proposers with multiple slots.
+//' @param engagements is a matrix that contains the id of the proposer that a given
+//' reviewer is matched to. The column dimension accommodates reviewers with multiple
+//' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat engagements) {
+bool checkStability(mat proposerUtils, mat reviewerUtils, const umat proposals, const umat engagements) {
     
     // number of workers
-    const int M = uWorkers.n_rows;
+    const int M = proposerUtils.n_rows;
     // number of firms
-    const int N = uWorkers.n_cols;
+    const int N = proposerUtils.n_cols;
     // number of slots per firm
-    const int slotsFirms = engagements.n_cols;
+    const int slotsReviewers = engagements.n_cols;
     // number of slots per worker
-    const int slotsWorkers = proposals.n_cols;
+    const int slotsProposers = proposals.n_cols;
     
     // more jobs than workers (add utility from being unmatched to firms' preferences)
-    if(N*slotsFirms>M*slotsWorkers) {
-        uFirms.insert_cols(M, 1);
-        uFirms.col(M).fill(-1e10);
+    if(N*slotsReviewers>M*slotsProposers) {
+        reviewerUtils.insert_cols(M, 1);
+        reviewerUtils.col(M).fill(-1e10);
     }
     // more workers than jobs (add utility from being unmatched to workers' preferences)
-    if(M*slotsWorkers>N*slotsFirms) {
-        uWorkers.insert_cols(N, 1);
-        uWorkers.col(N).fill(-1e10);
+    if(M*slotsProposers>N*slotsReviewers) {
+        proposerUtils.insert_cols(N, 1);
+        proposerUtils.col(N).fill(-1e10);
     }
     // loop over workers
     for(int wX=0; wX<M; wX++) {
         // loop over firms
         for(int fX=0; fX<N; fX++) {
             // loop over multiple "slots" at the same worker
-            for(int swX=0;swX<slotsWorkers;swX++) {
+            for(int swX=0;swX<slotsProposers;swX++) {
                 // loop over multiple slots at the same firm
-                for(int sfX=0;sfX<slotsFirms;sfX++) {
+                for(int sfX=0;sfX<slotsReviewers;sfX++) {
                     // check if wX and fX would rather be matched with each other than with their actual matches
-                    if(uFirms(fX, wX) > uFirms(fX, engagements(fX, sfX)) && uWorkers(wX, fX) > uWorkers(wX, proposals(wX, swX))) {
+                    if(reviewerUtils(fX, wX) > reviewerUtils(fX, engagements(fX, sfX)) && proposerUtils(wX, fX) > proposerUtils(wX, proposals(wX, swX))) {
                         Rprintf("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
                         return false;
                     } 

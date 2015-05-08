@@ -4,21 +4,21 @@
 \alias{galeShapleyMatching}
 \title{Compute the Gale-Shapley Algorithm}
 \usage{
-galeShapleyMatching(prefM, uW)
+galeShapleyMatching(proposerPref, reviewerUtils)
 }
 \arguments{
-\item{prefM}{is a matrix with the preference order of the proposing side of
+\item{proposerPref}{is a matrix with the preference order of the proposing side of
 the market}
 
-\item{uW}{is a matrix with cardinal utilities of the courted side of the
+\item{reviewerUtils}{is a matrix with cardinal utilities of the courted side of the
 market}
 }
 \value{
 A list with the successful proposals and engagements.
-\code{proposals} is a vector whose nth element contains the id of the female
-that male n is matched to.
-\code{engagements} is a vector whose nth element contains the id of the male
-that female n is matched to.
+\code{proposals} is a vector whose nth element contains the id of the reviewer
+that proposer n is matched to.
+\code{engagements} is a vector whose nth element contains the id of the proposer
+that reviewer n is matched to.
 }
 \description{
 This function computes the Gale-Shapley Algorithm with one-to-one matching

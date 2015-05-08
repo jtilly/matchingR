@@ -5,17 +5,17 @@
 #'
 #' This function computes the Gale-Shapley Algorithm with one-to-one matching 
 #'
-#' @param prefM is a matrix with the preference order of the proposing side of 
+#' @param proposerPref is a matrix with the preference order of the proposing side of 
 #' the market
-#' @param uW is a matrix with cardinal utilities of the courted side of the 
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
 #' market
 #' @return A list with the successful proposals and engagements. 
-#' \code{proposals} is a vector whose nth element contains the id of the female 
-#' that male n is matched to. 
-#' \code{engagements} is a vector whose nth element contains the id of the male 
-#' that female n is matched to.  
-galeShapleyMatching <- function(prefM, uW) {
-    .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', prefM, uW)
+#' \code{proposals} is a vector whose nth element contains the id of the reviewer 
+#' that proposer n is matched to. 
+#' \code{engagements} is a vector whose nth element contains the id of the proposer 
+#' that reviewer n is matched to.  
+galeShapleyMatching <- function(proposerPref, reviewerUtils) {
+    .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', proposerPref, reviewerUtils)
 }
 
 #' Sort indices of a matrix within row
@@ -47,19 +47,20 @@ rankIndex <- function(sortedIdx) {
 #' This function checks if a given matching is stable for a particular set of
 #' preferences
 #'
-#' @param uWorkers is a matrix with cardinal utilities of the proposing side of the 
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
 #' market
-#' @param uFirms is a matrix with cardinal utilities of the courted side of the 
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
 #' market
-#' @param proposals is a matrix that contains the id of the female that a given
-#' man is matched to: the first row contains the id of the female that is 
-#' matched with the first man, the second row contains the id of the female 
-#' that is matched with the second man, etc. The column dimension accommodates
-#' multi-worker firms.
-#' @param engagements is a matrix that contains the id of the male that a given
-#' female is matched to. The column dimension accommodates multi-worker firms.
+#' @param proposals is a matrix that contains the id of the reviewer that a given
+#' proposer is matched to: the first row contains the id of the reviewer that is 
+#' matched with the first proposer, the second row contains the id of the reviewer 
+#' that is matched with the second proposer, etc. The column dimension accommodates
+#' proposers with multiple slots.
+#' @param engagements is a matrix that contains the id of the proposer that a given
+#' reviewer is matched to. The column dimension accommodates reviewers with multiple
+#' slots
 #' @return true if the matching is stable, false otherwise
-checkStability <- function(uWorkers, uFirms, proposals, engagements) {
-    .Call('matchingR_checkStability', PACKAGE = 'matchingR', uWorkers, uFirms, proposals, engagements)
+checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
+    .Call('matchingR_checkStability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
 }
 

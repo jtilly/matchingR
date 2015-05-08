@@ -15,17 +15,17 @@ side of the market}
 of the market}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{uM} is not provided)}
+side of the market (only required when \code{proposerUtils} is not provided)}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
-of the market (only required when \code{prefW} is not provided)}
+of the market (only required when \code{reviewerUtils} is not provided)}
 }
 \value{
 A list with the successful proposals and engagements:
-\code{proposals} is a vector whose nth element contains the id of the female
-that male n is matched to.
-\code{engagements} is a vector whose nth element contains the id of the male
-that female n is matched to.
+\code{proposals} is a vector whose nth element contains the id of the reviewer
+that proposer n is matched to.
+\code{engagements} is a vector whose nth element contains the id of the proposer
+that reviewer n is matched to.
 \code{single.proposers} is a vector that lists the ids of remaining single
 proposers
 \code{single.reviewers} is a vector that lists the ids of remaining single
@@ -34,8 +34,8 @@ reviewers
 \description{
 This function returns the one-to-one matching. The function needs some
 description of individuals preferences as inputs. That can be in the form of
-cardinal utilities or preference orders (or both). It is computational most
+cardinal utilities or preference orders (or both). It is computationally most
 efficient to provide preference orders for the proposers \code{proposerPref}
-and cardinal utilities for the reviewers \code{reviewerPref}.
+and cardinal utilities for the reviewers \code{reviewerUtils}.
 }
 
