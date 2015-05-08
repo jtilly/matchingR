@@ -19,15 +19,15 @@ matching1 = matchingMarkets::daa(nStudents = nStudents, nColleges = nColleges)
 matching1$engagements = matrix(unlist(matching1$matches), ncol=1)
 
 # now use my matchingR::one2one to compute the matching
-matching2 = one2many(proposerPref = t(matching1$s.prefs)-1, reviewerPref = t(matching1$c.prefs)-1)
+matching2 = one2one(proposerPref = t(matching1$s.prefs)-1, reviewerPref = t(matching1$c.prefs)-1)
 # adjust convention for unmatched colleges
 matching2$engagements[matching2$engagements==nStudents]=-1
-# add 1 to C++ indicies to make them comparable to R
+# add 1 to C++ indices to make them comparable to the indicies in R
 matching2$engagements = matching2$engagements+1
 
 # compare engagements
 if(any(matching1$engagements != matching2$engagements)) {
-    stop("the two packages produce different results.")
+    stop("The two packages produce different results.")
 } else {
-    print("The packages matchingR and matchingMarkets produce identitical results.")
+    print("The packages matchingR and matchingMarkets produce identical results.")
 }
