@@ -13,9 +13,9 @@
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side 
 #' of the market
 #' @param proposerPref is a matrix with the preference order of the proposing 
-#' side of the market (only required when \code{uM} is not provided)
+#' side of the market (only required when \code{proposerUtils} is not provided)
 #' @param reviewerPref is a matrix with the preference order of the courted side
-#' of the market (only required when \code{prefW} is not provided)
+#' of the market (only required when \code{reviewerUtils} is not provided)
 #' @return A list with the successful proposals and engagements: 
 #' \code{proposals} is a vector whose nth element contains the id of the female 
 #' that male n is matched to. 
@@ -30,39 +30,21 @@ one2one = function(proposerUtils = NULL,
                    proposerPref = NULL, 
                    reviewerPref = NULL) {
     
-    # parse inputs
-    if(is.null(proposerPref) && !is.null(proposerUtils)) {
-        proposerPref = sortIndex(as.matrix(proposerUtils))
-    } 
-    if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
-    }
-    if(is.null(proposerPref)) {
-        stop("missing proposer preferences")   
-    }
-    if(is.null(reviewerUtils)) {
-        stop("missing reviwer utilities")   
-    }
-    
-    # check inputs
-    if(NROW(proposerPref)!=NCOL(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
-    if(NCOL(proposerPref)!=NROW(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
-    
+    # validate the inputs
+    args = validateInputs(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
+        
     # use galeShapleyMatching to compute matching
-    res = galeShapleyMatching(as.matrix(proposerPref), as.matrix(reviewerUtils))
+    res = galeShapleyMatching(args$proposerPref, args$reviewerUtils)
     
     M = length(res$proposals)
     N = length(res$engagements)
     
-    res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N],
-                      "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]))
+    # turn these into R indices by adding +1
+    res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N]+1,
+                      "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]+1))
     
-    res$proposals = matrix(res$proposals, ncol=1)
-    res$engagements = matrix(res$engagements, ncol=1)
+    res$proposals = matrix(res$proposals, ncol=1)+1
+    res$engagements = matrix(res$engagements, ncol=1)+1
     
     return(res)
 }
@@ -70,18 +52,19 @@ one2one = function(proposerUtils = NULL,
 
 #' Compute the one-to-many matching
 #'
-#' This function returns the one-to-many matching. Workers are making proposals.
-#' The function needs some description of individuals preferences as inputs. 
-#' That can be in the form of cardinal utilities or preference orders (or both). 
+#' This function returns the one-to-many matching. Workers are making proposals
+#' to multi-worker firms. The function needs some description of individuals 
+#' preferences as inputs. That can be in the form of cardinal utilities or 
+#' preference orders (or both). 
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing 
 #' side of the market
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side 
 #' of the market
 #' @param proposerPref is a matrix with the preference order of the proposing 
-#' side of the market (only required when \code{uM} is not provided)
+#' side of the market (only required when \code{proposerUtils} is not provided)
 #' @param reviewerPref is a matrix with the preference order of the courted 
-#' side of the market (only required when \code{prefW} is not provided)
+#' side of the market (only required when \code{reviewerUtils} is not provided)
 #' @param slots is an integer with the number slots per firm
 #' @return A list with the successful proposals and engagements:
 #' \code{proposals} is a vector whose nth element contains the id of the firm 
@@ -98,34 +81,15 @@ one2many = function(proposerUtils = NULL,
                     reviewerPref = NULL,
                     slots = 1) {
     
-    # parse inputs
-    if(is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = -rankIndex(as.matrix(proposerPref))
-    } 
-    if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
-    }
-    if(is.null(proposerUtils)) {
-        stop("missing proposer utilities")   
-    }
-    if(is.null(reviewerUtils)) {
-        stop("missing reviewer utilities")   
-    }
-    
-    # check inputs
-    if(NROW(proposerUtils)!=NCOL(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
-    if(NCOL(proposerUtils)!=NROW(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
+    # validate the inputs
+    args = validateInputs(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
     
     # number of firms
-    number_of_firms = NROW(reviewerUtils)
+    number_of_firms = NROW(args$reviewerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = repcol(proposerUtils, slots)
-    reviewerUtils = reprow(reviewerUtils, slots)
+    proposerUtils = repcol(args$proposerUtils, slots)
+    reviewerUtils = reprow(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -140,25 +104,25 @@ one2many = function(proposerUtils = NULL,
     N = length(res$engagements)
     
     # collect results
-    res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N],
-                      "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]))
+    res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N]+1,
+                      "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]+1))
     
-    # collapse engagements
-    res$engagements = matrix(res$engagements, ncol=slots, byrow = TRUE)
+    # collapse engagements (turn these into R indices by adding +1)
+    res$engagements = matrix(res$engagements, ncol=slots, byrow = TRUE)+1
     
-    # translate proposals into the id of the original firm
+    # translate proposals into the id of the original firm (turn these into R indices by adding +1)
     firm.ids = reprow(matrix(seq(from=0, to=number_of_firms), ncol=1), slots)
-    res$proposals = matrix(firm.ids[res$proposals+1], ncol=1)
+    res$proposals = matrix(firm.ids[res$proposals+1], ncol=1)+1
     
-    # translate single reviewers into the id of the original firm
-    res$single.reviewers = firm.ids[res$single.reviewers+1]
+    # translate single reviewers into the id of the original firm (turn these into R indices by adding +1)
+    res$single.reviewers = firm.ids[res$single.reviewers]+1
     
     return(res)
 }
 
 #' Compute the many-to-one matching
 #'
-#' This function returns the many-to-many matching. Multi-worker firms make 
+#' This function returns the many-to-one matching. Multi-worker firms make 
 #' proposals to workers. The function needs some description of individuals 
 #' preferences as inputs. That can be in the form of cardinal utilities or 
 #' preference orders (or both). 
@@ -168,9 +132,9 @@ one2many = function(proposerUtils = NULL,
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side 
 #' of the market
 #' @param proposerPref is a matrix with the preference order of the proposing 
-#' side of the market (only required when \code{uM} is not provided)
+#' side of the market (only required when \code{proposerUtils} is not provided)
 #' @param reviewerPref is a matrix with the preference order of the courted side
-#' of the market (only required when \code{prefW} is not provided)
+#' of the market (only required when \code{reviewerUtils} is not provided)
 #' @param slots is an integer with the number slots per firm
 #' @return A list with the successful proposals and engagements: 
 #' \code{proposals} is a vector whose nth element contains the id of the firm 
@@ -187,34 +151,15 @@ many2one = function(proposerUtils = NULL,
                     reviewerPref = NULL,
                     slots = 1) {
     
-    # parse inputs
-    if(is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = -rankIndex(proposerPref)
-    } 
-    if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
-    }
-    if(is.null(proposerUtils)) {
-        stop("missing proposer utilities")   
-    }
-    if(is.null(reviewerUtils)) {
-        stop("missing reviwer utilities")   
-    }
-    
-    # check inputs
-    if(NROW(proposerUtils)!=NCOL(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
-    if(NCOL(proposerUtils)!=NROW(reviewerUtils)) {
-        stop("preference orderings must be symmetric")
-    }
+    # validate the inputs
+    args = validateInputs(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
     
     # number of firms
-    number_of_firms = NROW(proposerUtils)
+    number_of_firms = NROW(args$proposerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = reprow(proposerUtils, slots)
-    reviewerUtils = repcol(reviewerUtils, slots)
+    proposerUtils = reprow(args$proposerUtils, slots)
+    reviewerUtils = repcol(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -232,15 +177,85 @@ many2one = function(proposerUtils = NULL,
     res = c(res, list("single.proposers" = seq(from=0, to=M-1)[res$proposals==N],
                       "single.reviewers" = seq(from=0, to=N-1)[res$engagements==M]))
     
-    # collapse proposals
-    res$proposals = matrix(res$proposals, ncol=slots, byrow = TRUE)
+    # collapse proposals (turn these into R indices by adding +1)
+    res$proposals = matrix(res$proposals, ncol=slots, byrow = TRUE)+1
     
-    # translate engagements into the id of the original firm
+    # translate engagements into the id of the original firm (turn these into R indices by adding +1)
     firm.ids = reprow(matrix(seq(from=0, to=number_of_firms), ncol=1), slots)
-    res$engagements = matrix(firm.ids[res$engagements+1], ncol=1)
+    res$engagements = matrix(firm.ids[res$engagements+1], ncol=1)+1
     
-    # translate single proposers into the id of the original firm
-    res$single.proposers = firm.ids[res$single.proposers+1]
+    # translate single proposers into the id of the original firm (turn these into R indices by adding +1)
+    res$single.proposers = firm.ids[res$single.proposers+1]+1
+    
     
     return(res)
+}
+
+
+#' Input validation
+#' 
+#' This function parses and validates the arguments that are passed on to the
+#' functions one2one, one2many, and many2one. In particular, it checks if 
+#' user-defined preference orders are complete. If user-defined orderings
+#' are given in terms of R indices (starting at 1), then these are transformed
+#' into C++ indices (starting at zero).
+#' 
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing 
+#' side of the market
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side 
+#' of the market
+#' @param proposerPref is a matrix with the preference order of the proposing 
+#' side of the market (only required when \code{proposerUtils} is not provided)
+#' @param reviewerPref is a matrix with the preference order of the courted side
+#' of the market (only required when \code{reviewerUtils} is not provided)
+#' @return a list containing proposerUtils, reviewerUtils, proposerPref
+#' (reviewerPref are not required after they are translated into reviewerUtils).
+validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPref) { 
+
+    if(!is.null(reviewerPref)) {
+        reviewerPref = checkPreferenceOrder(reviewerPref)
+        if(is.null(reviewerPref)) {
+            stop("reviewerPref was defined by the user but is not a complete list of preference orderings")
+        }      
+    }
+    
+    if(!is.null(proposerPref)) {
+        proposerPref = checkPreferenceOrder(proposerPref)
+        if(is.null(proposerPref)) {
+            stop("proposerPref was defined by the user but is not a complete list of preference orderings")
+        }      
+    }
+        
+    # parse inputs
+    if(is.null(proposerPref) && !is.null(proposerUtils)) {
+        proposerPref = sortIndex(as.matrix(proposerUtils))
+    } 
+        
+    if(is.null(proposerUtils) && !is.null(proposerPref)) {
+        proposerUtils = -rankIndex(as.matrix(proposerPref))
+    }
+    
+    if(is.null(reviewerUtils) && !is.null(reviewerPref)) {
+        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
+    }
+    
+    if(is.null(proposerPref)) {
+        stop("missing proposer preferences")   
+    }
+    
+    if(is.null(reviewerUtils)) {
+        stop("missing reviewer utilities")   
+    }
+    
+    # check inputs
+    if(NROW(proposerPref)!=NCOL(reviewerUtils)) {
+        stop("preference orderings must be symmetric")
+    }
+    if(NCOL(proposerPref)!=NROW(reviewerUtils)) {
+        stop("preference orderings must be symmetric")
+    }
+    
+    return(list(proposerPref = as.matrix(proposerPref),
+                proposerUtils = as.matrix(proposerUtils),
+                reviewerUtils = as.matrix(reviewerUtils)))
 }

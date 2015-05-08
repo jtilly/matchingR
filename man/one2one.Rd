@@ -15,10 +15,10 @@ side of the market}
 of the market}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{uM} is not provided)}
+side of the market (only required when \code{proposerUtils} is not provided)}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
-of the market (only required when \code{prefW} is not provided)}
+of the market (only required when \code{reviewerUtils} is not provided)}
 }
 \value{
 A list with the successful proposals and engagements:

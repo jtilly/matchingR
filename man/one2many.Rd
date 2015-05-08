@@ -15,10 +15,10 @@ side of the market}
 of the market}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{uM} is not provided)}
+side of the market (only required when \code{proposerUtils} is not provided)}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted
-side of the market (only required when \code{prefW} is not provided)}
+side of the market (only required when \code{reviewerUtils} is not provided)}
 
 \item{slots}{is an integer with the number slots per firm}
 }
@@ -34,8 +34,9 @@ workers
 firms (if a firm is two vacancies it will be listed twice)
 }
 \description{
-This function returns the one-to-many matching. Workers are making proposals.
-The function needs some description of individuals preferences as inputs.
-That can be in the form of cardinal utilities or preference orders (or both).
+This function returns the one-to-many matching. Workers are making proposals
+to multi-worker firms. The function needs some description of individuals
+preferences as inputs. That can be in the form of cardinal utilities or
+preference orders (or both).
 }
 

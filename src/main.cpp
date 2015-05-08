@@ -7,12 +7,15 @@
 
 //' Compute the Gale-Shapley Algorithm
 //'
-//' This function computes the Gale-Shapley Algorithm with one-to-one matching 
+//' This function computes the Gale-Shapley Algorithm with one-to-one matching.
+//' This function requires very specific types of arguments. It might be more
+//' convenient to call the function \code{one2one()} instead that allows for
+//' more flexible input choices.
 //'
 //' @param prefM is a matrix with the preference order of the proposing side of 
-//' the market
+//' the market (aka males)
 //' @param uW is a matrix with cardinal utilities of the courted side of the 
-//' market
+//' market (aka females)
 //' @return A list with the successful proposals and engagements. 
 //' \code{proposals} is a vector whose nth element contains the id of the female 
 //' that male n is matched to. 
@@ -118,22 +121,25 @@ umat rankIndex(const umat sortedIdx) {
 //' Check if a matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
-//' preferences
+//' preferences. This function can check if a given check one-to-one, 
+//' one-to-many, or many-to-one matching is stable.
 //'
 //' @param uWorkers is a matrix with cardinal utilities of the proposing side of the 
 //' market
 //' @param uFirms is a matrix with cardinal utilities of the courted side of the 
 //' market
-//' @param proposals is a matrix that contains the id of the female that a given
-//' man is matched to: the first row contains the id of the female that is 
-//' matched with the first man, the second row contains the id of the female 
-//' that is matched with the second man, etc. The column dimension accommodates
-//' multi-worker firms.
-//' @param engagements is a matrix that contains the id of the male that a given
-//' female is matched to. The column dimension accommodates multi-worker firms.
+//' @param proposals is a matrix that contains the id of the firm that a given
+//' worker is matched to: the first row contains the id of the firm that is 
+//' matched with the first worker, the second row contains the id of the firm 
+//' that is matched to the second worker, etc. The column dimension accommodates
+//' the scenario when there are multiple workers of the same type. These can be
+//' in R or C++ indices.
+//' @param engagements is a matrix that contains the id of the worker that a given
+//' firm is matched to. The column dimension accommodates multi-worker firms. These 
+//' can be in R or C++ indices.
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat engagements) {
+bool checkStability(mat uWorkers, mat uFirms, umat proposals, umat engagements) {
     
     // number of workers
     const int M = uWorkers.n_rows;
@@ -143,6 +149,14 @@ bool checkStability(mat uWorkers, mat uFirms, const umat proposals, const umat e
     const int slotsFirms = engagements.n_cols;
     // number of slots per worker
     const int slotsWorkers = proposals.n_cols;
+    // turn proposals into C++ indices if necessary
+    if(proposals.min()==1) {
+        proposals--;
+    }
+    // turn engagements into C++ indices if necessary
+    if(engagements.min()==1) {
+        engagements--;
+    }
     
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsFirms>M*slotsWorkers) {

@@ -8,10 +8,10 @@ galeShapleyMatching(prefM, uW)
 }
 \arguments{
 \item{prefM}{is a matrix with the preference order of the proposing side of
-the market}
+the market (aka males)}
 
 \item{uW}{is a matrix with cardinal utilities of the courted side of the
-market}
+market (aka females)}
 }
 \value{
 A list with the successful proposals and engagements.
@@ -21,6 +21,9 @@ that male n is matched to.
 that female n is matched to.
 }
 \description{
-This function computes the Gale-Shapley Algorithm with one-to-one matching
+This function computes the Gale-Shapley Algorithm with one-to-one matching.
+This function requires very specific types of arguments. It might be more
+convenient to call the function \code{one2one()} instead that allows for
+more flexible input choices.
 }
 

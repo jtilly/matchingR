@@ -13,20 +13,23 @@ market}
 \item{uFirms}{is a matrix with cardinal utilities of the courted side of the
 market}
 
-\item{proposals}{is a matrix that contains the id of the female that a given
-man is matched to: the first row contains the id of the female that is
-matched with the first man, the second row contains the id of the female
-that is matched with the second man, etc. The column dimension accommodates
-multi-worker firms.}
+\item{proposals}{is a matrix that contains the id of the firm that a given
+worker is matched to: the first row contains the id of the firm that is
+matched with the first worker, the second row contains the id of the firm
+that is matched to the second worker, etc. The column dimension accommodates
+the scenario when there are multiple workers of the same type. These can be
+in R or C++ indices.}
 
-\item{engagements}{is a matrix that contains the id of the male that a given
-female is matched to. The column dimension accommodates multi-worker firms.}
+\item{engagements}{is a matrix that contains the id of the worker that a given
+firm is matched to. The column dimension accommodates multi-worker firms. These
+can be in R or C++ indices.}
 }
 \value{
 true if the matching is stable, false otherwise
 }
 \description{
 This function checks if a given matching is stable for a particular set of
-preferences
+preferences. This function can check if a given check one-to-one,
+one-to-many, or many-to-one matching is stable.
 }
 
