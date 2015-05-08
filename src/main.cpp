@@ -150,11 +150,11 @@ bool checkStability(mat uWorkers, mat uFirms, umat proposals, umat engagements) 
     // number of slots per worker
     const int slotsWorkers = proposals.n_cols;
     // turn proposals into C++ indices if necessary
-    if(proposals.min()==1) {
+    if(proposals.min() == 1) {
         proposals--;
     }
     // turn engagements into C++ indices if necessary
-    if(engagements.min()==1) {
+    if(engagements.min() == 1) {
         engagements--;
     }
     
