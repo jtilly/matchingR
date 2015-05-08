@@ -30,6 +30,28 @@ test_that("Check if using preferences as inputs yields the same results as when 
     expect_true(all(matching1$engagements==matching2$engagements))
 })
 
+test_that("Check if using preferences as inputs with R indices yields the same results as when using cardinal utilities as inputs", {
+    uM = matrix(runif(16*14), nrow=16, ncol=14)
+    uW = matrix(runif(16*14), nrow=14, ncol=16)
+    matching1 = one2one(uM, uW)
+    matching2 = one2one(proposerPref = sortIndex(uM)+1, reviewerPref = sortIndex(uW)+1)
+    expect_true(all(matching1$engagements==matching2$engagements))
+})
+
+test_that("Check if incorrect preference orders result in an error", {
+    uM = matrix(runif(16*14), nrow=16, ncol=14)
+    uW = matrix(runif(16*14), nrow=14, ncol=16)
+    proposerPref = sortIndex(uM)+1
+    proposerPref[1,1] = 9999
+    expect_error(one2one(proposerPref = proposerPref, reviewerPref = sortIndex(uW)+1), "proposerPref was defined by the user but is not a complete list of preference orderings")
+})
+
+test_that("Check if incorrect dimensions result in error", {
+    uM = matrix(runif(16*14), nrow=16, ncol=14)
+    uW = matrix(runif(15*15), nrow=15, ncol=15)
+    expect_error(one2one(uM, uW), "preference orderings must be symmetric")
+})
+
 test_that("Check outcome from one2one matching", {
     uM = matrix(c(0, 1, 
                   1, 0, 
@@ -37,8 +59,8 @@ test_that("Check outcome from one2one matching", {
     uW = matrix(c(0, 2, 1, 
                   1, 0, 2), byrow = TRUE, nrow=2, ncol=3)
     matching = one2one(uM, uW)
-    expect_true(all(matching$engagements == c(1,2)))
-    expect_true(all(matching$proposals == c(2, 0, 1)))
+    expect_true(all(matching$engagements == c(1,2)+1))
+    expect_true(all(matching$proposals == c(2, 0, 1)+1))
 })
 
 test_that("Check outcome from one2many matching", {
@@ -48,8 +70,8 @@ test_that("Check outcome from one2many matching", {
     uW = matrix(c(0, 2, 1, 
                   1, 0, 2), byrow = TRUE, nrow=2, ncol=3)
     matching = one2many(uM, uW, slots=2)
-    expect_true(all(matching$engagements == c(1,2, 3, 0)))
-    expect_true(all(matching$proposals == c(1, 0, 1)))
+    expect_true(all(matching$engagements == c(1,2, 3, 0)+1))
+    expect_true(all(matching$proposals == c(1, 0, 1)+1))
 })
 
 test_that("Check outcome from many2one matching", {
@@ -59,6 +81,6 @@ test_that("Check outcome from many2one matching", {
     uW = matrix(c(0, 2, 1, 
                   1, 0, 2), byrow = TRUE, nrow=2, ncol=3)
     matching = many2one(uM, uW, slots=2)
-    expect_true(all(matching$engagements == c(1,2)))
-    expect_true(all(matching$proposals == c(2, 2, 2, 2, 0, 1)))
+    expect_true(all(matching$engagements == c(1,2)+1))
+    expect_true(all(matching$proposals == c(2, 2, 2, 2, 0, 1)+1))
 })

@@ -21,6 +21,9 @@ that proposer n is matched to.
 that reviewer n is matched to.
 }
 \description{
-This function computes the Gale-Shapley Algorithm with one-to-one matching
+This function computes the Gale-Shapley Algorithm with one-to-one matching.
+This function requires very specific types of arguments. It might be more
+convenient to call the function \code{one2one()} instead that allows for
+more flexible input choices.
 }
 

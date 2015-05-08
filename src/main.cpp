@@ -7,7 +7,10 @@
 
 //' Compute the Gale-Shapley Algorithm
 //'
-//' This function computes the Gale-Shapley Algorithm with one-to-one matching 
+//' This function computes the Gale-Shapley Algorithm with one-to-one matching.
+//' This function requires very specific types of arguments. It might be more
+//' convenient to call the function \code{one2one()} instead that allows for
+//' more flexible input choices.
 //'
 //' @param proposerPref is a matrix with the preference order of the proposing side of 
 //' the market
@@ -118,7 +121,8 @@ umat rankIndex(const umat sortedIdx) {
 //' Check if a matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
-//' preferences
+//' preferences. This function can check if a given check one-to-one, 
+//' one-to-many, or many-to-one matching is stable.
 //'
 //' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
 //' market
@@ -134,8 +138,8 @@ umat rankIndex(const umat sortedIdx) {
 //' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat proposerUtils, mat reviewerUtils, const umat proposals, const umat engagements) {
-    
+bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
+
     // number of workers
     const int M = proposerUtils.n_rows;
     // number of firms
@@ -145,6 +149,11 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, const umat proposals, 
     // number of slots per worker
     const int slotsProposers = proposals.n_cols;
     
+    // turn proposals into C++ indices 
+    proposals = proposals-1;
+    // turn engagements into C++ indices
+    engagements = engagements-1;
+        
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsReviewers>M*slotsProposers) {
         reviewerUtils.insert_cols(M, 1);

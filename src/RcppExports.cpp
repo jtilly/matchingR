@@ -42,15 +42,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // checkStability
-bool checkStability(mat proposerUtils, mat reviewerUtils, const umat proposals, const umat engagements);
+bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements);
 RcppExport SEXP matchingR_checkStability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< mat >::type proposerUtils(proposerUtilsSEXP);
     Rcpp::traits::input_parameter< mat >::type reviewerUtils(reviewerUtilsSEXP);
-    Rcpp::traits::input_parameter< const umat >::type proposals(proposalsSEXP);
-    Rcpp::traits::input_parameter< const umat >::type engagements(engagementsSEXP);
+    Rcpp::traits::input_parameter< umat >::type proposals(proposalsSEXP);
+    Rcpp::traits::input_parameter< umat >::type engagements(engagementsSEXP);
     __result = Rcpp::wrap(checkStability(proposerUtils, reviewerUtils, proposals, engagements));
     return __result;
 END_RCPP

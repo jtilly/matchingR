@@ -3,7 +3,10 @@
 
 #' Compute the Gale-Shapley Algorithm
 #'
-#' This function computes the Gale-Shapley Algorithm with one-to-one matching 
+#' This function computes the Gale-Shapley Algorithm with one-to-one matching.
+#' This function requires very specific types of arguments. It might be more
+#' convenient to call the function \code{one2one()} instead that allows for
+#' more flexible input choices.
 #'
 #' @param proposerPref is a matrix with the preference order of the proposing side of 
 #' the market
@@ -45,7 +48,8 @@ rankIndex <- function(sortedIdx) {
 #' Check if a matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of
-#' preferences
+#' preferences. This function can check if a given check one-to-one, 
+#' one-to-many, or many-to-one matching is stable.
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
 #' market

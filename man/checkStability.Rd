@@ -28,6 +28,7 @@ true if the matching is stable, false otherwise
 }
 \description{
 This function checks if a given matching is stable for a particular set of
-preferences
+preferences. This function can check if a given check one-to-one,
+one-to-many, or many-to-one matching is stable.
 }
 

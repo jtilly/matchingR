@@ -4,13 +4,16 @@ R Package that quickly computes the Gale-Shapley Algorithm for large scale match
 ## Depends on
 * [Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html)
 * [RcppArmadillo](http://cran.r-project.org/web/packages/RcppArmadillo/index.html)
-* [tictoc](http://cran.r-project.org/web/packages/tictoc/index.html)
+
 
 ## Installation
 ```
 library("devtools")
 install_github("jtilly/matchingR")
 ```
+
+## Documentation
+* [matchingR Documentation as PDF](http://jtilly.io/matchingR/matchingR.pdf)
 
 ## Example: Marriage Market
 ```
