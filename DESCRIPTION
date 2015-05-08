@@ -2,7 +2,7 @@ Package: matchingR
 Type: Package
 Title: matchingR implements the Gale-Shapley Algorithm in R using Rcpp
 Version: 1.0
-Date: 2015-03-08
+Date: 2015-05-07
 Author: Jan Tilly
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
 Description: This package computes the Gale-Shapley Algorithm efficiently using Rcpp. It provides algorithms to compute the stable matching for the marriage problem and for the matching of workers to multi-worker firms.
