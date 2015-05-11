@@ -62,7 +62,7 @@ the form of cardinal utilities or preference orders (or both).
 nmen = 25
 nwomen = 20
 uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-uW = runif(nwomen*nmen, nrow=nwomen, ncol=nmen)
+uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
 results = one2one(uM, uW)
 
 prefM = sortIndex(uM)
