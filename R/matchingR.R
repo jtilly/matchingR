@@ -27,7 +27,7 @@
 #' nmen = 25
 #' nwomen = 20
 #' uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-#' uW = runif(nwomen*nmen, nrow=nwomen, ncol=nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
 #' results = one2one(uM, uW)
 #'   
 #' prefM = sortIndex(uM)  
@@ -84,6 +84,12 @@ one2one = function(proposerUtils = NULL,
 #' proposers
 #' \code{single.reviewers} is a vector that lists the ids of remaining single
 #' reviewers (if a reviewer has two vacancies left it will be listed twice)
+#' @examples
+#' nfirms = 10
+#' nworkers = 25
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' results = one2many(uWorkers, uFirms, slots=2)
 one2many = function(proposerUtils = NULL, 
                     reviewerUtils = NULL, 
                     proposerPref = NULL, 
@@ -155,6 +161,12 @@ one2many = function(proposerUtils = NULL,
 #' proposers (if a proposer has two vacancies left it will be listed twice)
 #' \code{single.reviewers} is a vector that lists the ids of remaining single
 #' reviewers 
+#' @examples
+#' nfirms = 10
+#' nworkers = 25
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' results = many2one(uFirms, uWorkers, slots=2)
 many2one = function(proposerUtils = NULL, 
                     reviewerUtils = NULL, 
                     proposerPref = NULL, 

@@ -40,4 +40,11 @@ cardinal utilities or preference orders (or both). It is computationally most
 efficient to provide cardinal utilities for the proposers \code{proposerUtils}
 and cardinal utilities for the reviewers \code{reviewerUtils}.
 }
+\examples{
+nfirms = 10
+nworkers = 25
+uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
+uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+results = many2one(uFirms, uWorkers, slots=2)
+}
 
