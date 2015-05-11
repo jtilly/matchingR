@@ -1,12 +1,10 @@
 # matchingR.R
 
-#' Compute the one-to-one matching
+#' Compute one-to-one matching
 #'
-#' This function returns the one-to-one matching. The function needs some 
-#' description of individuals preferences as inputs. That can be in the form of 
-#' cardinal utilities or preference orders (or both). It is computationally most 
-#' efficient to provide preference orders for the proposers \code{proposerPref} 
-#' and cardinal utilities for the reviewers \code{reviewerUtils}.
+#' This function returns the proposer-optimal one-to-one matching. The function 
+#' needs some description of individuals preferences as inputs. That can be in 
+#' the form of cardinal utilities or preference orders (or both). 
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing 
 #' side of the market
@@ -16,15 +14,25 @@
 #' side of the market (only required when \code{proposerUtils} is not provided)
 #' @param reviewerPref is a matrix with the preference order of the courted side
 #' of the market (only required when \code{reviewerUtils} is not provided)
-#' @return A list with the successful proposals and engagements: 
+#' @aliases  A list with the successful proposals and engagements: 
 #' \code{proposals} is a vector whose nth element contains the id of the reviewer 
 #' that proposer n is matched to. 
 #' \code{engagements} is a vector whose nth element contains the id of the proposer 
 #' that reviewer n is matched to.  
 #' \code{single.proposers} is a vector that lists the ids of remaining single 
-#' proposers
+#' proposers.
 #' \code{single.reviewers} is a vector that lists the ids of remaining single
-#' reviewers
+#' reviewers.
+#' @examples
+#' nmen = 25
+#' nwomen = 20
+#' uM = runif(nmen*nwomen)
+#' uW = runif(nwomen*nmen)
+#' results = one2one(uM, uW)
+#'   
+#' prefM = sortIndex(uM)  
+#' prefW = sortIndex(uW)
+#' results = one2one(proposerPref = prefM, reviewerPref = prefW)
 one2one = function(proposerUtils = NULL, 
                    reviewerUtils = NULL, 
                    proposerPref = NULL, 
