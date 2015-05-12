@@ -42,14 +42,30 @@ test_that("Check if incorrect preference orders result in an error", {
     uM = matrix(runif(16*14), nrow=16, ncol=14)
     uW = matrix(runif(16*14), nrow=14, ncol=16)
     proposerPref = sortIndex(uM)+1
-    proposerPref[1,1] = 9999
-    expect_error(one2one(proposerPref = proposerPref, reviewerPref = sortIndex(uW)+1), "proposerPref was defined by the user but is not a complete list of preference orderings")
+    reviewerPref = sortIndex(uW)+1
+    
+    proposerPrefPrime = proposerPref
+    proposerPrefPrime[1,1] = 9999
+    
+    reviewerPrefPrime = reviewerPref
+    reviewerPrefPrime[1,1] = 9999
+    
+    expect_error(one2one(proposerPref = proposerPrefPrime, reviewerPref = reviewerPref), "proposerPref was defined by the user but is not a complete list of preference orderings")
+    expect_error(one2one(proposerPref = proposerPref, reviewerPref = reviewerPrefPrime), "reviewerPref was defined by the user but is not a complete list of preference orderings")
+})
+
+test_that("Check null inputs", {
+    expect_error(one2one(), "missing proposer preferences")
+    uM = matrix(runif(16*14), nrow=16, ncol=14)
+    expect_error(one2one(uM), "missing reviewer utilities")
+    expect_error(one2one(proposerPref = sortIndex(uM)), "missing reviewer utilities")
 })
 
 test_that("Check if incorrect dimensions result in error", {
     uM = matrix(runif(16*14), nrow=16, ncol=14)
     uW = matrix(runif(15*15), nrow=15, ncol=15)
     expect_error(one2one(uM, uW), "preference orderings must be symmetric")
+    expect_error(one2one(proposerPref = sortIndex(uM), reviewerUtils = sortIndex(uW)), "preference orderings must be symmetric")
 })
 
 test_that("Check outcome from one2one matching", {
@@ -83,4 +99,20 @@ test_that("Check outcome from many2one matching", {
     matching = many2one(uM, uW, slots=2)
     expect_true(all(matching$engagements == c(1,2)+1))
     expect_true(all(matching$proposals == c(2, 2, 2, 2, 0, 1)+1))
+})
+
+test_that("Check checkStability", {
+    # define preferences
+    uM = matrix(c(0, 1, 
+                  1, 0, 
+                  0, 1), byrow = TRUE, nrow=3, ncol=2)  
+    uW = matrix(c(0, 2, 1, 
+                  1, 0, 2), byrow = TRUE, nrow=2, ncol=3)
+    # define matchings (this one is correct)
+    matching = list("engagements" = as.matrix(c(1,2)+1),
+                    "proposals" = as.matrix(c(2, 0, 1)+1))
+    # check if the matching is stable
+    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    # swap proposals and engagements (this one isn't stable)
+    expect_false(checkStability(uM, uW, matching$engagements, matching$proposals))
 })
