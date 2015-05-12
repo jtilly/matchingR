@@ -9,5 +9,5 @@ Description: This package computes the Gale-Shapley Algorithm efficiently using 
 License: GPL (>= 2)
 Depends: Rcpp, RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo
-Suggests: testthat, knitr
+Suggests: testthat, knitr, covr
 VignetteBuilder: knitr
