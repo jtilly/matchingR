@@ -9,9 +9,13 @@ test_that("Check if one2one matching is stable", {
 })
 
 test_that("Check if one2many matching is stable", {
-    uM = matrix(runif(12), nrow=4, ncol=2)
-    uW = matrix(runif(8), nrow=2, ncol=4)
-    matching = one2many(uM, uW, slots=2)
+    uM = matrix(runif(16), nrow=8, ncol=2)
+    uW = matrix(runif(16), nrow=2, ncol=8)
+    matching = one2many(uM, uW, slots=4)
+    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    matching = one2many(uM, uW, slots=8)
+    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    matching = one2many(uM, uW, slots=10)
     expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
 })
 
@@ -65,7 +69,10 @@ test_that("Check if incorrect dimensions result in error", {
     uM = matrix(runif(16*14), nrow=16, ncol=14)
     uW = matrix(runif(15*15), nrow=15, ncol=15)
     expect_error(one2one(uM, uW), "preference orderings must be symmetric")
-    expect_error(one2one(proposerPref = sortIndex(uM), reviewerUtils = sortIndex(uW)), "preference orderings must be symmetric")
+    expect_error(one2one(proposerPref = sortIndex(uM), reviewerUtils = uW), "preference orderings must be symmetric")
+    uM = matrix(runif(16*16), nrow=16, ncol=16)
+    uW = matrix(runif(15*16), nrow=15, ncol=16)
+    expect_error(one2one(proposerPref = sortIndex(uM), reviewerUtils = uW), "preference orderings must be symmetric")
 })
 
 test_that("Check outcome from one2one matching", {
