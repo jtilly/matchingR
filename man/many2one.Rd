@@ -15,7 +15,8 @@ side of the market}
 of the market}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{proposerUtils} is not provided)}
+side of the market (only required when \code{proposerUtils} is not
+provided)}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
 of the market (only required when \code{reviewerUtils} is not provided)}
@@ -24,21 +25,21 @@ of the market (only required when \code{reviewerUtils} is not provided)}
 }
 \value{
 A list with the successful proposals and engagements:
-\code{proposals} is a vector whose nth element contains the id of the reviewer
-that proposer n is matched to.
-\code{engagements} is a vector whose nth element contains the id of the proposer
-that reviewer n is matched to.
-\code{single.proposers} is a vector that lists the ids of remaining single
-proposers (if a proposer has two vacancies left it will be listed twice)
-\code{single.reviewers} is a vector that lists the ids of remaining single
-reviewers
+  \code{proposals} is a vector whose nth element contains the id of the
+  reviewer that proposer n is matched to. \code{engagements} is a vector
+  whose nth element contains the id of the proposer that reviewer n is
+  matched to. \code{single.proposers} is a vector that lists the ids of
+  remaining single proposers (if a proposer has two vacancies left it will be
+  listed twice) \code{single.reviewers} is a vector that lists the ids of
+  remaining single reviewers
 }
 \description{
 This function returns the many-to-many matching. The function needs some
 description of individuals preferences as inputs. That can be in the form of
 cardinal utilities or preference orders (or both). It is computationally most
-efficient to provide cardinal utilities for the proposers \code{proposerUtils}
-and cardinal utilities for the reviewers \code{reviewerUtils}.
+efficient to provide cardinal utilities for the proposers
+\code{proposerUtils} and cardinal utilities for the reviewers
+\code{reviewerUtils}.
 }
 \examples{
 nfirms = 10

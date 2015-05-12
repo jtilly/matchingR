@@ -14,20 +14,22 @@ side of the market}
 of the market}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{proposerUtils} is not provided)}
+side of the market (only required when \code{proposerUtils} is not
+provided)}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
 of the market (only required when \code{reviewerUtils} is not provided)}
 }
 \value{
 a list containing proposerUtils, reviewerUtils, proposerPref
-(reviewerPref are not required after they are translated into reviewerUtils).
+  (reviewerPref are not required after they are translated into
+  reviewerUtils).
 }
 \description{
 This function parses and validates the arguments that are passed on to the
 functions one2one, one2many, and many2one. In particular, it checks if
-user-defined preference orders are complete. If user-defined orderings
-are given in terms of R indices (starting at 1), then these are transformed
-into C++ indices (starting at zero).
+user-defined preference orders are complete. If user-defined orderings are
+given in terms of R indices (starting at 1), then these are transformed into
+C++ indices (starting at zero).
 }
 
