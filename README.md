@@ -7,10 +7,11 @@ matchingR is an R Package that quickly computes the Gale-Shapley Algorithm for l
 
 
 ## Installation
-This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/)
+This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
 ```
-install.packages("matchingR")
+install.packages("matchingR", type="source")
 ```
+Binaries will be available soon.
 
 ## Documentation
 * [Documentation as PDF](http://jtilly.io/matchingR/matchingR.pdf)
