@@ -38,87 +38,51 @@ Binaries from CRAN will be made available soon. In the meantime, binaries can be
 
 ## Example: Marriage Market
 ```
-
 library("matchingR")
 
-set seed for replicability
-==========================
-
+# set seed for replicability
 set.seed(1)
-
-set commonality
-===============
-
+# set commonality
 commonality = 0.5
-
-set number of men
-=================
-
+# set number of men
 nmen = 2500
-
-set number of women
-===================
-
+# set number of women
 nwomen = 2000
 
-generate preferences
-====================
+# generate preferences
+uM = commonality * matrix(runif(nwomen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen)
+uW = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
 
-uM = commonality * matrix(runif(nwomen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen) uW = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
-
-male optimal matching
-=====================
-
+# male optimal matching
 resultsM = one2one(uM, uW)
-
-female optimal matching
-=======================
-
+# female optimal matching
 resultsW = one2one(uW, uM)
 
-check if matching is stable
-===========================
-
-checkStability(uM, uW, resultsM$proposals, resultsM$engagements) checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
-
+# check if matching is stable
+checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
+checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
 ## Example: College Admissions Problem
 ```
-
 library("matchingR")
 
-set seed for replicability
-==========================
-
+# set seed for replicability
 set.seed(1)
-
-set commonality
-===============
-
+# set commonality
 commonality = 0.5
-
-set number of workers
-=====================
-
+# set number of workers
 nstudents = 1000
-
-set number of colleges
-======================
-
+# set number of colleges
 ncolleges = 400
 
-generate preferences
-====================
+# generate preferences
+uStudents = commonality * matrix(runif(ncolleges), nrow=nworkers, ncol=ncolleges, byrow = TRUE) + (1-commonality) * runif(nworkers*ncolleges)
+uColleges = commonality * matrix(runif(nworkers), nrow=ncolleges, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(ncolleges*nworkers)
 
-uStudents = commonality * matrix(runif(ncolleges), nrow=nworkers, ncol=ncolleges, byrow = TRUE) + (1-commonality) * runif(nworkers*ncolleges) uColleges = commonality * matrix(runif(nworkers), nrow=ncolleges, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(ncolleges*nworkers)
-
-worker optimal matching
-=======================
-
+# worker optimal matching
 results = one2many(uStudents, uColleges, slots=2)
 
-check if matching is stable
-===========================
-
-checkStability(uStudents, uColleges, results$proposals, results$engagements)\`\`\`
+# check if matching is stable
+checkStability(uStudents, uColleges, results$proposals, results$engagements)
+```
