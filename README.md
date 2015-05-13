@@ -14,7 +14,7 @@ install.packages("matchingR", type="source")
 Binaries will be available soon.
 
 ## Documentation
-* [Documentation as PDF](http://jtilly.io/matchingR/matchingR.pdf)
+* [Documentation as PDF](http://cran.r-project.org/web/packages/matchingR/matchingR.pdf)
 
 ## Example: Marriage Market
 ```
