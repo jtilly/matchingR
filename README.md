@@ -11,7 +11,10 @@ This package can be installed from [CRAN](http://cran.r-project.org/web/packages
 ```
 install.packages("matchingR", type="source")
 ```
-Binaries will be available soon.
+Binaries from CRAN will be made available soon. In the meantime, binaries can be found here:
+* [Windows (64 bit)](http://jtilly.io/matchingR/matchingR_1.0.1.zip)  
+* [Mac (64 bit)](http://jtilly.io/matchingR/matchingR_1.0.1.tgz)
+* [Ubuntu (64bit)](http://jtilly.io/matchingR/matchingR_1.0.1_R_x86_64-pc-linux-gnu.tar.gz)
 
 ## Documentation
 * [Documentation as PDF](http://cran.r-project.org/web/packages/matchingR/matchingR.pdf)
