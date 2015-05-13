@@ -1,19 +1,17 @@
 matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++ [![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR) [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
-==================================================================================================================================================================================================================================================================================================================================
+===============
 
 matchingR is an R Package that quickly computes the Gale-Shapley Algorithm for large scale matching markets. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
 
 Depends on
 ----------
-
--	[Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html)
--	[RcppArmadillo](http://cran.r-project.org/web/packages/RcppArmadillo/index.html)
+*	[Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html)
+*	[RcppArmadillo](http://cran.r-project.org/web/packages/RcppArmadillo/index.html)
 
 Installation
 ------------
 
 This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
-
 ```
 install.packages("matchingR", type="source")
 ```
@@ -21,17 +19,14 @@ install.packages("matchingR", type="source")
 Binaries from CRAN will be made available soon. In the meantime, binaries can be installed from within R:
 
 #### Windows (64 bit)
-
 ```
- install.packages("http://jtilly.io/matchingR/matchingR_1.0.1.zip", repos = NULL)
+install.packages("http://jtilly.io/matchingR/matchingR_1.0.1.zip", repos = NULL)
 ```
 
 #### Mac (64 bit)
-
 ```
  install.packages("http://jtilly.io/matchingR/matchingR_1.0.1.tgz", repos = NULL)
-    ```
-
+```
 
 ## Documentation
 * [Documentation as PDF](http://cran.r-project.org/web/packages/matchingR/matchingR.pdf)
