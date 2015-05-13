@@ -7,9 +7,9 @@ matchingR is an R Package that quickly computes the Gale-Shapley Algorithm for l
 
 
 ## Installation
+This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/)
 ```
-library("devtools")
-install_github("jtilly/matchingR")
+install.packages("matchingR")
 ```
 
 ## Documentation
@@ -42,7 +42,7 @@ checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-## Example: Multi Worker Firms
+## Example: College Admissions Problem
 ```
 library("matchingR")
 
@@ -51,17 +51,17 @@ set.seed(1)
 # set commonality
 commonality = 0.5
 # set number of workers
-nworkers = 1000
-# set number of firms
-nfirms = 400
+nstudents = 1000
+# set number of colleges
+ncolleges = 400
 
 # generate preferences
-uWorkers = commonality * matrix(runif(nfirms), nrow=nworkers, ncol=nfirms, byrow = TRUE) + (1-commonality) * runif(nworkers*nfirms)
-uFirms = commonality * matrix(runif(nworkers), nrow=nfirms, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(nfirms*nworkers)
+uStudents = commonality * matrix(runif(ncolleges), nrow=nworkers, ncol=ncolleges, byrow = TRUE) + (1-commonality) * runif(nworkers*ncolleges)
+uColleges = commonality * matrix(runif(nworkers), nrow=ncolleges, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(ncolleges*nworkers)
 
 # worker optimal matching
-results = one2many(uWorkers, uFirms, slots=2)
+results = one2many(uStudents, uColleges, slots=2)
 
 # check if matching is stable
-checkStability(uWorkers, uFirms, results$proposals, results$engagements)
+checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
