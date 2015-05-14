@@ -13,19 +13,7 @@ Installation
 
 This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
 ```
-install.packages("matchingR", type="source")
-```
-
-Binaries from CRAN will be made available soon. In the meantime, binaries can be installed from within R:
-
-#### Windows (64 bit)
-```
-install.packages("http://jtilly.io/matchingR/matchingR_1.0.1.zip", repos = NULL)
-```
-
-#### Mac (64 bit)
-```
- install.packages("http://jtilly.io/matchingR/matchingR_1.0.1.tgz", repos = NULL)
+install.packages("matchingR")
 ```
 
 ## Documentation
