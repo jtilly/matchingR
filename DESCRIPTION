@@ -7,6 +7,8 @@ Author: Jan Tilly
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
 Description: Computes the Gale-Shapley Algorithm efficiently using Rcpp. Provides algorithms to compute the stable matching for the marriage problem and for the matching of workers to multi-worker firms.
 License: GPL (>= 2)
+URL: https://github.com/jtilly/matchingR
+BugReports: https://github.com/jtilly/matchingR/issues
 Depends: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
 Suggests: testthat, knitr
