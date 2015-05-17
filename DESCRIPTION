@@ -1,7 +1,7 @@
 Package: matchingR
 Type: Package
 Title: Gale-Shapley Algorithm in R and C++
-Version: 1.0
+Version: 1.0.2
 Date: 2015-05-07
 Author: Jan Tilly
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
@@ -11,5 +11,6 @@ URL: https://github.com/jtilly/matchingR
 BugReports: https://github.com/jtilly/matchingR/issues
 Depends: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
-Suggests: testthat, knitr
+Suggests: testthat,
+    knitr
 VignetteBuilder: knitr

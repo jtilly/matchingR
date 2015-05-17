@@ -1,0 +1,55 @@
+---
+title: "matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++"
+author: "Jan Tilly"
+date: "`r Sys.Date()`"
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, results = "hide", echo=FALSE, message = FALSE}
+library(matchingR)
+```
+
+# About this Package
+This package provides R functions to quickly compute the stable matching for large scale matching markets using the Gale-Shapley Algorithm. matchingR is an R Package that quickly computes the Gale-Shapley Algorithm for large scale matching markets. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. The package supports one-to-one, one-to-many, and many-to-one matching.  
+
+# Matching Markets
+Matching markets are now common place in economics. Consider the following example of the marriage market. Suppose there are three men and three women. The goal is to find a **stable matching**. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than his current spouse `w` and this other woman `w'` would rather be matched to man `m'` than her current spouse `m'`.
+
+
+# Preference Orders
+We first need to introduce notation to specify men's and women's preference orderings over each other. We record men's payoffs from being matched to a particular woman in the payoff matrix `uM`. Rows in the matrix correspond to men, columns to female. E.g.
+```{r}
+uM = matrix(c(1.0, 0.5, 0.0,
+              0.0, 0.5, 1.0,
+              0.0, 1.0, 0.5), nrow=3, ncol=3, byrow=TRUE)
+```
+which states that man `1` receives a payoff of $1.0$ from being matched to woman `1`, a payoff of $0.5$ from being matched to woman `2` and a payoff of $0.0$ from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, let the payoff matrix for women be given by
+```{r}
+uW = matrix(c(0.0, 0.5, 1.0,
+              1.0, 0.0, 0.5,
+              0.0, 1.0, 0.5), nrow=3, ncol=3, byrow=TRUE)
+```
+which states that woman `1` receives a payoff of $0.0$ from being matched to man `1`, a payoff of $0.5$ from being matched to man `2` and a payoff of $1.0$ from being matched to man 3.
+
+# Gale-Shapley Algorithm
+With these payoff matrices in hand, we can compute the Gale-Shapley algorithm. The Gale–Shapley algorithm works as follows: Single men sequentially make proposals to their most preferred available woman. A woman can hold on to at most one proposal at a time. A single woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all man are matched to women. 
+
+The package computes the Gale-Shapley algorithm using the function `one2one`:
+```{r}
+matching = one2one(uM, uW)
+```
+
+The function `one2one` returns a list `matching` that includes the vectors `proposals` and `engagements` with the final proposals and engagements, respectively. These two vectors contain the same information (i.e. they tell us who is matched with whom). For the example above, the vector of proposals contains
+```{r}
+matching$proposals
+```
+The first element in the vector tells us that man `1` will be matched to female `1`. Man `2` is matched to female `3`, and man `3` is matched to female `2`. The vector of engagement contains 
+```{r}
+matching$engagements
+```
+The first element in the vector tells us that woman `1` will be matched to man `1`, woman `2` will be matched to man `3`, and woman `3` will be matched to man `2`.
+
