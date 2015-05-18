@@ -11,7 +11,7 @@ Installation
 ------------
 
 This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
-```
+```{r}
 install.packages("matchingR")
 ```
 
