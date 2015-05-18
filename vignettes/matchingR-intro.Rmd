@@ -1,10 +1,10 @@
 ---
 title: "Computing the Gale-Shapley Algorithm in R and C++: An Introduction to matchingR"
-author: "[Jan Tilly](jtilly@econ.upenn.edu)"
+author: "[Jan Tilly](mailto:jtilly@econ.upenn.edu)"
 date: "May 17, 2015"
-output: pdf_document
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++}
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R and C++: An Introduction to matchingR}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -27,13 +27,13 @@ uM = matrix(c(1.0, 0.5, 0.0,
               0.0, 0.5, 1.0,
               0.0, 1.0, 0.5), nrow=3, ncol=3, byrow=TRUE)
 ```
-which states that man `1` receives a payoff of $1.0$ from being matched to woman `1`, a payoff of $0.5$ from being matched to woman `2` and a payoff of $0.0$ from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, let the payoff matrix for women be given by
+which states that man `1` receives a payoff of `1.0` from being matched to woman `1`, a payoff of `0.5` from being matched to woman `2` and a payoff of `0.0` from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, let the payoff matrix for women be given by
 ```{r}
 uW = matrix(c(0.0, 0.5, 1.0,
               1.0, 0.0, 0.5,
               0.0, 1.0, 0.5), nrow=3, ncol=3, byrow=TRUE)
 ```
-which states that woman `1` receives a payoff of $0.0$ from being matched to man `1`, a payoff of $0.5$ from being matched to man `2` and a payoff of $1.0$ from being matched to man 3.
+which states that woman `1` receives a payoff of `0.0` from being matched to man `1`, a payoff of `0.5` from being matched to man `2` and a payoff of `1.0` from being matched to man 3.
 
 Instead of using payoff matrices, we can also represent preferences using preference orderings. The preference ordering that corresponds to `uM` is
 ```{r}
@@ -75,3 +75,10 @@ We can then check if the computed matching is stable using the function `checkSt
 ```{r, results = "hide", message=FALSE}
 checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
+For the simple 3-by-3 example, we can perform this check by hand:
+
+ * Man `1` is matched to his most preferred woman, so he cannot do better.
+ * Man `2` is matched to his second most preferred woman. His most preferred woman is woman `2`, who is not     willing to match with man `2`, because he is her least preferred choice.
+ * Man `3` is matched to women `2`, his most preferred choice. 
+ 
+Thus, this matching is stable.
