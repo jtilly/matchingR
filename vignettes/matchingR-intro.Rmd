@@ -122,16 +122,13 @@ set.seed(1)
 nmen = 2500
 # set number of women
 nwomen = 2000
-
 # generate preferences
 uM = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen) 
 uW = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen) 
-
 # male optimal matching
 resultsM = one2one(uM, uW)
 # female optimal matching
 resultsW = one2one(uW, uM)
-
 # check if matchings are stable
 checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
@@ -142,18 +139,15 @@ The following is an example of `one2many` where 1000 students get matched to 400
 ```{r, results = "hide"}
 # set seed
 set.seed(1)
-# set number of workers
+# set number of students
 nstudents = 1000
 # set number of colleges
 ncolleges = 400
-
 # generate preferences
 uStudents = matrix(runif(ncolleges*nstudents), nrow = nstudents, ncol = ncolleges) 
 uColleges = matrix(runif(nstudents*ncolleges), nrow = ncolleges, ncol = nstudents) 
-
 # worker optimal matching
 results = one2many(uStudents, uColleges, slots = 2)
-
 # check if matching is stable
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
