@@ -13,7 +13,7 @@ install.packages("matchingR")
 
 ## Documentation
 * [Documentation](http://jtilly.io/matchingR/matchingR-documentation.pdf)
-* [Vignette](https://jtilly.io/matchingR/matchingR-intro.pdf)
+* [Vignette](http://jtilly.io/matchingR/matchingR-intro.pdf)
 
 ## Example: Marriage Market
 ```
