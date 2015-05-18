@@ -3,11 +3,6 @@ matchingR: Efficient Computation of the Gale-Shapley Algorithm in R and C++ [![B
 
 matchingR is an R Package that quickly computes the Gale-Shapley Algorithm for large scale matching markets. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
 
-Depends on
-----------
-*	[Rcpp](http://cran.r-project.org/web/packages/Rcpp/index.html)
-*	[RcppArmadillo](http://cran.r-project.org/web/packages/RcppArmadillo/index.html)
-
 Installation
 ------------
 
@@ -17,7 +12,8 @@ install.packages("matchingR")
 ```
 
 ## Documentation
-* [Documentation as PDF](http://cran.r-project.org/web/packages/matchingR/matchingR.pdf)
+* [Documentation](http://jtilly.io/matchingR/matchingR-documentation.pdf)
+* [Vignette](https://jtilly.io/matchingR/matchingR-intro.pdf)
 
 ## Example: Marriage Market
 ```
