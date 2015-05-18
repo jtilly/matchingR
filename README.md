@@ -20,8 +20,10 @@ The following is an example of `one2one` with different numbers of participants 
 ```{r}
 # set seed
 set.seed(1)
+
 # set number of men
 nmen = 2500
+
 # set number of women
 nwomen = 2000
 
@@ -44,8 +46,10 @@ The following is an example of `one2many` where 1000 students get matched to 400
 ```{r}
 # set seed
 set.seed(1)
-# set number of workers
+
+# set number of students
 nstudents = 1000
+
 # set number of colleges
 ncolleges = 400
 
