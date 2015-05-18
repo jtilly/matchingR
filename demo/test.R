@@ -6,16 +6,14 @@ require("matchingR")
 
 # set seed for replicability
 set.seed(1)
-# set commonality
-commonality = 0.5
 # number of firms
 M = 2000
 # number of workers
 N = 2500
 
 # generate preferences for firms and workers
-uFirms = commonality * matrix(runif(N), nrow=M, ncol=N, byrow = TRUE) + (1-commonality) * runif(N*M)
-uWorkers = commonality * matrix(runif(M), nrow=N, ncol=M, byrow = TRUE) + (1-commonality) * runif(M*N)
+uFirms = matrix(runif(N*M), nrow=M, ncol=N) 
+uWorkers = matrix(runif(N*M), nrow=N, ncol=M)
 
 # compute the firm-optimal one-to-one matching
 res.one2one = one2one(uFirms, uWorkers)
