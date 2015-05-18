@@ -12,52 +12,46 @@ install.packages("matchingR")
 ```
 
 ## Documentation
-* [Documentation](http://jtilly.io/matchingR/matchingR-documentation.pdf)
-* [Vignette](http://jtilly.io/matchingR/matchingR-intro.pdf)
+* [Package Documentation](http://jtilly.io/matchingR/matchingR-documentation.pdf)
+* [Vignette: Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.pdf)
 
-## Example: Marriage Market
-```
-library("matchingR")
-
-# set seed for replicability
+### Example: Marriage Market
+The following is an example of `one2one` with different numbers of participants on each side of the market. By construction, 500 men will remain unmatched.
+```{r}
+# set seed
 set.seed(1)
-# set commonality
-commonality = 0.5
 # set number of men
 nmen = 2500
 # set number of women
 nwomen = 2000
 
 # generate preferences
-uM = commonality * matrix(runif(nwomen), nrow=nmen, ncol=nwomen, byrow = TRUE) + (1-commonality) * runif(nmen*nwomen)
-uW = commonality * matrix(runif(nmen), nrow=nwomen, ncol=nmen, byrow = TRUE) + (1-commonality) * runif(nwomen*nmen)
+uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen) 
+uW = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen) 
 
 # male optimal matching
 resultsM = one2one(uM, uW)
 # female optimal matching
 resultsW = one2one(uW, uM)
 
-# check if matching is stable
+# check if matchings are stable
 checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-## Example: College Admissions Problem
-```
-library("matchingR")
-
-# set seed for replicability
+### Example: College Admissions Problem
+The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched.
+```{r}
+# set seed
 set.seed(1)
-# set commonality
-commonality = 0.5
 # set number of workers
 nstudents = 1000
 # set number of colleges
 ncolleges = 400
 
 # generate preferences
-uStudents = commonality * matrix(runif(ncolleges), nrow=nworkers, ncol=ncolleges, byrow = TRUE) + (1-commonality) * runif(nworkers*ncolleges)
-uColleges = commonality * matrix(runif(nworkers), nrow=ncolleges, ncol=nworkers, byrow = TRUE) + (1-commonality) * runif(ncolleges*nworkers)
+uStudents = matrix(runif(ncolleges*nstudents), nrow=nstudents, ncol=ncolleges) 
+uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents) 
 
 # worker optimal matching
 results = one2many(uStudents, uColleges, slots=2)
