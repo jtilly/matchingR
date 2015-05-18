@@ -1,12 +1,11 @@
 ---
-title: "Computing the Gale-Shapley Algorithm in R and C++: An Introduction to matchingR"
-author: "[Jan Tilly](mailto:jtilly@econ.upenn.edu)"
+title: 'Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR'
+author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
 date: "May 17, 2015"
 output: pdf_document
-vignette: >
-  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R and C++: An Introduction to matchingR}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+bibliography: bibliography.bib
+vignette: |
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
@@ -15,7 +14,7 @@ library(matchingR)
 
 ## Introduction
 
-This package provides R functions to quickly compute stable matchings for large matching markets using the Gale-Shapley Algorithm. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. The package supports one-to-one, one-to-many, and many-to-one matchings.  
+This package provides R functions to quickly compute stable matchings for large matching markets using the Gale-Shapley Algorithm [@gale1962college]. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. The package supports one-to-one, one-to-many, and many-to-one matchings.  
 
 Consider the following example of the marriage market. Suppose there are `N` men and `N` women. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than to his current spouse `w` and this other woman `w'` would rather be matched to man `m` than to her current spouse `m'`. In other words, a matching is stable when there does not exist a pair `(m, w')` for which both `m` and `w'` are better off than they are with their respective spouses `w`  and `m'`.
 
@@ -109,11 +108,11 @@ For the simple 3-by-3 example, we can perform this check by hand:
  
 Thus, this matching is stable.
 
-## Examples
+## Extensions
 
 The following examples illustrate some additional features of this package.
 
-### Marriage Market
+### Marriage Market with Unequal Number of Men and Women
 The following is an example of `one2one` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
 ```{r, results = "hide"}
 # set seed
@@ -134,8 +133,8 @@ checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-### College Admissions Problem
-The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution.
+### College Admissions Problem: One-to-Many Matching
+The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
 ```{r, results = "hide"}
 # set seed
 set.seed(1)
