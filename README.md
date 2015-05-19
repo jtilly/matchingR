@@ -5,7 +5,7 @@ Gale-Shapley in R
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/matchingR)](http://cran.r-project.org/web/packages/matchingR)
 
 
-[![You know that I'll never leave you. Not as long as she's with someone.](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ You know that I'll never leave you. Not as long as she's with someone.)
+[!["You know that I'll never leave you. Not as long as she's with someone."](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
 
 
 `matchingR` is an R Package that efficiently computes the [Gale-Shapley Algorithm](http://en.wikipedia.org/wiki/Stable_marriage_problem) for large matching markets. The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
