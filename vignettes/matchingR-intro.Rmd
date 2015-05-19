@@ -14,21 +14,20 @@ vignette: >
 library(matchingR)
 ```
 
-## Introduction
+# Introduction
 
 This package provides R functions to quickly compute stable matchings for large matching markets using the Gale-Shapley Algorithm [@gale1962college]. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. The package supports one-to-one, one-to-many, and many-to-one matchings.  
 
 Consider the following example of the marriage market. Suppose there are `N` men and `N` women. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than to his current spouse `w` and this other woman `w'` would rather be matched to man `m` than to her current spouse `m'`. In other words, a matching is stable when there does not exist a pair `(m, w')` for which both `m` and `w'` are better off than they are with their respective spouses `w`  and `m'`.
 
 
-
-## Preferences
+# Preferences
 
 We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Rows in the matrix correspond to men, columns to women. For example: 
 ```{r}
 uM = matrix(c(1.0, 0.5, 0.0,
-              0.0, 0.5, 1.0,
-              0.0, 1.0, 0.5), nrow = 3, ncol = 3, byrow = TRUE)
+              0.5, 0.0, 1.0,
+              0.0, 0.5, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(uM) = list(rows = c('Man 1', 'Man 2', 'Man 3'), cols = c('Woman 1', 'Woman 2', 'Woman 3'))
@@ -38,7 +37,7 @@ In this example, man `1` receives a payoff of `1.0` from being matched to woman 
 ```{r}
 uW = matrix(c(0.0, 0.5, 1.0,
               1.0, 0.0, 0.5,
-              0.0, 1.0, 0.5), nrow = 3, ncol = 3, byrow = TRUE)
+              0.0, 0.5, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(uW) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
@@ -49,18 +48,18 @@ In this example, woman `1` receives a payoff of `0.0` from being matched to man 
 Instead of using payoff matrices, we can also represent preferences using preference orderings. The preference ordering that corresponds to `uM` is
 ```{r}
 prefM = matrix(c(1, 2, 3,
-                 3, 2, 1,
-                 2, 3, 1), nrow = 3, ncol = 3, byrow = TRUE)
+                 3, 1, 2,
+                 3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(prefM) = list(rows = c('Man 1', 'Man 2', 'Man 3'), cols = c('Woman 1', 'Woman 2', 'Woman 3'))
 prefM
 ```
-`prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`. Man `2` prefers woman `3` over woman `2` over woman `1`, etc. The preference ordering that corresponds to `uW` is given by
+`prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`, etc. The preference ordering that corresponds to `uW` is given by
 ```{r}
 prefW = matrix(c(3, 2, 1,
                  1, 3, 2,
-                 2, 3, 1), nrow = 3, ncol = 3, byrow = TRUE)
+                 3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(prefW) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
@@ -68,9 +67,31 @@ prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
 
-## Gale-Shapley Algorithm: One-to-one matching
+# Gale-Shapley Algorithm: One-to-one matching
 
 The Gale–Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
+
+For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single. 
+
+ 1. * Man `1` proposes to woman `1`, his most-preferred choice.
+    * Unmatched men: `2`, `3`
+ 2. * Man `2` proposes to woman `3`, his most-preferred choice. 
+    * Unmatched men: `3`
+ 3. * Man `3` proposes to woman `3`, his most-preferred choice.
+    * Woman `3` now dumps man `2`. 
+    * Unmatched men: `2`
+ 4. * Man `2` proposes to woman `1`, his most-preferred available choice. 
+    * Woman `1` now dumps man `1`. 
+    * Unmatched men: `1`
+ 5. * Man `1` proposes to woman `2`, his most-preferred available choice. 
+    * All men are now matched.
+ 
+ The man-optimal stable matching is thefore:
+ 
+ |-------|---------|
+ | Man 1 | Woman 2 |
+ | Man 2 | Woman 1 |
+ | Man 3 | Woman 3 |
 
 The package computes the Gale-Shapley algorithm using the function `one2one`:
 ```{r}
@@ -88,7 +109,7 @@ dimnames(matching$proposals) = list(rows = c("Man 1", "Man 2", "Man 3"),
 ```{r}
 matching$proposals
 ```
-The first element in the vector tells us that man `1` is matched with woman `1`. Man `2` is matched to woman `3`, and man `3` is matched to woman `2`. The vector of engagement contains 
+The first element in the vector tells us that man `1` is matched with woman `2`. Man `2` is matched to woman `1`, and man `3` is matched to woman `3`. The vector of engagement contains 
 ```{r, echo=FALSE}
 dimnames(matching$engagements) = list(rows = c("Woman 1", "Woman 2", "Woman 3"), 
                                       cols = c("Engaged to Man"))
@@ -96,7 +117,7 @@ dimnames(matching$engagements) = list(rows = c("Woman 1", "Woman 2", "Woman 3"),
 ```{r}
 matching$engagements
 ```
-The first element in the vector tells us that woman `1` is matched to man `1`, woman `2` will be matched to man `3`, and woman `3` will be matched to man `2`.
+The first element in the vector tells us that woman `1` is matched to man `2`, woman `2` will be matched to man `1`, and woman `3` will be matched to man `3`.
 
 We can then check if the computed matching is stable using the function `checkStability`. To check if a matching is stable, we check for each assignment `(m,w)` if there is some other woman `w'` that man `m` would rather be matched with and who would rather be matched to man `m`. This function will return `true` if the matching is stable and `false` otherwise.
 ```{r, results = "hide", message=FALSE}
@@ -104,9 +125,9 @@ checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
 For the simple 3-by-3 example, we can perform this check by hand:
 
- * Man `1` is matched to his most preferred woman, so he cannot do better.
- * Man `2` is matched to his second most preferred woman. His most preferred woman is woman `2`, who is not     willing to match with man `2`, because he is her least preferred choice.
- * Man `3` is matched to women `2`, his most preferred choice. 
+ * Man `1` is matched to woman `2`, his second-most preferred choice. His most preferred choice is woman `1`. Woman `1` is matched with man `2` who she prefers over man `1`. Thus man `1` cannot do better than woman `2`.
+ * Man `2` is matched to woman `1`, his second-most preferred choice. His most preferred woman is woman `3`, who is     matched with man `3`. Since man `3` is her most-preferred choice, man `2` cannot do better than woman `1`.
+ * Man `3` is matched to women `3`, his most preferred choice, so he cannot do better. 
  
 Thus, this matching is stable.
 
@@ -152,3 +173,5 @@ results = one2many(uStudents, uColleges, slots = 2)
 # check if matching is stable
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
+
+## Literature
