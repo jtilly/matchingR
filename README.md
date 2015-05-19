@@ -54,8 +54,13 @@ The male-optimal stable matching is thefore:
 |  Man 2 |  Woman 1 |
 |  Man 3 |  Woman 3 |
 
+This matching can be computed using
+```{r}
+results = one2one(proposerPref = prefM, reviewerPref = prefW)
+```
 
-### Example: Marriage Market
+## Examples
+### Marriage Market
 The following is an example of `one2one` with different numbers of participants on each side of the market. By construction, 500 men will remain unmatched.
 ```{r}
 # set seed
@@ -81,8 +86,8 @@ checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-### Example: College Admissions Problem
-The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched.
+### College Admissions Problem
+The following is an example of `one2many` where 1,000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched.
 ```{r}
 # set seed
 set.seed(1)
