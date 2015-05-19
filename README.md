@@ -69,7 +69,7 @@ The male-optimal stable matching is therefore:
 
 This matching can be computed using
 ```{r}
-results = one2one(proposerPref = prefM, reviewerPref = prefW)
+results = matchingR::one2one(proposerPref = prefM, reviewerPref = prefW)
 ```
 
 ## Examples
@@ -90,13 +90,13 @@ uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
 uW = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen) 
 
 # male optimal matching
-resultsM = one2one(uM, uW)
+resultsM = matchingR::one2one(uM, uW)
 # female optimal matching
-resultsW = one2one(uW, uM)
+resultsW = matchingR::one2one(uW, uM)
 
 # check if matchings are stable
-checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
-checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
+matchingR::checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
+matchingR::checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
 ### College Admissions Problem
@@ -116,8 +116,8 @@ uStudents = matrix(runif(ncolleges*nstudents), nrow=nstudents, ncol=ncolleges)
 uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents) 
 
 # worker optimal matching
-results = one2many(uStudents, uColleges, slots=2)
+results = matchingR::one2many(uStudents, uColleges, slots=2)
 
 # check if matching is stable
-checkStability(uStudents, uColleges, results$proposals, results$engagements)
+matchingR::checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
