@@ -37,7 +37,7 @@ prefW = matrix(c(3, 2, 1,
 ```
 `prefW` states that woman `1` prefers man `3` over man `2` over man `1`, etc. 
 
-We can now compute the Gale-Shapley Algorithm by hand:
+We can now compute the Gale-Shapley Algorithm by hand. For the preferences defined in `prefM` and `prefW` it takes five rounds until all men (and women) are matched. 
 
 1. Man `1` proposes to woman `1`, his most-preferred choice. Unmatched men: `2`, `3`.
 2. Man `2` proposes to woman `3`, his most-preferred choice. Unmatched men: `3`.
