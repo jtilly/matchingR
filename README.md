@@ -46,11 +46,18 @@ prefW = matrix(c(3, 2, 1,
 
 We can now compute the Gale-Shapley Algorithm by hand. For the preferences defined in `prefM` and `prefW` it takes five rounds until all men (and women) are matched. 
 
-1. Man `1` proposes to woman `1`, his most-preferred choice. Unmatched men: `2`, `3`.
-2. Man `2` proposes to woman `3`, his most-preferred choice. Unmatched men: `3`.
-3. Man `3` proposes to woman `3`, his most-preferred choice. Woman `3` now dumps man `2`. Unmatched men: `2`.
-4. Man `2` proposes to woman `1`, his most-preferred *available* choice. Woman `1` now dumps man `1`. Unmatched men: `1`.
-5. Man `1` proposes to woman `2`, his most-preferred *available* choice. All men are now matched.
+1. Man `1` proposes to woman `1`, his most-preferred choice. 
+    Unmatched men: `2`, `3`.
+2. Man `2` proposes to woman `3`, his most-preferred choice. 
+    Unmatched men: `3`.
+3. Man `3` proposes to woman `3`, his most-preferred choice. 
+    Woman `3` now dumps man `2`. 
+    Unmatched men: `2`.
+4. Man `2` proposes to woman `1`, his most-preferred *available* choice.  
+    Woman `1` now dumps man `1`. 
+    Unmatched men: `1`.
+5. Man `1` proposes to woman `2`, his most-preferred *available* choice. 
+    All men are now matched.
 
 The male-optimal stable matching is therefore:
 
