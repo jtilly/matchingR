@@ -29,13 +29,13 @@ prefM = matrix(c(1, 2, 3,
                  3, 1, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
-I.e. man `1` prefers woman `1` over woman `2` over woman `3`. Man `2` prefers woman `3` over woman `1` over woman `2`. Man `3` prefers woman `3` over woman `2` over woman `1`. The women's preferences are given by
+`prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`. Man `2` prefers woman `3` over woman `1` over woman `2`. Man `3` prefers woman `3` over woman `2` over woman `1`. The women's preferences are given by
 ```{r}
 prefW = matrix(c(3, 2, 1,
                  1, 3, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
-I.e. woman `1` prefers man `3` over man `2` over man `1`, etc. 
+`prefW` states that woman `1` prefers man `3` over man `2` over man `1`, etc. 
 
 We can now compute the Gale-Shapley Algorithm by hand:
 
