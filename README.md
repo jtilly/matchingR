@@ -8,12 +8,12 @@ Gale-Shapley in R
 [![You know that I'll never leave you. Not as long as she's with someone.](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/)
 
 
-matchingR is an R Package that efficiently computes the [Gale-Shapley Algorithm](http://en.wikipedia.org/wiki/Stable_marriage_problem) for large matching markets. The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
+`matchingR` is an R Package that efficiently computes the [Gale-Shapley Algorithm](http://en.wikipedia.org/wiki/Stable_marriage_problem) for large matching markets. The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
 
 Installation
 ------------
 
-This package can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
+`matchingR` can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
 ```{r}
 install.packages("matchingR")
 ```
