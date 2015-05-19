@@ -29,24 +29,23 @@ prefM = matrix(c(1, 2, 3,
                  3, 1, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
-Man `1` prefers woman `1` over woman `2` over woman `3`, etc.
-The women's preferences are given by
+I.e. man `1` prefers woman `1` over woman `2` over woman `3`. Man `2` prefers woman `3` over woman `1` over woman `2`. Man `3` prefers woman `3` over woman `2` over woman `1`. The women's preferences are given by
 ```{r}
 prefW = matrix(c(3, 2, 1,
                  1, 3, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
-Woman `1` prefers man `3` over man `2` over man `1`, etc. 
+I.e. woman `1` prefers man `3` over man `2` over man `1`, etc. 
 
 We can now compute the Gale-Shapley Algorithm by hand:
 
 1. Man `1` proposes to woman `1`, his most-preferred choice. Unmatched men: `2`, `3`.
 2. Man `2` proposes to woman `3`, his most-preferred choice. Unmatched men: `3`.
 3. Man `3` proposes to woman `3`, his most-preferred choice. Woman `3` now dumps man `2`. Unmatched men: `2`.
-4. Man `2` proposes to woman `1`, his most-preferred available choice. Woman `1` now dumps man `1`. Unmatched men: `1`.
-5. Man `1` proposes to woman `2`, his most-preferred available choice. All men are now matched.
+4. Man `2` proposes to woman `1`, his most-preferred *available* choice. Woman `1` now dumps man `1`. Unmatched men: `1`.
+5. Man `1` proposes to woman `2`, his most-preferred *available* choice. All men are now matched.
 
-The male-optimal stable matching is thefore:
+The male-optimal stable matching is therefore:
 
 |   Man  |  Woman   |
 |--------|----------|
