@@ -16,3 +16,4 @@ vignettes/*.pdf
 *.Rproj
 src/symbols.rds
 inst/doc
+vignettes/matchingR-performance_cache/
