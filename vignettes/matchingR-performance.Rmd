@@ -1,0 +1,177 @@
+---
+title: 'Computing the Gale-Shapley Algorithm in R: Performance'
+author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
+date: "May 17, 2015"
+output: pdf_document
+bibliography: bibliography.bib
+vignette: >
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo=FALSE}
+library(matchingR)
+```
+In this vignette, I explore the computational performance of the Gale-Shapley algorithm [@gale1962college] implemented in this package.
+The computational performance highly depends on how similar agents' preferences are. When some women is the most preferred to many men,
+the algorithm will require a lot more rounds to compute the stable matching than when preferences are complete random. To capture
+this I will construct preferences that feature a common and an idiosyncratic component. The weight on the common component ("the level of commonality")
+is denoted by $\lambda$. When $\lambda=1$, all men have identitical preferences over all women and vice versa. 
+
+Preferences for men are then constructed as follows:
+```{r}
+# number of men and women, respectively
+n = 100
+# level of commonality
+lambda = 0.5
+# men's preferences
+uM = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+          (1 - lambda) * runif(n ^ 2)
+```
+The common component `matrix(runif(n), nrow = n, ncol = n, byrow = TRUE)` is a matrix
+of dimension `n` by `n` that has identical rows. The idiosyncratic component `runif(n ^ 2)`
+is a matrix of dimension `n` by `n` where each element is a separate draw from a uniform distribution. 
+
+Women's preferences are constructed similarly:
+```{r}
+# womens's preferences
+uW = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+          (1 - lambda) * runif(n ^ 2)
+```
+
+## One-to-one matching
+```{r}
+set.seed(1)
+
+N = c(100, 500, 1000, 2500, 5000, 10000)
+Commonality = c(0.0, 0.25, 0.5, 0.75, 0.99)
+
+test_one2one = function(n, lambda) {
+    uM = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+         (1 - lambda) * runif(n ^ 2)
+    uW = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+         (1 - lambda) * runif(n ^ 2)
+    one2one(uM, uW)
+}
+```
+```{r, cache=TRUE, echo=FALSE}
+res1 = microbenchmark::microbenchmark(
+    test_one2one(N[1], Commonality[1]),
+    test_one2one(N[2], Commonality[1]),
+    test_one2one(N[3], Commonality[1]),
+    test_one2one(N[4], Commonality[1]),
+    test_one2one(N[5], Commonality[1]),
+    test_one2one(N[6], Commonality[1]), times = 1, unit = "s")
+
+res2 = microbenchmark::microbenchmark(
+    test_one2one(N[1], Commonality[2]),
+    test_one2one(N[2], Commonality[2]),
+    test_one2one(N[3], Commonality[2]),
+    test_one2one(N[4], Commonality[2]),
+    test_one2one(N[5], Commonality[2]),
+    test_one2one(N[6], Commonality[2]), times = 1, unit = "s")
+
+res3 = microbenchmark::microbenchmark(
+    test_one2one(N[1], Commonality[3]),
+    test_one2one(N[2], Commonality[3]),
+    test_one2one(N[3], Commonality[3]),
+    test_one2one(N[4], Commonality[3]),
+    test_one2one(N[5], Commonality[3]),
+    test_one2one(N[6], Commonality[3]), times = 1, unit = "s")
+
+res4 = microbenchmark::microbenchmark(
+    test_one2one(N[1], Commonality[4]),
+    test_one2one(N[2], Commonality[4]),
+    test_one2one(N[3], Commonality[4]),
+    test_one2one(N[4], Commonality[4]),
+    test_one2one(N[5], Commonality[4]),
+    test_one2one(N[6], Commonality[4]), times = 1, unit = "s")
+
+
+res5 = microbenchmark::microbenchmark(
+    test_one2one(N[1], Commonality[5]),
+    test_one2one(N[2], Commonality[5]),
+    test_one2one(N[3], Commonality[5]),
+    test_one2one(N[4], Commonality[5]),
+    test_one2one(N[5], Commonality[5]),
+    test_one2one(N[6], Commonality[5]), times = 1, unit = "s")
+```
+
+```{r, echo=FALSE}
+table = matrix(c(summary(res1, unit = 's')$mean,
+                 summary(res2, unit = 's')$mean,
+                 summary(res3, unit = 's')$mean,
+                 summary(res4, unit = 's')$mean,
+                 summary(res5, unit = 's')$mean), ncol = length(Commonality), dimnames = list("N" = format(N, big.mark = ","), "Commonality" = Commonality))
+knitr::kable(table, digits = 6)
+```
+
+## One-to-many matching
+```{r, cache=TRUE, echo=FALSE}
+set.seed(1)
+
+N = c(100, 500, 1000, 2500, 5000, 10000)
+Commonality = c(0.0, 0.25, 0.5, 0.75, 0.99)
+
+test_one2many = function(n, lambda) {
+    uM = lambda * matrix(runif(n), nrow = n, ncol = n/10, byrow = TRUE) +
+          (1 - lambda) * runif(n ^ 2 / 10)
+    uW = lambda * matrix(runif(n/10), nrow = n/10, ncol = n, byrow = TRUE) +
+          (1 - lambda) * runif(n ^ 2 / 10)
+    one2many(uM, uW, slots = 10)
+}
+```
+```{r, cache=TRUE, echo=FALSE}
+res1 = microbenchmark::microbenchmark(
+    test_one2many(N[1], Commonality[1]),
+    test_one2many(N[2], Commonality[1]),
+    test_one2many(N[3], Commonality[1]),
+    test_one2many(N[4], Commonality[1]),
+    test_one2many(N[5], Commonality[1]),
+    test_one2many(N[6], Commonality[1]), times = 1, unit = "s")
+
+res2 = microbenchmark::microbenchmark(
+    test_one2many(N[1], Commonality[2]),
+    test_one2many(N[2], Commonality[2]),
+    test_one2many(N[3], Commonality[2]),
+    test_one2many(N[4], Commonality[2]),
+    test_one2many(N[5], Commonality[2]),
+    test_one2many(N[6], Commonality[2]), times = 1, unit = "s")
+
+res3 = microbenchmark::microbenchmark(
+    test_one2many(N[1], Commonality[3]),
+    test_one2many(N[2], Commonality[3]),
+    test_one2many(N[3], Commonality[3]),
+    test_one2many(N[4], Commonality[3]),
+    test_one2many(N[5], Commonality[3]),
+    test_one2many(N[6], Commonality[3]), times = 1, unit = "s")
+
+res4 = microbenchmark::microbenchmark(
+    test_one2many(N[1], Commonality[4]),
+    test_one2many(N[2], Commonality[4]),
+    test_one2many(N[3], Commonality[4]),
+    test_one2many(N[4], Commonality[4]),
+    test_one2many(N[5], Commonality[4]),
+    test_one2many(N[6], Commonality[4]), times = 1, unit = "s")
+
+
+res5 = microbenchmark::microbenchmark(
+    test_one2many(N[1], Commonality[5]),
+    test_one2many(N[2], Commonality[5]),
+    test_one2many(N[3], Commonality[5]),
+    test_one2many(N[4], Commonality[5]),
+    test_one2many(N[5], Commonality[5]),
+    test_one2many(N[6], Commonality[5]), times = 1, unit = "s")
+```
+
+```{r, echo=FALSE}
+table = matrix(c(summary(res1, unit = 's')$mean,
+                 summary(res2, unit = 's')$mean,
+                 summary(res3, unit = 's')$mean,
+                 summary(res4, unit = 's')$mean,
+                 summary(res5, unit = 's')$mean), ncol = length(Commonality), dimnames = list("N" = format(N, big.mark = ","), "Commonality" = Commonality))
+knitr::kable(table, digits = 6)
+```
+
+## Literature
