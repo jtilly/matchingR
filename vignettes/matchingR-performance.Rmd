@@ -111,7 +111,9 @@ table = matrix(c(summary(res1, unit = 's')$mean,
                  summary(res2, unit = 's')$mean,
                  summary(res3, unit = 's')$mean,
                  summary(res4, unit = 's')$mean,
-                 summary(res5, unit = 's')$mean), ncol = length(Commonality), dimnames = list("N" = format(N, big.mark = ","), "Commonality" = Commonality))
+                 summary(res5, unit = 's')$mean), ncol = length(Commonality), 
+                 dimnames = list("N" = gsub(" ", "", sprintf("N=%s", format(N, big.mark = ","))), 
+                                 "Commonality" = sprintf("lambda=%.2f" , Commonality)))
 knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matching of men to women")
 ```
 
@@ -177,8 +179,10 @@ table = matrix(c(summary(res1, unit = 's')$mean,
                  summary(res2, unit = 's')$mean,
                  summary(res3, unit = 's')$mean,
                  summary(res4, unit = 's')$mean,
-                 summary(res5, unit = 's')$mean), ncol = length(Commonality), dimnames = list("N" = format(N, big.mark = ","), "Commonality" = Commonality))
-knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matching of workers to multi-worker firms")
+                 summary(res5, unit = 's')$mean), ncol = length(Commonality), 
+                 dimnames = list("N" = gsub(" ", "", sprintf("N=%s", format(N, big.mark = ","))), 
+                                 "Commonality" = sprintf("lambda=%.2f" , Commonality)))
+knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matching of workers to multi-worker firms.")
 ```
 
 ## Literature
