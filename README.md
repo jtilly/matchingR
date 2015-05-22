@@ -28,6 +28,7 @@ install.packages("matchingR")
 ## Documentation
 * [Reference Manual](http://jtilly.io/matchingR/matchingR-documentation.pdf)
 * [Vignette: Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.pdf)
+* [Vignette: Computational Performance](http://jtilly.io/matchingR/matchingR-performance.pdf)
 
 ## Gale-Shapley Algorithm: How does it work?
 Consider a market with three men and three women. The men's preferences are given by
