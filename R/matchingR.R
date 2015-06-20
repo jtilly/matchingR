@@ -280,8 +280,7 @@ many2one = function(proposerUtils = NULL,
 #'                 5, 2, 3, 6, 1, 
 #'                 3, 1, 2, 4, 6, 
 #'                 5, 1, 3, 4, 2), nrow=5, ncol=6);
-#' stableRoommateMatching(test)
-#' results = stableRoommateMatching(test)
+#' results = onesided(test)
 onesided = function(pref = NULL) {
     validateInputsOneSided(pref);
     res = stableRoommateMatching(pref - 1);
@@ -377,5 +376,13 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 validateInputsOneSided = function(pref = NULL) {
     if (nrow(pref) != ncol(test)-1) {
         stop("incorrect dimensions of preferences matrix")
+    }
+    
+    if (max(test) != ncol(pref)) {
+        stop("wrong indexing")
+    }
+    
+    if (min(test) != 0) {
+        stop("wrong indexing")
     }
 }
