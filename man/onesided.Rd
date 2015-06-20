@@ -27,7 +27,6 @@ test = matrix(c(3, 4, 2, 6, 5,
                 5, 2, 3, 6, 1,
                 3, 1, 2, 4, 6,
                 5, 1, 3, 4, 2), nrow=5, ncol=6);
-stableRoommateMatching(test)
-results = stableRoommateMatching(test)
+results = onesided(test)
 }
 
