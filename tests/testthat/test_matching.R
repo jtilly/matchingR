@@ -162,5 +162,5 @@ test_that("One-sided matching", {
                     3, 1, 2, 4, 6, 
                     5, 1, 3, 4, 2), nrow=5, ncol=6)
     results = onesided(test)
-    expect_true(results == c(6, 5, 4, 3, 2, 1))
+    expect_true(all(results == c(6, 5, 4, 3, 2, 1)))
 })
