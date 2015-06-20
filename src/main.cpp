@@ -334,5 +334,4 @@ List stableRoommateMatching(const umat pref) {
     
     return List::create(
       _["matchings"]   = matchings);
-
 }
