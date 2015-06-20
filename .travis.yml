@@ -31,7 +31,7 @@ after_success:
   - Rscript -e 'library(covr);coveralls()'
   - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
   - Rscript -e "install.packages('rmarkdown', repos='http://cran.rstudio.com')"
-  - R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf
+  - R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf --nopreview --no-index --force --batch
   - R CMD INSTALL ${TRAVIS_BUILD_DIR}
   - cd ${TRAVIS_BUILD_DIR}
   - Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd', 'html', file.name), output_format = 'html_document') }"
