@@ -26,9 +26,7 @@ after_success:
 - R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf --no-preview --no-index --force --batch
 - R CMD INSTALL ${TRAVIS_BUILD_DIR}
 - cd ${TRAVIS_BUILD_DIR}
-- Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern
-  = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd',
-  'html', file.name), output_format = 'html_document') }"
+- Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd', 'html', file.name), output_format = c('html_document', 'pdf_document')) }"
 - cd ..
 - git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
 - cd gh-pages
@@ -38,7 +36,7 @@ after_success:
 - git pull origin gh-pages
 - mv ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf .
 - mv ${TRAVIS_BUILD_DIR}/vignettes/*.html .
-- git add ${REPO_NAME}.pdf
+- git add *.pdf
 - git add *.html
 - git commit -m "Automatic Travis update of PDF documentation and vignettes"
 - git push origin gh-pages
