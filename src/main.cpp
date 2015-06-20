@@ -226,7 +226,6 @@ List stableRoommateMatching(const umat pref) {
 
                 // if the next best guy likes him he accepts
                 if (op < proposal_from[proposee]) {
-                    
                     // make the proposal
                     proposal_to[n] = proposee;
                     // reject the proposee's proposer's proposal
@@ -234,7 +233,6 @@ List stableRoommateMatching(const umat pref) {
                         proposal_to[proposal_from[proposee]] = N;
                     }
                     proposal_from[proposee] = n;
-                     
                 }
 
                 // regardless of whether he was matched or not, iterate n's proposal forward
@@ -298,7 +296,6 @@ List stableRoommateMatching(const umat pref) {
 
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
-                    ++temp;
                     bool finished = false;
                     while(table[x[i]].back() != index[i-1]) {
                         table[table[x[i]].back()].erase(find(table[table[x[i]].back()].begin(), table[table[x[i]].back()].end(), x[i]));
