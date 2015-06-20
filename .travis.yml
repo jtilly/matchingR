@@ -28,8 +28,10 @@ after_success:
 - cd ${TRAVIS_BUILD_DIR}
 - Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd', 'html', file.name), output_format = c('html_document', 'pdf_document')) }"
 - git add vignettes/*.pdf
+- git config user.name "Jan Tilly"
+- git config user.email "jantilly@gmail.com"
 - git commit -m "Automatic Travis update of vignettes"
-- git push origin master
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 - cd ..
 - git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
 - cd gh-pages
