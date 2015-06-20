@@ -373,7 +373,7 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' @param pref is an (n-1)xn matrix, with each column representing the preferences
 #' of a particular agent.
 validateInputsOneSided = function(pref = NULL) {
-    if (nrow(pref) != ncol(test)-1) {
+    if (nrow(pref) != ncol(pref)-1) {
         stop("incorrect dimensions of preferences matrix")
     }
     
