@@ -164,3 +164,10 @@ test_that("One-sided matching", {
     results = onesided(test)
     expect_true(all(results == c(6, 5, 4, 3, 2, 1)))
 })
+
+test_that("Test that improper formatting results in error for one-sided matching", {
+    test = c(2, 3, 4)
+    expect_error(onesided(matrix(c(1, 2, 3), nrow = 1, ncol = 3)))
+    expect_error(onesided(matrix(c(4, 5), nrow = 1, ncol = 2)))
+    expect_error(onesided(matrix(c(2, -4), nrow = 1, ncol = 2)))
+})

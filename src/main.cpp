@@ -209,10 +209,8 @@ List stableRoommateMatching(const umat pref) {
     std::fill(proposed_to.begin(), proposed_to.end(), 0);
 
     bool stable = false;
-    int temp = 0;
     while (!stable) {
         stable = true;
-        ++temp;
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             if (proposal_to[n] == N) {
@@ -246,9 +244,6 @@ List stableRoommateMatching(const umat pref) {
                 stable = false;
             }
         }
-        if (temp > N*N) {
-            break;
-        }
     }
 
     // Generate table
@@ -279,10 +274,8 @@ List stableRoommateMatching(const umat pref) {
     
     // Eliminate rotations
     stable = false;
-    temp = 0;
     while(!stable) {
         stable = true;
-        ++temp;
         for (size_t n = 0; n < N; ++n) {
             if (table[n].size() > 1) {
                 stable = false;
@@ -313,9 +306,6 @@ List stableRoommateMatching(const umat pref) {
                     }
                 }
             }
-        }
-        if (temp > N) {
-            break;
         }
     }
 
