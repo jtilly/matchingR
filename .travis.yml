@@ -41,6 +41,7 @@ after_success:
 - git pull origin gh-pages
 - mv ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf .
 - mv ${TRAVIS_BUILD_DIR}/vignettes/*.html .
+- mv ${TRAVIS_BUILD_DIR}/vignettes/*.pdf .
 - git add *.pdf
 - git add *.html
 - git commit -m "Automatic Travis update of PDF documentation and vignettes"
