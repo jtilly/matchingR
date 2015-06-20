@@ -377,11 +377,11 @@ validateInputsOneSided = function(pref = NULL) {
         stop("incorrect dimensions of preferences matrix")
     }
     
-    if (max(test) != ncol(pref)) {
+    if (max(pref) != ncol(pref)) {
         stop("wrong indexing")
     }
     
-    if (min(test) != 0) {
+    if (min(pref) != 1) {
         stop("wrong indexing")
     }
 }
