@@ -4,8 +4,8 @@ branches:
   - master
 env:
   global:
-  - secure: SVR0tIJ5VSGSdoz7/+Ur+AmUg2dJHaqHd00MhIazsmh9V6QD/D6tdw1SRxetYLgIZD0/0XJuz5O4g5n8vCDwJKxPds2QY7m+iykmYyjgOWOXqQQoIvecwI0mKVPAzJf3iEnRsJ6xg+46gcqYONGIQeiV5Yr4CAXYQGqvhWt7NgceXglHjX/qFREH4RSHd4nMVsH2OkDfRsXdLCyLPX44uIjjwtgfBs7X4bjDy5PlyzyYEAVAJWeO/Q6IelX7iaEoMr+TI+KZiw23yy3wU8B3/eAJzgJHQqny9XFkVC8P5AtBYQN2Ia1G0rxwD1ofoDEbonDuKGVdbJrV4eNpUlpfuiWQBSTURX8WuVisGMLhGogAb8WwnfZVg6yNlK8oJjyne5aNeSFzX81YIlw1tWzNvpd46RWCGbYOoXjZtK2E8+SPBWw0R/1ay6PLtZh8vwn6odyKJFE3BHI/zDfv9GarSeubjs2FPPSVSR8P0E8kl3BzXaGC1mDlFloLhDZ7XDTp48RpZHOlfVemZxwG2Kx7swe0l3Lk2QkeaJ8Vk33ZwA+pUPX+4uNUgcxX3xkbnJtmsSf1n0g9hn9/EpWYAlsPLU6Tnhac/wZJx9+JQYaVTkSDEeBe8REmnT8pk1QTspJcfPfgntWuaGrnU6F5g0oK0l0OCDn04BUrjZRTGbdV1uc=
-  - BOOTSTRAP_LATEX=1 BOOTSTRAP_PANDOC=1  
+  - BOOTSTRAP_LATEX=1 BOOTSTRAP_PANDOC=1
+  - secure: me7OtR6CI2HsNhk+V0H9QJbIFlbKmhc9iyYHak7Bc7jQOKYfZAEFB5YkqWe4/KLiNCKBKtKhpGI3ZHXj0Df9JlxOuCs9zlFY4365hDV9iYiNBM20eYXqPAJ9xvZ1ADLhHB4VVmeSDII63EJBgesGIHSSAFZ84SKhMWT4jYbeb35MN6VA29T0fP1tab903jhYIhp33Ibjdgbu7kh4Fx5j1PE0/G8uqHpJ2DU0l26nBoSzMmFrQUv9gUPAPcZnxuAHIxqxHWYfbO3k4aI39qy8BrVbyNt5JUYpcRTAmySg0Q/68SL86cW582dXzaG+TZjR/R7e+6/pOqcskdQe7wTxgew5EbwciSnonnapNhHvmoWMoZCR1aFDrNfIucmUhiKbeMQjO+T6sEoLlRnWUEKXk+hv0RQIQbxa5iiVqGdCikw9G0RyV4o7yAapkycWdBxxqQeOcC8kmtRtHJJrNGgXKfu8m4KirCS/X4s6SiFR8rCWvYMnMtNGjRxIoVdVkscWk76SvWyAxDadOQcR7waJ+WTsiKXfek3niuebwObEh/q14bxHGBK6+k33Z4AT108jVnpcmKRkeAqgDQSqo3Bny1nKHbI1G3twl2+W68L2v54rEdtl4LZTrWbXby0/C975nAvrGK1KJh4sLvJUL7snj9frxMyB20PknpvoxJIW4gA=
 sudo: required
 before_install:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
@@ -23,7 +23,8 @@ after_success:
 - Rscript -e 'library(covr);coveralls()'
 - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
 - Rscript -e "install.packages('rmarkdown', repos='http://cran.rstudio.com')"
-- R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf
+- R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf --nopreview
+  --no-index --force --batch
 - R CMD INSTALL ${TRAVIS_BUILD_DIR}
 - cd ${TRAVIS_BUILD_DIR}
 - Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern
