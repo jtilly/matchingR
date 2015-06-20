@@ -27,11 +27,15 @@ after_success:
 - R CMD INSTALL ${TRAVIS_BUILD_DIR}
 - cd ${TRAVIS_BUILD_DIR}
 - Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd', 'html', file.name), output_format = c('html_document', 'pdf_document')) }"
+- cd ..
+- git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git master
+- cd master
+- cp -f ${TRAVIS_BUILD_DIR}/vignettes/*.pdf vignettes
 - git add vignettes/*.pdf
 - git config user.name "Jan Tilly"
 - git config user.email "jantilly@gmail.com"
 - git commit -m "Automatic Travis update of vignettes"
-- git push --force --quiet https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git master:master
+- git push origin master
 - cd ..
 - git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
 - cd gh-pages
@@ -39,9 +43,9 @@ after_success:
 - git config user.email "jantilly@gmail.com"
 - git checkout gh-pages
 - git pull origin gh-pages
-- mv ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf .
-- mv ${TRAVIS_BUILD_DIR}/vignettes/*.html .
-- mv ${TRAVIS_BUILD_DIR}/vignettes/*.pdf .
+- mv -f ${TRAVIS_BUILD_DIR}/${REPO_NAME}.pdf .
+- mv -f ${TRAVIS_BUILD_DIR}/vignettes/*.html .
+- mv -f ${TRAVIS_BUILD_DIR}/vignettes/*.pdf .
 - git add *.pdf
 - git add *.html
 - git commit -m "Automatic Travis update of PDF documentation and vignettes"
