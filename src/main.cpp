@@ -184,3 +184,155 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
     return true;
 }
 
+
+//' Computes a stable roommate matching
+//'
+//' This function computes the Irving (1985) algorithm.
+//'
+//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+//' @return A list with the matchings made.
+// [[Rcpp::export]]
+List stableRoommateMatching(const umat pref) {
+
+    // Number of participants
+    int N = pref.n_cols;
+
+    // Proposals to
+    std::vector<int> proposal_to(N);
+    // Proposals froms
+    std::vector<int> proposal_from(N);
+    std::vector<int> proposed_to(N);
+    
+    // All participants begin unmatched having proposed to nobody
+    std::fill(proposal_to.begin(), proposal_to.end(), N);
+    std::fill(proposal_from.begin(), proposal_from.end(), N);
+    std::fill(proposed_to.begin(), proposed_to.end(), 0);
+
+    bool stable = false;
+    int temp = 0;
+    while (!stable) {
+        stable = true;
+        ++temp;
+        for (size_t n = 0; n < N; ++n) {
+            // n proposes to the next best guy if has no proposal accepted
+            if (proposal_to[n] == N) {
+                
+                // find the proposee
+                int proposee = pref(proposed_to[n], n);
+
+                // proposee's preferences
+                const uint * prop_call = pref.colptr(proposee);
+
+                // proposee's opinion of the proposer (lower is better)
+                int op = find(prop_call, prop_call + N, n) - prop_call;
+
+                // if the next best guy likes him he accepts
+                if (op < proposal_from[proposee]) {
+                    
+                    // make the proposal
+                    proposal_to[n] = proposee;
+                    // reject the proposee's proposer's proposal
+                    if (proposal_from[proposee] != N) {
+                        proposal_to[proposal_from[proposee]] = N;
+                    }
+                    proposal_from[proposee] = n;
+                     
+                }
+
+                // regardless of whether he was matched or not, iterate n's proposal forward
+                proposed_to[n] < N ? ++proposed_to[n] : proposed_to[n] = N;
+
+                // not stable yet
+                stable = false;
+            }
+        }
+        if (temp > N*N) {
+            break;
+        }
+    }
+
+    // Generate table
+    std::vector< std::vector<int> > table(N);
+    std::vector< std::vector<int> > to_delete(N);
+    for (size_t n = 0; n < N; ++n) {
+        for (size_t i = 0; i < N-1; ++i) {
+            table[n].push_back(pref(i, n));
+        }
+    }
+    
+    for (size_t n = 0; n < N; ++n) {
+        for (size_t i = N-2; i >= 0; --i) {
+            if (pref(i, n) == proposal_from[n]) {
+                break;
+            } else {
+                to_delete[table[n].back()].push_back(n);
+                table[n].pop_back();
+            }
+        }
+    }
+    
+    for (size_t n = 0; n < N; ++n) {
+        for (size_t i = 0; i < to_delete[n].size(); ++i) {
+            table[n].erase(find(table[n].begin(), table[n].end(), to_delete[n][i]));
+        }
+    }
+    
+    // Eliminate rotations
+    stable = false;
+    temp = 0;
+    while(!stable) {
+        stable = true;
+        ++temp;
+        for (size_t n = 0; n < N; ++n) {
+            if (table[n].size() > 1) {
+                stable = false;
+                std::vector<size_t> x;
+                std::vector<size_t> index;
+
+                size_t new_index = n;
+                size_t rot_tail = -1;
+                
+                while (rot_tail == index.end()-index.begin()-1) {
+                    int new_x = table[new_index][1];
+                    new_index = table[new_x].back();
+                    
+                    // Check for a rotation
+                    rot_tail = find(index.begin(), index.end(), new_index) - index.begin();
+                    
+                    x.push_back(new_x);
+                    index.push_back(new_index);
+                }
+
+                // Delete the rotation
+                for (size_t i = rot_tail + 1; i < index.size(); ++i) {
+                    ++temp;
+                    bool finished = false;
+                    while(table[x[i]].back() != index[i-1]) {
+                        table[table[x[i]].back()].erase(find(table[table[x[i]].back()].begin(), table[table[x[i]].back()].end(), x[i]));
+                        table[x[i]].pop_back();
+                    }
+                }
+            }
+        }
+        if (temp > N) {
+            break;
+        }
+    }
+
+    // Check if anything is empty
+    for (size_t n = 0; n < N; ++n) {
+        if (table[n].empty()) {
+            stop("No stable matching exists.");
+        }
+    }
+    
+    // Create the matchings
+    std::vector<int> matchings(N);
+    for (size_t n = 0; n < N; ++n) {
+        matchings[n] = table[n][0];
+    }
+    
+    return List::create(
+      _["matchings"]   = matchings);
+
+}

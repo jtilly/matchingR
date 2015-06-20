@@ -68,3 +68,13 @@ checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements)
     .Call('matchingR_checkStability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
 }
 
+#' Computes a stable roommate matching
+#'
+#' This function computes the Irving (1985) algorithm.
+#'
+#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @return A list with the matchings made.
+stableRoommateMatching <- function(pref) {
+    .Call('matchingR_stableRoommateMatching', PACKAGE = 'matchingR', pref)
+}
+

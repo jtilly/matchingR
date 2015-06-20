@@ -262,6 +262,32 @@ many2one = function(proposerUtils = NULL,
     return(res)
 }
 
+#' Compute matching for one-sided markets
+#'
+#' This function returns a stable roommate matching for a one-sided market
+#' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
+#' to exist, nor to be unique.
+#'
+#' @param pref An n-1xn matrix, with each column representing the cardinal 
+#' utilities of each agent over matches with the other agents, so that, e.g.,
+#' if element (4, 6) of this matrix is 2, then agent 6 ranks agent 2 4th.
+#' @return A list of length n corresponding to the matchings being made, so that
+#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
+#' @examples
+#' test = matrix(c(3, 4, 2, 6, 5, 
+#'                 6, 5, 4, 1, 3, 
+#'                 2, 4, 5, 1, 6, 
+#'                 5, 2, 3, 6, 1, 
+#'                 3, 1, 2, 4, 6, 
+#'                 5, 1, 3, 4, 2), nrow=5, ncol=6);
+#' stableRoommateMatching(test)
+#' results = stableRoommateMatching(test)
+onesided = function(pref = NULL) {
+    validateInputsOneSided(pref);
+    res = stableRoommateMatching(pref - 1);
+    return(res$matchings + 1);
+}
+
 
 #' Input validation
 #' 
@@ -338,4 +364,18 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
             reviewerUtils = as.matrix(reviewerUtils)
         )
     )
+}
+
+#' Input validation for one-sided markets
+#' 
+#' This function parses and validates the arguments for one sided preferences
+#' for the function onesided.
+#' 
+#' @param pref is an (n-1)xn matrix, with each column representing the preferences
+#' of a particular agent.
+
+validateInputsOneSided = function(pref = NULL) {
+    if (nrow(pref) != ncol(test)-1) {
+        stop("incorrect dimensions of preferences matrix")
+    }
 }
