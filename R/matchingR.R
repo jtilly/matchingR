@@ -268,23 +268,18 @@ many2one = function(proposerUtils = NULL,
 #' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
 #' to exist, nor to be unique.
 #'
-#' @param pref An n-1xn matrix, with each column representing the cardinal 
+#' @param pref An nxn-1 matrix, with each row representing the cardinal 
 #' utilities of each agent over matches with the other agents, so that, e.g.,
 #' if element (4, 6) of this matrix is 2, then agent 6 ranks agent 2 4th.
 #' @return A list of length n corresponding to the matchings being made, so that
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
 #' @examples
-#' test = matrix(c(3, 4, 2, 6, 5, 
-#'                 6, 5, 4, 1, 3, 
-#'                 2, 4, 5, 1, 6, 
-#'                 5, 2, 3, 6, 1, 
-#'                 3, 1, 2, 4, 6, 
-#'                 5, 1, 3, 4, 2), nrow=5, ncol=6);
-#' results = onesided(test)
-onesided = function(pref = NULL) {
-    validateInputsOneSided(pref);
-    res = stableRoommateMatching(pref - 1);
-    return(res$matchings + 1);
+#' test = matrix(c(3, 6, 2, 5, 3, 5, 4, 5, 4, 2, 1, 1, 2, 4, 5, 3, 2, 3, 6, 1, 1, 6, 4, 4, 5, 3, 6, 1, 6, 2), nrow = 6, ncol = 5);
+#' results = onesided(pref = test)
+onesided = function(pref = NULL, prefUtil = NULL) {
+    args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
+    res = stableRoommateMatching(args);
+    return(res$matchings);
 }
 
 
@@ -370,18 +365,30 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' This function parses and validates the arguments for one sided preferences
 #' for the function onesided.
 #' 
-#' @param pref is an (n-1)xn matrix, with each column representing the preferences
+#' @param pref is an nx(n-1) matrix, with each row representing an ordinal ranking.
+#' @param prefUtil Cardinal preferences of the agents.
 #' of a particular agent.
-validateInputsOneSided = function(pref = NULL) {
-    if (nrow(pref) != ncol(pref)-1) {
+validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
+    
+    # Convert cardinal utility to ordinal, if necessary
+    if (is.null(pref) && !is.null(prefUtil)) {
+        pref = t(sortIndex(t(as.matrix(prefUtil))))
+    }
+    
+    if (nrow(pref)-1 != ncol(pref)) {
         stop("incorrect dimensions of preferences matrix")
     }
     
-    if (max(pref) != ncol(pref)) {
+    if (max(pref) + 1 != nrow(pref)) {
         stop("wrong indexing")
     }
     
-    if (min(pref) != 1) {
+    if (min(pref) + 1 != 1) {
         stop("wrong indexing")
     }
+    
+    # Convert row major to column major for armadillo
+    pref = t(pref)
+    
+    return(pref)
 }
