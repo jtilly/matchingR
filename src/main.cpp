@@ -195,13 +195,13 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
 List stableRoommateMatching(const umat pref) {
 
     // Number of participants
-    int N = pref.n_cols;
+    size_t N = pref.n_cols;
 
     // Proposals to
-    std::vector<int> proposal_to(N);
+    std::vector<size_t> proposal_to(N);
     // Proposals froms
-    std::vector<int> proposal_from(N);
-    std::vector<int> proposed_to(N);
+    std::vector<size_t> proposal_from(N);
+    std::vector<size_t> proposed_to(N);
     
     // All participants begin unmatched having proposed to nobody
     std::fill(proposal_to.begin(), proposal_to.end(), N);
@@ -216,13 +216,13 @@ List stableRoommateMatching(const umat pref) {
             if (proposal_to[n] == N) {
                 
                 // find the proposee
-                int proposee = pref(proposed_to[n], n);
+                size_t proposee = pref(proposed_to[n], n);
 
                 // proposee's preferences
-                const uint * prop_call = pref.colptr(proposee);
+                const unsigned int * prop_call = pref.colptr(proposee);
 
                 // proposee's opinion of the proposer (lower is better)
-                int op = find(prop_call, prop_call + N, n) - prop_call;
+                size_t op = find(prop_call, prop_call + N, n) - prop_call;
 
                 // if the next best guy likes him he accepts
                 if (op < proposal_from[proposee]) {
@@ -245,8 +245,8 @@ List stableRoommateMatching(const umat pref) {
     }
 
     // Generate table
-    std::vector< std::vector<int> > table(N);
-    std::vector< std::vector<int> > to_delete(N);
+    std::vector< std::vector<size_t> > table(N);
+    std::vector< std::vector<size_t> > to_delete(N);
     for (size_t n = 0; n < N; ++n) {
         for (size_t i = 0; i < N-1; ++i) {
             table[n].push_back(pref(i, n));
@@ -283,7 +283,7 @@ List stableRoommateMatching(const umat pref) {
                 size_t new_index = n;
                 size_t rot_tail = -1;
                 
-                while (rot_tail == index.end()-index.begin()-1) {
+                while (rot_tail == (size_t) (index.end() - index.begin() - 1)) {
                     int new_x = table[new_index][1];
                     new_index = table[new_x].back();
                     
@@ -296,7 +296,6 @@ List stableRoommateMatching(const umat pref) {
 
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
-                    bool finished = false;
                     while(table[x[i]].back() != index[i-1]) {
                         table[table[x[i]].back()].erase(find(table[table[x[i]].back()].begin(), table[table[x[i]].back()].end(), x[i]));
                         table[x[i]].pop_back();

@@ -11,78 +11,58 @@ using namespace Rcpp;
 List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils);
 RcppExport SEXP matchingR_galeShapleyMatching(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const umat >::type proposerPref(proposerPrefSEXP );
-        Rcpp::traits::input_parameter< const mat >::type reviewerUtils(reviewerUtilsSEXP );
-        List __result = galeShapleyMatching(proposerPref, reviewerUtils);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat >::type proposerPref(proposerPrefSEXP);
+    Rcpp::traits::input_parameter< const mat >::type reviewerUtils(reviewerUtilsSEXP);
+    __result = Rcpp::wrap(galeShapleyMatching(proposerPref, reviewerUtils));
+    return __result;
 END_RCPP
 }
 // sortIndex
 umat sortIndex(const mat u);
 RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const mat >::type u(uSEXP );
-        umat __result = sortIndex(u);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const mat >::type u(uSEXP);
+    __result = Rcpp::wrap(sortIndex(u));
+    return __result;
 END_RCPP
 }
 // rankIndex
 umat rankIndex(const umat sortedIdx);
 RcppExport SEXP matchingR_rankIndex(SEXP sortedIdxSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const umat >::type sortedIdx(sortedIdxSEXP );
-        umat __result = rankIndex(sortedIdx);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat >::type sortedIdx(sortedIdxSEXP);
+    __result = Rcpp::wrap(rankIndex(sortedIdx));
+    return __result;
 END_RCPP
 }
 // checkStability
 bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements);
 RcppExport SEXP matchingR_checkStability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< mat >::type proposerUtils(proposerUtilsSEXP );
-        Rcpp::traits::input_parameter< mat >::type reviewerUtils(reviewerUtilsSEXP );
-        Rcpp::traits::input_parameter< umat >::type proposals(proposalsSEXP );
-        Rcpp::traits::input_parameter< umat >::type engagements(engagementsSEXP );
-        bool __result = checkStability(proposerUtils, reviewerUtils, proposals, engagements);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< mat >::type proposerUtils(proposerUtilsSEXP);
+    Rcpp::traits::input_parameter< mat >::type reviewerUtils(reviewerUtilsSEXP);
+    Rcpp::traits::input_parameter< umat >::type proposals(proposalsSEXP);
+    Rcpp::traits::input_parameter< umat >::type engagements(engagementsSEXP);
+    __result = Rcpp::wrap(checkStability(proposerUtils, reviewerUtils, proposals, engagements));
+    return __result;
 END_RCPP
 }
 // stableRoommateMatching
 List stableRoommateMatching(const umat pref);
 RcppExport SEXP matchingR_stableRoommateMatching(SEXP prefSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP );
-        List __result = stableRoommateMatching(pref);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
+    __result = Rcpp::wrap(stableRoommateMatching(pref));
+    return __result;
 END_RCPP
 }
