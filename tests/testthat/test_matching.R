@@ -171,4 +171,6 @@ test_that("Test that improper formatting results in error for one-sided matching
     expect_error(onesided(matrix(c(1, 2, 3), nrow = 1, ncol = 3)))
     expect_error(onesided(matrix(c(4, 5), nrow = 1, ncol = 2)))
     expect_error(onesided(matrix(c(2, -4), nrow = 1, ncol = 2)))
+    test = matrix(c(2, 3, 4, 3, 1, 4, 1, 2, 4, 1, 2, 3), nrow = 3, ncol = 4);
+    expect_error(onesided(test))
 })
