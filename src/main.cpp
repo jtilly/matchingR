@@ -266,7 +266,7 @@ List stableRoommateMatching(const umat pref) {
     
     for (size_t n = 0; n < N; ++n) {
         for (size_t i = 0; i < to_delete[n].size(); ++i) {
-            table[n].erase(find(table[n].begin(), table[n].end(), to_delete[n][i]));
+            deleteValueWithWarning(&table[n], to_delete[n][i]);
         }
     }
     
@@ -297,7 +297,7 @@ List stableRoommateMatching(const umat pref) {
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
-                        table[table[x[i]].back()].erase(find(table[table[x[i]].back()].begin(), table[table[x[i]].back()].end(), x[i]));
+                        deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
                         table[x[i]].pop_back();
                     }
                 }
@@ -320,4 +320,13 @@ List stableRoommateMatching(const umat pref) {
     
     return List::create(
       _["matchings"]   = matchings);
+}
+
+void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
+  std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
+  if (ind == vec->end()) {
+    stop("No stable matching exists");
+  } else {
+    vec->erase(ind);
+  }
 }
