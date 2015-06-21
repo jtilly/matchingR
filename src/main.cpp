@@ -190,7 +190,7 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
 //' This function computes the Irving (1985) algorithm.
 //'
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A list with the matchings made.
+//' @return A list with the matchings made. Unmatched agents are 'matched' to N.
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
@@ -314,7 +314,7 @@ List stableRoommateMatching(const umat pref) {
     // Check if anything is empty
     for (size_t n = 0; n < N; ++n) {
         if (table[n].empty()) {
-            throwError("No stable matching exists.");
+            table[n].push_back(N);
         }
     }
     
@@ -330,9 +330,7 @@ List stableRoommateMatching(const umat pref) {
 
 void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
-  if (ind == vec->end()) {
-    throwError("No stable matching exists.");
-  } else {
+  if (ind != vec->end()) {
     vec->erase(ind);
   }
 }
