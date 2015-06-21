@@ -214,8 +214,12 @@ List stableRoommateMatching(const umat pref) {
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            if (proposal_to[n] == N && proposed_to[n] < N - 1) {
-                
+            
+            if (proposed_to[n] == (N-1)) {
+              throwError("No stable matching exists.");
+            }
+            
+            if (proposal_to[n] == N) {
                 // find the proposee
                 size_t proposee = pref(proposed_to[n], n);
 
@@ -235,14 +239,11 @@ List stableRoommateMatching(const umat pref) {
                         proposal_to[proposal_from[proposee]] = N;
                     }
                     proposal_from[proposee] = n;
-                } else if (proposed_to[n] < N - 1) {
-                    // Not a stable match
-                    throwError("No stable matching exists.");
                 }
-
-                // regardless of whether he was matched or not, iterate n's proposal forward
-                proposed_to[n] < N ? ++proposed_to[n] : proposed_to[n] = N;
-
+                
+                // iterate n's proposal forward
+                ++proposed_to[n];
+                
                 // not stable yet
                 stable = false;
             }
