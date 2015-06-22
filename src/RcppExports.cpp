@@ -55,3 +55,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// stableRoommateMatching
+List stableRoommateMatching(const umat pref);
+RcppExport SEXP matchingR_stableRoommateMatching(SEXP prefSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
+    __result = Rcpp::wrap(stableRoommateMatching(pref));
+    return __result;
+END_RCPP
+}

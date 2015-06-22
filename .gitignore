@@ -12,6 +12,7 @@ vignettes/*.html
 .Rbuildignore
 *.o
 *.so
+*.dll
 *.Rproj
 src/symbols.rds
 inst/doc

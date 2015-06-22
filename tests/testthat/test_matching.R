@@ -153,3 +153,23 @@ test_that("Assortative matching?", {
     expect_true(all(matching$proposals == 1:4))
     expect_true(all(matching$engagements == 1:4))
 })
+
+test_that("One-sided matching", {
+    test = matrix(c(3, 4, 2, 6, 5, 
+                    6, 5, 4, 1, 3, 
+                    2, 4, 5, 1, 6, 
+                    5, 2, 3, 6, 1, 
+                    3, 1, 2, 4, 6, 
+                    5, 1, 3, 4, 2), nrow=5, ncol=6)
+    results = onesided(test)
+
+    expect_true(all(results == c(6, 5, 4, 3, 2, 1)))
+})
+
+test_that("Test that improper formatting results in error for one-sided matching", {
+    expect_error(onesided(matrix(c(1, 2, 3), nrow = 1, ncol = 3)))
+    expect_error(onesided(matrix(c(4, 5), nrow = 1, ncol = 2)))
+    expect_error(onesided(matrix(c(2, -4), nrow = 1, ncol = 2)))
+    test = t(matrix(c(2, 3, 4, 3, 1, 4, 1, 2, 4, 1, 2, 3), nrow = 3, ncol = 4));
+    expect_error(onesided(test))
+})
