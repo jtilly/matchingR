@@ -2,7 +2,7 @@
 title: 'Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR'
 author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
 date: "May 17, 2015"
-output: pdf_document
+output: html_document
 bibliography: bibliography.bib
 vignette: >
   %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR}
