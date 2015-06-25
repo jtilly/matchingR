@@ -283,19 +283,22 @@ List stableRoommateMatching(const umat pref) {
         }
     }
     
-    print_table(table);
-    
     // Delete entries we eliminated in round 1
     for (size_t n = 0; n < N; ++n) {
         for (size_t i = table[n].size()-1; i >= 0; --i) {
             if (pref(i, n) == proposal_from[n]) {
                 break;
             } else {
+                if (table[n].size() == 0) {
+                    stop("No stable matching exists.");
+                }
                 deleteValueWithWarning(&table[table[n].back()], n);
                 table[n].pop_back();
             }
         }
     }
+    
+    print_table(table);
     
     // Eliminate rotations
     stable = false;
@@ -321,11 +324,16 @@ List stableRoommateMatching(const umat pref) {
                     index.push_back(new_index);
                 }
                 
+                for (size_t i = 0; i < index.size(); ++i) {
+                    Rcout << "(" << index[i] << ", " << x[i] << ")" << ", ";
+                }
+                Rcout << std::endl;
+                
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
-                        deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
                         table[x[i]].pop_back();
+                        deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
                     }
                 }
                 
@@ -366,10 +374,6 @@ void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   if (ind != vec->end()) {
     vec->erase(ind);
   } else {
-      for (size_t i = 0; i < vec->size(); ++i) {
-          Rcout << vec->at(i) << ", ";
-      }
-      Rcout << val;
       stop("Memory isssssue");
   }
 }
