@@ -45,6 +45,10 @@ rankIndex <- function(sortedIdx) {
     .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }
 
+sortIndexSingle <- function(u) {
+    .Call('matchingR_sortIndexSingle', PACKAGE = 'matchingR', u)
+}
+
 #' Check if a matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of

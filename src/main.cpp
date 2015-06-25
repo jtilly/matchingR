@@ -118,6 +118,27 @@ umat rankIndex(const umat sortedIdx) {
     return rankedIdx;
 }
 
+// [[Rcpp::export]]
+umat sortIndexSingle(const mat u) {
+    size_t N = u.n_cols;
+    size_t M = u.n_rows;
+    
+    umat sortedIdx(M, N);
+    for (size_t iX = 0; iX < M; ++iX) {
+        sortedIdx.row(iX) = sort_index(u.row(iX), "descend");
+    }
+    
+    for (size_t iX = 0; iX < M; ++iX) {
+        for (size_t iY = 0; iY < N; ++iY) {
+            if (sortedIdx(iX, iY) >= iX) {
+                ++sortedIdx(iX, iY);
+            }
+        }
+    }
+    
+    return sortedIdx;
+}
+
 //' Check if a matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
@@ -262,20 +283,17 @@ List stableRoommateMatching(const umat pref) {
         }
     }
     
+    print_table(table);
+    
+    // Delete entries we eliminated in round 1
     for (size_t n = 0; n < N; ++n) {
-        for (size_t i = N-2; i >= 0; --i) {
+        for (size_t i = table[n].size()-1; i >= 0; --i) {
             if (pref(i, n) == proposal_from[n]) {
                 break;
             } else {
-                to_delete[table[n].back()].push_back(n);
+                deleteValueWithWarning(&table[table[n].back()], n);
                 table[n].pop_back();
             }
-        }
-    }
-    
-    for (size_t n = 0; n < N; ++n) {
-        for (size_t i = 0; i < to_delete[n].size(); ++i) {
-            deleteValueWithWarning(&table[n], to_delete[n][i]);
         }
     }
     
@@ -302,7 +320,7 @@ List stableRoommateMatching(const umat pref) {
                     x.push_back(new_x);
                     index.push_back(new_index);
                 }
-
+                
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
@@ -310,6 +328,8 @@ List stableRoommateMatching(const umat pref) {
                         table[x[i]].pop_back();
                     }
                 }
+                
+                print_table(table);
             }
         }
     }
@@ -331,10 +351,26 @@ List stableRoommateMatching(const umat pref) {
       _["matchings"]   = matchings);
 }
 
+void print_table(std::vector< std::vector<size_t> > table) {
+    for (size_t k = 0; k < table.size(); ++k) {
+        Rcout << std::endl;
+        for (size_t l = 0; l < table[k].size(); ++l) {
+            Rcout << table[k][l] << ", ";
+        }
+    }
+    Rcout << std::endl << "-------" << std::endl;
+}
+
 void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
   if (ind != vec->end()) {
     vec->erase(ind);
+  } else {
+      for (size_t i = 0; i < vec->size(); ++i) {
+          Rcout << vec->at(i) << ", ";
+      }
+      Rcout << val;
+      stop("Memory isssssue");
   }
 }
 

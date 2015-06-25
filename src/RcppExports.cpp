@@ -41,6 +41,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// sortIndexSingle
+umat sortIndexSingle(const mat u);
+RcppExport SEXP matchingR_sortIndexSingle(SEXP uSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const mat >::type u(uSEXP);
+    __result = Rcpp::wrap(sortIndexSingle(u));
+    return __result;
+END_RCPP
+}
 // checkStability
 bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements);
 RcppExport SEXP matchingR_checkStability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
