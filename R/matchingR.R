@@ -387,7 +387,7 @@ validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
     }
     
     if (min(pref) + 1 != 1) {
-        stop("wrong indexing")
+        stop("wrong indexing, start at 0")
     }
     
     return(pref)

@@ -244,11 +244,7 @@ List stableRoommateMatching(const umat pref) {
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            if (proposed_to[n] == N) {
-                log().warning() << "No stable matching exists.";
-                return List::create(
-                    _["matchigs"]   = matchings);
-            }
+            if (proposed_to[n] == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
             
             if (proposal_to[n] == N) {
                 // find the proposee
@@ -320,7 +316,7 @@ List stableRoommateMatching(const umat pref) {
     }
     
     // Check if anything is empty
-    if (isEmpty(&table)) { return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
+    if (isEmpty(&table)) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
     
     log().info() << "Eliminating rotations.";
     
@@ -357,11 +353,7 @@ List stableRoommateMatching(const umat pref) {
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
                         // Check whether empty
-                        if (table[x[i]].size() == 0) {
-                            log().warning() << "No stable matching exists.";
-                            return List::create(
-                                _["matchings"]   = matchings);
-                        }
+                        if (table[x[i]].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
                         deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
                         table[x[i]].pop_back();
                     }
@@ -388,10 +380,7 @@ List stableRoommateMatching(const umat pref) {
 
 bool isEmpty(std::vector< std::vector<size_t> > *table) {
     for (size_t n = 0; n < table->size(); ++n) {
-        if (table[n].empty()) {
-            log().warning() << "No stable matching exists.";
-            return true;
-        }
+        if (table->at(n).empty()) return true;
     }
     return false;
 }
@@ -400,7 +389,5 @@ void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
   if (ind != vec->end()) {
     vec->erase(ind);
-  } else {
-      stop("Invalid memory access.");
   }
 }

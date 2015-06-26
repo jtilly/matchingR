@@ -17,3 +17,5 @@ vignettes/*.html
 src/symbols.rds
 inst/doc
 vignettes/matchingR-performance_cache/
+*.gcda
+*.gcno
