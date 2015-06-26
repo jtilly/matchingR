@@ -20,7 +20,7 @@ script: "./travis-tool.sh run_tests"
 after_failure:
 - "./travis-tool.sh dump_logs"
 after_success:
-- Rscript -e 'library(covr);coveralls()'
+- Rscript -e 'library(covr);coveralls(exclusions = "src/RcppExports.cpp")'
 - export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
 - sudo apt-add-repository http://ppa.launchpad.net/texlive-backports/ppa/ubuntu
 - sudo apt-get update
