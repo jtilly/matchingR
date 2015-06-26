@@ -369,6 +369,10 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' of a particular agent.
 validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
     
+    if (!is.null(pref)) {
+        pref = t(pref);
+    }
+    
     # Convert cardinal utility to ordinal, if necessary
     if (is.null(pref) && !is.null(prefUtil)) {
         pref = t(sortIndexSingle(as.matrix(prefUtil)))
