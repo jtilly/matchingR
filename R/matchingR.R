@@ -16,8 +16,8 @@
 #' results = onesided(pref = test)
 onesided = function(pref = NULL, prefUtil = NULL) {
     
-    prefUtil = replicate(5, rnorm(6));
-    args = validateInputsOneSided(prefUtil = prefUtil);
+    p = replicate(3, rnorm(4));
+    args = validateInputsOneSided(prefUtil = p);
     stableRoommateMatching(args)
     
     args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
@@ -373,9 +373,6 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' @param prefUtil Cardinal preferences of the agents.
 #' of a particular agent.
 validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
-    
-    prefUtil = replicate(5, rnorm(6));
-    pref = NULL
     
     # Convert cardinal utility to ordinal, if necessary
     if (is.null(pref) && !is.null(prefUtil)) {

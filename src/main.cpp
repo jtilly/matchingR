@@ -235,12 +235,15 @@ List stableRoommateMatching(const umat pref) {
     bool stable = false;
     while (!stable) {
         stable = true;
+        log().info() << "Not yet stable, iterating through players.";
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            
             if (proposed_to[n] == (N-1)) {
-              throwError("No stable matching exists.");
+                log().info() << "No stable matching exists.";
+                return List::create(
+                    _["proposal_to"]   = proposal_to,
+                    _["proposal_from"] = proposal_from);
             }
             
             if (proposal_to[n] == N) {
@@ -253,13 +256,18 @@ List stableRoommateMatching(const umat pref) {
                 // proposee's opinion of the proposer (lower is better)
                 size_t op = find(prop_call, prop_call + N, n) - prop_call;
 
+                log().info() << n << " is proposing to " << proposee;
+                
                 // if the next best guy likes him he accepts
                 if (op < proposal_from[proposee]) {
-                  
+                    
+                    log().info() << "He accepted!";
+
                     // make the proposal
                     proposal_to[n] = proposee;
                     // reject the proposee's proposer's proposal
                     if (proposal_from[proposee] != N) {
+                        log().info() << proposee << " is rejecting the proposal from  " << proposal_from[proposee];
                         proposal_to[proposal_from[proposee]] = N;
                     }
                     proposal_from[proposee] = n;
@@ -283,6 +291,8 @@ List stableRoommateMatching(const umat pref) {
         }
     }
     
+    print_table(table);
+    
     // Delete entries we eliminated in round 1
     for (size_t n = 0; n < N; ++n) {
         for (size_t i = table[n].size()-1; i >= 0; --i) {
@@ -292,13 +302,29 @@ List stableRoommateMatching(const umat pref) {
                 if (table[n].size() == 0) {
                     stop("No stable matching exists.");
                 }
+                Rcout << "Deleting " << n << " from " << table[n].back() << std::endl;
                 deleteValueWithWarning(&table[table[n].back()], n);
+                Rcout << "Deleting " << table[n].back() << " from " << n << std::endl;
                 table[n].pop_back();
+                print_table(table);
             }
         }
     }
     
     print_table(table);
+    
+    // Check if anything is empty
+    for (size_t n = 0; n < N; ++n) {
+        if (table[n].empty()) {
+            stop("No stable matching exists.");
+        }
+    }
+    
+    return List::create(
+        _["proposed_to"]   = proposal_to,
+        _["proposed_from"] = proposal_from);
+    
+    stop("End.");
     
     // Eliminate rotations
     stable = false;
@@ -380,4 +406,8 @@ void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
 
 void throwError(std::string error) {
   stop(error);
+}
+
+void log(std::string val) {
+    Rcout << val << std::endl;
 }
