@@ -385,13 +385,13 @@ List stableRoommateMatching(const umat pref) {
     }
 
     // Check if anything is empty
-    for (size_t n = 0; n < N; ++n) {
-        if (table[n].empty()) {
-            log().warning() << "No stable matching exists.";
-            return List::create(
-                _["matchigs"]   = matchings);
-        }
-    }
+    for (size_t n = 0; n < N; ++n) {                            // LCOV_EXCL_LINE GCOV_EXCL_LINE
+        if (table[n].empty()) {                                 // LCOV_EXCL_LINE GCOV_EXCL_LINE
+            log().warning() << "No stable matching exists.";    // LCOV_EXCL_LINE GCOV_EXCL_LINE
+            return List::create(                                // LCOV_EXCL_LINE GCOV_EXCL_LINE
+                _["matchigs"]   = matchings);                   // LCOV_EXCL_LINE GCOV_EXCL_LINE
+        }                                                       // LCOV_EXCL_LINE GCOV_EXCL_LINE
+    }                                                           // LCOV_EXCL_LINE GCOV_EXCL_LINE
     
     // Create the matchings
     matchings.resize(N);

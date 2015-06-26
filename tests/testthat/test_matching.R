@@ -157,12 +157,15 @@ test_that("Assortative matching?", {
 test_that("One-sided matching", {
     p = replicate(99, rnorm(100))
     expect_true(length(onesided(prefUtil = p)) == 0 || length(onesided(prefUtil = p)) == 100)
+    
+    p = matrix(c(-394, -23, 786, 293, -27, -10, -454, 398, 409, 43, 77, -6), nrow = 4, ncol = 3)
+    expect_true(length(onesided(prefUtil = p)) == 4)
 })
 
 test_that("Test that improper formatting results in error for one-sided matching", {
-    expect_error(onesided(matrix(c(1, 2, 3), nrow = 1, ncol = 3)))
-    expect_error(onesided(matrix(c(4, 5), nrow = 1, ncol = 2)))
-    expect_error(onesided(matrix(c(2, -4), nrow = 1, ncol = 2)))
+    expect_error(onesided(pref = matrix(c(1, 2, 3), nrow = 1, ncol = 3)))
+    expect_error(onesided(pref = matrix(c(4, 5), nrow = 1, ncol = 2)))
+    expect_error(onesided(pref = matrix(c(2, -4), nrow = 1, ncol = 2)))
     test = t(matrix(c(2, 3, 4, 3, 1, 4, 1, 2, 4, 1, 2, 3), nrow = 3, ncol = 4));
-    expect_error(onesided(test))
+    expect_error(onesided(pref = test))
 })
