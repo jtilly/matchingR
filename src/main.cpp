@@ -244,7 +244,7 @@ List stableRoommateMatching(const umat pref) {
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            if (proposed_to[n] == (N-1)) {
+            if (proposed_to[n] == N) {
                 log().warning() << "No stable matching exists.";
                 return List::create(
                     _["matchigs"]   = matchings);

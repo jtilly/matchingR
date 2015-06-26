@@ -158,8 +158,8 @@ test_that("One-sided matching", {
     p = replicate(99, rnorm(100))
     expect_true(length(onesided(prefUtil = p)) == 0 || length(onesided(prefUtil = p)) == 100)
     
-    p = matrix(c(-394, -23, 786, 293, -27, -10, -454, 398, 409, 43, 77, -6), nrow = 4, ncol = 3)
-    expect_true(length(onesided(prefUtil = p)) == 4)
+    p = replicate(1, rnorm(2))
+    expect_true(length(onesided(prefUtil = p)) == 2)
 })
 
 test_that("Test that improper formatting results in error for one-sided matching", {
