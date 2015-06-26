@@ -312,11 +312,7 @@ List stableRoommateMatching(const umat pref) {
             if (table[n][i] == proposal_from[n]) {
                 break;
             } else {
-                if (table[n].size() == 0) {
-                    log().warning() << "No stable matching exists.";
-                    return List::create(
-                        _["matchigs"]   = matchings);
-                }
+                if (table[n].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
                 deleteValueWithWarning(&table[table[n].back()], n);
                 table[n].pop_back();
             }
@@ -324,13 +320,7 @@ List stableRoommateMatching(const umat pref) {
     }
     
     // Check if anything is empty
-    for (size_t n = 0; n < N; ++n) {
-        if (table[n].empty()) {
-            log().warning() << "No stable matching exists.";
-            return List::create(
-                _["matchings"]   = matchings);
-        }
-    }
+    if (isEmpty(&table)) { return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
     
     log().info() << "Eliminating rotations.";
     
@@ -383,15 +373,9 @@ List stableRoommateMatching(const umat pref) {
             }
         }
     }
-
+    
     // Check if anything is empty
-    for (size_t n = 0; n < N; ++n) {                            // LCOV_EXCL_LINE GCOV_EXCL_LINE
-        if (table[n].empty()) {                                 // LCOV_EXCL_LINE GCOV_EXCL_LINE
-            log().warning() << "No stable matching exists.";    // LCOV_EXCL_LINE GCOV_EXCL_LINE
-            return List::create(                                // LCOV_EXCL_LINE GCOV_EXCL_LINE
-                _["matchigs"]   = matchings);                   // LCOV_EXCL_LINE GCOV_EXCL_LINE
-        }                                                       // LCOV_EXCL_LINE GCOV_EXCL_LINE
-    }                                                           // LCOV_EXCL_LINE GCOV_EXCL_LINE
+    if (isEmpty(&table)) { return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
     
     // Create the matchings
     matchings.resize(N);
@@ -399,8 +383,17 @@ List stableRoommateMatching(const umat pref) {
         matchings[n] = table[n][0];
     }
     
-    return List::create(
-      _["matchings"]   = matchings);
+    return List::create(_["matchings"] = matchings);
+}
+
+bool isEmpty(std::vector< std::vector<size_t> > *table) {
+    for (size_t n = 0; n < table->size(); ++n) {
+        if (table[n].empty()) {
+            log().warning() << "No stable matching exists.";
+            return true;
+        }
+    }
+    return false;
 }
 
 void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
