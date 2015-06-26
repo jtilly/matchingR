@@ -1,30 +1,5 @@
 # matchingR.R
 
-#' Compute matching for one-sided markets
-#'
-#' This function returns a stable roommate matching for a one-sided market
-#' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
-#' to exist, nor to be unique.
-#'
-#' @param pref An nxn-1 matrix, with each row representing the cardinal 
-#' utilities of each agent over matches with the other agents, so that, e.g.,
-#' if element (4, 6) of this matrix is 2, then agent 6 ranks agent 2 4th.
-#' @return A list of length n corresponding to the matchings being made, so that
-#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
-#' @examples
-#' test = matrix(c(3, 6, 2, 5, 3, 5, 4, 5, 4, 2, 1, 1, 2, 4, 5, 3, 2, 3, 6, 1, 1, 6, 4, 4, 5, 3, 6, 1, 6, 2), nrow = 6, ncol = 5);
-#' results = onesided(pref = test)
-onesided = function(pref = NULL, prefUtil = NULL) {
-    
-    p = replicate(3, rnorm(4));
-    args = validateInputsOneSided(prefUtil = p);
-    stableRoommateMatching(args)
-    
-    args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
-    res = stableRoommateMatching(args);
-    return(res$matchings);
-}
-
 #' @name matchingR-package
 #' @docType package
 #' @title matchingR: Efficient Computation of the Gale-Shapley Algorithm in R 
@@ -285,6 +260,26 @@ many2one = function(proposerUtils = NULL,
     
     
     return(res)
+}
+
+#' Compute matching for one-sided markets
+#'
+#' This function returns a stable roommate matching for a one-sided market
+#' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
+#' to exist, nor to be unique.
+#'
+#' @param pref An nxn-1 matrix, with each row representing the cardinal 
+#' utilities of each agent over matches with the other agents, so that, e.g.,
+#' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th.
+#' @return A list of length n corresponding to the matchings being made, so that
+#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
+#' @examples
+#' p = replicate(99, rnorm(100))
+#' results = onesided(prefUtil = p)
+onesided = function(pref = NULL, prefUtil = NULL) {
+    args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
+    res = stableRoommateMatching(args);
+    return(res$matchings);
 }
 
 #' Input validation

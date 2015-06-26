@@ -206,7 +206,6 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
     return true;
 }
 
-
 //' Computes a stable roommate matching
 //'
 //' This function computes the Irving (1985) algorithm for finding
@@ -219,7 +218,7 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
-    log().configure(ALL);
+    log().configure(QUIET);
     
     // Number of participants
     size_t N = pref.n_cols;
@@ -234,6 +233,9 @@ List stableRoommateMatching(const umat pref) {
     std::fill(proposal_to.begin(), proposal_to.end(), N);
     std::fill(proposal_from.begin(), proposal_from.end(), N);
     std::fill(proposed_to.begin(), proposed_to.end(), 0);
+    
+    // Empty matchings
+    std::vector<int> matchings;
 
     bool stable = false;
     while (!stable) {
@@ -243,10 +245,9 @@ List stableRoommateMatching(const umat pref) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
             if (proposed_to[n] == (N-1)) {
-                log().info() << "No stable matching exists.";
+                log().warning() << "No stable matching exists.";
                 return List::create(
-                    _["proposal_to"]   = proposal_to,
-                    _["proposal_from"] = proposal_from);
+                    _["matchigs"]   = matchings);
             }
             
             if (proposal_to[n] == N) {
@@ -263,7 +264,6 @@ List stableRoommateMatching(const umat pref) {
                 size_t op_curr = find(prop_call, prop_call + N, proposal_from[proposee]) - prop_call;
 
                 log().info() << n << " is proposing to " << proposee;
-                
                 log().info() << proposee << " ranks " << n << " at " << op;
                 
                 // if the next best guy likes him he accepts
@@ -291,6 +291,11 @@ List stableRoommateMatching(const umat pref) {
     }
     
     log().info() << "All players have made proposals.";
+    
+    for (size_t n = 0; n < N; ++n) {
+        log().info() << "Player " << n << " is proposing to " << proposal_to[n] << ".";
+        log().info() << "Player " << n << " has a proposal from " << proposal_from[n] << ".";
+    }
 
     // Generate table
     std::vector< std::vector<size_t> > table(N);
@@ -301,40 +306,33 @@ List stableRoommateMatching(const umat pref) {
         }
     }
     
-    print_table(table);
-    
     // Delete entries we eliminated in round 1
     for (size_t n = 0; n < N; ++n) {
-        for (size_t i = table[n].size()-1; i >= 0; --i) {
-            if (pref(i, n) == proposal_from[n]) {
+        for (int i = table[n].size()-1; i >= 0; --i) {
+            if (table[n][i] == proposal_from[n]) {
                 break;
             } else {
                 if (table[n].size() == 0) {
-                    stop("No stable matching exists.");
+                    log().warning() << "No stable matching exists.";
+                    return List::create(
+                        _["matchigs"]   = matchings);
                 }
-                Rcout << "Deleting " << n << " from " << table[n].back() << std::endl;
                 deleteValueWithWarning(&table[table[n].back()], n);
-                Rcout << "Deleting " << table[n].back() << " from " << n << std::endl;
                 table[n].pop_back();
-                print_table(table);
             }
         }
     }
     
-    print_table(table);
-    
     // Check if anything is empty
     for (size_t n = 0; n < N; ++n) {
         if (table[n].empty()) {
-            stop("No stable matching exists.");
+            log().warning() << "No stable matching exists.";
+            return List::create(
+                _["matchings"]   = matchings);
         }
     }
     
-    return List::create(
-        _["proposed_to"]   = proposal_to,
-        _["proposed_from"] = proposal_from);
-    
-    stop("End.");
+    log().info() << "Eliminating rotations.";
     
     // Eliminate rotations
     stable = false;
@@ -342,6 +340,7 @@ List stableRoommateMatching(const umat pref) {
         stable = true;
         for (size_t n = 0; n < N; ++n) {
             if (table[n].size() > 1) {
+                log().info() << "Starting with " << n;
                 stable = false;
                 std::vector<size_t> x;
                 std::vector<size_t> index;
@@ -360,20 +359,27 @@ List stableRoommateMatching(const umat pref) {
                     index.push_back(new_index);
                 }
                 
-                for (size_t i = 0; i < index.size(); ++i) {
-                    Rcout << "(" << index[i] << ", " << x[i] << ")" << ", ";
-                }
-                Rcout << std::endl;
-                
+                log().info() << "Rotations: ";
+                log().info() << index;
+                log().info() << x;
+
                 // Delete the rotation
                 for (size_t i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
-                        table[x[i]].pop_back();
+                        // Check whether empty
+                        if (table[x[i]].size() == 0) {
+                            log().warning() << "No stable matching exists.";
+                            return List::create(
+                                _["matchings"]   = matchings);
+                        }
                         deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
+                        table[x[i]].pop_back();
                     }
                 }
                 
-                print_table(table);
+                for (size_t i = 0; i < N; ++i) {
+                    log().info() << table[i];
+                }
             }
         }
     }
@@ -381,12 +387,14 @@ List stableRoommateMatching(const umat pref) {
     // Check if anything is empty
     for (size_t n = 0; n < N; ++n) {
         if (table[n].empty()) {
-            table[n].push_back(N);
+            log().warning() << "No stable matching exists.";
+            return List::create(
+                _["matchigs"]   = matchings);
         }
     }
     
     // Create the matchings
-    std::vector<int> matchings(N);
+    matchings.resize(N);
     for (size_t n = 0; n < N; ++n) {
         matchings[n] = table[n][0];
     }
@@ -395,21 +403,11 @@ List stableRoommateMatching(const umat pref) {
       _["matchings"]   = matchings);
 }
 
-void print_table(std::vector< std::vector<size_t> > table) {
-    for (size_t k = 0; k < table.size(); ++k) {
-        Rcout << std::endl;
-        for (size_t l = 0; l < table[k].size(); ++l) {
-            Rcout << table[k][l] << ", ";
-        }
-    }
-    Rcout << std::endl << "-------" << std::endl;
-}
-
 void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
   if (ind != vec->end()) {
     vec->erase(ind);
   } else {
-      stop("Memory isssssue");
+      stop("Invalid memory access.");
   }
 }

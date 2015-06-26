@@ -1,8 +1,6 @@
 #ifndef main_h
 #define main_h
 
-#include "c_logger.h"
-
 List galeShapleyMatching(umat prefM, mat rankW);
 umat sortIndex(mat u);
 umat rankIndex(umat sortedIdx);

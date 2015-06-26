@@ -11,32 +11,41 @@ class c_log_message {
             this->importance = importance;
             this->level = level;
             if (importance > level) {
-                Rcout << header;
+                Rcpp::Rcout << header;
             }
         }
     
         c_log_message(bool result, int importance, int level) {
-            Rcout << "[";
+            Rcpp::Rcout << "[";
             if (result) {
-                Rcout << "SUCCESS";
+                Rcpp::Rcout << "SUCCESS";
     
             } else {
-                Rcout << "FAILURE";
+                Rcpp::Rcout << "FAILURE";
             }
     
-            Rcout << "] ";
+                Rcpp::Rcout << "] ";
         }
     
         ~c_log_message() {
             if (importance > level) {
-                Rcout << "\n";
+                Rcpp::Rcout << "\n";
             }
         }
     
         template<typename T>
         c_log_message &operator<<(const T &t) {
             if (importance > level) {
-                Rcout << t;
+                Rcpp::Rcout << t;
+            }
+            return *this;
+        }
+        
+        c_log_message &operator<<(std::vector<size_t> &t) {
+            if (importance > level) {
+                for (size_t i = 0; i < t.size(); ++i) {
+                    Rcpp::Rcout << t[i] << ", ";
+                }
             }
             return *this;
         }
@@ -55,7 +64,7 @@ class c_logger {
         }
     
         c_log_message warning() {
-            return c_log_message("[WARNING ]", 1, verbosity);
+            return c_log_message("[WARNING] ", 1, verbosity);
         }
     
         c_log_message test(bool result) {
