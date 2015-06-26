@@ -157,10 +157,8 @@ test_that("Assortative matching?", {
 test_that("One-sided matching", {
     p = replicate(99, rnorm(100))
     expect_true(length(onesided(prefUtil = p)) == 0 || length(onesided(prefUtil = p)) == 100)
-    
     p = replicate(1, rnorm(2))
     expect_true(length(onesided(prefUtil = p)) == 2)
-    
     p = matrix(c(1, 2, 3, 0, 2, 3, 0, 1, 3, 0, 1, 2), nrow = 4, ncol = 3)
     expect_true(length(onesided(pref = p)) == 4)
 })
