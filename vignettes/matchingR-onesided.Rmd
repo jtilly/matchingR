@@ -1,0 +1,25 @@
+---
+title: 'Computing the Irving Algorithm in R using matchingR'
+author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
+date: "June 26, 2015"
+output: html_document
+bibliography: bibliography.bib
+vignette: >
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, results = "hide", echo=FALSE, message = FALSE}
+library(matchingR)
+```
+In this vignette, I briefly demonstrate usage of the `onesided` function in the `matchingR` package, which uses the Irving (1985) algorithm to find a solution to the stable roommates problem. 
+
+`onesided` accepts ordinal or cardinal preferences. Preferences are encoded as an $n-1xn$ matrix. Each column represents the preferences of an agent. If the matrix `pref` is passed to `onesided`, it expects ordinal preference with the following meaning: The $i$th entry in the $j$th column is $k$ means that agent $j$ ranks agent $k$ at $i$. If the matrix `prefUtil` is passed to `onesided`, it expects cardinal preferences with the meaning that the $j$th agent puts utility $k$ on agent $i$ (if $i < j$) and on agent $i-1$ (if $i > j$). 
+
+```{r}
+p = replicate(99, rnorm(100))
+onesided(prefUtil = p)
+```
+
+The function returns a vector, the $i$th entry of which encodes the agent to which the $i$th agent was matched. If no stable matching was found, an empty vector is returned.

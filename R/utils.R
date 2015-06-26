@@ -47,3 +47,7 @@ checkPreferenceOrder = function(pref) {
     
     return(NULL)
 }
+
+convertCardinalToOrdinal = function(pref) {
+    
+}

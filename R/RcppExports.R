@@ -45,6 +45,10 @@ rankIndex <- function(sortedIdx) {
     .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }
 
+sortIndexSingle <- function(u) {
+    .Call('matchingR_sortIndexSingle', PACKAGE = 'matchingR', u)
+}
+
 #' Check if a matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of
@@ -66,5 +70,18 @@ rankIndex <- function(sortedIdx) {
 #' @return true if the matching is stable, false otherwise
 checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
     .Call('matchingR_checkStability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
+}
+
+#' Computes a stable roommate matching
+#'
+#' This function computes the Irving (1985) algorithm for finding
+#' a stable matching in a one-sided matching market. Note that neither
+#' existence nor uniqueness is guaranteed, this algorithm finds one
+#' matching, not all of them. 
+#'
+#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @return A list with the matchings made. Unmatched agents are 'matched' to N.
+stableRoommateMatching <- function(pref) {
+    .Call('matchingR_stableRoommateMatching', PACKAGE = 'matchingR', pref)
 }
 
