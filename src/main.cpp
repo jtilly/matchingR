@@ -1,5 +1,6 @@
 #include <queue>
 #include <matchingR.h>
+#include <c_logger.h>
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -218,6 +219,8 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
+    log().configure(ALL);
+    
     // Number of participants
     size_t N = pref.n_cols;
 
@@ -235,7 +238,7 @@ List stableRoommateMatching(const umat pref) {
     bool stable = false;
     while (!stable) {
         stable = true;
-        log().info() << "Not yet stable, iterating through players.";
+        log().info() << "Iterating through players.";
         for (size_t n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
@@ -255,11 +258,16 @@ List stableRoommateMatching(const umat pref) {
 
                 // proposee's opinion of the proposer (lower is better)
                 size_t op = find(prop_call, prop_call + N, n) - prop_call;
+                
+                // opinion of his current match
+                size_t op_curr = find(prop_call, prop_call + N, proposal_from[proposee]) - prop_call;
 
                 log().info() << n << " is proposing to " << proposee;
                 
+                log().info() << proposee << " ranks " << n << " at " << op;
+                
                 // if the next best guy likes him he accepts
-                if (op < proposal_from[proposee]) {
+                if (op < op_curr) {
                     
                     log().info() << "He accepted!";
 
@@ -281,6 +289,8 @@ List stableRoommateMatching(const umat pref) {
             }
         }
     }
+    
+    log().info() << "All players have made proposals.";
 
     // Generate table
     std::vector< std::vector<size_t> > table(N);
@@ -402,12 +412,4 @@ void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
   } else {
       stop("Memory isssssue");
   }
-}
-
-void throwError(std::string error) {
-  stop(error);
-}
-
-void log(std::string val) {
-    Rcout << val << std::endl;
 }
