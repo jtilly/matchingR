@@ -18,23 +18,12 @@ addons:
     - r-recommended
 
 install:
-  - Rscript -e 'install.packages("~/matchingR")'
+  - mkdir ~/Rlib
+  - R CMD INSTALL . -l ~/Rlib
   
 script: 
   - Rscript -e 'install.packages("devtools"); devtools::test()'
 
-# install covr package from CRAN
-r_packages:
- - Rcpp
- - RcppArmadillo
- - devtools
- - testthat
- - knitr
- - microbenchmark
- - crayon
- - rmarkdown
- - covr
- 
 # if everything worked out, then report coverage to coveralls and then 
 # push the documentation and vignettes to the gh-pages branch
 after_success:
