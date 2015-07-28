@@ -1,4 +1,4 @@
-# .travis.yml for R using the container structure
+# .travis.yml for matchingR using container-based infrastructure
 
 # use c as catch-all language
 language: c
