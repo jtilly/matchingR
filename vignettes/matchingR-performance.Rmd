@@ -26,17 +26,17 @@ n = 100
 # level of commonality
 lambda = 0.5
 # men's preferences
-uM = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+uM = lambda * matrix(runif(n), nrow = n, ncol = n) +
           (1 - lambda) * runif(n ^ 2)
 ```
-The common component `matrix(runif(n), nrow = n, ncol = n, byrow = TRUE)` is a matrix
-of dimension `n` by `n` that has identical rows. The idiosyncratic component `runif(n ^ 2)`
+The common component `matrix(runif(n), nrow = n, ncol = n)` is a matrix
+of dimension `n` by `n` that has identical columns. The idiosyncratic component `runif(n ^ 2)`
 is a matrix of dimension `n` by `n` where each element is a separate draw from a uniform distribution. 
 
 Women's preferences are constructed similarly:
 ```{r}
 # womens's preferences
-uW = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+uW = lambda * matrix(runif(n), nrow = n, ncol = n) +
           (1 - lambda) * runif(n ^ 2)
 ```
 I benchmark the matching functions for six different market sizes
@@ -56,9 +56,9 @@ The test function for the case of `one2one` matching is constructed as follows:
 set.seed(1)
 
 test_one2one = function(n, lambda) {
-    uM = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+    uM = lambda * matrix(runif(n), nrow = n, ncol = n) +
          (1 - lambda) * runif(n ^ 2)
-    uW = lambda * matrix(runif(n), nrow = n, ncol = n, byrow = TRUE) +
+    uW = lambda * matrix(runif(n), nrow = n, ncol = n) +
          (1 - lambda) * runif(n ^ 2)
     one2one(uM, uW)
 }
@@ -118,9 +118,9 @@ The test function for the case of `one2many` matching is constructed as follows:
 set.seed(1)
 
 test_one2many = function(n, lambda) {
-    uWorkers = lambda * matrix(runif(n), nrow = n, ncol = n/10, byrow = TRUE) +
+    uWorkers = lambda * matrix(runif(n), nrow = n, ncol = n/10) +
           (1 - lambda) * runif(n ^ 2 / 10)
-    uFirms = lambda * matrix(runif(n/10), nrow = n/10, ncol = n, byrow = TRUE) +
+    uFirms = lambda * matrix(runif(n/10), nrow = n/10, ncol = n) +
           (1 - lambda) * runif(n ^ 2 / 10)
     one2many(uWorkers, uFirms, slots = 10)
 }

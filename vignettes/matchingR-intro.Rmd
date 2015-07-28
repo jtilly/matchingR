@@ -31,11 +31,11 @@ Consider the following example of the marriage market. Suppose there are `N` men
 
 # Preferences
 
-We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Rows in the matrix correspond to men, columns to women. For example: 
+We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Columns in the matrix correspond to men, rows to women. For example: 
 ```{r}
 uM = matrix(c(1.0, 0.5, 0.0,
-              0.5, 0.0, 1.0,
-              0.0, 0.5, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
+              0.5, 0.0, 0.5,
+              0.0, 1.0, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(uM) = list(rows = c('Man 1', 'Man 2', 'Man 3'), cols = c('Woman 1', 'Woman 2', 'Woman 3'))
@@ -43,20 +43,20 @@ uM
 ```
 In this example, man `1` receives a payoff of `1.0` from being matched to woman `1`, a payoff of `0.5` from being matched to woman `2` and a payoff of `0.0` from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, let the payoff matrix for women be given by
 ```{r}
-uW = matrix(c(0.0, 0.5, 1.0,
-              1.0, 0.0, 0.5,
-              0.0, 0.5, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
+uW = matrix(c(0.0, 1.0, 0.0,
+              0.5, 0.0, 0.5,
+              1.0, 0.5, 1.0), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(uW) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
 uW
 ```
-In this example, woman `1` receives a payoff of `0.0` from being matched to man `1`, a payoff of `0.5` from being matched to man `2` and a payoff of `1.0` from being matched to man 3 (same logic applies to women `2` and `3`).
+Here, columns in the matrix correspond to women, rows to men. In this example, woman `1` receives a payoff of `0.0` from being matched to man `1`, a payoff of `0.5` from being matched to man `2` and a payoff of `1.0` from being matched to man 3 (same logic applies to women `2` and `3`).
 
 Instead of using payoff matrices, we can also represent preferences using preference orderings. The preference ordering that corresponds to `uM` is
 ```{r}
-prefM = matrix(c(1, 2, 3,
-                 3, 1, 2,
+prefM = matrix(c(1, 3, 3,
+                 2, 1, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
@@ -65,9 +65,9 @@ prefM
 ```
 `prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`, etc. The preference ordering that corresponds to `uW` is given by
 ```{r}
-prefW = matrix(c(3, 2, 1,
-                 1, 3, 2,
-                 3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
+prefW = matrix(c(3, 1, 3,
+                 2, 3, 2,
+                 1, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
 dimnames(prefW) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
@@ -153,8 +153,8 @@ nmen = 2500
 # set number of women
 nwomen = 2000
 # generate preferences
-uM = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen) 
-uW = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen) 
+uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen) 
+uW = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen) 
 # male optimal matching
 resultsM = one2one(uM, uW)
 # female optimal matching
@@ -174,8 +174,8 @@ nstudents = 1000
 # set number of colleges
 ncolleges = 400
 # generate preferences
-uStudents = matrix(runif(ncolleges*nstudents), nrow = nstudents, ncol = ncolleges) 
-uColleges = matrix(runif(nstudents*ncolleges), nrow = ncolleges, ncol = nstudents) 
+uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = 
+uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges) nstudents) 
 # worker optimal matching
 results = one2many(uStudents, uColleges, slots = 2)
 # check if matching is stable

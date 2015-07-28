@@ -33,15 +33,15 @@ install.packages("matchingR")
 ## Gale-Shapley Algorithm: How does it work?
 Consider a market with three men and three women. The men's preferences are given by
 ```{r}
-prefM = matrix(c(1, 2, 3,
-                 3, 1, 2,
+prefM = matrix(c(1, 3, 3,
+                 2, 1, 2,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 `prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`. Man `2` prefers woman `3` over woman `1` over woman `2`. Man `3` prefers woman `3` over woman `2` over woman `1`. The women's preferences are given by
 ```{r}
-prefW = matrix(c(3, 2, 1,
-                 1, 3, 2,
-                 3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
+prefW = matrix(c(3, 1, 3,
+                 2, 3, 2,
+                 1, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 `prefW` states that woman `1` prefers man `3` over man `2` over man `1`, etc. 
 
@@ -88,8 +88,8 @@ nmen = 2500
 nwomen = 2000
 
 # generate preferences
-uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen) 
-uW = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen) 
+uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen) 
+uW = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen) 
 
 # male optimal matching
 resultsM = matchingR::one2one(uM, uW)
@@ -114,8 +114,8 @@ nstudents = 1000
 ncolleges = 400
 
 # generate preferences
-uStudents = matrix(runif(ncolleges*nstudents), nrow=nstudents, ncol=ncolleges) 
-uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents) 
+uStudents = matrix(runif(ncolleges*nstudents), nrow=ncolleges, ncol=nstudents) 
+uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges) 
 
 # worker optimal matching
 results = matchingR::one2many(uStudents, uColleges, slots=2)
