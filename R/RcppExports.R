@@ -21,9 +21,9 @@ galeShapleyMatching <- function(proposerPref, reviewerUtils) {
     .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', proposerPref, reviewerUtils)
 }
 
-#' Sort indices of a matrix within row
+#' Sort indices of a matrix within a column
 #' 
-#' Within each row of a matrix, this function returns the indices of each 
+#' Within each column of a matrix, this function returns the indices of each 
 #' element in descending order
 #' 
 #' @param u is the input matrix
@@ -33,9 +33,9 @@ sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
 }
 
-#' Rank elements within row of a matrix
+#' Rank elements within column of a matrix
 #' 
-#' This function returns the rank of each element within each row of a matrix.
+#' This function returns the rank of each element within each column of a matrix.
 #' The highest element receives the highest rank.
 #' 
 #' @param sortedIdx is the input matrix

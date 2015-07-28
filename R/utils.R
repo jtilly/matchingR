@@ -36,12 +36,12 @@ reprow<-function(x,n){
 checkPreferenceOrder = function(pref) {
     
     # check if pref is using R instead of C++ indexing
-    if(all(apply(pref,1,sort) == rep(1:(NCOL(pref)), NROW(pref)))) {
+    if(all(apply(pref,2,sort) == array(1:(NROW(pref)), dim = dim(pref)))) {
         return(pref-1)
     }
     
     # check if pref has a complete listing otherwise given an error
-    if(all(apply(pref,1,sort) == rep(0:(NCOL(pref)-1), NROW(pref)))) {
+    if(all(apply(pref,2,sort) == (array(1:(NROW(pref)), dim = dim(pref)))-1)) {
         return(pref)
     }  
     

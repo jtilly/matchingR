@@ -84,9 +84,8 @@ one2one = function(proposerUtils = NULL,
     
     # turn these into R indices by adding +1
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M] + 1
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
     ))
     
     res$proposals = matrix(res$proposals, ncol = 1) + 1
@@ -141,8 +140,8 @@ one2many = function(proposerUtils = NULL,
     number_of_firms = NROW(args$reviewerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = repcol(args$proposerUtils, slots)
-    reviewerUtils = reprow(args$reviewerUtils, slots)
+    proposerUtils = reprow(args$proposerUtils, slots)
+    reviewerUtils = repcol(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -158,18 +157,15 @@ one2many = function(proposerUtils = NULL,
     
     # collect results
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M] + 1
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
     ))
     
     # collapse engagements (turn these into R indices by adding +1)
-    res$engagements = matrix(res$engagements, ncol = slots, byrow = TRUE) +
-        1
+    res$engagements = matrix(res$engagements, ncol = slots, byrow = TRUE) + 1
     
     # translate proposals into the id of the original firm (turn these into R indices by adding +1)
-    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol =
-                                 1), slots)
+    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol = 1), slots)
     res$proposals = matrix(firm.ids[res$proposals + 1], ncol = 1) + 1
     
     # translate single reviewers into the id of the original firm (turn these into R indices by adding +1)
@@ -223,8 +219,8 @@ many2one = function(proposerUtils = NULL,
     number_of_firms = NROW(args$proposerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = reprow(args$proposerUtils, slots)
-    reviewerUtils = repcol(args$reviewerUtils, slots)
+    proposerUtils = repcol(args$proposerUtils, slots)
+    reviewerUtils = reprow(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -240,24 +236,19 @@ many2one = function(proposerUtils = NULL,
     
     # collect results
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N],
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M]
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N],
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M]
     ))
     
     # collapse proposals (turn these into R indices by adding +1)
-    res$proposals = matrix(res$proposals, ncol = slots, byrow = TRUE) +
-        1
+    res$proposals = matrix(res$proposals, ncol = slots, byrow = TRUE) + 1
     
     # translate engagements into the id of the original firm (turn these into R indices by adding +1)
-    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol =
-                                 1), slots)
-    res$engagements = matrix(firm.ids[res$engagements + 1], ncol = 1) +
-        1
+    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol = 1), slots)
+    res$engagements = matrix(firm.ids[res$engagements + 1], ncol = 1) + 1
     
     # translate single proposers into the id of the original firm (turn these into R indices by adding +1)
     res$single.proposers = firm.ids[res$single.proposers + 1] + 1
-    
     
     return(res)
 }
