@@ -1,7 +1,7 @@
 Package: matchingR
 Type: Package
 Title: Gale-Shapley Algorithm in R and C++
-Version: 1.0.2
+Version: 1.1
 Date: 2015-05-17
 Author: Jan Tilly
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
