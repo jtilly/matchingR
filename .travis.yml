@@ -27,6 +27,9 @@ r_binary_packages:
  - microbenchmark
  - crayon
  - rmarkdown
+ 
+# install covr package from CRAN
+r_packages:
  - covr
  
 # if everything worked out, then report coverage to coveralls and then 
