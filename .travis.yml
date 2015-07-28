@@ -18,18 +18,18 @@ addons:
     packages:
     - r-base-dev
 
-
 install:
   - mkdir ~/Rlib
-  - Rscript -e 'install.packages("devtools", lib="~/Rlib", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'install.packages("/home/travis/build/jtilly/matchingR", dependencies=TRUE, lib="~/Rlib", repos=NULL, type="source")'
+  - echo 'R_LIBS=~/Rlib' > .Renviron
+  - Rscript -e 'install.packages("devtools", repos="http://cran.rstudio.com/")'
+  - Rscript -e 'install.packages("/home/travis/build/jtilly/matchingR", dependencies=TRUE, repos=NULL)'
 script: 
   - Rscript -e 'devtools::test()'
 
 # if everything worked out, then report coverage to coveralls and then 
 # push the documentation and vignettes to the gh-pages branch
 after_success:
-  - Rscript -e 'devtools::install_github("jimhester/covr", dependencies=TRUE, lib="~/Rlib")'
+  - Rscript -e 'devtools::install_github("jimhester/covr", dependencies=TRUE)'
   - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
 
 # send e-mails if stuff changes
