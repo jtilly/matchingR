@@ -1,12 +1,19 @@
-# let's see if we can get travis to work using containers
+# .travis.yml for R using the container structure
+
+# use c as catch-all language
 language: c
 
-# only run for pushes to the master branch
+# use containers
+sudo: false
+
+# only run for pushes to master branch
 branches: 
   only: 
    - master
 
-# install add-ons
+# install r-base-dev:
+# use r-packages-precise (https://cran.r-project.org/bin/linux/ubuntu/precise/) as source
+# which is white listed (https://github.com/travis-ci/apt-source-whitelist/) 
 addons:
   apt:
     sources:
@@ -14,11 +21,13 @@ addons:
     packages:
     - r-base-dev
 
-# cache where R stores its libraries
+# cache local R libraries directory:
 cache:
   directories: 
     - ~/Rlib
 
+# install the package and dependencies:
+# - create directory for R libraries (if not already exists)
 # - create .Renviron with location of R libraries
 # - install devtools if not already installed
 # - install covr if not already installed
