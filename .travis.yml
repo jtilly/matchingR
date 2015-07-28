@@ -16,7 +16,7 @@ addons:
     sources:
     - r-packages-precise
     packages:
-    - r-base-dev: '3.2.1-4'
+    - 'r-base-dev_3.2.1-4precise0_all'
 
 
 install:
