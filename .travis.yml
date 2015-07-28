@@ -31,10 +31,11 @@ install:
 # run devtools::test() and see if the package passes all the tests
 script: 
   - Rscript -e 'devtools::test()'
+  - rm -f -r ~/Rlib/matchingR
 
 # if everything worked out, then report coverage rate to coveralls
 after_success:
-  - Rscript -e 'if(!"covr" %in% rownames(installed.packages())) { devtools::install_github("jimhester/covr", dependencies=TRUE) }'
+  - Rscript -e 'if(!"covr" %in% rownames(installed.packages())) { devtools::install("covr", dependencies=TRUE) }'
   - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
 
 # send e-mails if stuff changes
