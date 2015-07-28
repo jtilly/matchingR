@@ -18,7 +18,7 @@ addons:
     - r-recommended
 
 install:
-  - R CMD INSTALL .
+  - Rscript -e 'install.packages("~/matchingR")'
   
 script: 
   - Rscript -e 'install.packages("devtools"); devtools::test()'
