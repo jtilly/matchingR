@@ -1,49 +1,37 @@
-language: c
-branches:
-  only:
-  - master
-env:
-  global:
-  - BOOTSTRAP_PANDOC=1
-  - secure: me7OtR6CI2HsNhk+V0H9QJbIFlbKmhc9iyYHak7Bc7jQOKYfZAEFB5YkqWe4/KLiNCKBKtKhpGI3ZHXj0Df9JlxOuCs9zlFY4365hDV9iYiNBM20eYXqPAJ9xvZ1ADLhHB4VVmeSDII63EJBgesGIHSSAFZ84SKhMWT4jYbeb35MN6VA29T0fP1tab903jhYIhp33Ibjdgbu7kh4Fx5j1PE0/G8uqHpJ2DU0l26nBoSzMmFrQUv9gUPAPcZnxuAHIxqxHWYfbO3k4aI39qy8BrVbyNt5JUYpcRTAmySg0Q/68SL86cW582dXzaG+TZjR/R7e+6/pOqcskdQe7wTxgew5EbwciSnonnapNhHvmoWMoZCR1aFDrNfIucmUhiKbeMQjO+T6sEoLlRnWUEKXk+hv0RQIQbxa5iiVqGdCikw9G0RyV4o7yAapkycWdBxxqQeOcC8kmtRtHJJrNGgXKfu8m4KirCS/X4s6SiFR8rCWvYMnMtNGjRxIoVdVkscWk76SvWyAxDadOQcR7waJ+WTsiKXfek3niuebwObEh/q14bxHGBK6+k33Z4AT108jVnpcmKRkeAqgDQSqo3Bny1nKHbI1G3twl2+W68L2v54rEdtl4LZTrWbXby0/C975nAvrGK1KJh4sLvJUL7snj9frxMyB20PknpvoxJIW4gA=
-sudo: required
-before_install:
-- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-- chmod 755 ./travis-tool.sh
-- "./travis-tool.sh bootstrap"
-install:
-- mkdir ~/.R
-- "./travis-tool.sh RInstall crayon"
-- "./travis-tool.sh install_github jimhester/covr"
-- "./travis-tool.sh install_deps"
-script: "./travis-tool.sh run_tests"
-after_failure:
-- "./travis-tool.sh dump_logs"
+# let's see if we can get travis to work with native r support
+language: r
+
+# be strict
+warnings_are_errors: true
+
+# only run for pushes to the master branch
+branches: 
+  only: 
+   - master
+
+# set a secure key to push documentation to gh-pages branch
+env: 
+  global: 
+   - secure: me7OtR6CI2HsNhk+V0H9QJbIFlbKmhc9iyYHak7Bc7jQOKYfZAEFB5YkqWe4/KLiNCKBKtKhpGI3ZHXj0Df9JlxOuCs9zlFY4365hDV9iYiNBM20eYXqPAJ9xvZ1ADLhHB4VVmeSDII63EJBgesGIHSSAFZ84SKhMWT4jYbeb35MN6VA29T0fP1tab903jhYIhp33Ibjdgbu7kh4Fx5j1PE0/G8uqHpJ2DU0l26nBoSzMmFrQUv9gUPAPcZnxuAHIxqxHWYfbO3k4aI39qy8BrVbyNt5JUYpcRTAmySg0Q/68SL86cW582dXzaG+TZjR/R7e+6/pOqcskdQe7wTxgew5EbwciSnonnapNhHvmoWMoZCR1aFDrNfIucmUhiKbeMQjO+T6sEoLlRnWUEKXk+hv0RQIQbxa5iiVqGdCikw9G0RyV4o7yAapkycWdBxxqQeOcC8kmtRtHJJrNGgXKfu8m4KirCS/X4s6SiFR8rCWvYMnMtNGjRxIoVdVkscWk76SvWyAxDadOQcR7waJ+WTsiKXfek3niuebwObEh/q14bxHGBK6+k33Z4AT108jVnpcmKRkeAqgDQSqo3Bny1nKHbI1G3twl2+W68L2v54rEdtl4LZTrWbXby0/C975nAvrGK1KJh4sLvJUL7snj9frxMyB20PknpvoxJIW4gA=
+
+# install covr package from CRAN
+r_packages:
+ - Rcpp
+ - RcppArmadillo
+ - devtools
+ - testthat
+ - knitr
+ - microbenchmark
+ - crayon
+ - rmarkdown
+ - covr
+ 
+# if everything worked out, then report coverage to coveralls and then 
+# push the documentation and vignettes to the gh-pages branch
 after_success:
 - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
-- export REPO_NAME=${TRAVIS_REPO_SLUG#*/}
-- sudo apt-add-repository http://ppa.launchpad.net/texlive-backports/ppa/ubuntu
-- sudo apt-get update
-- sudo apt-get install texinfo texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-- Rscript -e "install.packages('rmarkdown', repos='http://cran.rstudio.com')"
-- R CMD Rd2pdf ${TRAVIS_BUILD_DIR} -o ${TRAVIS_BUILD_DIR}/${REPO_NAME}-documentation.pdf --no-preview --no-index --force --batch
-- R CMD INSTALL ${TRAVIS_BUILD_DIR}
-- cd ${TRAVIS_BUILD_DIR}
-- Rscript -e "library('rmarkdown'); for(file.name in dir(path = 'vignettes/', pattern = '*.Rmd')) { render(paste('vignettes', file.name, sep='/'), output_file = gsub('Rmd', 'html', file.name), output_format = c('html_document', 'pdf_document')) }"
-- cd ..
-- git clone https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
-- cd gh-pages
-- git config user.name "Jan Tilly"
-- git config user.email "jantilly@gmail.com"
-- git checkout gh-pages
-- git pull origin gh-pages
-- mv -f ${TRAVIS_BUILD_DIR}/${REPO_NAME}-documentation.pdf .
-- mv -f ${TRAVIS_BUILD_DIR}/vignettes/*.html .
-- mv -f ${TRAVIS_BUILD_DIR}/vignettes/*.pdf .
-- git add *.pdf
-- git add *.html
-- git commit -m "Automatic Travis update of PDF documentation and vignettes"
-- git push origin gh-pages
+
+# send e-mails if stuff changes
 notifications:
   email:
     on_success: change
