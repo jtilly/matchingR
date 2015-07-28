@@ -23,16 +23,16 @@
 #' # stable marriage problem
 #' nmen = 25
 #' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 #' results = one2one(uM, uW)
 #' checkStability(uM, uW, results$proposals, results$engagements)
 #' 
 #' # college admissions problem
 #' nstudents = 25
 #' ncolleges = 5
-#' uStudents = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
-#' uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+#' uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+#' uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 #' results = one2many(uStudents, uColleges, slots=4)
 #' checkStability(uStudents, uColleges, results$proposals, results$engagements)
 NULL
@@ -62,8 +62,8 @@ NULL
 #' @examples
 #' nmen = 25
 #' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 #' results = one2one(uM, uW)
 #'
 #' prefM = sortIndex(uM)
@@ -84,9 +84,8 @@ one2one = function(proposerUtils = NULL,
     
     # turn these into R indices by adding +1
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M] + 1
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
     ))
     
     res$proposals = matrix(res$proposals, ncol = 1) + 1
@@ -126,8 +125,8 @@ one2one = function(proposerUtils = NULL,
 #' @examples
 #' nfirms = 10
 #' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
 #' results = one2many(uWorkers, uFirms, slots=2)
 one2many = function(proposerUtils = NULL,
                     reviewerUtils = NULL,
@@ -141,8 +140,8 @@ one2many = function(proposerUtils = NULL,
     number_of_firms = NROW(args$reviewerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = repcol(args$proposerUtils, slots)
-    reviewerUtils = reprow(args$reviewerUtils, slots)
+    proposerUtils = reprow(args$proposerUtils, slots)
+    reviewerUtils = repcol(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -158,18 +157,15 @@ one2many = function(proposerUtils = NULL,
     
     # collect results
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M] + 1
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
     ))
     
     # collapse engagements (turn these into R indices by adding +1)
-    res$engagements = matrix(res$engagements, ncol = slots, byrow = TRUE) +
-        1
+    res$engagements = matrix(res$engagements, ncol = slots, byrow = TRUE) + 1
     
     # translate proposals into the id of the original firm (turn these into R indices by adding +1)
-    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol =
-                                 1), slots)
+    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol = 1), slots)
     res$proposals = matrix(firm.ids[res$proposals + 1], ncol = 1) + 1
     
     # translate single reviewers into the id of the original firm (turn these into R indices by adding +1)
@@ -208,8 +204,8 @@ one2many = function(proposerUtils = NULL,
 #' @examples
 #' nfirms = 10
 #' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
 #' results = many2one(uFirms, uWorkers, slots=2)
 many2one = function(proposerUtils = NULL,
                     reviewerUtils = NULL,
@@ -223,8 +219,8 @@ many2one = function(proposerUtils = NULL,
     number_of_firms = NROW(args$proposerUtils)
     
     # expand cardinal utilities corresponding to the slot size
-    proposerUtils = reprow(args$proposerUtils, slots)
-    reviewerUtils = repcol(args$reviewerUtils, slots)
+    proposerUtils = repcol(args$proposerUtils, slots)
+    reviewerUtils = reprow(args$reviewerUtils, slots)
     
     # create preference ordering
     proposerPref = sortIndex(as.matrix(proposerUtils));
@@ -240,24 +236,19 @@ many2one = function(proposerUtils = NULL,
     
     # collect results
     res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N],
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements ==
-                                                           M]
+      "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N],
+      "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M]
     ))
     
     # collapse proposals (turn these into R indices by adding +1)
-    res$proposals = matrix(res$proposals, ncol = slots, byrow = TRUE) +
-        1
+    res$proposals = matrix(res$proposals, ncol = slots, byrow = TRUE) + 1
     
     # translate engagements into the id of the original firm (turn these into R indices by adding +1)
-    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol =
-                                 1), slots)
-    res$engagements = matrix(firm.ids[res$engagements + 1], ncol = 1) +
-        1
+    firm.ids = reprow(matrix(seq(from = 0, to = number_of_firms), ncol = 1), slots)
+    res$engagements = matrix(firm.ids[res$engagements + 1], ncol = 1) + 1
     
     # translate single proposers into the id of the original firm (turn these into R indices by adding +1)
     res$single.proposers = firm.ids[res$single.proposers + 1] + 1
-    
     
     return(res)
 }

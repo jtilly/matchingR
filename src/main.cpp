@@ -25,9 +25,9 @@
 List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
     
     // number of proposers (men)
-    int M = proposerPref.n_rows;
+    int M = proposerPref.n_cols;
     // number of reviewers (women)
-    int N = proposerPref.n_cols;
+    int N = proposerPref.n_rows;
     // initialize engagements, proposals
     vec engagements(N), proposals(M);
     // create an integer queue of bachelors
@@ -37,7 +37,7 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
     // set all engagements to M (aka no engagements)
     engagements.fill(M);
     // every proposer starts out as a bachelor
-    for(int iX=M-1;iX>=0;iX--) {
+    for(int iX=M-1; iX >= 0; iX--) {
         bachelors.push(iX);
     }
     
@@ -46,11 +46,11 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
         // get the index of the proposer
         int proposer = bachelors.front();
         // get the proposer's preferences
-        urowvec proposerPrefrow = proposerPref.row(proposer);
+        const unsigned int * proposerPrefcol = proposerPref.colptr(proposer);
         // find the best available match
         for(int jX=0;jX<N;jX++) {
             // index of the reviewer that the proposer is interested in
-            int wX = proposerPrefrow(jX);
+            const unsigned int wX = *proposerPrefcol++;
             // check if wX is available
             if(engagements(wX)==M) {
                 engagements(wX) = proposer;
@@ -58,7 +58,7 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
                 break;
             }
             // check if the wX can be poached
-            if(reviewerUtils(wX, proposer) > reviewerUtils(wX, engagements(wX))) {
+            if(reviewerUtils(proposer, wX) > reviewerUtils(engagements(wX), wX)) {
                 // make the guy who was just dropped a bachelor again
                 proposals(engagements(wX)) = N;
                 // and put him back into the bachelor queue
@@ -78,9 +78,9 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
       _["engagements"] = engagements);
 }
 
-//' Sort indices of a matrix within row
+//' Sort indices of a matrix within a column
 //' 
-//' Within each row of a matrix, this function returns the indices of each 
+//' Within each column of a matrix, this function returns the indices of each 
 //' element in descending order
 //' 
 //' @param u is the input matrix
@@ -88,18 +88,18 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
 //' 
 // [[Rcpp::export]]
 umat sortIndex(const mat u) {
-    int N = u.n_cols;
-    int M = u.n_rows;
-    umat sortedIdx(M,N);
+    int N = u.n_rows;
+    int M = u.n_cols;
+    umat sortedIdx(N,M);
     for(int jX=0;jX<M;jX++) {
-        sortedIdx.row(jX) = sort_index(u.row(jX), "descend");
+        sortedIdx.col(jX) = sort_index(u.col(jX), "descend");
     }
     return sortedIdx;
 }
 
-//' Rank elements within row of a matrix
+//' Rank elements within column of a matrix
 //' 
-//' This function returns the rank of each element within each row of a matrix.
+//' This function returns the rank of each element within each column of a matrix.
 //' The highest element receives the highest rank.
 //' 
 //' @param sortedIdx is the input matrix
@@ -107,12 +107,12 @@ umat sortIndex(const mat u) {
 //' 
 // [[Rcpp::export]]
 umat rankIndex(const umat sortedIdx) {
-    int N = sortedIdx.n_cols;
-    int M = sortedIdx.n_rows;
-    umat rankedIdx(M,N);
-    for(int jX=0; jX<M; jX++) {
-        for(int iX=0; iX<N; iX++) {
-            rankedIdx.at(jX, sortedIdx.at(jX,iX)) = iX;
+    int N = sortedIdx.n_rows;
+    int M = sortedIdx.n_cols;
+    umat rankedIdx(N,M);
+    for(int iX=0; iX<N; iX++) {
+        for(int jX=0; jX<M; jX++) {
+            rankedIdx.at(sortedIdx.at(iX,jX), jX) = iX;
         }
     }
     return rankedIdx;
@@ -139,11 +139,11 @@ umat rankIndex(const umat sortedIdx) {
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
-
+    
     // number of workers
-    const int M = proposerUtils.n_rows;
+    const int M = proposerUtils.n_cols;
     // number of firms
-    const int N = proposerUtils.n_cols;
+    const int N = proposerUtils.n_rows;
     // number of slots per firm
     const int slotsReviewers = engagements.n_cols;
     // number of slots per worker
@@ -156,13 +156,13 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
         
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsReviewers>M*slotsProposers) {
-        reviewerUtils.insert_cols(M, 1);
-        reviewerUtils.col(M).fill(-1e10);
+        reviewerUtils.insert_rows(M, 1);
+        reviewerUtils.row(M).fill(-1e10);
     }
     // more workers than jobs (add utility from being unmatched to workers' preferences)
     if(M*slotsProposers>N*slotsReviewers) {
-        proposerUtils.insert_cols(N, 1);
-        proposerUtils.col(N).fill(-1e10);
+        proposerUtils.insert_rows(N, 1);
+        proposerUtils.row(N).fill(-1e10);
     }
     // loop over workers
     for(int wX=0; wX<M; wX++) {
@@ -173,7 +173,7 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
                 // loop over multiple slots at the same firm
                 for(int sfX=0;sfX<slotsReviewers;sfX++) {
                     // check if wX and fX would rather be matched with each other than with their actual matches
-                    if(reviewerUtils(fX, wX) > reviewerUtils(fX, engagements(fX, sfX)) && proposerUtils(wX, fX) > proposerUtils(wX, proposals(wX, swX))) {
+                    if(reviewerUtils(wX, fX) > reviewerUtils(engagements(fX, sfX), fX) && proposerUtils(fX, wX) > proposerUtils(proposals(wX, swX), wX)) {
                         Rprintf("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
                         return false;
                     } 
@@ -183,4 +183,3 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
     }
     return true;
 }
-
