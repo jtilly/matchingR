@@ -16,7 +16,7 @@ addons:
     sources:
     - r-packages-precise
     packages:
-    - r-packages-precise/r-base-dev
+    - r-base-dev
 
 
 install:
