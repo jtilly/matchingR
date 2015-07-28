@@ -19,14 +19,15 @@ addons:
 
 install:
   - mkdir ~/Rlib
-  - R CMD INSTALL . -l ~/Rlib
-  
+  - Rscript -e 'install.packages("devtools", dependencies=TRUE, lib="~/Rlib")'
+  - Rscript -e 'install.packages("~/matchingR", dependencies=TRUE, lib="~/Rlib", repos=NULL)'
 script: 
-  - Rscript -e 'install.packages("devtools"); devtools::test()'
+  - Rscript -e 'devtools::test()'
 
 # if everything worked out, then report coverage to coveralls and then 
 # push the documentation and vignettes to the gh-pages branch
 after_success:
+- Rscript -e 'devtools::install_github("jimhester/covr", lib="~/Rlib")'
 - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
 
 # send e-mails if stuff changes
