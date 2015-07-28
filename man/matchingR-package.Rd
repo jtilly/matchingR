@@ -22,16 +22,16 @@ matchingR is an R Package that quickly computes the Gale-Shapley
 # stable marriage problem
 nmen = 25
 nwomen = 20
-uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 results = one2one(uM, uW)
 checkStability(uM, uW, results$proposals, results$engagements)
 
 # college admissions problem
 nstudents = 25
 ncolleges = 5
-uStudents = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
-uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 results = one2many(uStudents, uColleges, slots=4)
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 }

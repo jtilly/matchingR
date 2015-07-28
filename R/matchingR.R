@@ -23,16 +23,16 @@
 #' # stable marriage problem
 #' nmen = 25
 #' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 #' results = one2one(uM, uW)
 #' checkStability(uM, uW, results$proposals, results$engagements)
 #' 
 #' # college admissions problem
 #' nstudents = 25
 #' ncolleges = 5
-#' uStudents = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
-#' uColleges = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+#' uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+#' uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 #' results = one2many(uStudents, uColleges, slots=4)
 #' checkStability(uStudents, uColleges, results$proposals, results$engagements)
 NULL
@@ -62,8 +62,8 @@ NULL
 #' @examples
 #' nmen = 25
 #' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 #' results = one2one(uM, uW)
 #'
 #' prefM = sortIndex(uM)
@@ -125,8 +125,8 @@ one2one = function(proposerUtils = NULL,
 #' @examples
 #' nfirms = 10
 #' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
 #' results = one2many(uWorkers, uFirms, slots=2)
 one2many = function(proposerUtils = NULL,
                     reviewerUtils = NULL,
@@ -204,8 +204,8 @@ one2many = function(proposerUtils = NULL,
 #' @examples
 #' nfirms = 10
 #' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
 #' results = many2one(uFirms, uWorkers, slots=2)
 many2one = function(proposerUtils = NULL,
                     reviewerUtils = NULL,

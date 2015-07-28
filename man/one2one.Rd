@@ -62,8 +62,8 @@ the form of cardinal utilities or preference orders (or both).
 \examples{
 nmen = 25
 nwomen = 20
-uM = matrix(runif(nmen*nwomen), nrow=nmen, ncol=nwomen)
-uW = matrix(runif(nwomen*nmen), nrow=nwomen, ncol=nmen)
+uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
+uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 results = one2one(uM, uW)
 
 prefM = sortIndex(uM)

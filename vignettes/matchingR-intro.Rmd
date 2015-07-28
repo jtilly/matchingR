@@ -174,8 +174,8 @@ nstudents = 1000
 # set number of colleges
 ncolleges = 400
 # generate preferences
-uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = 
-uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges) nstudents) 
+uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = nstudents) 
+uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges) 
 # worker optimal matching
 results = one2many(uStudents, uColleges, slots = 2)
 # check if matching is stable

@@ -44,8 +44,8 @@ efficient to provide cardinal utilities for the proposers
 \examples{
 nfirms = 10
 nworkers = 25
-uFirms = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-uWorkers = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
+uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
 results = one2many(uWorkers, uFirms, slots=2)
 }
 
