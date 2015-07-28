@@ -19,8 +19,8 @@ addons:
 
 install:
   - mkdir ~/Rlib
-  - Rscript -e 'install.packages("devtools", dependencies=TRUE, lib="~/Rlib")'
-  - Rscript -e 'install.packages("~/matchingR", dependencies=TRUE, lib="~/Rlib", repos=NULL)'
+  - Rscript -e 'install.packages("devtools", dependencies=TRUE, lib="~/Rlib", repos="http://cran.rstudio.com/")'
+  - Rscript -e 'install.packages("~/matchingR", dependencies=TRUE, lib="~/Rlib", repos=NULL, type="source")'
 script: 
   - Rscript -e 'devtools::test()'
 
