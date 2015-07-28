@@ -4,6 +4,9 @@ language: r
 # be strict
 warnings_are_errors: true
 
+# need sudo
+sudo: required
+
 # only run for pushes to the master branch
 branches: 
   only: 
