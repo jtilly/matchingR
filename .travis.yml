@@ -16,7 +16,8 @@ addons:
     sources:
     - r-packages-precise
     packages:
-    - r-base-dev
+    - r-base-dev_3.2.1-4precise0
+
 
 install:
   - mkdir ~/Rlib
