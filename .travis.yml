@@ -11,6 +11,7 @@ env:
   global: 
    - secure: me7OtR6CI2HsNhk+V0H9QJbIFlbKmhc9iyYHak7Bc7jQOKYfZAEFB5YkqWe4/KLiNCKBKtKhpGI3ZHXj0Df9JlxOuCs9zlFY4365hDV9iYiNBM20eYXqPAJ9xvZ1ADLhHB4VVmeSDII63EJBgesGIHSSAFZ84SKhMWT4jYbeb35MN6VA29T0fP1tab903jhYIhp33Ibjdgbu7kh4Fx5j1PE0/G8uqHpJ2DU0l26nBoSzMmFrQUv9gUPAPcZnxuAHIxqxHWYfbO3k4aI39qy8BrVbyNt5JUYpcRTAmySg0Q/68SL86cW582dXzaG+TZjR/R7e+6/pOqcskdQe7wTxgew5EbwciSnonnapNhHvmoWMoZCR1aFDrNfIucmUhiKbeMQjO+T6sEoLlRnWUEKXk+hv0RQIQbxa5iiVqGdCikw9G0RyV4o7yAapkycWdBxxqQeOcC8kmtRtHJJrNGgXKfu8m4KirCS/X4s6SiFR8rCWvYMnMtNGjRxIoVdVkscWk76SvWyAxDadOQcR7waJ+WTsiKXfek3niuebwObEh/q14bxHGBK6+k33Z4AT108jVnpcmKRkeAqgDQSqo3Bny1nKHbI1G3twl2+W68L2v54rEdtl4LZTrWbXby0/C975nAvrGK1KJh4sLvJUL7snj9frxMyB20PknpvoxJIW4gA=
 
+# install add-ons
 addons:
   apt:
     sources:
@@ -18,18 +19,25 @@ addons:
     packages:
     - r-base-dev
 
+# cache the Rlib
+cache:
+  directories: 
+    - ~/Rlib
+
+# install devtools and the package at hands (with all its dependencies)
 install:
   - mkdir ~/Rlib
   - echo 'R_LIBS=~/Rlib' > .Renviron
-  - Rscript -e 'install.packages("devtools", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'devtools::install(pkg = ".", dependencies = TRUE)'
+  - Rscript -e 'if(!"devtools" %in% rownames(installed.packages())) { install.packages("devtools", repos="http://cran.rstudio.com/") }'
+  - Rscript -e 'if(!"matchingR" %in% rownames(installed.packages())) { devtools::install(pkg = ".", dependencies = TRUE) }'
+  - Rscript -e 'if("matchingR" %in% rownames(installed.packages())) { devtools::install(pkg = ".") }'
 script: 
   - Rscript -e 'devtools::test()'
 
 # if everything worked out, then report coverage to coveralls and then 
 # push the documentation and vignettes to the gh-pages branch
 after_success:
-  - Rscript -e 'devtools::install_github("jimhester/covr", dependencies=TRUE)'
+  - Rscript -e 'if(!"covr" %in% rownames(installed.packages())) { devtools::install_github("jimhester/covr", dependencies=TRUE) }'
   - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
 
 # send e-mails if stuff changes
