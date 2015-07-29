@@ -8,39 +8,39 @@
 #' convenient to call the function \code{one2one()} instead that allows for
 #' more flexible input choices.
 #'
-#' @param proposerPref is a matrix with the preference order of the proposing side of 
+#' @param proposerPref is a matrix with the preference order of the proposing side of
 #' the market
-#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
 #' market
-#' @return A list with the successful proposals and engagements. 
-#' \code{proposals} is a vector whose nth element contains the id of the reviewer 
-#' that proposer n is matched to. 
-#' \code{engagements} is a vector whose nth element contains the id of the proposer 
-#' that reviewer n is matched to.  
+#' @return A list with the successful proposals and engagements.
+#' \code{proposals} is a vector whose nth element contains the id of the reviewer
+#' that proposer n is matched to.
+#' \code{engagements} is a vector whose nth element contains the id of the proposer
+#' that reviewer n is matched to.
 galeShapleyMatching <- function(proposerPref, reviewerUtils) {
     .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', proposerPref, reviewerUtils)
 }
 
 #' Sort indices of a matrix within a column
-#' 
-#' Within each column of a matrix, this function returns the indices of each 
+#'
+#' Within each column of a matrix, this function returns the indices of each
 #' element in descending order
-#' 
+#'
 #' @param u is the input matrix
 #' @return a matrix with sorted indicies
-#' 
+#'
 sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
 }
 
 #' Rank elements within column of a matrix
-#' 
+#'
 #' This function returns the rank of each element within each column of a matrix.
 #' The highest element receives the highest rank.
-#' 
+#'
 #' @param sortedIdx is the input matrix
 #' @return a rank matrix
-#' 
+#'
 rankIndex <- function(sortedIdx) {
     .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }
@@ -48,16 +48,16 @@ rankIndex <- function(sortedIdx) {
 #' Check if a matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of
-#' preferences. This function can check if a given check one-to-one, 
+#' preferences. This function can check if a given check one-to-one,
 #' one-to-many, or many-to-one matching is stable.
 #'
-#' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the
 #' market
-#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
 #' market
 #' @param proposals is a matrix that contains the id of the reviewer that a given
-#' proposer is matched to: the first row contains the id of the reviewer that is 
-#' matched with the first proposer, the second row contains the id of the reviewer 
+#' proposer is matched to: the first row contains the id of the reviewer that is
+#' matched with the first proposer, the second row contains the id of the reviewer
 #' that is matched with the second proposer, etc. The column dimension accommodates
 #' proposers with multiple slots.
 #' @param engagements is a matrix that contains the id of the proposer that a given

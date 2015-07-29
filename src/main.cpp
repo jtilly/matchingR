@@ -12,18 +12,18 @@
 //' convenient to call the function \code{one2one()} instead that allows for
 //' more flexible input choices.
 //'
-//' @param proposerPref is a matrix with the preference order of the proposing side of 
+//' @param proposerPref is a matrix with the preference order of the proposing side of
 //' the market
-//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
+//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
 //' market
-//' @return A list with the successful proposals and engagements. 
-//' \code{proposals} is a vector whose nth element contains the id of the reviewer 
-//' that proposer n is matched to. 
-//' \code{engagements} is a vector whose nth element contains the id of the proposer 
-//' that reviewer n is matched to.  
+//' @return A list with the successful proposals and engagements.
+//' \code{proposals} is a vector whose nth element contains the id of the reviewer
+//' that proposer n is matched to.
+//' \code{engagements} is a vector whose nth element contains the id of the proposer
+//' that reviewer n is matched to.
 // [[Rcpp::export]]
 List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
-    
+
     // number of proposers (men)
     int M = proposerPref.n_cols;
     // number of reviewers (women)
@@ -40,17 +40,17 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
     for(int iX=M-1; iX >= 0; iX--) {
         bachelors.push(iX);
     }
-    
+
     // loop until there are no proposals to be made
     while (!bachelors.empty()) {
         // get the index of the proposer
         int proposer = bachelors.front();
         // get the proposer's preferences
-        const unsigned int * proposerPrefcol = proposerPref.colptr(proposer);
+        const uword * proposerPrefcol = proposerPref.colptr(proposer);
         // find the best available match
         for(int jX=0;jX<N;jX++) {
             // index of the reviewer that the proposer is interested in
-            const unsigned int wX = *proposerPrefcol++;
+            const uword wX = *proposerPrefcol++;
             // check if wX is available
             if(engagements(wX)==M) {
                 engagements(wX) = proposer;
@@ -70,22 +70,22 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
             }
         }
         // pop at the end
-        bachelors.pop();         
+        bachelors.pop();
     }
-    
+
     return List::create(
       _["proposals"]   = proposals,
       _["engagements"] = engagements);
 }
 
 //' Sort indices of a matrix within a column
-//' 
-//' Within each column of a matrix, this function returns the indices of each 
+//'
+//' Within each column of a matrix, this function returns the indices of each
 //' element in descending order
-//' 
+//'
 //' @param u is the input matrix
 //' @return a matrix with sorted indicies
-//' 
+//'
 // [[Rcpp::export]]
 umat sortIndex(const mat u) {
     int N = u.n_rows;
@@ -98,13 +98,13 @@ umat sortIndex(const mat u) {
 }
 
 //' Rank elements within column of a matrix
-//' 
+//'
 //' This function returns the rank of each element within each column of a matrix.
 //' The highest element receives the highest rank.
-//' 
+//'
 //' @param sortedIdx is the input matrix
 //' @return a rank matrix
-//' 
+//'
 // [[Rcpp::export]]
 umat rankIndex(const umat sortedIdx) {
     int N = sortedIdx.n_rows;
@@ -121,16 +121,16 @@ umat rankIndex(const umat sortedIdx) {
 //' Check if a matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
-//' preferences. This function can check if a given check one-to-one, 
+//' preferences. This function can check if a given check one-to-one,
 //' one-to-many, or many-to-one matching is stable.
 //'
-//' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the 
+//' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the
 //' market
-//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the 
+//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
 //' market
 //' @param proposals is a matrix that contains the id of the reviewer that a given
-//' proposer is matched to: the first row contains the id of the reviewer that is 
-//' matched with the first proposer, the second row contains the id of the reviewer 
+//' proposer is matched to: the first row contains the id of the reviewer that is
+//' matched with the first proposer, the second row contains the id of the reviewer
 //' that is matched with the second proposer, etc. The column dimension accommodates
 //' proposers with multiple slots.
 //' @param engagements is a matrix that contains the id of the proposer that a given
@@ -139,7 +139,7 @@ umat rankIndex(const umat sortedIdx) {
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
-    
+
     // number of workers
     const int M = proposerUtils.n_cols;
     // number of firms
@@ -148,12 +148,12 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
     const int slotsReviewers = engagements.n_cols;
     // number of slots per worker
     const int slotsProposers = proposals.n_cols;
-    
-    // turn proposals into C++ indices 
+
+    // turn proposals into C++ indices
     proposals = proposals-1;
     // turn engagements into C++ indices
     engagements = engagements-1;
-        
+
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsReviewers>M*slotsProposers) {
         reviewerUtils.insert_rows(M, 1);
@@ -176,7 +176,7 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
                     if(reviewerUtils(wX, fX) > reviewerUtils(engagements(fX, sfX), fX) && proposerUtils(fX, wX) > proposerUtils(proposals(wX, swX), wX)) {
                         Rprintf("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
                         return false;
-                    } 
+                    }
                 }
             }
         }
