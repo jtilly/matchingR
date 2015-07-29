@@ -1,0 +1,2805 @@
+# depslib dependency file v1.0
+1438202655 source:/home/njanetos/Google Drive/Programming/matchingR/src/c_logger.cpp
+	"../inst/include/c_logger.h"
+
+1438203470 /home/njanetos/Google Drive/Programming/matchingR/inst/include/c_logger.h
+	<iostream>
+
+1438202913 /home/njanetos/Google Drive/Programming/matchingR/inst/include/matchingR.h
+	<RcppArmadillo.h>
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadillo.h
+	<RcppArmadilloForward.h>
+	<Rcpp.h>
+	<RcppArmadilloWrap.h>
+	<RcppArmadilloAs.h>
+	<RcppArmadilloSugar.h>
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloForward.h
+	<RcppCommon.h>
+	<Rconfig.h>
+	<RcppArmadilloConfig.h>
+	<armadillo>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/RcppCommon.h
+	<Rcpp/r/headers.h>
+	<iterator>
+	<exception>
+	<iostream>
+	<sstream>
+	<string>
+	<list>
+	<map>
+	<set>
+	<stdexcept>
+	<vector>
+	<deque>
+	<functional>
+	<numeric>
+	<algorithm>
+	<complex>
+	<limits>
+	<typeinfo>
+	<Rcpp/sprintf.h>
+	<R_ext/Callbacks.h>
+	<R_ext/Visibility.h>
+	<Rcpp/utils/tinyformat.h>
+	<Rmath.h>
+	<Rcpp/sugar/undoRmath.h>
+	<Rcpp/storage/storage.h>
+	<Rcpp/protection/protection.h>
+	<Rcpp/routines.h>
+	<Rcpp/exceptions.h>
+	<Rcpp/proxy/proxy.h>
+	<Rcpp/lang.h>
+	<Rcpp/complex.h>
+	<Rcpp/barrier.h>
+	<Rcpp/exceptions.h>
+	<Rcpp/Interrupt.h>
+	<Rcpp/longlong.h>
+	<Rcpp/internal/na.h>
+	<Rcpp/internal/NAComparator.h>
+	<Rcpp/internal/NAEquals.h>
+	<Rcpp/traits/traits.h>
+	<Rcpp/Named.h>
+	<Rcpp/internal/caster.h>
+	<Rcpp/internal/r_vector.h>
+	<Rcpp/r_cast.h>
+	<Rcpp/api/bones/bones.h>
+	<Rcpp/internal/export.h>
+	<Rcpp/internal/r_coerce.h>
+	<Rcpp/as.h>
+	<Rcpp/InputParameter.h>
+	<Rcpp/is.h>
+	<Rcpp/vector/VectorBase.h>
+	<Rcpp/vector/MatrixBase.h>
+	<Rcpp/internal/ListInitialization.h>
+	<Rcpp/internal/Proxy_Iterator.h>
+	<Rcpp/internal/SEXP_Iterator.h>
+	<Rcpp/internal/converter.h>
+	<Rcpp/print.h>
+	<Rcpp/algo.h>
+	<Rcpp/sugar/sugar_forward.h>
+	<Rcpp/iostream/Rstreambuf.h>
+	<Rcpp/internal/wrap.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/r/headers.h
+	<Rcpp/platform/compiler.h>
+	<Rcpp/config.h>
+	<Rcpp/macros/macros.h>
+	<R.h>
+	<Rinternals.h>
+	<R_ext/Complex.h>
+	<R_ext/Parse.h>
+	<R_ext/Rdynload.h>
+	<Rversion.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/platform/compiler.h
+	<cmath>
+	<initializer_list>
+	<unordered_map>
+	<map>
+	<unordered_set>
+	<set>
+	<tr1/unordered_map>
+	<map>
+	<tr1/unordered_set>
+	<set>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/config.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/macros.h
+	<Rcpp/macros/debug.h>
+	<Rcpp/macros/unroll.h>
+	<Rcpp/macros/dispatch.h>
+	<Rcpp/macros/xp.h>
+	<Rcpp/macros/traits.h>
+	<Rcpp/macros/config.hpp>
+	<Rcpp/macros/cat.hpp>
+	<Rcpp/macros/module.h>
+	<Rcpp/macros/interface.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/debug.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/unroll.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/dispatch.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/xp.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/config.hpp
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/cat.hpp
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/module.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/macros/interface.h
+
+1434656267 /usr/share/R/include/R.h
+	<stdlib.h>
+	<stdio.h>
+	<limits.h>
+	<math.h>
+	<Rconfig.h>
+	<R_ext/Arith.h>
+	<R_ext/Boolean.h>
+	<R_ext/Complex.h>
+	<R_ext/Constants.h>
+	<R_ext/Error.h>
+	<R_ext/Memory.h>
+	<R_ext/Print.h>
+	<R_ext/Random.h>
+	<R_ext/Utils.h>
+	<R_ext/RS.h>
+
+1424883217 /usr/include//stdlib.h
+	<features.h>
+	<stddef.h>
+	<bits/waitflags.h>
+	<bits/waitstatus.h>
+	<xlocale.h>
+	<sys/types.h>
+	<alloca.h>
+	<bits/stdlib-bsearch.h>
+	<bits/stdlib-float.h>
+	<bits/stdlib.h>
+	<bits/stdlib-ldbl.h>
+
+1424883199 /usr/include//features.h
+	<stdc-predef.h>
+	<sys/cdefs.h>
+	<gnu/stubs.h>
+
+1424883199 /usr/include//stdc-predef.h
+
+1424883201 /usr/include//xlocale.h
+
+1424883217 /usr/include//alloca.h
+	<features.h>
+	<stddef.h>
+
+1424883218 /usr/include//stdio.h
+	<features.h>
+	<stddef.h>
+	<bits/types.h>
+	<libio.h>
+	<stdarg.h>
+	<bits/stdio_lim.h>
+	<bits/sys_errlist.h>
+	<getopt.h>
+	<bits/stdio.h>
+	<bits/stdio2.h>
+	<bits/stdio-ldbl.h>
+
+1424883218 /usr/include//libio.h
+	<_G_config.h>
+	<stdarg.h>
+	<sys/cdefs.h>
+	<bits/stdio-lock.h>
+	<shlib-compat.h>
+	<bits/libio-ldbl.h>
+
+1424883218 /usr/include//_G_config.h
+	<bits/types.h>
+	<stddef.h>
+	<wchar.h>
+	<gconv.h>
+
+1424883220 /usr/include//wchar.h
+	<features.h>
+	<stdio.h>
+	<stdarg.h>
+	<bits/wchar.h>
+	<stddef.h>
+	<wctype.h>
+	<xlocale.h>
+	<xlocale.h>
+	<xlocale.h>
+	<wctype.h>
+	<bits/wchar2.h>
+	<bits/wchar-ldbl.h>
+
+1424883225 /usr/include//wctype.h
+	<features.h>
+	<bits/types.h>
+	<wchar.h>
+	<endian.h>
+	<xlocale.h>
+
+1424883219 /usr/include//endian.h
+	<features.h>
+	<bits/endian.h>
+	<bits/byteswap.h>
+
+1424883200 /usr/include//gconv.h
+	<features.h>
+	<wchar.h>
+	<stddef.h>
+
+1424883222 /usr/include//getopt.h
+	<ctype.h>
+
+1424883213 /usr/include//ctype.h
+	<features.h>
+	<bits/types.h>
+	<endian.h>
+	<xlocale.h>
+
+1424883199 /usr/include//limits.h
+	<features.h>
+	<bits/wordsize.h>
+	<bits/posix1_lim.h>
+	<bits/posix2_lim.h>
+	<bits/xopen_lim.h>
+
+1424883215 /usr/include//math.h
+	<features.h>
+	<bits/huge_val.h>
+	<bits/huge_valf.h>
+	<bits/huge_vall.h>
+	<bits/inf.h>
+	<bits/nan.h>
+	<bits/mathdef.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathinline.h>
+	<bits/math-finite.h>
+
+1434656267 /usr/share/R/include/Rconfig.h
+
+1434656266 /usr/share/R/include/R_ext/Arith.h
+	<features.h>
+	<R_ext/libextern.h>
+	<math.h>
+
+1434656267 /usr/share/R/include/R_ext/libextern.h
+
+1434656266 /usr/share/R/include/R_ext/Boolean.h
+
+1434656267 /usr/share/R/include/R_ext/Complex.h
+
+1434656267 /usr/share/R/include/R_ext/Constants.h
+	<float.h>
+
+1434656267 /usr/share/R/include/R_ext/Error.h
+
+1434656267 /usr/share/R/include/R_ext/Memory.h
+	<stddef.h>
+
+1434656267 /usr/share/R/include/R_ext/Print.h
+	<cstdarg>
+	<stdarg.h>
+
+1434656267 /usr/share/R/include/R_ext/Random.h
+	<R_ext/Boolean.h>
+
+1434656267 /usr/share/R/include/R_ext/Utils.h
+	<R_ext/Boolean.h>
+	<R_ext/Complex.h>
+	<stddef.h>
+
+1434656267 /usr/share/R/include/R_ext/RS.h
+	<string.h>
+	<Rconfig.h>
+	<R_ext/Error.h>
+
+1424883219 /usr/include//string.h
+	<features.h>
+	<stddef.h>
+	<xlocale.h>
+	<bits/string.h>
+	<bits/string2.h>
+	<bits/string3.h>
+
+1434656267 /usr/share/R/include/Rinternals.h
+	<cstdio>
+	<climits>
+	<stdio.h>
+	<limits.h>
+	<R_ext/Arith.h>
+	<R_ext/Boolean.h>
+	<R_ext/Complex.h>
+	<R_ext/Error.h>
+	<R_ext/Memory.h>
+	<R_ext/Utils.h>
+	<R_ext/Print.h>
+	<R_ext/libextern.h>
+	<Rconfig.h>
+	"Rinlinedfuns.h"
+
+1434656267 /usr/share/R/include/R_ext/Parse.h
+
+1434656267 /usr/share/R/include/R_ext/Rdynload.h
+	<R_ext/Boolean.h>
+
+1434656267 /usr/share/R/include/Rversion.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sprintf.h
+	<cstdio>
+	<cstdarg>
+
+1434656266 /usr/share/R/include/R_ext/Callbacks.h
+	<Rinternals.h>
+
+1434656267 /usr/share/R/include/R_ext/Visibility.h
+	<Rconfig.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/utils/tinyformat.h
+	<algorithm>
+	<iostream>
+	<sstream>
+
+1434656267 /usr/share/R/include/Rmath.h
+	<math.h>
+	<R_ext/Boolean.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/undoRmath.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/storage/storage.h
+	<Rcpp/storage/PreserveStorage.h>
+	<Rcpp/storage/NoProtectStorage.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/storage/PreserveStorage.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/storage/NoProtectStorage.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/protection/protection.h
+	<Rcpp/protection/Shield.h>
+	<Rcpp/protection/Shelter.h>
+	<Rcpp/protection/Armor.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/protection/Shield.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/protection/Shelter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/protection/Armor.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/routines.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/exceptions.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/proxy.h
+	<Rcpp/proxy/GenericProxy.h>
+	<Rcpp/proxy/NamesProxy.h>
+	<Rcpp/proxy/RObjectMethods.h>
+	<Rcpp/proxy/AttributeProxy.h>
+	<Rcpp/proxy/TagProxy.h>
+	<Rcpp/proxy/ProtectedProxy.h>
+	<Rcpp/proxy/SlotProxy.h>
+	<Rcpp/proxy/Binding.h>
+	<Rcpp/proxy/FieldProxy.h>
+	<Rcpp/proxy/DottedPairProxy.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/GenericProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/NamesProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/RObjectMethods.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/AttributeProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/TagProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/ProtectedProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/SlotProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/Binding.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/FieldProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/proxy/DottedPairProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/lang.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/complex.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/barrier.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Interrupt.h
+	<R_ext/GraphicsEngine.h>
+
+1434656267 /usr/share/R/include/R_ext/GraphicsEngine.h
+	<R_ext/GraphicsDevice.h>
+
+1434656267 /usr/share/R/include/R_ext/GraphicsDevice.h
+	<R_ext/Boolean.h>
+	<R_ext/libextern.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/longlong.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/NAComparator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/NAEquals.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/traits.h
+	<Rcpp/traits/integral_constant.h>
+	<Rcpp/traits/same_type.h>
+	<Rcpp/traits/enable_if.h>
+	<Rcpp/traits/is_wide_string.h>
+	<Rcpp/traits/char_type.h>
+	<Rcpp/traits/named_object.h>
+	<Rcpp/traits/is_convertible.h>
+	<Rcpp/traits/has_iterator.h>
+	<Rcpp/traits/expands_to_logical.h>
+	<Rcpp/traits/matrix_interface.h>
+	<Rcpp/traits/is_sugar_expression.h>
+	<Rcpp/traits/is_eigen_base.h>
+	<Rcpp/traits/has_na.h>
+	<Rcpp/traits/storage_type.h>
+	<Rcpp/traits/r_sexptype_traits.h>
+	<Rcpp/traits/r_type_traits.h>
+	<Rcpp/traits/un_pointer.h>
+	<Rcpp/traits/is_pointer.h>
+	<Rcpp/traits/wrap_type_traits.h>
+	<Rcpp/traits/longlong.h>
+	<Rcpp/traits/module_wrap_traits.h>
+	<Rcpp/traits/is_na.h>
+	<Rcpp/traits/is_finite.h>
+	<Rcpp/traits/is_infinite.h>
+	<Rcpp/traits/is_nan.h>
+	<Rcpp/traits/is_bool.h>
+	<Rcpp/traits/if_.h>
+	<Rcpp/traits/get_na.h>
+	<Rcpp/traits/is_trivial.h>
+	<Rcpp/traits/init_type.h>
+	<Rcpp/traits/is_const.h>
+	<Rcpp/traits/is_reference.h>
+	<Rcpp/traits/remove_const.h>
+	<Rcpp/traits/remove_reference.h>
+	<Rcpp/traits/remove_const_and_reference.h>
+	<Rcpp/traits/result_of.h>
+	<Rcpp/traits/is_module_object.h>
+	<Rcpp/traits/is_primitive.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/integral_constant.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/same_type.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/enable_if.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_wide_string.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/char_type.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/named_object.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_convertible.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/has_iterator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/expands_to_logical.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/matrix_interface.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_sugar_expression.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_eigen_base.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/has_na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/storage_type.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/r_sexptype_traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/r_type_traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/un_pointer.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_pointer.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/wrap_type_traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/longlong.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/module_wrap_traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_finite.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_infinite.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_nan.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_bool.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/if_.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/get_na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_trivial.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/init_type.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_const.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_reference.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/remove_const.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/remove_reference.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/remove_const_and_reference.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/result_of.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_module_object.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/traits/is_primitive.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Named.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/caster.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/r_vector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/r_cast.h
+	<Rcpp/exceptions.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/bones/bones.h
+	<Rcpp/api/bones/wrap_extra_steps.h>
+	<Rcpp/api/bones/Date.h>
+	<Rcpp/api/bones/Datetime.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/bones/wrap_extra_steps.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/bones/Date.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/bones/Datetime.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/export.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/r_coerce.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/as.h
+	<Rcpp/internal/Exporter.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/Exporter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/InputParameter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/is.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/VectorBase.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/MatrixBase.h
+	<Rcpp/sugar/matrix/tools.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/tools.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/ListInitialization.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/Proxy_Iterator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/SEXP_Iterator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/converter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/print.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/algo.h
+	<iterator>
+	<algorithm>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/sugar_forward.h
+	<Rcpp/sugar/operators/r_binary_op.h>
+	<Rcpp/sugar/logical/logical.h>
+	<Rcpp/sugar/Range.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/r_binary_op.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/logical.h
+	<Rcpp/sugar/logical/can_have_na.h>
+	<Rcpp/sugar/logical/SingleLogicalResult.h>
+	<Rcpp/sugar/logical/not.h>
+	<Rcpp/sugar/logical/and.h>
+	<Rcpp/sugar/logical/or.h>
+	<Rcpp/sugar/logical/is.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/can_have_na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/SingleLogicalResult.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/not.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/and.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/or.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/logical/is.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/Range.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/iostream/Rstreambuf.h
+	<cstdio>
+	<streambuf>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/wrap.h
+	<iterator>
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloConfig.h
+	<RcppArmadilloLapack.h>
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloLapack.h
+
+1393565149 /usr/include//armadillo
+	<cstdlib>
+	<cstring>
+	<climits>
+	<cmath>
+	<ctime>
+	<cstdio>
+	<iostream>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<new>
+	<limits>
+	<algorithm>
+	<complex>
+	<vector>
+	<unistd.h>
+	<sys/time.h>
+	"armadillo_bits/config.hpp"
+	"armadillo_bits/compiler_setup.hpp"
+	<initializer_list>
+	<cstdint>
+	<chrono>
+	<random>
+	<tbb/scalable_allocator.h>
+	<mkl_service.h>
+	<tr1/cmath>
+	<tr1/complex>
+	"armadillo_bits/include_atlas.hpp"
+	<hdf5.h>
+	"armadillo_bits/forward_bones.hpp"
+	"armadillo_bits/arma_static_check.hpp"
+	"armadillo_bits/typedef_elem.hpp"
+	"armadillo_bits/typedef_elem_check.hpp"
+	"armadillo_bits/typedef_mat.hpp"
+	"armadillo_bits/arma_boost.hpp"
+	"armadillo_bits/arma_version.hpp"
+	"armadillo_bits/arma_config.hpp"
+	"armadillo_bits/traits.hpp"
+	"armadillo_bits/promote_type.hpp"
+	"armadillo_bits/upgrade_val.hpp"
+	"armadillo_bits/restrictors.hpp"
+	"armadillo_bits/access.hpp"
+	"armadillo_bits/span.hpp"
+	"armadillo_bits/distr_param.hpp"
+	"armadillo_bits/constants.hpp"
+	"armadillo_bits/constants_compat.hpp"
+	"armadillo_bits/arma_rng_cxx11.hpp"
+	"armadillo_bits/arma_rng.hpp"
+	"armadillo_bits/arma_rng_cxx98.hpp"
+	"armadillo_bits/arma_rng.hpp"
+	"armadillo_bits/Base_bones.hpp"
+	"armadillo_bits/BaseCube_bones.hpp"
+	"armadillo_bits/SpBase_bones.hpp"
+	"armadillo_bits/blas_bones.hpp"
+	"armadillo_bits/lapack_bones.hpp"
+	"armadillo_bits/atlas_bones.hpp"
+	"armadillo_bits/arpack_bones.hpp"
+	"armadillo_bits/blas_wrapper.hpp"
+	"armadillo_bits/lapack_wrapper.hpp"
+	"armadillo_bits/atlas_wrapper.hpp"
+	"armadillo_bits/arpack_wrapper.hpp"
+	"armadillo_bits/cond_rel_bones.hpp"
+	"armadillo_bits/arrayops_bones.hpp"
+	"armadillo_bits/podarray_bones.hpp"
+	"armadillo_bits/auxlib_bones.hpp"
+	"armadillo_bits/sp_auxlib_bones.hpp"
+	"armadillo_bits/injector_bones.hpp"
+	"armadillo_bits/Mat_bones.hpp"
+	"armadillo_bits/Col_bones.hpp"
+	"armadillo_bits/Row_bones.hpp"
+	"armadillo_bits/Cube_bones.hpp"
+	"armadillo_bits/xvec_htrans_bones.hpp"
+	"armadillo_bits/SizeMat_bones.hpp"
+	"armadillo_bits/SizeCube_bones.hpp"
+	"armadillo_bits/SpValProxy_bones.hpp"
+	"armadillo_bits/SpMat_bones.hpp"
+	"armadillo_bits/SpCol_bones.hpp"
+	"armadillo_bits/SpRow_bones.hpp"
+	"armadillo_bits/SpSubview_bones.hpp"
+	"armadillo_bits/typedef_mat_fixed.hpp"
+	"armadillo_bits/field_bones.hpp"
+	"armadillo_bits/subview_bones.hpp"
+	"armadillo_bits/subview_elem1_bones.hpp"
+	"armadillo_bits/subview_elem2_bones.hpp"
+	"armadillo_bits/subview_field_bones.hpp"
+	"armadillo_bits/subview_cube_bones.hpp"
+	"armadillo_bits/diagview_bones.hpp"
+	"armadillo_bits/subview_each_bones.hpp"
+	"armadillo_bits/diskio_bones.hpp"
+	"armadillo_bits/wall_clock_bones.hpp"
+	"armadillo_bits/running_stat_bones.hpp"
+	"armadillo_bits/running_stat_vec_bones.hpp"
+	"armadillo_bits/Op_bones.hpp"
+	"armadillo_bits/OpCube_bones.hpp"
+	"armadillo_bits/SpOp_bones.hpp"
+	"armadillo_bits/eOp_bones.hpp"
+	"armadillo_bits/eOpCube_bones.hpp"
+	"armadillo_bits/mtOp_bones.hpp"
+	"armadillo_bits/mtOpCube_bones.hpp"
+	"armadillo_bits/mtSpOp_bones.hpp"
+	"armadillo_bits/Glue_bones.hpp"
+	"armadillo_bits/eGlue_bones.hpp"
+	"armadillo_bits/mtGlue_bones.hpp"
+	"armadillo_bits/SpGlue_bones.hpp"
+	"armadillo_bits/GlueCube_bones.hpp"
+	"armadillo_bits/eGlueCube_bones.hpp"
+	"armadillo_bits/mtGlueCube_bones.hpp"
+	"armadillo_bits/eop_core_bones.hpp"
+	"armadillo_bits/eglue_core_bones.hpp"
+	"armadillo_bits/Gen_bones.hpp"
+	"armadillo_bits/GenCube_bones.hpp"
+	"armadillo_bits/op_diagmat_bones.hpp"
+	"armadillo_bits/op_diagvec_bones.hpp"
+	"armadillo_bits/op_dot_bones.hpp"
+	"armadillo_bits/op_inv_bones.hpp"
+	"armadillo_bits/op_htrans_bones.hpp"
+	"armadillo_bits/op_max_bones.hpp"
+	"armadillo_bits/op_min_bones.hpp"
+	"armadillo_bits/op_mean_bones.hpp"
+	"armadillo_bits/op_median_bones.hpp"
+	"armadillo_bits/op_sort_bones.hpp"
+	"armadillo_bits/op_sum_bones.hpp"
+	"armadillo_bits/op_stddev_bones.hpp"
+	"armadillo_bits/op_strans_bones.hpp"
+	"armadillo_bits/op_var_bones.hpp"
+	"armadillo_bits/op_repmat_bones.hpp"
+	"armadillo_bits/op_reshape_bones.hpp"
+	"armadillo_bits/op_vectorise_bones.hpp"
+	"armadillo_bits/op_resize_bones.hpp"
+	"armadillo_bits/op_cov_bones.hpp"
+	"armadillo_bits/op_cor_bones.hpp"
+	"armadillo_bits/op_shuffle_bones.hpp"
+	"armadillo_bits/op_prod_bones.hpp"
+	"armadillo_bits/op_pinv_bones.hpp"
+	"armadillo_bits/op_dotext_bones.hpp"
+	"armadillo_bits/op_flip_bones.hpp"
+	"armadillo_bits/op_princomp_bones.hpp"
+	"armadillo_bits/op_misc_bones.hpp"
+	"armadillo_bits/op_relational_bones.hpp"
+	"armadillo_bits/op_find_bones.hpp"
+	"armadillo_bits/op_chol_bones.hpp"
+	"armadillo_bits/op_cx_scalar_bones.hpp"
+	"armadillo_bits/op_trimat_bones.hpp"
+	"armadillo_bits/op_cumsum_bones.hpp"
+	"armadillo_bits/op_symmat_bones.hpp"
+	"armadillo_bits/op_hist_bones.hpp"
+	"armadillo_bits/op_unique_bones.hpp"
+	"armadillo_bits/op_toeplitz_bones.hpp"
+	"armadillo_bits/op_fft_bones.hpp"
+	"armadillo_bits/op_any_bones.hpp"
+	"armadillo_bits/op_all_bones.hpp"
+	"armadillo_bits/op_normalise_bones.hpp"
+	"armadillo_bits/glue_times_bones.hpp"
+	"armadillo_bits/glue_mixed_bones.hpp"
+	"armadillo_bits/glue_cov_bones.hpp"
+	"armadillo_bits/glue_cor_bones.hpp"
+	"armadillo_bits/glue_kron_bones.hpp"
+	"armadillo_bits/glue_cross_bones.hpp"
+	"armadillo_bits/glue_join_bones.hpp"
+	"armadillo_bits/glue_relational_bones.hpp"
+	"armadillo_bits/glue_solve_bones.hpp"
+	"armadillo_bits/glue_conv_bones.hpp"
+	"armadillo_bits/glue_toeplitz_bones.hpp"
+	"armadillo_bits/glue_hist_bones.hpp"
+	"armadillo_bits/glue_histc_bones.hpp"
+	"armadillo_bits/glue_max_bones.hpp"
+	"armadillo_bits/glue_min_bones.hpp"
+	"armadillo_bits/spop_max_bones.hpp"
+	"armadillo_bits/spop_min_bones.hpp"
+	"armadillo_bits/spop_sum_bones.hpp"
+	"armadillo_bits/spop_strans_bones.hpp"
+	"armadillo_bits/spop_htrans_bones.hpp"
+	"armadillo_bits/spop_misc_bones.hpp"
+	"armadillo_bits/spop_mean_bones.hpp"
+	"armadillo_bits/spop_var_bones.hpp"
+	"armadillo_bits/spglue_plus_bones.hpp"
+	"armadillo_bits/spglue_minus_bones.hpp"
+	"armadillo_bits/spglue_times_bones.hpp"
+	"armadillo_bits/debug.hpp"
+	"armadillo_bits/memory.hpp"
+	"armadillo_bits/arma_cmath.hpp"
+	"armadillo_bits/unwrap.hpp"
+	"armadillo_bits/unwrap_cube.hpp"
+	"armadillo_bits/unwrap_spmat.hpp"
+	"armadillo_bits/Proxy.hpp"
+	"armadillo_bits/ProxyCube.hpp"
+	"armadillo_bits/SpProxy.hpp"
+	"armadillo_bits/diagmat_proxy.hpp"
+	"armadillo_bits/strip.hpp"
+	"armadillo_bits/Op_meat.hpp"
+	"armadillo_bits/OpCube_meat.hpp"
+	"armadillo_bits/SpOp_meat.hpp"
+	"armadillo_bits/mtOp_meat.hpp"
+	"armadillo_bits/mtOpCube_meat.hpp"
+	"armadillo_bits/mtSpOp_meat.hpp"
+	"armadillo_bits/Glue_meat.hpp"
+	"armadillo_bits/GlueCube_meat.hpp"
+	"armadillo_bits/SpGlue_meat.hpp"
+	"armadillo_bits/eop_aux.hpp"
+	"armadillo_bits/eOp_meat.hpp"
+	"armadillo_bits/eOpCube_meat.hpp"
+	"armadillo_bits/eGlue_meat.hpp"
+	"armadillo_bits/eGlueCube_meat.hpp"
+	"armadillo_bits/mtGlue_meat.hpp"
+	"armadillo_bits/mtGlueCube_meat.hpp"
+	"armadillo_bits/Base_meat.hpp"
+	"armadillo_bits/BaseCube_meat.hpp"
+	"armadillo_bits/SpBase_meat.hpp"
+	"armadillo_bits/Gen_meat.hpp"
+	"armadillo_bits/GenCube_meat.hpp"
+	"armadillo_bits/arma_ostream_bones.hpp"
+	"armadillo_bits/arma_ostream_meat.hpp"
+	"armadillo_bits/fn_n_unique.hpp"
+	"armadillo_bits/operator_plus.hpp"
+	"armadillo_bits/operator_minus.hpp"
+	"armadillo_bits/operator_times.hpp"
+	"armadillo_bits/operator_schur.hpp"
+	"armadillo_bits/operator_div.hpp"
+	"armadillo_bits/operator_relational.hpp"
+	"armadillo_bits/operator_cube_plus.hpp"
+	"armadillo_bits/operator_cube_minus.hpp"
+	"armadillo_bits/operator_cube_times.hpp"
+	"armadillo_bits/operator_cube_schur.hpp"
+	"armadillo_bits/operator_cube_div.hpp"
+	"armadillo_bits/operator_cube_relational.hpp"
+	"armadillo_bits/operator_ostream.hpp"
+	"armadillo_bits/fn_conv_to.hpp"
+	"armadillo_bits/fn_min.hpp"
+	"armadillo_bits/fn_max.hpp"
+	"armadillo_bits/fn_accu.hpp"
+	"armadillo_bits/fn_sum.hpp"
+	"armadillo_bits/fn_diagmat.hpp"
+	"armadillo_bits/fn_diagvec.hpp"
+	"armadillo_bits/fn_inv.hpp"
+	"armadillo_bits/fn_trace.hpp"
+	"armadillo_bits/fn_trans.hpp"
+	"armadillo_bits/fn_det.hpp"
+	"armadillo_bits/fn_log_det.hpp"
+	"armadillo_bits/fn_eig_sym.hpp"
+	"armadillo_bits/fn_eig_gen.hpp"
+	"armadillo_bits/fn_eig_pair.hpp"
+	"armadillo_bits/fn_lu.hpp"
+	"armadillo_bits/fn_zeros.hpp"
+	"armadillo_bits/fn_ones.hpp"
+	"armadillo_bits/fn_eye.hpp"
+	"armadillo_bits/fn_misc.hpp"
+	"armadillo_bits/fn_find.hpp"
+	"armadillo_bits/fn_elem.hpp"
+	"armadillo_bits/fn_norm.hpp"
+	"armadillo_bits/fn_dot.hpp"
+	"armadillo_bits/fn_randu.hpp"
+	"armadillo_bits/fn_randn.hpp"
+	"armadillo_bits/fn_trig.hpp"
+	"armadillo_bits/fn_mean.hpp"
+	"armadillo_bits/fn_median.hpp"
+	"armadillo_bits/fn_stddev.hpp"
+	"armadillo_bits/fn_var.hpp"
+	"armadillo_bits/fn_sort.hpp"
+	"armadillo_bits/fn_sort_index.hpp"
+	"armadillo_bits/fn_strans.hpp"
+	"armadillo_bits/fn_chol.hpp"
+	"armadillo_bits/fn_qr.hpp"
+	"armadillo_bits/fn_svd.hpp"
+	"armadillo_bits/fn_solve.hpp"
+	"armadillo_bits/fn_repmat.hpp"
+	"armadillo_bits/fn_reshape.hpp"
+	"armadillo_bits/fn_vectorise.hpp"
+	"armadillo_bits/fn_resize.hpp"
+	"armadillo_bits/fn_cov.hpp"
+	"armadillo_bits/fn_cor.hpp"
+	"armadillo_bits/fn_shuffle.hpp"
+	"armadillo_bits/fn_prod.hpp"
+	"armadillo_bits/fn_eps.hpp"
+	"armadillo_bits/fn_pinv.hpp"
+	"armadillo_bits/fn_rank.hpp"
+	"armadillo_bits/fn_kron.hpp"
+	"armadillo_bits/fn_flip.hpp"
+	"armadillo_bits/fn_as_scalar.hpp"
+	"armadillo_bits/fn_princomp.hpp"
+	"armadillo_bits/fn_cross.hpp"
+	"armadillo_bits/fn_join.hpp"
+	"armadillo_bits/fn_conv.hpp"
+	"armadillo_bits/fn_trunc_exp.hpp"
+	"armadillo_bits/fn_trunc_log.hpp"
+	"armadillo_bits/fn_toeplitz.hpp"
+	"armadillo_bits/fn_trimat.hpp"
+	"armadillo_bits/fn_cumsum.hpp"
+	"armadillo_bits/fn_symmat.hpp"
+	"armadillo_bits/fn_syl_lyap.hpp"
+	"armadillo_bits/fn_hist.hpp"
+	"armadillo_bits/fn_histc.hpp"
+	"armadillo_bits/fn_unique.hpp"
+	"armadillo_bits/fn_fft.hpp"
+	"armadillo_bits/fn_fft2.hpp"
+	"armadillo_bits/fn_any.hpp"
+	"armadillo_bits/fn_all.hpp"
+	"armadillo_bits/fn_size.hpp"
+	"armadillo_bits/fn_numel.hpp"
+	"armadillo_bits/fn_inplace_strans.hpp"
+	"armadillo_bits/fn_inplace_trans.hpp"
+	"armadillo_bits/fn_randi.hpp"
+	"armadillo_bits/fn_cond.hpp"
+	"armadillo_bits/fn_normalise.hpp"
+	"armadillo_bits/fn_speye.hpp"
+	"armadillo_bits/fn_spones.hpp"
+	"armadillo_bits/fn_sprandn.hpp"
+	"armadillo_bits/fn_sprandu.hpp"
+	"armadillo_bits/fn_eigs_sym.hpp"
+	"armadillo_bits/fn_eigs_gen.hpp"
+	"armadillo_bits/fn_norm_sparse.hpp"
+	"armadillo_bits/hdf5_misc.hpp"
+	"armadillo_bits/fft_engine.hpp"
+	"armadillo_bits/mul_gemv.hpp"
+	"armadillo_bits/mul_gemm.hpp"
+	"armadillo_bits/mul_gemm_mixed.hpp"
+	"armadillo_bits/mul_syrk.hpp"
+	"armadillo_bits/mul_herk.hpp"
+	"armadillo_bits/eop_core_meat.hpp"
+	"armadillo_bits/eglue_core_meat.hpp"
+	"armadillo_bits/cond_rel_meat.hpp"
+	"armadillo_bits/arrayops_meat.hpp"
+	"armadillo_bits/podarray_meat.hpp"
+	"armadillo_bits/auxlib_meat.hpp"
+	"armadillo_bits/sp_auxlib_meat.hpp"
+	"armadillo_bits/injector_meat.hpp"
+	"armadillo_bits/Mat_meat.hpp"
+	"armadillo_bits/Col_meat.hpp"
+	"armadillo_bits/Row_meat.hpp"
+	"armadillo_bits/Cube_meat.hpp"
+	"armadillo_bits/xvec_htrans_meat.hpp"
+	"armadillo_bits/SizeMat_meat.hpp"
+	"armadillo_bits/SizeCube_meat.hpp"
+	"armadillo_bits/field_meat.hpp"
+	"armadillo_bits/subview_meat.hpp"
+	"armadillo_bits/subview_elem1_meat.hpp"
+	"armadillo_bits/subview_elem2_meat.hpp"
+	"armadillo_bits/subview_field_meat.hpp"
+	"armadillo_bits/subview_cube_meat.hpp"
+	"armadillo_bits/diagview_meat.hpp"
+	"armadillo_bits/subview_each_meat.hpp"
+	"armadillo_bits/SpValProxy_meat.hpp"
+	"armadillo_bits/SpMat_meat.hpp"
+	"armadillo_bits/SpMat_iterators_meat.hpp"
+	"armadillo_bits/SpCol_meat.hpp"
+	"armadillo_bits/SpRow_meat.hpp"
+	"armadillo_bits/SpSubview_meat.hpp"
+	"armadillo_bits/SpSubview_iterators_meat.hpp"
+	"armadillo_bits/diskio_meat.hpp"
+	"armadillo_bits/wall_clock_meat.hpp"
+	"armadillo_bits/running_stat_meat.hpp"
+	"armadillo_bits/running_stat_vec_meat.hpp"
+	"armadillo_bits/op_diagmat_meat.hpp"
+	"armadillo_bits/op_diagvec_meat.hpp"
+	"armadillo_bits/op_dot_meat.hpp"
+	"armadillo_bits/op_inv_meat.hpp"
+	"armadillo_bits/op_htrans_meat.hpp"
+	"armadillo_bits/op_max_meat.hpp"
+	"armadillo_bits/op_min_meat.hpp"
+	"armadillo_bits/op_mean_meat.hpp"
+	"armadillo_bits/op_median_meat.hpp"
+	"armadillo_bits/op_sort_meat.hpp"
+	"armadillo_bits/op_sum_meat.hpp"
+	"armadillo_bits/op_stddev_meat.hpp"
+	"armadillo_bits/op_strans_meat.hpp"
+	"armadillo_bits/op_var_meat.hpp"
+	"armadillo_bits/op_repmat_meat.hpp"
+	"armadillo_bits/op_reshape_meat.hpp"
+	"armadillo_bits/op_vectorise_meat.hpp"
+	"armadillo_bits/op_resize_meat.hpp"
+	"armadillo_bits/op_cov_meat.hpp"
+	"armadillo_bits/op_cor_meat.hpp"
+	"armadillo_bits/op_shuffle_meat.hpp"
+	"armadillo_bits/op_prod_meat.hpp"
+	"armadillo_bits/op_pinv_meat.hpp"
+	"armadillo_bits/op_dotext_meat.hpp"
+	"armadillo_bits/op_flip_meat.hpp"
+	"armadillo_bits/op_princomp_meat.hpp"
+	"armadillo_bits/op_misc_meat.hpp"
+	"armadillo_bits/op_relational_meat.hpp"
+	"armadillo_bits/op_find_meat.hpp"
+	"armadillo_bits/op_chol_meat.hpp"
+	"armadillo_bits/op_cx_scalar_meat.hpp"
+	"armadillo_bits/op_trimat_meat.hpp"
+	"armadillo_bits/op_cumsum_meat.hpp"
+	"armadillo_bits/op_symmat_meat.hpp"
+	"armadillo_bits/op_hist_meat.hpp"
+	"armadillo_bits/op_unique_meat.hpp"
+	"armadillo_bits/op_toeplitz_meat.hpp"
+	"armadillo_bits/op_fft_meat.hpp"
+	"armadillo_bits/op_any_meat.hpp"
+	"armadillo_bits/op_all_meat.hpp"
+	"armadillo_bits/op_normalise_meat.hpp"
+	"armadillo_bits/glue_times_meat.hpp"
+	"armadillo_bits/glue_mixed_meat.hpp"
+	"armadillo_bits/glue_cov_meat.hpp"
+	"armadillo_bits/glue_cor_meat.hpp"
+	"armadillo_bits/glue_kron_meat.hpp"
+	"armadillo_bits/glue_cross_meat.hpp"
+	"armadillo_bits/glue_join_meat.hpp"
+	"armadillo_bits/glue_relational_meat.hpp"
+	"armadillo_bits/glue_solve_meat.hpp"
+	"armadillo_bits/glue_conv_meat.hpp"
+	"armadillo_bits/glue_toeplitz_meat.hpp"
+	"armadillo_bits/glue_hist_meat.hpp"
+	"armadillo_bits/glue_histc_meat.hpp"
+	"armadillo_bits/glue_max_meat.hpp"
+	"armadillo_bits/glue_min_meat.hpp"
+	"armadillo_bits/spop_max_meat.hpp"
+	"armadillo_bits/spop_min_meat.hpp"
+	"armadillo_bits/spop_sum_meat.hpp"
+	"armadillo_bits/spop_strans_meat.hpp"
+	"armadillo_bits/spop_htrans_meat.hpp"
+	"armadillo_bits/spop_misc_meat.hpp"
+	"armadillo_bits/spop_mean_meat.hpp"
+	"armadillo_bits/spop_var_meat.hpp"
+	"armadillo_bits/spglue_plus_meat.hpp"
+	"armadillo_bits/spglue_minus_meat.hpp"
+	"armadillo_bits/spglue_times_meat.hpp"
+	"armadillo_bits/compiler_setup_post.hpp"
+
+1424883222 /usr/include//unistd.h
+	<features.h>
+	<bits/posix_opt.h>
+	<bits/environments.h>
+	<bits/types.h>
+	<stddef.h>
+	<bits/confname.h>
+	<getopt.h>
+	<bits/unistd.h>
+
+1397247302 /usr/include//armadillo_bits/config.hpp
+
+1392977589 /usr/include//armadillo_bits/compiler_setup.hpp
+
+1375427138 /usr/include//armadillo_bits/include_atlas.hpp
+	<cblas.h>
+	<clapack.h>
+
+1382361133 /usr/include//cblas.h
+	<stddef.h>
+
+1387759096 /usr/include//hdf5.h
+	"H5public.h"
+	"H5Apublic.h"
+	"H5ACpublic.h"
+	"H5Dpublic.h"
+	"H5Epublic.h"
+	"H5Fpublic.h"
+	"H5FDpublic.h"
+	"H5Gpublic.h"
+	"H5Ipublic.h"
+	"H5Lpublic.h"
+	"H5MMpublic.h"
+	"H5Opublic.h"
+	"H5Ppublic.h"
+	"H5Rpublic.h"
+	"H5Spublic.h"
+	"H5Tpublic.h"
+	"H5Zpublic.h"
+	"H5FDcore.h"
+	"H5FDfamily.h"
+	"H5FDlog.h"
+	"H5FDmpi.h"
+	"H5FDmulti.h"
+	"H5FDsec2.h"
+	"H5FDstdio.h"
+	"H5FDwindows.h"
+	"H5FDdirect.h"
+
+1387759096 /usr/include//H5public.h
+	"H5pubconf.h"
+	"H5version.h"
+	<features.h>
+	<sys/types.h>
+	<limits.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+	<stddef.h>
+	<mpi.h>
+	<mpio.h>
+	"H5api_adpt.h"
+
+1387759096 /usr/include//H5pubconf.h
+
+1387759096 /usr/include//H5version.h
+
+1424883217 /usr/include//stdint.h
+	<features.h>
+	<bits/wchar.h>
+	<bits/wordsize.h>
+
+1424883217 /usr/include//inttypes.h
+	<features.h>
+	<stdint.h>
+	<stddef.h>
+
+1387759096 /usr/include//H5api_adpt.h
+
+1387759096 /usr/include//H5Apublic.h
+	"H5Ipublic.h"
+	"H5Opublic.h"
+	"H5Tpublic.h"
+
+1387759096 /usr/include//H5Ipublic.h
+	"H5public.h"
+
+1387759096 /usr/include//H5Opublic.h
+	"H5public.h"
+	"H5Ipublic.h"
+	"H5Lpublic.h"
+
+1387759096 /usr/include//H5Lpublic.h
+	"H5public.h"
+	"H5Ipublic.h"
+	"H5Tpublic.h"
+
+1387759096 /usr/include//H5Tpublic.h
+	"H5public.h"
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5ACpublic.h
+	"H5public.h"
+	"H5Cpublic.h"
+
+1387759096 /usr/include//H5Cpublic.h
+	"H5public.h"
+
+1387759096 /usr/include//H5Dpublic.h
+	"H5public.h"
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5Epublic.h
+	<stdio.h>
+	"H5public.h"
+	"H5Ipublic.h"
+	"H5Epubgen.h"
+
+1387759096 /usr/include//H5Epubgen.h
+
+1387759096 /usr/include//H5Fpublic.h
+	"H5public.h"
+	"H5ACpublic.h"
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDpublic.h
+	"H5public.h"
+	"H5Fpublic.h"
+
+1387759096 /usr/include//H5Gpublic.h
+	<sys/types.h>
+	"H5public.h"
+	"H5Lpublic.h"
+	"H5Opublic.h"
+	"H5Tpublic.h"
+
+1387759096 /usr/include//H5MMpublic.h
+	"H5public.h"
+
+1387759096 /usr/include//H5Ppublic.h
+	"H5public.h"
+	"H5ACpublic.h"
+	"H5Dpublic.h"
+	"H5Fpublic.h"
+	"H5FDpublic.h"
+	"H5Ipublic.h"
+	"H5Lpublic.h"
+	"H5Opublic.h"
+	"H5MMpublic.h"
+	"H5Tpublic.h"
+	"H5Zpublic.h"
+
+1387759096 /usr/include//H5Zpublic.h
+	"H5public.h"
+
+1387759096 /usr/include//H5Rpublic.h
+	"H5public.h"
+	"H5Gpublic.h"
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5Spublic.h
+	"H5public.h"
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDcore.h
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDfamily.h
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDlog.h
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDmpi.h
+	"H5FDmpio.h"
+	"H5FDmpiposix.h"
+
+1387759096 /usr/include//H5FDmpio.h
+
+1387759096 /usr/include//H5FDmpiposix.h
+
+1387759096 /usr/include//H5FDmulti.h
+	"H5Ipublic.h"
+	"H5Ppublic.h"
+	"H5Fpublic.h"
+
+1387759096 /usr/include//H5FDsec2.h
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDstdio.h
+	"H5Ipublic.h"
+
+1387759096 /usr/include//H5FDdirect.h
+	"H5Ipublic.h"
+
+1394815889 /usr/include//armadillo_bits/forward_bones.hpp
+
+1387428642 /usr/include//armadillo_bits/arma_static_check.hpp
+
+1385907257 /usr/include//armadillo_bits/typedef_elem.hpp
+
+1394631288 /usr/include//armadillo_bits/typedef_elem_check.hpp
+
+1385906730 /usr/include//armadillo_bits/typedef_mat.hpp
+
+1386756347 /usr/include//armadillo_bits/arma_boost.hpp
+
+1396845546 /usr/include//armadillo_bits/arma_version.hpp
+
+1388447852 /usr/include//armadillo_bits/arma_config.hpp
+
+1394815889 /usr/include//armadillo_bits/traits.hpp
+
+1375671787 /usr/include//armadillo_bits/promote_type.hpp
+
+1375427138 /usr/include//armadillo_bits/upgrade_val.hpp
+
+1395152888 /usr/include//armadillo_bits/restrictors.hpp
+
+1375427138 /usr/include//armadillo_bits/access.hpp
+
+1379923845 /usr/include//armadillo_bits/span.hpp
+
+1386299882 /usr/include//armadillo_bits/distr_param.hpp
+
+1375427138 /usr/include//armadillo_bits/constants.hpp
+
+1383832887 /usr/include//armadillo_bits/constants_compat.hpp
+
+1385902347 /usr/include//armadillo_bits/arma_rng_cxx11.hpp
+
+1385902347 /usr/include//armadillo_bits/arma_rng.hpp
+
+1389688121 /usr/include//armadillo_bits/arma_rng_cxx98.hpp
+
+1394601871 /usr/include//armadillo_bits/Base_bones.hpp
+
+1392186531 /usr/include//armadillo_bits/BaseCube_bones.hpp
+
+1392186531 /usr/include//armadillo_bits/SpBase_bones.hpp
+
+1375758482 /usr/include//armadillo_bits/blas_bones.hpp
+
+1387796888 /usr/include//armadillo_bits/lapack_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/atlas_bones.hpp
+
+1387980119 /usr/include//armadillo_bits/arpack_bones.hpp
+
+1375771845 /usr/include//armadillo_bits/blas_wrapper.hpp
+
+1387273131 /usr/include//armadillo_bits/lapack_wrapper.hpp
+
+1381713414 /usr/include//armadillo_bits/atlas_wrapper.hpp
+
+1387980119 /usr/include//armadillo_bits/arpack_wrapper.hpp
+
+1361430995 /usr/include//armadillo_bits/cond_rel_bones.hpp
+
+1392654815 /usr/include//armadillo_bits/arrayops_bones.hpp
+
+1375671787 /usr/include//armadillo_bits/podarray_bones.hpp
+
+1388892450 /usr/include//armadillo_bits/auxlib_bones.hpp
+
+1393565149 /usr/include//armadillo_bits/sp_auxlib_bones.hpp
+
+1376289542 /usr/include//armadillo_bits/injector_bones.hpp
+
+1383784897 /usr/include//armadillo_bits/Mat_bones.hpp
+
+1386838496 /usr/include//armadillo_bits/Col_bones.hpp
+
+1386838496 /usr/include//armadillo_bits/Row_bones.hpp
+
+1387976684 /usr/include//armadillo_bits/Cube_bones.hpp
+
+1370503770 /usr/include//armadillo_bits/xvec_htrans_bones.hpp
+
+1391360112 /usr/include//armadillo_bits/SizeMat_bones.hpp
+
+1391360112 /usr/include//armadillo_bits/SizeCube_bones.hpp
+
+1371038880 /usr/include//armadillo_bits/SpValProxy_bones.hpp
+
+1393041782 /usr/include//armadillo_bits/SpMat_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/SpCol_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/SpRow_bones.hpp
+
+1393174427 /usr/include//armadillo_bits/SpSubview_bones.hpp
+
+1385906730 /usr/include//armadillo_bits/typedef_mat_fixed.hpp
+
+1392096016 /usr/include//armadillo_bits/field_bones.hpp
+
+1383832887 /usr/include//armadillo_bits/subview_bones.hpp
+
+1387976684 /usr/include//armadillo_bits/subview_elem1_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/subview_elem2_bones.hpp
+
+1392010389 /usr/include//armadillo_bits/subview_field_bones.hpp
+
+1383832887 /usr/include//armadillo_bits/subview_cube_bones.hpp
+
+1383832887 /usr/include//armadillo_bits/diagview_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/subview_each_bones.hpp
+
+1369792239 /usr/include//armadillo_bits/diskio_bones.hpp
+
+1386681253 /usr/include//armadillo_bits/wall_clock_bones.hpp
+
+1386167119 /usr/include//armadillo_bits/running_stat_bones.hpp
+
+1386163091 /usr/include//armadillo_bits/running_stat_vec_bones.hpp
+
+1393299994 /usr/include//armadillo_bits/Op_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/OpCube_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/SpOp_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/eOp_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/eOpCube_bones.hpp
+
+1376289542 /usr/include//armadillo_bits/mtOp_bones.hpp
+
+1376289542 /usr/include//armadillo_bits/mtOpCube_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/mtSpOp_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/Glue_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/eGlue_bones.hpp
+
+1376289542 /usr/include//armadillo_bits/mtGlue_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/SpGlue_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/GlueCube_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/eGlueCube_bones.hpp
+
+1376289542 /usr/include//armadillo_bits/mtGlueCube_bones.hpp
+
+1379460222 /usr/include//armadillo_bits/eop_core_bones.hpp
+
+1375427138 /usr/include//armadillo_bits/eglue_core_bones.hpp
+
+1375338988 /usr/include//armadillo_bits/Gen_bones.hpp
+
+1375338988 /usr/include//armadillo_bits/GenCube_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_diagmat_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_diagvec_bones.hpp
+
+1393389985 /usr/include//armadillo_bits/op_dot_bones.hpp
+
+1395049527 /usr/include//armadillo_bits/op_inv_bones.hpp
+
+1380688248 /usr/include//armadillo_bits/op_htrans_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_max_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_min_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_mean_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_median_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_sort_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_sum_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_stddev_bones.hpp
+
+1380688248 /usr/include//armadillo_bits/op_strans_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_var_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_repmat_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_reshape_bones.hpp
+
+1387990880 /usr/include//armadillo_bits/op_vectorise_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_resize_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cov_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cor_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_shuffle_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_prod_bones.hpp
+
+1381215347 /usr/include//armadillo_bits/op_pinv_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_dotext_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_flip_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_princomp_bones.hpp
+
+1388857936 /usr/include//armadillo_bits/op_misc_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_relational_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_find_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_chol_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cx_scalar_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_trimat_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cumsum_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_symmat_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_hist_bones.hpp
+
+1375941263 /usr/include//armadillo_bits/op_unique_bones.hpp
+
+1361504322 /usr/include//armadillo_bits/op_toeplitz_bones.hpp
+
+1365153641 /usr/include//armadillo_bits/op_fft_bones.hpp
+
+1375972725 /usr/include//armadillo_bits/op_any_bones.hpp
+
+1375974434 /usr/include//armadillo_bits/op_all_bones.hpp
+
+1393308658 /usr/include//armadillo_bits/op_normalise_bones.hpp
+
+1388075347 /usr/include//armadillo_bits/glue_times_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_mixed_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cov_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cor_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_kron_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cross_bones.hpp
+
+1380106367 /usr/include//armadillo_bits/glue_join_bones.hpp
+
+1394952403 /usr/include//armadillo_bits/glue_relational_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_solve_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_conv_bones.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_toeplitz_bones.hpp
+
+1387980245 /usr/include//armadillo_bits/glue_hist_bones.hpp
+
+1387980245 /usr/include//armadillo_bits/glue_histc_bones.hpp
+
+1385216628 /usr/include//armadillo_bits/glue_max_bones.hpp
+
+1385216628 /usr/include//armadillo_bits/glue_min_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_max_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_min_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_sum_bones.hpp
+
+1394454207 /usr/include//armadillo_bits/spop_strans_bones.hpp
+
+1394454207 /usr/include//armadillo_bits/spop_htrans_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_misc_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_mean_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_var_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spglue_plus_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spglue_minus_bones.hpp
+
+1361430995 /usr/include//armadillo_bits/spglue_times_bones.hpp
+
+1388447852 /usr/include//armadillo_bits/debug.hpp
+
+1394631288 /usr/include//armadillo_bits/memory.hpp
+
+1387614493 /usr/include//armadillo_bits/arma_cmath.hpp
+
+1394336504 /usr/include//armadillo_bits/unwrap.hpp
+
+1387959260 /usr/include//armadillo_bits/unwrap_cube.hpp
+
+1375427138 /usr/include//armadillo_bits/unwrap_spmat.hpp
+
+1375427138 /usr/include//armadillo_bits/Proxy.hpp
+
+1375427138 /usr/include//armadillo_bits/ProxyCube.hpp
+
+1361430995 /usr/include//armadillo_bits/SpProxy.hpp
+
+1395057653 /usr/include//armadillo_bits/diagmat_proxy.hpp
+
+1388075347 /usr/include//armadillo_bits/strip.hpp
+
+1375427138 /usr/include//armadillo_bits/Op_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/OpCube_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/SpOp_meat.hpp
+
+1376289542 /usr/include//armadillo_bits/mtOp_meat.hpp
+
+1376289542 /usr/include//armadillo_bits/mtOpCube_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/mtSpOp_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/Glue_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/GlueCube_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/SpGlue_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/eop_aux.hpp
+
+1375427138 /usr/include//armadillo_bits/eOp_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/eOpCube_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/eGlue_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/eGlueCube_meat.hpp
+
+1376289542 /usr/include//armadillo_bits/mtGlue_meat.hpp
+
+1376289542 /usr/include//armadillo_bits/mtGlueCube_meat.hpp
+
+1394601871 /usr/include//armadillo_bits/Base_meat.hpp
+
+1392186531 /usr/include//armadillo_bits/BaseCube_meat.hpp
+
+1392186531 /usr/include//armadillo_bits/SpBase_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/Gen_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/GenCube_meat.hpp
+
+1391360112 /usr/include//armadillo_bits/arma_ostream_bones.hpp
+
+1392010389 /usr/include//armadillo_bits/arma_ostream_meat.hpp
+
+1393132319 /usr/include//armadillo_bits/fn_n_unique.hpp
+
+1375671624 /usr/include//armadillo_bits/operator_plus.hpp
+
+1394161872 /usr/include//armadillo_bits/operator_minus.hpp
+
+1375671624 /usr/include//armadillo_bits/operator_times.hpp
+
+1375338988 /usr/include//armadillo_bits/operator_schur.hpp
+
+1375671624 /usr/include//armadillo_bits/operator_div.hpp
+
+1394951670 /usr/include//armadillo_bits/operator_relational.hpp
+
+1375671787 /usr/include//armadillo_bits/operator_cube_plus.hpp
+
+1375671787 /usr/include//armadillo_bits/operator_cube_minus.hpp
+
+1375671787 /usr/include//armadillo_bits/operator_cube_times.hpp
+
+1375671787 /usr/include//armadillo_bits/operator_cube_schur.hpp
+
+1375671787 /usr/include//armadillo_bits/operator_cube_div.hpp
+
+1394952403 /usr/include//armadillo_bits/operator_cube_relational.hpp
+
+1391360112 /usr/include//armadillo_bits/operator_ostream.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_conv_to.hpp
+
+1385216628 /usr/include//armadillo_bits/fn_min.hpp
+
+1385216628 /usr/include//armadillo_bits/fn_max.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_accu.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_sum.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_diagmat.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_diagvec.hpp
+
+1395049527 /usr/include//armadillo_bits/fn_inv.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trace.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trans.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_det.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_log_det.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_eig_sym.hpp
+
+1387348124 /usr/include//armadillo_bits/fn_eig_gen.hpp
+
+1387348124 /usr/include//armadillo_bits/fn_eig_pair.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_lu.hpp
+
+1387813607 /usr/include//armadillo_bits/fn_zeros.hpp
+
+1382933280 /usr/include//armadillo_bits/fn_ones.hpp
+
+1382933960 /usr/include//armadillo_bits/fn_eye.hpp
+
+1388036800 /usr/include//armadillo_bits/fn_misc.hpp
+
+1391738695 /usr/include//armadillo_bits/fn_find.hpp
+
+1387959260 /usr/include//armadillo_bits/fn_elem.hpp
+
+1393348535 /usr/include//armadillo_bits/fn_norm.hpp
+
+1393389933 /usr/include//armadillo_bits/fn_dot.hpp
+
+1385707683 /usr/include//armadillo_bits/fn_randu.hpp
+
+1385707683 /usr/include//armadillo_bits/fn_randn.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trig.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_mean.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_median.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_stddev.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_var.hpp
+
+1393229653 /usr/include//armadillo_bits/fn_sort.hpp
+
+1393229653 /usr/include//armadillo_bits/fn_sort_index.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_strans.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_chol.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_qr.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_svd.hpp
+
+1393565149 /usr/include//armadillo_bits/fn_solve.hpp
+
+1387980245 /usr/include//armadillo_bits/fn_repmat.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_reshape.hpp
+
+1375346820 /usr/include//armadillo_bits/fn_vectorise.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_resize.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_cov.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_cor.hpp
+
+1380797958 /usr/include//armadillo_bits/fn_shuffle.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_prod.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_eps.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_pinv.hpp
+
+1386686845 /usr/include//armadillo_bits/fn_rank.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_kron.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_flip.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_as_scalar.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_princomp.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_cross.hpp
+
+1380106367 /usr/include//armadillo_bits/fn_join.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_conv.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trunc_exp.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trunc_log.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_toeplitz.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_trimat.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_cumsum.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_symmat.hpp
+
+1375861602 /usr/include//armadillo_bits/fn_syl_lyap.hpp
+
+1387980245 /usr/include//armadillo_bits/fn_hist.hpp
+
+1387980245 /usr/include//armadillo_bits/fn_histc.hpp
+
+1387980245 /usr/include//armadillo_bits/fn_unique.hpp
+
+1379459744 /usr/include//armadillo_bits/fn_fft.hpp
+
+1379459744 /usr/include//armadillo_bits/fn_fft2.hpp
+
+1375961210 /usr/include//armadillo_bits/fn_any.hpp
+
+1375974434 /usr/include//armadillo_bits/fn_all.hpp
+
+1391494813 /usr/include//armadillo_bits/fn_size.hpp
+
+1380253957 /usr/include//armadillo_bits/fn_numel.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_inplace_strans.hpp
+
+1391665348 /usr/include//armadillo_bits/fn_inplace_trans.hpp
+
+1386299882 /usr/include//armadillo_bits/fn_randi.hpp
+
+1387780488 /usr/include//armadillo_bits/fn_cond.hpp
+
+1393339840 /usr/include//armadillo_bits/fn_normalise.hpp
+
+1387813607 /usr/include//armadillo_bits/fn_speye.hpp
+
+1387814104 /usr/include//armadillo_bits/fn_spones.hpp
+
+1385707683 /usr/include//armadillo_bits/fn_sprandn.hpp
+
+1385707683 /usr/include//armadillo_bits/fn_sprandu.hpp
+
+1391839319 /usr/include//armadillo_bits/fn_eigs_sym.hpp
+
+1391847487 /usr/include//armadillo_bits/fn_eigs_gen.hpp
+
+1393348897 /usr/include//armadillo_bits/fn_norm_sparse.hpp
+
+1369875656 /usr/include//armadillo_bits/hdf5_misc.hpp
+
+1365179410 /usr/include//armadillo_bits/fft_engine.hpp
+
+1380688248 /usr/include//armadillo_bits/mul_gemv.hpp
+
+1380688248 /usr/include//armadillo_bits/mul_gemm.hpp
+
+1380688248 /usr/include//armadillo_bits/mul_gemm_mixed.hpp
+
+1380688248 /usr/include//armadillo_bits/mul_syrk.hpp
+
+1380688248 /usr/include//armadillo_bits/mul_herk.hpp
+
+1390892131 /usr/include//armadillo_bits/eop_core_meat.hpp
+
+1390892131 /usr/include//armadillo_bits/eglue_core_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/cond_rel_meat.hpp
+
+1392654815 /usr/include//armadillo_bits/arrayops_meat.hpp
+
+1388458333 /usr/include//armadillo_bits/podarray_meat.hpp
+
+1393425208 /usr/include//armadillo_bits/auxlib_meat.hpp
+
+1393565149 /usr/include//armadillo_bits/sp_auxlib_meat.hpp
+
+1376289542 /usr/include//armadillo_bits/injector_meat.hpp
+
+1393083436 /usr/include//armadillo_bits/Mat_meat.hpp
+
+1389662914 /usr/include//armadillo_bits/Col_meat.hpp
+
+1389662914 /usr/include//armadillo_bits/Row_meat.hpp
+
+1389718340 /usr/include//armadillo_bits/Cube_meat.hpp
+
+1370503770 /usr/include//armadillo_bits/xvec_htrans_meat.hpp
+
+1391360112 /usr/include//armadillo_bits/SizeMat_meat.hpp
+
+1391360112 /usr/include//armadillo_bits/SizeCube_meat.hpp
+
+1392096016 /usr/include//armadillo_bits/field_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/subview_meat.hpp
+
+1387976684 /usr/include//armadillo_bits/subview_elem1_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/subview_elem2_meat.hpp
+
+1392010389 /usr/include//armadillo_bits/subview_field_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/subview_cube_meat.hpp
+
+1385707683 /usr/include//armadillo_bits/diagview_meat.hpp
+
+1361506713 /usr/include//armadillo_bits/subview_each_meat.hpp
+
+1371038880 /usr/include//armadillo_bits/SpValProxy_meat.hpp
+
+1393081623 /usr/include//armadillo_bits/SpMat_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/SpMat_iterators_meat.hpp
+
+1366939127 /usr/include//armadillo_bits/SpCol_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/SpRow_meat.hpp
+
+1393387523 /usr/include//armadillo_bits/SpSubview_meat.hpp
+
+1375949305 /usr/include//armadillo_bits/SpSubview_iterators_meat.hpp
+
+1391494546 /usr/include//armadillo_bits/diskio_meat.hpp
+
+1386681253 /usr/include//armadillo_bits/wall_clock_meat.hpp
+
+1386165239 /usr/include//armadillo_bits/running_stat_meat.hpp
+
+1386250581 /usr/include//armadillo_bits/running_stat_vec_meat.hpp
+
+1380698022 /usr/include//armadillo_bits/op_diagmat_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_diagvec_meat.hpp
+
+1393389775 /usr/include//armadillo_bits/op_dot_meat.hpp
+
+1395049527 /usr/include//armadillo_bits/op_inv_meat.hpp
+
+1380688248 /usr/include//armadillo_bits/op_htrans_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_max_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_min_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_mean_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_median_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_sort_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_sum_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_stddev_meat.hpp
+
+1381307377 /usr/include//armadillo_bits/op_strans_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_var_meat.hpp
+
+1387980245 /usr/include//armadillo_bits/op_repmat_meat.hpp
+
+1375348009 /usr/include//armadillo_bits/op_reshape_meat.hpp
+
+1387990880 /usr/include//armadillo_bits/op_vectorise_meat.hpp
+
+1387983678 /usr/include//armadillo_bits/op_resize_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cov_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cor_meat.hpp
+
+1385710038 /usr/include//armadillo_bits/op_shuffle_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_prod_meat.hpp
+
+1381215347 /usr/include//armadillo_bits/op_pinv_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_dotext_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_flip_meat.hpp
+
+1386255080 /usr/include//armadillo_bits/op_princomp_meat.hpp
+
+1388857936 /usr/include//armadillo_bits/op_misc_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_relational_meat.hpp
+
+1395152888 /usr/include//armadillo_bits/op_find_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_chol_meat.hpp
+
+1386258477 /usr/include//armadillo_bits/op_cx_scalar_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_trimat_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_cumsum_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_symmat_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_hist_meat.hpp
+
+1375941263 /usr/include//armadillo_bits/op_unique_meat.hpp
+
+1361504322 /usr/include//armadillo_bits/op_toeplitz_meat.hpp
+
+1380698022 /usr/include//armadillo_bits/op_fft_meat.hpp
+
+1395152888 /usr/include//armadillo_bits/op_any_meat.hpp
+
+1395152888 /usr/include//armadillo_bits/op_all_meat.hpp
+
+1393818151 /usr/include//armadillo_bits/op_normalise_meat.hpp
+
+1395507016 /usr/include//armadillo_bits/glue_times_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_mixed_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cov_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cor_meat.hpp
+
+1380107529 /usr/include//armadillo_bits/glue_kron_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_cross_meat.hpp
+
+1380106367 /usr/include//armadillo_bits/glue_join_meat.hpp
+
+1394952403 /usr/include//armadillo_bits/glue_relational_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_solve_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_conv_meat.hpp
+
+1375861602 /usr/include//armadillo_bits/glue_toeplitz_meat.hpp
+
+1387980245 /usr/include//armadillo_bits/glue_hist_meat.hpp
+
+1387980245 /usr/include//armadillo_bits/glue_histc_meat.hpp
+
+1385216628 /usr/include//armadillo_bits/glue_max_meat.hpp
+
+1385216628 /usr/include//armadillo_bits/glue_min_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_max_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_min_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_sum_meat.hpp
+
+1394455542 /usr/include//armadillo_bits/spop_strans_meat.hpp
+
+1394455542 /usr/include//armadillo_bits/spop_htrans_meat.hpp
+
+1393000013 /usr/include//armadillo_bits/spop_misc_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_mean_meat.hpp
+
+1361430995 /usr/include//armadillo_bits/spop_var_meat.hpp
+
+1393042884 /usr/include//armadillo_bits/spglue_plus_meat.hpp
+
+1393042884 /usr/include//armadillo_bits/spglue_minus_meat.hpp
+
+1365818977 /usr/include//armadillo_bits/spglue_times_meat.hpp
+
+1375427138 /usr/include//armadillo_bits/compiler_setup_post.hpp
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp.h
+	<RcppCommon.h>
+	<Rcpp/RObject.h>
+	<Rcpp/S4.h>
+	<Rcpp/Reference.h>
+	<Rcpp/clone.h>
+	<Rcpp/grow.h>
+	<Rcpp/Dimension.h>
+	<Rcpp/Environment.h>
+	<Rcpp/Vector.h>
+	<Rcpp/sugar/nona/nona.h>
+	<Rcpp/Fast.h>
+	<Rcpp/Extractor.h>
+	<Rcpp/Promise.h>
+	<Rcpp/XPtr.h>
+	<Rcpp/Symbol.h>
+	<Rcpp/DottedPairImpl.h>
+	<Rcpp/Function.h>
+	<Rcpp/Language.h>
+	<Rcpp/DottedPair.h>
+	<Rcpp/Pairlist.h>
+	<Rcpp/StretchyList.h>
+	<Rcpp/WeakReference.h>
+	<Rcpp/StringTransformer.h>
+	<Rcpp/Formula.h>
+	<Rcpp/DataFrame.h>
+	<Rcpp/Date.h>
+	<Rcpp/DateVector.h>
+	<Rcpp/Datetime.h>
+	<Rcpp/DatetimeVector.h>
+	<Rcpp/Na_Proxy.h>
+	<Rcpp/Module.h>
+	<Rcpp/InternalFunction.h>
+	<Rcpp/sugar/sugar.h>
+	<Rcpp/stats/stats.h>
+	<Rcpp/Rmath.h>
+	<Rcpp/internal/wrap_end.h>
+	<Rcpp/platform/solaris.h>
+	<Rcpp/api/meat/meat.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/RObject.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/S4.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Reference.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/clone.h
+	<RcppCommon.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/grow.h
+	<RcppCommon.h>
+	<Rcpp/Named.h>
+	<Rcpp/generated/grow__pairlist.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/grow__pairlist.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Dimension.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Environment.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Vector.h
+	<RcppCommon.h>
+	<Rcpp/exceptions.h>
+	<Rcpp/r_cast.h>
+	<Rcpp/vector/00_forward_Vector.h>
+	<Rcpp/vector/no_init.h>
+	<Rcpp/vector/00_forward_proxy.h>
+	<Rcpp/vector/vector_from_string.h>
+	<Rcpp/vector/converter.h>
+	<Rcpp/vector/RangeIndexer.h>
+	<Rcpp/vector/Vector.h>
+	<Rcpp/vector/proxy.h>
+	<Rcpp/vector/traits.h>
+	<Rcpp/vector/DimNameProxy.h>
+	<Rcpp/vector/Matrix.h>
+	<Rcpp/vector/SubMatrix.h>
+	<Rcpp/vector/MatrixRow.h>
+	<Rcpp/vector/MatrixColumn.h>
+	<Rcpp/vector/instantiation.h>
+	<Rcpp/vector/string_proxy.h>
+	<Rcpp/vector/const_string_proxy.h>
+	<Rcpp/vector/generic_proxy.h>
+	<Rcpp/vector/const_generic_proxy.h>
+	<Rcpp/String.h>
+	<Rcpp/vector/LazyVector.h>
+	<Rcpp/vector/swap.h>
+	<Rcpp/vector/ChildVector.h>
+	<Rcpp/vector/ListOf.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/00_forward_Vector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/no_init.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/00_forward_proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/vector_from_string.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/converter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/RangeIndexer.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/Vector.h
+	<Rcpp/vector/Subsetter.h>
+	<Rcpp/generated/Vector__create.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/Subsetter.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/Vector__create.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/traits.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/DimNameProxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/Matrix.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/SubMatrix.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/MatrixRow.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/MatrixColumn.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/instantiation.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/string_proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/const_string_proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/generic_proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/const_generic_proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/String.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/LazyVector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/swap.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/ChildVector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/vector/ListOf.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/nona/nona.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Fast.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Extractor.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Promise.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/XPtr.h
+	<RcppCommon.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Symbol.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/DottedPairImpl.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Function.h
+	<RcppCommon.h>
+	<Rcpp/grow.h>
+	<Rcpp/generated/Function__operator.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/Function__operator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Language.h
+	<Rcpp/generated/Language__ctors.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/Language__ctors.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/DottedPair.h
+	<Rcpp/generated/DottedPair__ctors.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/DottedPair__ctors.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Pairlist.h
+	<RcppCommon.h>
+	<Rcpp/DottedPair.h>
+	<Rcpp/r_cast.h>
+	<Rcpp/generated/Pairlist__ctors.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/Pairlist__ctors.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/StretchyList.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/WeakReference.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/StringTransformer.h
+	<RcppCommon.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Formula.h
+	<RcppCommon.h>
+	<Rcpp/Language.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/DataFrame.h
+	<Rcpp/generated/DataFrame_generated.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/DataFrame_generated.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Date.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/DateVector.h
+	<RcppCommon.h>
+	<Rcpp/internal/GreedyVector.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/GreedyVector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Datetime.h
+	<RcppCommon.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/DatetimeVector.h
+	<RcppCommon.h>
+	<Rcpp/internal/GreedyVector.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Na_Proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Module.h
+	<Rcpp/config.h>
+	<Rcpp/module/CppFunction.h>
+	<Rcpp/module/get_return_type.h>
+	<Rcpp/module/Module_generated_get_signature.h>
+	<Rcpp/module/Module_generated_CppFunction.h>
+	<Rcpp/module/class_Base.h>
+	<Rcpp/module/Module.h>
+	<Rcpp/module/Module_generated_ctor_signature.h>
+	<Rcpp/module/Module_generated_Constructor.h>
+	<Rcpp/module/Module_generated_Factory.h>
+	<Rcpp/module/Module_generated_class_signature.h>
+	<Rcpp/module/Module_generated_CppMethod.h>
+	<Rcpp/module/Module_generated_Pointer_CppMethod.h>
+	<Rcpp/module/Module_Property.h>
+	<Rcpp/module/class.h>
+	<Rcpp/module/Module_generated_function.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/CppFunction.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/get_return_type.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_get_signature.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_CppFunction.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/class_Base.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_ctor_signature.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_Constructor.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_Factory.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_class_signature.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_CppMethod.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_Pointer_CppMethod.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_Property.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/class.h
+	<Rcpp/module/Module_generated_class_constructor.h>
+	<Rcpp/module/Module_generated_class_factory.h>
+	<Rcpp/module/Module_generated_method.h>
+	<Rcpp/module/Module_generated_Pointer_method.h>
+	<Rcpp/module/Module_Field.h>
+	<Rcpp/module/Module_Add_Property.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_class_constructor.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_class_factory.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_method.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_Pointer_method.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_Field.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_Add_Property.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/module/Module_generated_function.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/InternalFunction.h
+	<RcppCommon.h>
+	<Rcpp/grow.h>
+	<Rcpp/InternalFunctionWithStdFunction.h>
+	<Rcpp/generated/InternalFunction__ctors.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/InternalFunctionWithStdFunction.h
+	<functional>
+	<Rcpp/generated/InternalFunctionWithStdFunction_call.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/InternalFunctionWithStdFunction_call.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/generated/InternalFunction__ctors.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/sugar.h
+	<Rcpp/sugar/tools/iterator.h>
+	<Rcpp/sugar/block/block.h>
+	<Rcpp/hash/hash.h>
+	<Rcpp/sugar/operators/operators.h>
+	<Rcpp/sugar/functions/functions.h>
+	<Rcpp/sugar/matrix/matrix_functions.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/tools/iterator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/block.h
+	<Rcpp/sugar/block/SugarBlock_1.h>
+	<Rcpp/sugar/block/SugarBlock_2.h>
+	<Rcpp/sugar/block/SugarBlock_3.h>
+	<Rcpp/sugar/block/SugarMath.h>
+	<Rcpp/sugar/block/Vectorized_Math.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/SugarBlock_1.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/SugarBlock_2.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/SugarBlock_3.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/SugarMath.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/block/Vectorized_Math.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/hash/hash.h
+	<inttypes.h>
+	<Rcpp/hash/IndexHash.h>
+	<Rcpp/hash/SelfHash.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/hash/IndexHash.h
+	<mach/mach_time.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/hash/SelfHash.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/operators.h
+	<Rcpp/sugar/operators/Comparator.h>
+	<Rcpp/sugar/operators/Comparator_With_One_Value.h>
+	<Rcpp/sugar/operators/logical_operators__Vector__Vector.h>
+	<Rcpp/sugar/operators/logical_operators__Vector__primitive.h>
+	<Rcpp/sugar/operators/plus.h>
+	<Rcpp/sugar/operators/minus.h>
+	<Rcpp/sugar/operators/times.h>
+	<Rcpp/sugar/operators/divides.h>
+	<Rcpp/sugar/operators/not.h>
+	<Rcpp/sugar/operators/unary_minus.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/Comparator.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/Comparator_With_One_Value.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/logical_operators__Vector__Vector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/logical_operators__Vector__primitive.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/plus.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/minus.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/times.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/divides.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/not.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/operators/unary_minus.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/functions.h
+	<cmath>
+	<Rcpp/sugar/functions/Lazy.h>
+	<Rcpp/sugar/functions/math.h>
+	<Rcpp/sugar/functions/complex.h>
+	<Rcpp/sugar/functions/any.h>
+	<Rcpp/sugar/functions/all.h>
+	<Rcpp/sugar/functions/is_na.h>
+	<Rcpp/sugar/functions/is_finite.h>
+	<Rcpp/sugar/functions/is_infinite.h>
+	<Rcpp/sugar/functions/is_nan.h>
+	<Rcpp/sugar/functions/na_omit.h>
+	<Rcpp/sugar/functions/seq_along.h>
+	<Rcpp/sugar/functions/sapply.h>
+	<Rcpp/sugar/functions/mapply.h>
+	<Rcpp/sugar/functions/lapply.h>
+	<Rcpp/sugar/functions/ifelse.h>
+	<Rcpp/sugar/functions/pmin.h>
+	<Rcpp/sugar/functions/pmax.h>
+	<Rcpp/sugar/functions/clamp.h>
+	<Rcpp/sugar/functions/min.h>
+	<Rcpp/sugar/functions/max.h>
+	<Rcpp/sugar/functions/range.h>
+	<Rcpp/sugar/functions/sign.h>
+	<Rcpp/sugar/functions/diff.h>
+	<Rcpp/sugar/functions/pow.h>
+	<Rcpp/sugar/functions/rep.h>
+	<Rcpp/sugar/functions/rep_len.h>
+	<Rcpp/sugar/functions/rep_each.h>
+	<Rcpp/sugar/functions/rev.h>
+	<Rcpp/sugar/functions/head.h>
+	<Rcpp/sugar/functions/tail.h>
+	<Rcpp/sugar/functions/sum.h>
+	<Rcpp/sugar/functions/mean.h>
+	<Rcpp/sugar/functions/var.h>
+	<Rcpp/sugar/functions/sd.h>
+	<Rcpp/sugar/functions/cumsum.h>
+	<Rcpp/sugar/functions/which_min.h>
+	<Rcpp/sugar/functions/which_max.h>
+	<Rcpp/sugar/functions/unique.h>
+	<Rcpp/sugar/functions/match.h>
+	<Rcpp/sugar/functions/table.h>
+	<Rcpp/sugar/functions/duplicated.h>
+	<Rcpp/sugar/functions/self_match.h>
+	<Rcpp/sugar/functions/setdiff.h>
+	<Rcpp/sugar/functions/strings/strings.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/Lazy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/math.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/complex.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/any.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/all.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/is_na.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/is_finite.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/is_infinite.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/is_nan.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/na_omit.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/seq_along.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/sapply.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/mapply.h
+	<Rcpp/sugar/functions/mapply/mapply_3.h>
+	<Rcpp/sugar/functions/mapply/mapply_2.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/mapply/mapply_3.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/mapply/mapply_2.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/lapply.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/ifelse.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/pmin.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/pmax.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/clamp.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/min.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/max.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/range.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/sign.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/diff.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/pow.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/rep.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/rep_len.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/rep_each.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/rev.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/head.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/tail.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/sum.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/mean.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/var.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/sd.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/cumsum.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/which_min.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/which_max.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/unique.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/match.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/table.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/duplicated.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/self_match.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/setdiff.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/strings/strings.h
+	<Rcpp/sugar/functions/strings/collapse.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/functions/strings/collapse.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/matrix_functions.h
+	<Rcpp/sugar/matrix/outer.h>
+	<Rcpp/sugar/matrix/row.h>
+	<Rcpp/sugar/matrix/col.h>
+	<Rcpp/sugar/matrix/lower_tri.h>
+	<Rcpp/sugar/matrix/upper_tri.h>
+	<Rcpp/sugar/matrix/diag.h>
+	<Rcpp/sugar/matrix/as_vector.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/outer.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/row.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/col.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/lower_tri.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/upper_tri.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/diag.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/sugar/matrix/as_vector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/stats.h
+	<Rcpp/stats/dpq/dpq.h>
+	<Rcpp/stats/unif.h>
+	<Rcpp/stats/norm.h>
+	<Rcpp/stats/gamma.h>
+	<Rcpp/stats/chisq.h>
+	<Rcpp/stats/beta.h>
+	<Rcpp/stats/t.h>
+	<Rcpp/stats/lnorm.h>
+	<Rcpp/stats/weibull.h>
+	<Rcpp/stats/logis.h>
+	<Rcpp/stats/f.h>
+	<Rcpp/stats/exp.h>
+	<Rcpp/stats/cauchy.h>
+	<Rcpp/stats/geom.h>
+	<Rcpp/stats/hyper.h>
+	<Rcpp/stats/nt.h>
+	<Rcpp/stats/nchisq.h>
+	<Rcpp/stats/nbeta.h>
+	<Rcpp/stats/nf.h>
+	<Rcpp/stats/nbinom.h>
+	<Rcpp/stats/nbinom_mu.h>
+	<Rcpp/stats/binom.h>
+	<Rcpp/stats/pois.h>
+	<Rcpp/stats/random/random.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/dpq/dpq.h
+	<Rcpp/stats/dpq/macros.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/dpq/macros.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/unif.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/norm.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/gamma.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/chisq.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/beta.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/t.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/lnorm.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/weibull.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/logis.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/f.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/exp.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/cauchy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/geom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/hyper.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nt.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nchisq.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nbeta.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nf.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nbinom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/nbinom_mu.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/binom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/pois.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/random.h
+	<Rcpp/stats/random/rnorm.h>
+	<Rcpp/stats/random/runif.h>
+	<Rcpp/stats/random/rgamma.h>
+	<Rcpp/stats/random/rbeta.h>
+	<Rcpp/stats/random/rlnorm.h>
+	<Rcpp/stats/random/rchisq.h>
+	<Rcpp/stats/random/rnchisq.h>
+	<Rcpp/stats/random/rf.h>
+	<Rcpp/stats/random/rt.h>
+	<Rcpp/stats/random/rbinom.h>
+	<Rcpp/stats/random/rcauchy.h>
+	<Rcpp/stats/random/rexp.h>
+	<Rcpp/stats/random/rgeom.h>
+	<Rcpp/stats/random/rnbinom.h>
+	<Rcpp/stats/random/rnbinom_mu.h>
+	<Rcpp/stats/random/rpois.h>
+	<Rcpp/stats/random/rweibull.h>
+	<Rcpp/stats/random/rlogis.h>
+	<Rcpp/stats/random/rwilcox.h>
+	<Rcpp/stats/random/rsignrank.h>
+	<Rcpp/stats/random/rhyper.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rnorm.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/runif.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rgamma.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rbeta.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rlnorm.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rchisq.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rnchisq.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rf.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rt.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rbinom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rcauchy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rexp.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rgeom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rnbinom.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rnbinom_mu.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rpois.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rweibull.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rlogis.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rwilcox.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rsignrank.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/stats/random/rhyper.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/Rmath.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/internal/wrap_end.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/platform/solaris.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/meat.h
+	<Rcpp/api/meat/Rcpp_eval.h>
+	<Rcpp/api/meat/Dimension.h>
+	<Rcpp/api/meat/Date.h>
+	<Rcpp/api/meat/Datetime.h>
+	<Rcpp/api/meat/DataFrame.h>
+	<Rcpp/api/meat/S4.h>
+	<Rcpp/api/meat/Environment.h>
+	<Rcpp/api/meat/proxy.h>
+	<Rcpp/api/meat/DottedPairImpl.h>
+	<Rcpp/api/meat/StretchyList.h>
+	<Rcpp/api/meat/Vector.h>
+	<Rcpp/api/meat/is.h>
+	<Rcpp/api/meat/as.h>
+	<Rcpp/api/meat/export.h>
+	<Rcpp/api/meat/protection.h>
+	<Rcpp/api/meat/wrap.h>
+	<Rcpp/api/meat/module/Module.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Rcpp_eval.h
+	<Rcpp/Interrupt.h>
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Dimension.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Date.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Datetime.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/DataFrame.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/S4.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Environment.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/proxy.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/DottedPairImpl.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/StretchyList.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/Vector.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/is.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/as.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/export.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/protection.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/wrap.h
+
+1434907171 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/Rcpp/include/Rcpp/api/meat/module/Module.h
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloWrap.h
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloAs.h
+
+1434918708 /home/njanetos/R/x86_64-pc-linux-gnu-library/3.2/RcppArmadillo/include/RcppArmadilloSugar.h
+
+1438202617 source:/home/njanetos/Google Drive/Programming/matchingR/src/debug.cpp
+	<iostream>
+
+1438203265 source:/home/njanetos/Google Drive/Programming/matchingR/src/main.cpp
+	<queue>
+	<matchingR.h>
+	"main.h"
+
+1438186988 /home/njanetos/Google Drive/Programming/matchingR/src/main.h
+
+1438187547 source:/home/njanetos/Google Drive/Programming/matchingR/src/RcppExports.cpp
+	"../inst/include/matchingR.h"
+	<RcppArmadillo.h>
+	<Rcpp.h>
+
+1438203371 source:/home/njanetos/Google Drive/Programming/matchingR/src/stable.cpp
+	<queue>
+	<c_logger.h>
+	"stable.h"
+
+1438203508 /home/njanetos/Google Drive/Programming/matchingR/src/stable.h
+	<armadillo>
+

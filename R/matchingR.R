@@ -253,6 +253,25 @@ many2one = function(proposerUtils = NULL,
     return(res)
 }
 
+#' Compute matching for one-sided markets
+#'
+#' This function returns a stable roommate matching for a one-sided market
+#' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
+#' to exist, nor to be unique.
+#'
+#' @param pref An nxn-1 matrix, with each row representing the cardinal 
+#' utilities of each agent over matches with the other agents, so that, e.g.,
+#' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th.
+#' @return A list of length n corresponding to the matchings being made, so that
+#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
+#' @examples
+#' p = replicate(99, rnorm(100))
+#' results = onesided(prefUtil = p)
+onesided = function(pref = NULL, prefUtil = NULL) {
+    args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
+    res = stableRoommateMatching(args);
+    return(res$matchings);
+}
 
 #' Input validation
 #' 
@@ -330,3 +349,39 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
         )
     )
 }
+
+
+#' Input validation for one-sided markets
+#' 
+#' This function parses and validates the arguments for one sided preferences
+#' for the function onesided.
+#' 
+#' @param pref is an nx(n-1) matrix, with each row representing an ordinal ranking.
+#' @param prefUtil Cardinal preferences of the agents.
+#' of a particular agent.
+validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
+    
+    if (!is.null(pref)) {
+        pref = t(pref);
+    }
+    
+    # Convert cardinal utility to ordinal, if necessary
+    if (is.null(pref) && !is.null(prefUtil)) {
+        pref = t(sortIndexSingle(as.matrix(prefUtil)))
+    }
+    
+    if (ncol(pref)-1 != nrow(pref)) {
+        stop("incorrect dimensions of preferences matrix")
+    }
+    
+    if (max(pref) + 1 != ncol(pref)) {
+        stop("wrong indexing")
+    }
+    
+    if (min(pref) + 1 != 1) {
+        stop("wrong indexing, start at 0")
+    }
+    
+    return(pref)
+}
+
