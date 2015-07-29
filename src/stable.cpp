@@ -1,7 +1,7 @@
 #include <queue>
 #include <matchingR.h>
 #include <c_logger.h>
-#include <stable.h>
+#include "stable.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
