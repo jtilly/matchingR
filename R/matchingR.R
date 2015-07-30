@@ -259,13 +259,15 @@ many2one = function(proposerUtils = NULL,
 #' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
 #' to exist, nor to be unique.
 #'
-#' @param pref An nxn-1 matrix, with each row representing the cardinal 
+#' @param pref An nxn-1 matrix, with each column representing the cardinal 
 #' utilities of each agent over matches with the other agents, so that, e.g.,
 #' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th.
+#' @param prefUtil An nxn-1 matrix, each column representing ordinal preferences
+#' of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. 
 #' @return A list of length n corresponding to the matchings being made, so that
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
 #' @examples
-#' p = replicate(99, rnorm(100))
+#' p = replicate(100, rnorm(99))
 #' results = onesided(prefUtil = p)
 onesided = function(pref = NULL, prefUtil = NULL) {
     args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
@@ -350,7 +352,6 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
     )
 }
 
-
 #' Input validation for one-sided markets
 #' 
 #' This function parses and validates the arguments for one sided preferences
@@ -361,26 +362,12 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' of a particular agent.
 validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
     
-    if (!is.null(pref)) {
-        pref = t(pref);
-    }
-    
     # Convert cardinal utility to ordinal, if necessary
     if (is.null(pref) && !is.null(prefUtil)) {
-        pref = t(sortIndexSingle(as.matrix(prefUtil)))
+        pref = sortIndexOneSided(as.matrix(prefUtil))
     }
     
-    if (ncol(pref)-1 != nrow(pref)) {
-        stop("incorrect dimensions of preferences matrix")
-    }
-    
-    if (max(pref) + 1 != ncol(pref)) {
-        stop("wrong indexing")
-    }
-    
-    if (min(pref) + 1 != 1) {
-        stop("wrong indexing, start at 0")
-    }
+    # TODO: Add checking for bad preference matrices.
     
     return(pref)
 }

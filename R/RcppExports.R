@@ -57,6 +57,19 @@ stableRoommateMatching <- function(pref) {
     .Call('matchingR_stableRoommateMatching', PACKAGE = 'matchingR', pref)
 }
 
+#' Ranks elements with column of a matrix, assuming a one-sided market.
+#'
+#' Returns the rank of each element with each column of a matrix. So,
+#' if row 34 is the highest number for column 3, then the first row of
+#' column 3 will be 34 -- unless it is column 34, in which case it will
+#' be 35, to adjust for the fact that this is a single-sided market.
+#'
+#' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @return A list with the matchings made.
+sortIndexOneSided <- function(u) {
+    .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
+}
+
 #' Sort indices of a matrix within a column
 #'
 #' Within each column of a matrix, this function returns the indices of each

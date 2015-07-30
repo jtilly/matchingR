@@ -3,7 +3,7 @@
 
 #include <matchingR.h>
 
-enum e_verbosity { ALL, WARNINGS, INFO, QUIET };
+enum e_verbosity { ALL, INFO, WARNINGS, QUIET };
 
 class c_log_message {
     public:
@@ -56,15 +56,15 @@ class c_log_message {
 class c_logger {
     public:
         c_log_message error() {
-            return c_log_message("[ERROR] ", 2, verbosity);
+            return c_log_message("[ERROR] ", 3, verbosity);
         }
         
         c_log_message info() {
-            return c_log_message("[INFO] ", 3, verbosity);
+            return c_log_message("[INFO] ", 1, verbosity);
         }
     
         c_log_message warning() {
-            return c_log_message("[WARNING] ", 1, verbosity);
+            return c_log_message("[WARNING] ", 2, verbosity);
         }
     
         c_log_message test(bool result) {
