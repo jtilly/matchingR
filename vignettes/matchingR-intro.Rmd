@@ -1,13 +1,11 @@
 ---
 title: 'Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR'
 author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
-date: "May 17, 2015"
-output: html_document
+date: "July 30, 2015"
+output: pdf_document
 bibliography: bibliography.bib
-vignette: >
-  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+vignette: |
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
