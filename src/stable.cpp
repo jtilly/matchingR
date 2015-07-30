@@ -177,6 +177,35 @@ List stableRoommateMatching(const umat pref) {
     return List::create(_["matchings"] = matchings);
 }
 
+//' Ranks elements with column of a matrix, assuming a one-sided market.
+//'
+//' Returns the rank of each element with each column of a matrix. So,
+//' if row 34 is the highest number for column 3, then the first row of
+//' column 3 will be 34 -- unless it is column 34, in which case it will
+//' be 35, to adjust for the fact that this is a single-sided market.
+//'
+//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+//' @return A list with the matchings made.
+// [[Rcpp::export]]
+umat sortIndexOneSided(const mat& u) {
+    size_t N = u.n_rows;
+    size_t M = u.n_cols;
+    umat sortedIdx(N,M);
+    for(size_t jX=0;jX<M;jX++) {
+        sortedIdx.col(jX) = sort_index(u.col(jX), "descend");
+    }
+    
+    for (size_t iX=0;iX<M;iX++) {
+        for (size_t iY=0;iY<N;iY++) {
+            if (sortedIdx(iY, iX) >= iX) {
+                ++sortedIdx(iY, iX);
+            }
+        }
+    }
+    
+    return sortedIdx;
+}
+
 bool isEmpty(std::vector< std::vector<size_t> > *table) {
     for (size_t n = 0; n < table->size(); ++n) {
         if (table->at(n).empty()) return true;
@@ -190,3 +219,5 @@ void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
     vec->erase(ind);
   }
 }
+
+
