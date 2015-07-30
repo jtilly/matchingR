@@ -21,31 +21,7 @@ galeShapleyMatching <- function(proposerPref, reviewerUtils) {
     .Call('matchingR_galeShapleyMatching', PACKAGE = 'matchingR', proposerPref, reviewerUtils)
 }
 
-#' Sort indices of a matrix within a column
-#'
-#' Within each column of a matrix, this function returns the indices of each
-#' element in descending order
-#'
-#' @param u is the input matrix
-#' @return a matrix with sorted indicies
-#'
-sortIndex <- function(u) {
-    .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
-}
-
-#' Rank elements within column of a matrix
-#'
-#' This function returns the rank of each element within each column of a matrix.
-#' The highest element receives the highest rank.
-#'
-#' @param sortedIdx is the input matrix
-#' @return a rank matrix
-#'
-rankIndex <- function(sortedIdx) {
-    .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
-}
-
-#' Check if a matching is stable
+#' Check if a two-sided matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of
 #' preferences. This function can check if a given check one-to-one,
@@ -79,5 +55,29 @@ checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements)
 #' @return A list with the matchings made. Unmatched agents are 'matched' to N.
 stableRoommateMatching <- function(pref) {
     .Call('matchingR_stableRoommateMatching', PACKAGE = 'matchingR', pref)
+}
+
+#' Sort indices of a matrix within a column
+#'
+#' Within each column of a matrix, this function returns the indices of each
+#' element in descending order
+#'
+#' @param u is the input matrix
+#' @return a matrix with sorted indicies
+#'
+sortIndex <- function(u) {
+    .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
+}
+
+#' Rank elements within column of a matrix
+#'
+#' This function returns the rank of each element within each column of a matrix.
+#' The highest element receives the highest rank.
+#'
+#' @param sortedIdx is the input matrix
+#' @return a rank matrix
+#'
+rankIndex <- function(sortedIdx) {
+    .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }
 

@@ -19,28 +19,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// sortIndex
-umat sortIndex(const mat& u);
-RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const mat& >::type u(uSEXP);
-    __result = Rcpp::wrap(sortIndex(u));
-    return __result;
-END_RCPP
-}
-// rankIndex
-umat rankIndex(const umat& sortedIdx);
-RcppExport SEXP matchingR_rankIndex(SEXP sortedIdxSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const umat& >::type sortedIdx(sortedIdxSEXP);
-    __result = Rcpp::wrap(rankIndex(sortedIdx));
-    return __result;
-END_RCPP
-}
 // checkStability
 bool checkStability(mat& proposerUtils, mat& reviewerUtils, umat& proposals, umat& engagements);
 RcppExport SEXP matchingR_checkStability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
@@ -63,6 +41,28 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
     __result = Rcpp::wrap(stableRoommateMatching(pref));
+    return __result;
+END_RCPP
+}
+// sortIndex
+umat sortIndex(const mat& u);
+RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const mat& >::type u(uSEXP);
+    __result = Rcpp::wrap(sortIndex(u));
+    return __result;
+END_RCPP
+}
+// rankIndex
+umat rankIndex(const umat& sortedIdx);
+RcppExport SEXP matchingR_rankIndex(SEXP sortedIdxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat& >::type sortedIdx(sortedIdxSEXP);
+    __result = Rcpp::wrap(rankIndex(sortedIdx));
     return __result;
 END_RCPP
 }

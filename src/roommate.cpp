@@ -1,7 +1,8 @@
 #include <queue>
-#include <matchingR.h>
-#include <c_logger.h>
-#include "stable.h"
+#include "matchingR.h"
+
+#include "roommate.h"
+#include "c_logger.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -50,7 +51,7 @@ List stableRoommateMatching(const umat pref) {
                 size_t proposee = pref(proposed_to[n], n);
 
                 // proposee's preferences
-                const unsigned int * prop_call = pref.colptr(proposee);
+                const uword * prop_call = pref.colptr(proposee);
 
                 // proposee's opinion of the proposer (lower is better)
                 size_t op = find(prop_call, prop_call + N, n) - prop_call;

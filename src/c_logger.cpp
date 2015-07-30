@@ -1,4 +1,4 @@
-#include "../include/c_logger.h"
+#include "c_logger.h"
 
 c_logger logger;
 
