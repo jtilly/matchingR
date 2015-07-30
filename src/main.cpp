@@ -22,7 +22,7 @@
 //' \code{engagements} is a vector whose nth element contains the id of the proposer
 //' that reviewer n is matched to.
 // [[Rcpp::export]]
-List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
+List galeShapleyMatching(const umat& proposerPref, const mat& reviewerUtils) {
 
     // number of proposers (men)
     int M = proposerPref.n_cols;
@@ -87,7 +87,7 @@ List galeShapleyMatching(const umat proposerPref, const mat reviewerUtils) {
 //' @return a matrix with sorted indicies
 //'
 // [[Rcpp::export]]
-umat sortIndex(const mat u) {
+umat sortIndex(const mat& u) {
     int N = u.n_rows;
     int M = u.n_cols;
     umat sortedIdx(N,M);
@@ -106,7 +106,7 @@ umat sortIndex(const mat u) {
 //' @return a rank matrix
 //'
 // [[Rcpp::export]]
-umat rankIndex(const umat sortedIdx) {
+umat rankIndex(const umat& sortedIdx) {
     int N = sortedIdx.n_rows;
     int M = sortedIdx.n_cols;
     umat rankedIdx(N,M);
@@ -138,7 +138,7 @@ umat rankIndex(const umat sortedIdx) {
 //' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
+bool checkStability(mat& proposerUtils, mat& reviewerUtils, umat& proposals, umat& engagements) {
 
     // number of workers
     const int M = proposerUtils.n_cols;

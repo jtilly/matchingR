@@ -1,13 +1,11 @@
 ---
 title: 'Computing the Gale-Shapley Algorithm in R: Performance'
 author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
-date: "May 17, 2015"
-output: html_document
+date: "July 30, 2015"
+output: pdf_document
 bibliography: bibliography.bib
-vignette: >
-  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+vignette: |
+  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
@@ -42,7 +40,7 @@ uW = lambda * matrix(runif(n), nrow = n, ncol = n) +
 I benchmark the matching functions for six different market sizes
 ```{r}
 # market sizes
-N = c(100, 200, 250, 500, 1000)
+N = c(100, 500, 1000, 2500, 5000)
 ```
 and five different levels of commonality
 ```{r}
