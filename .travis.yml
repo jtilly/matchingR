@@ -29,18 +29,22 @@ cache:
 # install the package and dependencies:
 # - create directory for R libraries (if not already exists)
 # - create .Renviron with location of R libraries
+# - define R repository in .Rprofile
+# - add .travis.yml to .Rbuildignore
 # - install devtools if not already installed
 # - install covr if not already installed
-# - install matchingR with dependencies
+# - install dependencies
 install:
   - mkdir -p ~/Rlib 
   - echo 'R_LIBS=~/Rlib' > .Renviron
+  - echo 'options(repos = "http://cran.rstudio.com")' > .Rprofile
+  - echo '.travis.yml' > .Rbuildignore
   - Rscript -e 'if(!"devtools" %in% rownames(installed.packages())) { install.packages("devtools", dependencies=TRUE, repos="http://cran.rstudio.com/") }'
   - Rscript -e 'if(!"covr" %in% rownames(installed.packages())) { install.packages("covr", dependencies=TRUE, repos="http://cran.rstudio.com/") }'
   - Rscript -e 'update.packages(ask = FALSE)'
   - Rscript -e 'devtools::install_deps(pkg = ".", dependencies = TRUE)'
 
-# run devtools::test() and check if the package passes all the tests
+# build and check package
 # delete package from ~/Rlib so that it won't be cached
 script: 
   - R CMD build --no-build-vignettes --no-manual .
