@@ -1,8 +1,4 @@
-#include <queue>
-#include "matchingR.h"
-
 #include "roommate.h"
-#include "c_logger.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -18,46 +14,46 @@
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
-    log().configure(WARNINGS);
+    log().configure(QUIET);
 
     // Number of participants
-    size_t N = pref.n_cols;
+    uword N = pref.n_cols;
 
     // Proposals to
-    std::vector<size_t> proposal_to(N);
+    umat proposal_to(N, 1);
     // Proposals froms
-    std::vector<size_t> proposal_from(N);
-    std::vector<size_t> proposed_to(N);
-
+    umat proposal_from(N, 1);
+    umat proposed_to(N, 1);
+    
     // All participants begin unmatched having proposed to nobody
-    std::fill(proposal_to.begin(), proposal_to.end(), N);
-    std::fill(proposal_from.begin(), proposal_from.end(), N);
-    std::fill(proposed_to.begin(), proposed_to.end(), 0);
-
+    proposal_to = proposal_to.ones()*N;
+    proposal_from = proposal_from.ones()*N;
+    proposed_to = proposed_to.zeros();
+    
     // Empty matchings
-    std::vector<int> matchings;
+    umat matchings(N, 1);
 
     bool stable = false;
     while (!stable) {
         stable = true;
         log().info() << "Iterating through players.";
-        for (size_t n = 0; n < N; ++n) {
+        for (uword n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            if (proposed_to[n] == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
+            if (proposed_to(n) == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
 
-            if (proposal_to[n] == N) {
+            if (proposal_to(n) == N) {
                 // find the proposee
-                size_t proposee = pref(proposed_to[n], n);
+                uword proposee = pref(proposed_to(n), n);
 
                 // proposee's preferences
                 const uword * prop_call = pref.colptr(proposee);
 
                 // proposee's opinion of the proposer (lower is better)
-                size_t op = find(prop_call, prop_call + N, n) - prop_call;
+                uword op = find(prop_call, prop_call + N, n) - prop_call;
 
                 // opinion of his current match
-                size_t op_curr = find(prop_call, prop_call + N, proposal_from[proposee]) - prop_call;
+                uword op_curr = find(prop_call, prop_call + N, proposal_from(proposee)) - prop_call;
 
                 log().info() << n << " is proposing to " << proposee;
                 log().info() << proposee << " ranks " << n << " at " << op;
@@ -68,17 +64,17 @@ List stableRoommateMatching(const umat pref) {
                     log().info() << "He accepted!";
 
                     // make the proposal
-                    proposal_to[n] = proposee;
+                    proposal_to(n) = proposee;
                     // reject the proposee's proposer's proposal
-                    if (proposal_from[proposee] != N) {
-                        log().info() << proposee << " is rejecting the proposal from  " << proposal_from[proposee];
-                        proposal_to[proposal_from[proposee]] = N;
+                    if (proposal_from(proposee) != N) {
+                        log().info() << proposee << " is rejecting the proposal from  " << proposal_from(proposee);
+                        proposal_to(proposal_from(proposee)) = N;
                     }
-                    proposal_from[proposee] = n;
+                    proposal_from(proposee) = n;
                 }
 
                 // iterate n's proposal forward
-                ++proposed_to[n];
+                ++proposed_to(n);
 
                 // not stable yet
                 stable = false;
@@ -88,53 +84,59 @@ List stableRoommateMatching(const umat pref) {
 
     log().info() << "All players have made proposals.";
 
-    for (size_t n = 0; n < N; ++n) {
-        log().info() << "Player " << n << " is proposing to " << proposal_to[n] << ".";
-        log().info() << "Player " << n << " has a proposal from " << proposal_from[n] << ".";
+    for (uword n = 0; n < N; ++n) {
+        log().info() << "Player " << n << " is proposing to " << proposal_to(n) << ".";
+        log().info() << "Player " << n << " has a proposal from " << proposal_from(n) << ".";
     }
 
     // Generate table
-    std::vector< std::vector<size_t> > table(N);
-    std::vector< std::vector<size_t> > to_delete(N);
-    for (size_t n = 0; n < N; ++n) {
-        for (size_t i = 0; i < N-1; ++i) {
+    std::vector< std::deque<uword> > table(N);
+    std::vector< std::deque<uword> > to_delete(N);
+    for (uword n = 0; n < N; ++n) {
+        for (uword i=0;i<N-1;++i) {
             table[n].push_back(pref(i, n));
         }
     }
-
+    
     // Delete entries we eliminated in round 1
-    for (size_t n = 0; n < N; ++n) {
-        for (int i = table[n].size()-1; i >= 0; --i) {
-            if (table[n][i] == proposal_from[n]) {
+    for (uword n = 0; n < N; ++n) {
+        for (int i = table[n].size()-1;i>= 0;--i) {
+            if (table[n][i] == proposal_from(n)) {
                 break;
             } else {
                 if (table[n].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
-                deleteValueWithWarning(&table[table[n].back()], n);
+                // find and erase from the table
+                bool erased = false;
+                for (uword j = 0; j < table[table[n].back()].size(); ++j) {
+                    if (table[table[n].back()][j] == n) {
+                        table[table[n].back()].erase(table[table[n].back()].begin() + j);
+                        erased = true;
+                        break;
+                    }
+                }
+                if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
                 table[n].pop_back();
             }
         }
     }
-
-    // Check if anything is empty
-    if (isEmpty(&table)) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
-
+    
     log().info() << "Eliminating rotations.";
 
     // Eliminate rotations
     stable = false;
     while(!stable) {
         stable = true;
-        for (size_t n = 0; n < N; ++n) {
+        for (uword n = 0; n < N; ++n) {
             if (table[n].size() > 1) {
                 log().info() << "Starting with " << n;
                 stable = false;
-                std::vector<size_t> x;
-                std::vector<size_t> index;
+                std::vector<uword> x;
+                std::vector<uword> index;
 
-                size_t new_index = n;
-                size_t rot_tail = -1;
+                uword new_index = n;
+                uword rot_tail = -1;
 
-                while (rot_tail == (size_t) (index.end() - index.begin() - 1)) {
+                while (rot_tail == (uword) (index.end() - index.begin() - 1)) {
                     int new_x = table[new_index][1];
                     new_index = table[new_x].back();
 
@@ -150,16 +152,23 @@ List stableRoommateMatching(const umat pref) {
                 log().info() << x;
 
                 // Delete the rotation
-                for (size_t i = rot_tail + 1; i < index.size(); ++i) {
+                for (uword i = rot_tail + 1; i < index.size(); ++i) {
                     while(table[x[i]].back() != index[i-1]) {
-                        // Check whether empty
-                        if (table[x[i]].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
-                        deleteValueWithWarning(&table[table[x[i]].back()], x[i]);
+                        // find and erase from the table
+                        bool erased = false;
+                        for (uword j = 0; j < table[table[x[i]].back()].size(); ++j) {
+                            if (table[table[x[i]].back()][j] == x[i]) {
+                                table[table[x[i]].back()].erase(table[table[x[i]].back()].begin() + j);
+                                erased = true;
+                                break;
+                            }
+                        }
+                        if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
                         table[x[i]].pop_back();
                     }
                 }
 
-                for (size_t i = 0; i < N; ++i) {
+                for (uword i = 0; i < N; ++i) {
                     log().info() << table[i];
                 }
             }
@@ -167,11 +176,15 @@ List stableRoommateMatching(const umat pref) {
     }
 
     // Check if anything is empty
-    if (isEmpty(&table)) { return List::create(_["matchings"] = matchings); } else { log().info() << "Table nonempty."; }
+    for (uword i = 0; i < table.size(); ++i) {
+        if (table[i].empty()) {
+            return List::create(_["matchings"] = matchings);
+        }
+    }
 
     // Create the matchings
     matchings.resize(N);
-    for (size_t n = 0; n < N; ++n) {
+    for (uword n = 0; n < N; ++n) {
         matchings[n] = table[n][0];
     }
 
@@ -189,15 +202,15 @@ List stableRoommateMatching(const umat pref) {
 //' @return A list with the matchings made.
 // [[Rcpp::export]]
 umat sortIndexOneSided(const mat& u) {
-    size_t N = u.n_rows;
-    size_t M = u.n_cols;
+    uword N = u.n_rows;
+    uword M = u.n_cols;
     umat sortedIdx(N,M);
-    for(size_t jX=0;jX<M;jX++) {
+    for(uword jX=0;jX<M;jX++) {
         sortedIdx.col(jX) = sort_index(u.col(jX), "descend");
     }
     
-    for (size_t iX=0;iX<M;iX++) {
-        for (size_t iY=0;iY<N;iY++) {
+    for (uword iX=0;iX<M;iX++) {
+        for (uword iY=0;iY<N;iY++) {
             if (sortedIdx(iY, iX) >= iX) {
                 ++sortedIdx(iY, iX);
             }
@@ -206,19 +219,3 @@ umat sortIndexOneSided(const mat& u) {
     
     return sortedIdx;
 }
-
-bool isEmpty(std::vector< std::vector<size_t> > *table) {
-    for (size_t n = 0; n < table->size(); ++n) {
-        if (table->at(n).empty()) return true;
-    }
-    return false;
-}
-
-void deleteValueWithWarning(std::vector<size_t> *vec, size_t val) {
-  std::vector<size_t>::iterator ind = find(vec->begin(), vec->end(), val);
-  if (ind != vec->end()) {
-    vec->erase(ind);
-  }
-}
-
-

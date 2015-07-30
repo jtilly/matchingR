@@ -41,9 +41,18 @@ class c_log_message {
             return *this;
         }
         
-        c_log_message &operator<<(std::vector<size_t> &t) {
+        c_log_message &operator<<(std::vector<uword> &t) {
             if (importance > level) {
-                for (size_t i = 0; i < t.size(); ++i) {
+                for (uword i = 0; i < t.size(); ++i) {
+                    Rcpp::Rcout << t[i] << ", ";
+                }
+            }
+            return *this;
+        }
+        
+        c_log_message &operator<<(std::deque<uword> &t) {
+            if (importance > level) {
+                for (uword i = 0; i < t.size(); ++i) {
                     Rcpp::Rcout << t[i] << ", ";
                 }
             }

@@ -267,7 +267,7 @@ many2one = function(proposerUtils = NULL,
 #' @return A list of length n corresponding to the matchings being made, so that
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
 #' @examples
-#' p = replicate(100, rnorm(99))
+#' p = replicate(4, rnorm(3))
 #' results = onesided(prefUtil = p)
 onesided = function(pref = NULL, prefUtil = NULL) {
     args = validateInputsOneSided(pref = pref, prefUtil = prefUtil);
