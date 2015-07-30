@@ -161,5 +161,4 @@ test_that("Stable roommate?", {
     }
     
     # TODO: Check stability
-    
 })

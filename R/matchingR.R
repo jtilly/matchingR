@@ -259,9 +259,11 @@ many2one = function(proposerUtils = NULL,
 #' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed 
 #' to exist, nor to be unique.
 #'
-#' @param pref An nxn-1 matrix, with each row representing the cardinal 
+#' @param pref An nxn-1 matrix, with each column representing the cardinal 
 #' utilities of each agent over matches with the other agents, so that, e.g.,
 #' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th.
+#' @param prefUtil An nxn-1 matrix, each column representing ordinal preferences
+#' of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. 
 #' @return A list of length n corresponding to the matchings being made, so that
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
 #' @examples

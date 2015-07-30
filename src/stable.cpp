@@ -184,7 +184,7 @@ List stableRoommateMatching(const umat pref) {
 //' column 3 will be 34 -- unless it is column 34, in which case it will
 //' be 35, to adjust for the fact that this is a single-sided market.
 //'
-//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+//' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
 //' @return A list with the matchings made.
 // [[Rcpp::export]]
 umat sortIndexOneSided(const mat& u) {
