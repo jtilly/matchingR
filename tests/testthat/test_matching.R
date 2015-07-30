@@ -153,3 +153,13 @@ test_that("Assortative matching?", {
     expect_true(all(matching$proposals == 1:4))
     expect_true(all(matching$engagements == 1:4))
 })
+
+test_that("Stable roommate?", {
+    for (i in 1:100) {
+        results = onesided(prefUtil = replicate(100, rnorm(99)))
+        expect_true((is.matrix(results) || is.integer(results)))
+    }
+    
+    # TODO: Check stability
+    
+})
