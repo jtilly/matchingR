@@ -45,12 +45,10 @@ install:
   - Rscript -e 'devtools::install_deps(pkg = ".", dependencies = TRUE)'
 
 # build and check package
-# delete package from ~/Rlib so that it won't be cached
 script: 
   - R CMD build --no-build-vignettes --no-manual .
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
   - R CMD check "${PKG_FILE_NAME}" --no-build-vignettes --no-manual --as-cran
-  - rm -f -r ~/Rlib/matchingR
 
 # report coverage rate to coveralls
 after_success:
