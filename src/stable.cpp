@@ -17,7 +17,7 @@
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
-    log().configure(QUIET);
+    log().configure(WARNINGS);
 
     // Number of participants
     size_t N = pref.n_cols;
