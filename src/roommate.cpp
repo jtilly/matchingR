@@ -198,7 +198,7 @@ List stableRoommateMatching(const umat pref) {
 //' one-to-many, or many-to-one matching is stable.
 //'
 //' @param pref is a matrix with ordinal rankings of the participants
-//' @param reviewerUtils is an nx1 matrix encoding who is matched to whom
+//' @param matchings is an nx1 matrix encoding who is matched to whom
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool checkStabilityRoommate(umat& pref, umat& matchings) {

@@ -24,7 +24,7 @@ using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
 to exist, nor to be unique.
 }
 \examples{
-p = replicate(100, rnorm(99))
+p = replicate(4, rnorm(3))
 results = onesided(prefUtil = p)
 }
 

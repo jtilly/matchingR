@@ -57,19 +57,6 @@ stableRoommateMatching <- function(pref) {
     .Call('matchingR_stableRoommateMatching', PACKAGE = 'matchingR', pref)
 }
 
-#' Ranks elements with column of a matrix, assuming a one-sided market.
-#'
-#' Returns the rank of each element with each column of a matrix. So,
-#' if row 34 is the highest number for column 3, then the first row of
-#' column 3 will be 34 -- unless it is column 34, in which case it will
-#' be 35, to adjust for the fact that this is a single-sided market.
-#'
-#' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-#' @return A list with the matchings made.
-sortIndexOneSided <- function(u) {
-    .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
-}
-
 #' Check if a two-sided matching is stable
 #'
 #' This function checks if a given matching is stable for a particular set of
@@ -77,7 +64,7 @@ sortIndexOneSided <- function(u) {
 #' one-to-many, or many-to-one matching is stable.
 #'
 #' @param pref is a matrix with ordinal rankings of the participants
-#' @param reviewerUtils is an nx1 matrix encoding who is matched to whom
+#' @param matchings is an nx1 matrix encoding who is matched to whom
 #' @return true if the matching is stable, false otherwise
 checkStabilityRoommate <- function(pref, matchings) {
     .Call('matchingR_checkStabilityRoommate', PACKAGE = 'matchingR', pref, matchings)
@@ -93,6 +80,19 @@ checkStabilityRoommate <- function(pref, matchings) {
 #'
 sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
+}
+
+#' Ranks elements with column of a matrix, assuming a one-sided market.
+#'
+#' Returns the rank of each element with each column of a matrix. So,
+#' if row 34 is the highest number for column 3, then the first row of
+#' column 3 will be 34 -- unless it is column 34, in which case it will
+#' be 35, to adjust for the fact that this is a single-sided market.
+#'
+#' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @return A list with the matchings made.
+sortIndexOneSided <- function(u) {
+    .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
 }
 
 #' Rank elements within column of a matrix

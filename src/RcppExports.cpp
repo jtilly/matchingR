@@ -44,17 +44,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// sortIndexOneSided
-umat sortIndexOneSided(const mat& u);
-RcppExport SEXP matchingR_sortIndexOneSided(SEXP uSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< const mat& >::type u(uSEXP);
-    __result = Rcpp::wrap(sortIndexOneSided(u));
-    return __result;
-END_RCPP
-}
 // checkStabilityRoommate
 bool checkStabilityRoommate(umat& pref, umat& matchings);
 RcppExport SEXP matchingR_checkStabilityRoommate(SEXP prefSEXP, SEXP matchingsSEXP) {
@@ -75,6 +64,17 @@ BEGIN_RCPP
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const mat& >::type u(uSEXP);
     __result = Rcpp::wrap(sortIndex(u));
+    return __result;
+END_RCPP
+}
+// sortIndexOneSided
+umat sortIndexOneSided(const mat& u);
+RcppExport SEXP matchingR_sortIndexOneSided(SEXP uSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const mat& >::type u(uSEXP);
+    __result = Rcpp::wrap(sortIndexOneSided(u));
     return __result;
 END_RCPP
 }

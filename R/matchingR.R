@@ -367,7 +367,21 @@ validateInputsOneSided = function(pref = NULL, prefUtil = NULL) {
         pref = sortIndexOneSided(as.matrix(prefUtil))
     }
     
-    # TODO: Add checking for bad preference matrices.
+    # check inputs
+    if (NROW(prefUtil)+1 != NCOL(prefUtil)) {
+        stop("preference matrix must be n-1xn")
+    }
+    
+    if (NROW(pref)+1 != NCOL(pref)) {
+        stop("preference matrix must be n-1xn")
+    }
+    
+    pref = checkPreferenceOrderOnesided(pref)
+    if (is.null(pref)) {
+        stop(
+            "preferences are not a complete list of preference orderings"
+        )
+    }
     
     return(pref)
 }
