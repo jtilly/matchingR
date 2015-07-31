@@ -191,35 +191,6 @@ List stableRoommateMatching(const umat pref) {
     return List::create(_["matchings"] = matchings);
 }
 
-//' Ranks elements with column of a matrix, assuming a one-sided market.
-//'
-//' Returns the rank of each element with each column of a matrix. So,
-//' if row 34 is the highest number for column 3, then the first row of
-//' column 3 will be 34 -- unless it is column 34, in which case it will
-//' be 35, to adjust for the fact that this is a single-sided market.
-//'
-//' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A list with the matchings made.
-// [[Rcpp::export]]
-umat sortIndexOneSided(const mat& u) {
-    uword N = u.n_rows;
-    uword M = u.n_cols;
-    umat sortedIdx(N,M);
-    for(uword jX=0;jX<M;jX++) {
-        sortedIdx.col(jX) = sort_index(u.col(jX), "descend");
-    }
-    
-    for (uword iX=0;iX<M;iX++) {
-        for (uword iY=0;iY<N;iY++) {
-            if (sortedIdx(iY, iX) >= iX) {
-                ++sortedIdx(iY, iX);
-            }
-        }
-    }
-    
-    return sortedIdx;
-}
-
 //' Check if a two-sided matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
