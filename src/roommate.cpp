@@ -219,3 +219,47 @@ umat sortIndexOneSided(const mat& u) {
     
     return sortedIdx;
 }
+
+//' Check if a two-sided matching is stable
+//'
+//' This function checks if a given matching is stable for a particular set of
+//' preferences. This function can check if a given check one-to-one,
+//' one-to-many, or many-to-one matching is stable.
+//'
+//' @param pref is a matrix with ordinal rankings of the participants
+//' @param reviewerUtils is an nx1 matrix encoding who is matched to whom
+//' @return true if the matching is stable, false otherwise
+// [[Rcpp::export]]
+bool checkStabilityRoommate(umat& pref, umat& matchings) {
+    
+    // loop through everyone and check whether there's anyone else
+    // who they'd rather be with
+    for (uword i=0;i<pref.n_cols;++i) {
+        for (uword j=i+1;j<pref.n_cols;++j) {
+
+            // do i, j prefer to switch?
+            bool i_prefers = false;
+            bool j_prefers = false;
+            
+            // i?
+            for (uword k=0;k<pref.n_rows;++k) {
+                if (pref(k, i) == j) i_prefers = true;
+                if (pref(k, i) == matchings(i)) break;
+            }
+            
+            // j?
+            for (uword k=0;k<pref.n_rows;++k) {
+                if (pref(k, j) == j) j_prefers = true;
+                if (pref(k, j) == matchings(j)) break;
+            }
+            
+            // do they both want to switch?
+            if (i_prefers && j_prefers) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+    
+}

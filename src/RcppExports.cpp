@@ -55,6 +55,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// checkStabilityRoommate
+bool checkStabilityRoommate(umat& pref, umat& matchings);
+RcppExport SEXP matchingR_checkStabilityRoommate(SEXP prefSEXP, SEXP matchingsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< umat& >::type pref(prefSEXP);
+    Rcpp::traits::input_parameter< umat& >::type matchings(matchingsSEXP);
+    __result = Rcpp::wrap(checkStabilityRoommate(pref, matchings));
+    return __result;
+END_RCPP
+}
 // sortIndex
 umat sortIndex(const mat& u);
 RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {

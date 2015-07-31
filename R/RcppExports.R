@@ -70,6 +70,19 @@ sortIndexOneSided <- function(u) {
     .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
 }
 
+#' Check if a two-sided matching is stable
+#'
+#' This function checks if a given matching is stable for a particular set of
+#' preferences. This function can check if a given check one-to-one,
+#' one-to-many, or many-to-one matching is stable.
+#'
+#' @param pref is a matrix with ordinal rankings of the participants
+#' @param reviewerUtils is an nx1 matrix encoding who is matched to whom
+#' @return true if the matching is stable, false otherwise
+checkStabilityRoommate <- function(pref, matchings) {
+    .Call('matchingR_checkStabilityRoommate', PACKAGE = 'matchingR', pref, matchings)
+}
+
 #' Sort indices of a matrix within a column
 #'
 #' Within each column of a matrix, this function returns the indices of each

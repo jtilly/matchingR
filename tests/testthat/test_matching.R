@@ -158,7 +158,6 @@ test_that("Stable roommate?", {
     for (i in 1:100) {
         results = onesided(prefUtil = replicate(100, rnorm(99)))
         expect_true((is.matrix(results) || is.integer(results)))
+        expect_true((is.matrix(results) || is.integer(results)))
     }
-    
-    # TODO: Check stability
 })
