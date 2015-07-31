@@ -1,0 +1,13 @@
+---
+title: 'Solving the Stable Roommate Problem in R: Performance'
+author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
+date: "July 31, 2015"
+output: pdf_document
+bibliography: bibliography.bib
+vignette: |
+  %\VignetteIndexEntry{Solving the Stable Roommate Problem in R: Performance} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+---
+
+```{r, results = "hide", echo=FALSE, message = FALSE}
+library(matchingR)
+```
