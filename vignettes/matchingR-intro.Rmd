@@ -4,8 +4,10 @@ author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
 date: "July 30, 2015"
 output: html_document
 bibliography: bibliography.bib
-vignette: |
-  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR}  %\VignetteEngine{knitr::rmarkdown}  %\usepackage[utf8]{inputenc}
+vignette: >
+    %\VignetteEngine{knitr::knitr}  
+    %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: An Introduction to matchingR}
+    %\usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
@@ -75,7 +77,7 @@ The matching algorithm discussed below can take either payoff matrices of the ty
 
 # Gale-Shapley Algorithm: One-to-one matching
 
-The Gale–Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
+The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
 
 For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single. 
 

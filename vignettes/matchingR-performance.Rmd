@@ -4,8 +4,10 @@ author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
 date: "July 30, 2015"
 output: html_document
 bibliography: bibliography.bib
-vignette: |
-  %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}  %\VignetteEngine{knitr::rmarkdown}  %\usepackage[utf8]{inputenc}
+vignette: >
+    %\VignetteEngine{knitr::knitr}  
+    %\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}
+    %\usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
@@ -68,35 +70,35 @@ res1 = microbenchmark::microbenchmark(
     test_one2one(N[2], Commonality[1]),
     test_one2one(N[3], Commonality[1]),
     test_one2one(N[4], Commonality[1]),
-    test_one2one(N[5], Commonality[1]), times = 10, unit = "s")
+    test_one2one(N[5], Commonality[1]), times = 1, unit = "s")
 
 res2 = microbenchmark::microbenchmark(
     test_one2one(N[1], Commonality[2]),
     test_one2one(N[2], Commonality[2]),
     test_one2one(N[3], Commonality[2]),
     test_one2one(N[4], Commonality[2]),
-    test_one2one(N[5], Commonality[2]), times = 10, unit = "s")
+    test_one2one(N[5], Commonality[2]), times = 1, unit = "s")
 
 res3 = microbenchmark::microbenchmark(
     test_one2one(N[1], Commonality[3]),
     test_one2one(N[2], Commonality[3]),
     test_one2one(N[3], Commonality[3]),
     test_one2one(N[4], Commonality[3]),
-    test_one2one(N[5], Commonality[3]), times = 10, unit = "s")
+    test_one2one(N[5], Commonality[3]), times = 1, unit = "s")
 
 res4 = microbenchmark::microbenchmark(
     test_one2one(N[1], Commonality[4]),
     test_one2one(N[2], Commonality[4]),
     test_one2one(N[3], Commonality[4]),
     test_one2one(N[4], Commonality[4]),
-    test_one2one(N[5], Commonality[4]), times = 10, unit = "s")
+    test_one2one(N[5], Commonality[4]), times = 1, unit = "s")
 
 res5 = microbenchmark::microbenchmark(
     test_one2one(N[1], Commonality[5]),
     test_one2one(N[2], Commonality[5]),
     test_one2one(N[3], Commonality[5]),
     test_one2one(N[4], Commonality[5]),
-    test_one2one(N[5], Commonality[5]), times = 10, unit = "s")
+    test_one2one(N[5], Commonality[5]), times = 1, unit = "s")
 ```
 
 ```{r, echo=FALSE, cache=TRUE}
@@ -131,35 +133,35 @@ res1 = microbenchmark::microbenchmark(
     test_one2many(N[2], Commonality[1]),
     test_one2many(N[3], Commonality[1]),
     test_one2many(N[4], Commonality[1]),
-    test_one2many(N[5], Commonality[1]), times = 10, unit = "s")
+    test_one2many(N[5], Commonality[1]), times = 1, unit = "s")
 
 res2 = microbenchmark::microbenchmark(
     test_one2many(N[1], Commonality[2]),
     test_one2many(N[2], Commonality[2]),
     test_one2many(N[3], Commonality[2]),
     test_one2many(N[4], Commonality[2]),
-    test_one2many(N[5], Commonality[2]), times = 10, unit = "s")
+    test_one2many(N[5], Commonality[2]), times = 1, unit = "s")
 
 res3 = microbenchmark::microbenchmark(
     test_one2many(N[1], Commonality[3]),
     test_one2many(N[2], Commonality[3]),
     test_one2many(N[3], Commonality[3]),
     test_one2many(N[4], Commonality[3]),
-    test_one2many(N[5], Commonality[3]), times = 10, unit = "s")
+    test_one2many(N[5], Commonality[3]), times = 1, unit = "s")
 
 res4 = microbenchmark::microbenchmark(
     test_one2many(N[1], Commonality[4]),
     test_one2many(N[2], Commonality[4]),
     test_one2many(N[3], Commonality[4]),
     test_one2many(N[4], Commonality[4]),
-    test_one2many(N[5], Commonality[4]), times = 10, unit = "s")
+    test_one2many(N[5], Commonality[4]), times = 1, unit = "s")
 
 res5 = microbenchmark::microbenchmark(
     test_one2many(N[1], Commonality[5]),
     test_one2many(N[2], Commonality[5]),
     test_one2many(N[3], Commonality[5]),
     test_one2many(N[4], Commonality[5]),
-    test_one2many(N[5], Commonality[5]), times = 10, unit = "s")
+    test_one2many(N[5], Commonality[5]), times = 1, unit = "s")
 ```
 
 ```{r, echo=FALSE, cache=TRUE}

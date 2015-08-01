@@ -4,8 +4,10 @@ author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "July 31, 2015"
 output: html_document
 bibliography: bibliography.bib
-vignette: |
-  %\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}  %\VignetteEngine{knitr::rmarkdown}  %\usepackage[utf8]{inputenc}
+vignette: >
+    %\VignetteEngine{knitr::knitr}
+    %\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}
+    %\usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
@@ -67,7 +69,7 @@ res_irving = microbenchmark::microbenchmark(
     test_roommate(N[28]),
     test_roommate(N[29]),
     test_roommate(N[30]),
-    test_roommate(N[31]), times = 1, unit = "s")
+    test_roommate(N[31]), times = 1, unit = "ms")
 
 tot_exis = rep(0, 31);
 for (n in 1:31) {
