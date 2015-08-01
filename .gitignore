@@ -8,6 +8,7 @@
 .Rproj.user/
 # produced vignettes
 vignettes/*.html
+*__packages
 *.rdx
 *.rdb
 .Rproj.user

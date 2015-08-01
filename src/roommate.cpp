@@ -14,20 +14,20 @@
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
-    log().configure(ALL);
+    log().configure(QUIET);
 
     // Number of participants
     uword N = pref.n_cols;
 
-    // Proposals to
     umat proposal_to(N, 1);
-    // Proposals froms
     umat proposal_from(N, 1);
     umat proposed_to(N, 1);
     
-    // All participants begin unmatched having proposed to nobody
+    // All participants begin unmatched having proposals accepted by nobody (=N)...
     proposal_to = proposal_to.ones()*N;
+    // having accepted proposals from nobody (=N)...
     proposal_from = proposal_from.ones()*N;
+    // and having proposed to nobody.
     proposed_to = proposed_to.zeros();
     
     // Empty matchings
@@ -35,15 +35,18 @@ List stableRoommateMatching(const umat pref) {
 
     bool stable = false;
     while (!stable) {
-        stable = true;
         log().info() << "Iterating through players.";
+        
+        // set stable to false later if anyone hasn't proposed / been proposed to
+        stable = true;
         for (uword n = 0; n < N; ++n) {
-            // n proposes to the next best guy if has no proposal accepted
-            // and if he hasn't proposed to everyone else
-            if (proposed_to(n) == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
+            // n proposes to the next best guy if he hasn't proposed to everyone already...
+            if (proposed_to(n) >= N-1) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
 
+            // or if he has no proposals accepted by anyone.
             if (proposal_to(n) == N) {
-                // find the proposee
+                
+                // find the player he is proposing to next
                 uword proposee = pref(proposed_to(n), n);
 
                 // proposee's preferences
@@ -56,7 +59,7 @@ List stableRoommateMatching(const umat pref) {
                 uword op_curr = find(prop_call, prop_call + N, proposal_from(proposee)) - prop_call;
 
                 log().info() << n << " is proposing to " << proposee;
-                log().info() << proposee << " ranks " << n << " at " << op;
+                log().info() << proposee << " ranks " << n << " at " << op << " and his current match at " << op_curr;
 
                 // if the next best guy likes him he accepts
                 if (op < op_curr) {
@@ -65,19 +68,23 @@ List stableRoommateMatching(const umat pref) {
 
                     // make the proposal
                     proposal_to(n) = proposee;
-                    // reject the proposee's proposer's proposal
+                    // reject the proposee's original proposer's proposal
+                    // got it!?
                     if (proposal_from(proposee) != N) {
                         log().info() << proposee << " is rejecting the proposal from  " << proposal_from(proposee);
                         proposal_to(proposal_from(proposee)) = N;
+                        // someone has proposed to nobody, we're not stabler yet
+                        stable = false;
                     }
+                    // record the proposal
                     proposal_from(proposee) = n;
+                } else {
+                    // offer was rejected, we're not stable yet
+                    stable = false;
                 }
 
                 // iterate n's proposal forward
-                ++proposed_to(n);
-
-                // not stable yet
-                stable = false;
+                proposed_to(n)++;
             }
         }
     }
@@ -89,12 +96,12 @@ List stableRoommateMatching(const umat pref) {
         log().info() << "Player " << n << " has a proposal from " << proposal_from(n) << ".";
     }
 
-    // Generate table
-    std::vector< std::deque<uword> > table(N);
-    std::vector< std::deque<uword> > to_delete(N);
+    // Generate tables, initially of length N
+    std::vector< std::deque<uword> > table(N, std::deque<uword>(N-1));
     for (uword n = 0; n < N; ++n) {
         for (uword i=0;i<N-1;++i) {
-            table[n].push_back(pref(i, n));
+            // fill in the table with preferences
+            table[n][i] = pref(i, n);
         }
     }
     
