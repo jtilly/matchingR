@@ -130,6 +130,10 @@ List stableRoommateMatching(const umat pref) {
     log().info() << "Eliminating rotations.";
 
     // Eliminate rotations
+    // A 'rotation' is a series of individuals and preference pairs which satisfy 
+    // a relationship specified in Irving (1985). Removing a rotation maintains the
+    // status of the table as a 'stable' table, meaning everyone's most preferred 
+    // feasible option hates them. 
     stable = false;
     while(!stable) {
         stable = true;
@@ -141,7 +145,8 @@ List stableRoommateMatching(const umat pref) {
                 std::vector<uword> index;
 
                 uword new_index = n;
-                uword rot_tail = -1;
+                // Unassigned for now, so assign to the maximum value
+                uword rot_tail = static_cast<uword>(-1);;
 
                 while (rot_tail == (uword) (index.end() - index.begin() - 1)) {
                     int new_x = table[new_index][1];
@@ -175,6 +180,7 @@ List stableRoommateMatching(const umat pref) {
                     }
                 }
 
+                // print the table
                 for (uword i = 0; i < N; ++i) {
                     log().info() << table[i];
                 }
