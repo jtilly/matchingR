@@ -5,9 +5,9 @@
 
 enum e_verbosity { ALL, INFO, WARNINGS, QUIET };
 
-class c_log_message {
+class log_message {
     public:
-        c_log_message(const char *header, int importance, int level) {
+        log_message(const char *header, int importance, int level) {
             this->importance = importance;
             this->level = level;
             if (importance > level) {
@@ -15,7 +15,7 @@ class c_log_message {
             }
         }
     
-        c_log_message(bool result, int importance, int level) {
+        log_message(bool result, int importance, int level) {
             Rcpp::Rcout << "[";
             if (result) {
                 Rcpp::Rcout << "SUCCESS";
@@ -27,21 +27,21 @@ class c_log_message {
                 Rcpp::Rcout << "] ";
         }
     
-        ~c_log_message() {
+        ~log_message() {
             if (importance > level) {
                 Rcpp::Rcout << "\n";
             }
         }
     
         template<typename T>
-        c_log_message &operator<<(const T &t) {
+        log_message &operator<<(const T &t) {
             if (importance > level) {
                 Rcpp::Rcout << t;
             }
             return *this;
         }
         
-        c_log_message &operator<<(std::vector<uword> &t) {
+        log_message &operator<<(std::vector<uword> &t) {
             if (importance > level) {
                 for (uword i = 0; i < t.size(); ++i) {
                     Rcpp::Rcout << t[i] << ", ";
@@ -50,7 +50,7 @@ class c_log_message {
             return *this;
         }
         
-        c_log_message &operator<<(std::deque<uword> &t) {
+        log_message &operator<<(std::deque<uword> &t) {
             if (importance > level) {
                 for (uword i = 0; i < t.size(); ++i) {
                     Rcpp::Rcout << t[i] << ", ";
@@ -62,22 +62,22 @@ class c_log_message {
         int importance, level;
 };
 
-class c_logger {
+class logger {
     public:
-        c_log_message error() {
-            return c_log_message("[ERROR] ", 3, verbosity);
+        log_message error() {
+            return log_message("[ERROR] ", 3, verbosity);
         }
         
-        c_log_message info() {
-            return c_log_message("[INFO] ", 1, verbosity);
+        log_message info() {
+            return log_message("[INFO] ", 1, verbosity);
         }
     
-        c_log_message warning() {
-            return c_log_message("[WARNING] ", 2, verbosity);
+        log_message warning() {
+            return log_message("[WARNING] ", 2, verbosity);
         }
     
-        c_log_message test(bool result) {
-            return c_log_message(result, 2, verbosity);
+        log_message test(bool result) {
+            return log_message(result, 2, verbosity);
         }
 
         void configure(e_verbosity verbosity) {
@@ -92,6 +92,6 @@ class c_logger {
         e_verbosity verbosity;
 };
 
-c_logger &log();
+logger &log();
 
 #endif

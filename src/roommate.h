@@ -4,7 +4,7 @@
 #include <queue>
 #include <deque>
 #include "matchingR.h"
-#include "c_logger.h"
+#include "logger.h"
 
 List stableRoommateMatching(const umat pref);
 

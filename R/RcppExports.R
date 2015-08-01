@@ -49,7 +49,7 @@ checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements)
 #' This function computes the Irving (1985) algorithm for finding
 #' a stable matching in a one-sided matching market. Note that neither
 #' existence nor uniqueness is guaranteed, this algorithm finds one
-#' matching, not all of them.
+#' matching, not all of them. If no matching exists, returns 0.
 #'
 #' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
 #' @return A list with the matchings made. Unmatched agents are 'matched' to N.

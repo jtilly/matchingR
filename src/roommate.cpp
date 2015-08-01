@@ -7,7 +7,7 @@
 //' This function computes the Irving (1985) algorithm for finding
 //' a stable matching in a one-sided matching market. Note that neither
 //' existence nor uniqueness is guaranteed, this algorithm finds one
-//' matching, not all of them.
+//' matching, not all of them. If no matching exists, returns 0.
 //'
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
 //' @return A list with the matchings made. Unmatched agents are 'matched' to N.
@@ -40,7 +40,7 @@ List stableRoommateMatching(const umat pref) {
         for (uword n = 0; n < N; ++n) {
             // n proposes to the next best guy if has no proposal accepted
             // and if he hasn't proposed to everyone else
-            if (proposed_to(n) == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
+            if (proposed_to(n) == N) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
 
             if (proposal_to(n) == N) {
                 // find the proposee
@@ -104,7 +104,7 @@ List stableRoommateMatching(const umat pref) {
             if (table[n][i] == proposal_from(n)) {
                 break;
             } else {
-                if (table[n].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = matchings); }
+                if (table[n].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
                 // find and erase from the table
                 bool erased = false;
                 for (uword j = 0; j < table[table[n].back()].size(); ++j) {
@@ -114,7 +114,7 @@ List stableRoommateMatching(const umat pref) {
                         break;
                     }
                 }
-                if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
+                if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = 0); }
                 table[n].pop_back();
             }
         }
@@ -163,7 +163,7 @@ List stableRoommateMatching(const umat pref) {
                                 break;
                             }
                         }
-                        if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = matchings); }
+                        if (!erased) { log().warning() << "No stable matching exists."; return List::create(_["matchings"]   = 0); }
                         table[x[i]].pop_back();
                     }
                 }
@@ -178,7 +178,7 @@ List stableRoommateMatching(const umat pref) {
     // Check if anything is empty
     for (uword i = 0; i < table.size(); ++i) {
         if (table[i].empty()) {
-            return List::create(_["matchings"] = matchings);
+            return List::create(_["matchings"] = 0);
         }
     }
 
