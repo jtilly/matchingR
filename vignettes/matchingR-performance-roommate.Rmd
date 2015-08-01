@@ -1,11 +1,11 @@
 ---
 title: 'Solving the stable roommate problem in R: Performance'
-author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
+author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "July 31, 2015"
 output: html_document
 bibliography: bibliography.bib
 vignette: |
-  %\VignetteIndexEntry{Solving the stable roommate problem in R: Performance} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+  %\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}  %\VignetteEngine{knitr::rmarkdown}  %\usepackage[utf8]{inputenc}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
