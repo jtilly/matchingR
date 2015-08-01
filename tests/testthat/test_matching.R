@@ -158,7 +158,9 @@ test_that("Stable roommate?", {
     for (i in c(4, 8, 16, 32, 64, 128, 256, 512)) {
         p = validateInputsOneSided(prefUtil = replicate(i, rnorm(i-1)))
         results = onesided(pref = p)
-        expect_true(checkStabilityRoommate(pref = p, matchings = results))
+        if (!is.integer(results)) {
+            expect_true(checkStabilityRoommate(pref = p, matchings = results))
+        }
     }
 })
 
