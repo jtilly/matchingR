@@ -63,7 +63,7 @@ res_irving = microbenchmark::microbenchmark(
     test_roommate(N[28]),
     test_roommate(N[29]),
     test_roommate(N[30]),
-    test_roommate(N[31]), times = 1, unit = "ms")
+    test_roommate(N[31]), times = 1, unit = "s")
 
 tot_exis = rep(0, 31);
 for (n in 1:31) {
