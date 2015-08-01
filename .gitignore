@@ -8,6 +8,8 @@
 .Rproj.user/
 # produced vignettes
 vignettes/*.html
+*.rdx
+*.rdb
 .Rproj.user
 .Rbuildignore
 *.o
@@ -21,3 +23,4 @@ vignettes/matchingR-performance_cache/
 *.depend
 *.layout
 *.Rdata
+*.RData
