@@ -39,7 +39,7 @@ Women's preferences are constructed similarly:
 uW = lambda * matrix(runif(n), nrow = n, ncol = n) +
           (1 - lambda) * runif(n ^ 2)
 ```
-I benchmark the matching functions for six different market sizes
+I benchmark the matching functions for five different market sizes
 ```{r}
 # market sizes
 N = c(100, 500, 1000, 2500, 5000)
