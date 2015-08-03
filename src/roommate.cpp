@@ -15,9 +15,6 @@
 // [[Rcpp::export]]
 List stableRoommateMatching(const umat pref) {
 
-    logger log;
-    log.configure(QUIET);
-
     // Number of participants
     uword N = pref.n_cols;
 
@@ -37,13 +34,11 @@ List stableRoommateMatching(const umat pref) {
 
     bool stable = false;
     while (!stable) {
-        log.info() << "Iterating through players.";
-
         // set stable to false later if anyone hasn't proposed / been proposed to
         stable = true;
         for (uword n = 0; n < N; n++) {
             // n proposes to the next best guy if he hasn't proposed to everyone already...
-            if (proposed_to(n) >= N-1) { log.warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
+            if (proposed_to(n) >= N-1) { return List::create(_["matchings"] = 0); }
 
             // or if he has no proposals accepted by anyone.
             if (proposal_to(n) == N) {
@@ -60,20 +55,14 @@ List stableRoommateMatching(const umat pref) {
                 // opinion of his current match
                 uword op_curr = find(prop_call, prop_call + N, proposal_from(proposee)) - prop_call;
 
-                log.info() << n << " is proposing to " << proposee;
-                log.info() << proposee << " ranks " << n << " at " << op << " and his current match at " << op_curr;
-
                 // if the next best guy likes him he accepts
                 if (op < op_curr) {
-
-                    log.info() << "He accepted!";
 
                     // make the proposal
                     proposal_to(n) = proposee;
                     // reject the proposee's original proposer's proposal
                     // got it!?
                     if (proposal_from(proposee) != N) {
-                        log.info() << proposee << " is rejecting the proposal from  " << proposal_from(proposee);
                         proposal_to(proposal_from(proposee)) = N;
                         // someone has proposed to nobody, we're not stabler yet
                         stable = false;
@@ -91,13 +80,6 @@ List stableRoommateMatching(const umat pref) {
         }
     }
 
-    log.info() << "All players have made proposals.";
-
-    for (uword n = 0; n < N; n++) {
-        log.info() << "Player " << n << " is proposing to " << proposal_to(n) << ".";
-        log.info() << "Player " << n << " has a proposal from " << proposal_from(n) << ".";
-    }
-
     // Generate tables, initially of length N
     std::vector< std::deque<uword> > table(N, std::deque<uword>(N-1));
     for (uword n = 0; n < N; ++n) {
@@ -113,7 +95,7 @@ List stableRoommateMatching(const umat pref) {
             if (table[n][i] == proposal_from(n)) {
                 break;
             } else {
-                if (table[n].size() == 0) { log.warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
+                if (table[n].size() == 0) { return List::create(_["matchings"] = 0); }
                 // find and erase from the table
                 bool erased = false;
                 for (uword j = 0; j < table[table[n].back()].size(); j++) {
@@ -123,13 +105,11 @@ List stableRoommateMatching(const umat pref) {
                         break;
                     }
                 }
-                if (!erased) { log.warning() << "No stable matching exists."; return List::create(_["matchings"]   = 0); }
+                if (!erased) { return List::create(_["matchings"]   = 0); }
                 table[n].pop_back();
             }
         }
     }
-
-    log.info() << "Eliminating rotations.";
 
     // Eliminate rotations
     // A 'rotation' is a series of individuals and preference pairs which satisfy
@@ -141,7 +121,6 @@ List stableRoommateMatching(const umat pref) {
         stable = true;
         for (uword n = 0; n < N; n++) {
             if (table[n].size() > 1) {
-                log.info() << "Starting with " << n;
                 stable = false;
                 std::vector<uword> x;
                 std::vector<uword> index;
@@ -173,7 +152,7 @@ List stableRoommateMatching(const umat pref) {
                                 break;
                             }
                         }
-                        if (!erased) { log.warning() << "No stable matching exists."; return List::create(_["matchings"]   = 0); }
+                        if (!erased) { return List::create(_["matchings"]   = 0); }
                         table[x[i]].pop_back();
                     }
                 }
