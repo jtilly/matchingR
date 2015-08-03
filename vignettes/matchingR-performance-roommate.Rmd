@@ -4,11 +4,12 @@ author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "July 31, 2015"
 output: html_document
 bibliography: bibliography.bib
-vignette: >
-    %\VignetteEngine{knitr::knitr}
-    %\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}
-    %\usepackage[utf8]{inputenc}
 ---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}
+%\usepackage[utf8]{inputenc}
+-->
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
 library(matchingR)
