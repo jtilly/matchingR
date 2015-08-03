@@ -52,7 +52,7 @@ Commonality = c(0.0, 0.25, 0.5, 0.75, 0.99)
 
 ## One-to-one matching
 The test function for the case of `one2one` matching is constructed as follows:
-```{r, cache=TRUE}
+```{r}
 set.seed(1)
 
 test_one2one = function(n, lambda) {
@@ -64,7 +64,7 @@ test_one2one = function(n, lambda) {
 }
 ```
 In this example, there are equal numbers of men and women, so everyone will get matched. Note that I am benchmarking the generation of preferences and the computation of the stable matching jointly.
-```{r, cache=TRUE, echo=FALSE}
+```{r, echo=FALSE}
 res1 = microbenchmark::microbenchmark(
     test_one2one(N[1], Commonality[1]),
     test_one2one(N[2], Commonality[1]),
@@ -101,7 +101,7 @@ res5 = microbenchmark::microbenchmark(
     test_one2one(N[5], Commonality[5]), times = 1, unit = "s")
 ```
 
-```{r, echo=FALSE, cache=TRUE}
+```{r, echo=FALSE}
 table = matrix(c(summary(res1, unit = 's')$mean,
                  summary(res2, unit = 's')$mean,
                  summary(res3, unit = 's')$mean,
@@ -114,7 +114,7 @@ knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matchin
 
 ## One-to-many matching
 The test function for the case of `one2many` matching is constructed as follows:
-```{r, cache=TRUE}
+```{r}
 set.seed(1)
 
 test_one2many = function(n, lambda) {
@@ -127,7 +127,7 @@ test_one2many = function(n, lambda) {
 ```
 In this example, I am matching workers with multi-worker firms, where each firm has 10 vacant positions. There are ten times as many workers as firms so every worker will get matched and every vacancy will be filled. Again, note that I am benchmarking the generation of preferences and the computation of the stable matching jointly.
 
-```{r, cache=TRUE, echo=FALSE}
+```{r, echo=FALSE}
 res1 = microbenchmark::microbenchmark(
     test_one2many(N[1], Commonality[1]),
     test_one2many(N[2], Commonality[1]),
@@ -164,7 +164,7 @@ res5 = microbenchmark::microbenchmark(
     test_one2many(N[5], Commonality[5]), times = 1, unit = "s")
 ```
 
-```{r, echo=FALSE, cache=TRUE}
+```{r, echo=FALSE}
 table = matrix(c(summary(res1, unit = 's')$mean,
                  summary(res2, unit = 's')$mean,
                  summary(res3, unit = 's')$mean,

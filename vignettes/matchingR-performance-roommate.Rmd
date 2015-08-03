@@ -28,9 +28,9 @@ test_roommate = function(n) {
 }
 ```
 That is, $n$ represents the number of rooms available.
-```{r, cache=TRUE, echo=FALSE}
-N = c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 35, 40, 45, 100, 200, 500)
-N_rep = c(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 50, 50, 50)/2
+```{r, echo=FALSE}
+N = c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 35, 40, 45)
+N_rep = c(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100)/2
 
 res_irving = microbenchmark::microbenchmark(
     test_roommate(N[1]),
@@ -60,13 +60,10 @@ res_irving = microbenchmark::microbenchmark(
     test_roommate(N[25]),
     test_roommate(N[26]),
     test_roommate(N[27]),
-    test_roommate(N[28]),
-    test_roommate(N[29]),
-    test_roommate(N[30]),
-    test_roommate(N[31]), times = 1, unit = "s")
+    test_roommate(N[28]), times = 1, unit = "s")
 
-tot_exis = rep(0, 31);
-for (n in 1:31) {
+tot_exis = rep(0, 28);
+for (n in 1:28) {
     for (i in 1:N_rep[n]) {
         p = replicate(2*N[n], rnorm(2*N[n]-1))
         p = validateInputsOneSided(prefUtil = p)
@@ -77,7 +74,7 @@ for (n in 1:31) {
     }
 }
 
-irving_original_prop = c(0.961, 0.931, 0.909, 0.868, 0.871, 0.867, 0.857, 0.830, 0.815, 0.808, 0.816, 0.788, 0.750, 0.766, 0.755, 0.770, 0.740, 0.725, 0.745, 0.775, 0.740, 0.740, 0.730, 0.710, 0.725, 0.670, 0.675, 0.690, NA, NA, NA)
+irving_original_prop = c(0.961, 0.931, 0.909, 0.868, 0.871, 0.867, 0.857, 0.830, 0.815, 0.808, 0.816, 0.788, 0.750, 0.766, 0.755, 0.770, 0.740, 0.725, 0.745, 0.775, 0.740, 0.740, 0.730, 0.710, 0.725, 0.670, 0.675, 0.690)
 ```
 
 ```{r, echo=FALSE}
@@ -87,7 +84,7 @@ tab = matrix(c(N_rep,
                irving_original_prop,
                summary(res_irving)$mean), 
              ncol = 5, 
-             nrow = 31,
+             nrow = 28,
              dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
                   "t" = c("No. of instances", "No. with solution", "Proportion with solution", "Proportion with solution (Irving 1985)", "Average cpu time")))
 knitr::kable(tab, digits = 6, caption = "Proportion of matchings which exist and run time (in seconds) for the stable roommate algorithm.")
