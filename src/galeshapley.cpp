@@ -100,7 +100,7 @@ List galeShapleyMatching(const umat& proposerPref, const mat& reviewerUtils) {
 //' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat& proposerUtils, mat& reviewerUtils, umat& proposals, umat& engagements) {
+bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
 
     // number of workers
     const int M = proposerUtils.n_cols;

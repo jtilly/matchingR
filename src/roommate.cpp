@@ -24,11 +24,11 @@ List stableRoommateMatching(const umat pref) {
     uvec proposed_to(N);
 
     // All participants begin unmatched having proposals accepted by nobody (=N)...
-    proposal_to = proposal_to.ones()*N;
+    proposal_to.fill(N);
     // having accepted proposals from nobody (=N)...
-    proposal_from = proposal_from.ones()*N;
+    proposal_from.fill(N);
     // and having proposed to nobody.
-    proposed_to = proposed_to.zeros();
+    proposed_to.zeros();
 
     // Empty matchings
     uvec matchings(N);
