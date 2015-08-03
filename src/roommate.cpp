@@ -19,33 +19,33 @@ List stableRoommateMatching(const umat pref) {
     // Number of participants
     uword N = pref.n_cols;
 
-    umat proposal_to(N, 1);
-    umat proposal_from(N, 1);
-    umat proposed_to(N, 1);
-    
+    uvec proposal_to(N);
+    uvec proposal_from(N);
+    uvec proposed_to(N);
+
     // All participants begin unmatched having proposals accepted by nobody (=N)...
     proposal_to = proposal_to.ones()*N;
     // having accepted proposals from nobody (=N)...
     proposal_from = proposal_from.ones()*N;
     // and having proposed to nobody.
     proposed_to = proposed_to.zeros();
-    
+
     // Empty matchings
-    umat matchings(N, 1);
+    uvec matchings(N);
 
     bool stable = false;
     while (!stable) {
         log().info() << "Iterating through players.";
-        
+
         // set stable to false later if anyone hasn't proposed / been proposed to
         stable = true;
-        for (uword n = 0; n < N; ++n) {
+        for (uword n = 0; n < N; n++) {
             // n proposes to the next best guy if he hasn't proposed to everyone already...
             if (proposed_to(n) >= N-1) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
 
             // or if he has no proposals accepted by anyone.
             if (proposal_to(n) == N) {
-                
+
                 // find the player he is proposing to next
                 uword proposee = pref(proposed_to(n), n);
 
@@ -91,7 +91,7 @@ List stableRoommateMatching(const umat pref) {
 
     log().info() << "All players have made proposals.";
 
-    for (uword n = 0; n < N; ++n) {
+    for (uword n = 0; n < N; n++) {
         log().info() << "Player " << n << " is proposing to " << proposal_to(n) << ".";
         log().info() << "Player " << n << " has a proposal from " << proposal_from(n) << ".";
     }
@@ -99,22 +99,22 @@ List stableRoommateMatching(const umat pref) {
     // Generate tables, initially of length N
     std::vector< std::deque<uword> > table(N, std::deque<uword>(N-1));
     for (uword n = 0; n < N; ++n) {
-        for (uword i=0;i<N-1;++i) {
+        for (uword i=0; i<N-1; i++) {
             // fill in the table with preferences
             table[n][i] = pref(i, n);
         }
     }
-    
+
     // Delete entries we eliminated in round 1
-    for (uword n = 0; n < N; ++n) {
-        for (int i = table[n].size()-1;i>= 0;--i) {
+    for (uword n = 0; n < N; n++) {
+        for (int i = table[n].size()-1; i>= 0; i--) {
             if (table[n][i] == proposal_from(n)) {
                 break;
             } else {
                 if (table[n].size() == 0) { log().warning() << "No stable matching exists."; return List::create(_["matchings"] = 0); }
                 // find and erase from the table
                 bool erased = false;
-                for (uword j = 0; j < table[table[n].back()].size(); ++j) {
+                for (uword j = 0; j < table[table[n].back()].size(); j++) {
                     if (table[table[n].back()][j] == n) {
                         table[table[n].back()].erase(table[table[n].back()].begin() + j);
                         erased = true;
@@ -126,18 +126,18 @@ List stableRoommateMatching(const umat pref) {
             }
         }
     }
-    
+
     log().info() << "Eliminating rotations.";
 
     // Eliminate rotations
-    // A 'rotation' is a series of individuals and preference pairs which satisfy 
+    // A 'rotation' is a series of individuals and preference pairs which satisfy
     // a relationship specified in Irving (1985). Removing a rotation maintains the
-    // status of the table as a 'stable' table, meaning everyone's most preferred 
-    // feasible option hates them. 
+    // status of the table as a 'stable' table, meaning everyone's most preferred
+    // feasible option hates them.
     stable = false;
     while(!stable) {
         stable = true;
-        for (uword n = 0; n < N; ++n) {
+        for (uword n = 0; n < N; n++) {
             if (table[n].size() > 1) {
                 log().info() << "Starting with " << n;
                 stable = false;
@@ -146,7 +146,7 @@ List stableRoommateMatching(const umat pref) {
 
                 uword new_index = n;
                 // Unassigned for now, so assign to the maximum value
-                uword rot_tail = static_cast<uword>(-1);;
+                uword rot_tail = static_cast<uword>(-1);
 
                 while (rot_tail == (uword) (index.end() - index.begin() - 1)) {
                     int new_x = table[new_index][1];
@@ -164,11 +164,11 @@ List stableRoommateMatching(const umat pref) {
                 log().info() << x;
 
                 // Delete the rotation
-                for (uword i = rot_tail + 1; i < index.size(); ++i) {
+                for (uword i = rot_tail + 1; i < index.size(); i++) {
                     while(table[x[i]].back() != index[i-1]) {
                         // find and erase from the table
                         bool erased = false;
-                        for (uword j = 0; j < table[table[x[i]].back()].size(); ++j) {
+                        for (uword j = 0; j < table[table[x[i]].back()].size(); j++) {
                             if (table[table[x[i]].back()][j] == x[i]) {
                                 table[table[x[i]].back()].erase(table[table[x[i]].back()].begin() + j);
                                 erased = true;
@@ -181,7 +181,7 @@ List stableRoommateMatching(const umat pref) {
                 }
 
                 // print the table
-                for (uword i = 0; i < N; ++i) {
+                for (uword i = 0; i < N; i++) {
                     log().info() << table[i];
                 }
             }
@@ -189,7 +189,7 @@ List stableRoommateMatching(const umat pref) {
     }
 
     // Check if anything is empty
-    for (uword i = 0; i < table.size(); ++i) {
+    for (uword i = 0; i < table.size(); i++) {
         if (table[i].empty()) {
             return List::create(_["matchings"] = 0);
         }
@@ -197,7 +197,7 @@ List stableRoommateMatching(const umat pref) {
 
     // Create the matchings
     matchings.resize(N);
-    for (uword n = 0; n < N; ++n) {
+    for (uword n = 0; n < N; n++) {
         matchings[n] = table[n][0];
     }
 
@@ -215,35 +215,35 @@ List stableRoommateMatching(const umat pref) {
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool checkStabilityRoommate(umat& pref, umat& matchings) {
-    
+
     // loop through everyone and check whether there's anyone else
     // who they'd rather be with
-    for (uword i=0;i<pref.n_cols;++i) {
-        for (uword j=i+1;j<pref.n_cols;++j) {
+    for (uword i=0; i<pref.n_cols; i++) {
+        for (uword j=i+1; j<pref.n_cols; j++) {
 
             // do i, j prefer to switch?
             bool i_prefers = false;
             bool j_prefers = false;
-            
+
             // i?
-            for (uword k=0;k<pref.n_rows;++k) {
+            for (uword k=0; k<pref.n_rows; k++) {
                 if (pref(k, i) == j) i_prefers = true;
                 if (pref(k, i) == matchings(i)) break;
             }
-            
+
             // j?
-            for (uword k=0;k<pref.n_rows;++k) {
+            for (uword k=0; k<pref.n_rows; k++) {
                 if (pref(k, j) == j) j_prefers = true;
                 if (pref(k, j) == matchings(j)) break;
             }
-            
+
             // do they both want to switch?
             if (i_prefers && j_prefers) {
                 return false;
             }
         }
     }
-    
+
     return true;
-    
+
 }
