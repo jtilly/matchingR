@@ -1,7 +1,6 @@
 #include "roommate.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::depends(RcppLogger)]]
 
 //' Computes a stable roommate matching
 //'
