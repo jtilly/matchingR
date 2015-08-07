@@ -2,7 +2,7 @@
 title: 'Computing the Gale-Shapley Algorithm in R: Performance'
 author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
 date: "July 30, 2015"
-output: html_document
+output: pdf_document
 bibliography: bibliography.bib
 ---
 <!--

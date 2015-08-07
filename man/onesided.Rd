@@ -4,7 +4,7 @@
 \alias{onesided}
 \title{Compute matching for one-sided markets}
 \usage{
-onesided(pref = NULL, prefUtil = NULL)
+onesided(pref = NULL, utils = NULL)
 }
 \arguments{
 \item{pref}{An n-1xn matrix, with each column representing the cardinal
@@ -13,14 +13,15 @@ if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
 matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
 style).}
 
-\item{prefUtil}{An n-1xn matrix, each column representing ordinal preferences
+\item{utils}{An n-1xn matrix, each column representing ordinal preferences
 of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. For example, if
 element (4, 6) of this matrix is 2, then agent 4 gets utility 2 from agent
 6.}
 }
 \value{
-A list of length n corresponding to the matchings being made, so that
-e.g. if the 4th element is 6 then agent 4 was matched with agent 6.
+A vector of length n corresponding to the matchings being made, so that
+e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
+uses R style indexing. If no stable matching exists, it returns NULL.
 }
 \description{
 This function returns a stable roommate matching for a one-sided market
@@ -28,6 +29,6 @@ using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
 to exist, nor to be unique. If no stable matching exists, 0 is returned.
 }
 \examples{
-results = onesided(prefUtil = replicate(4, rnorm(3)))
+results = onesided(utils = replicate(4, rnorm(3)))
 }
 

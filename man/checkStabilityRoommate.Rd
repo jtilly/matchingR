@@ -9,7 +9,8 @@ checkStabilityRoommate(pref, matchings)
 \arguments{
 \item{pref}{is a matrix with ordinal rankings of the participants}
 
-\item{matchings}{is an nx1 matrix encoding who is matched to whom}
+\item{matchings}{is an nx1 matrix encoding who is matched to whom using
+R style indexing}
 }
 \value{
 true if the matching is stable, false otherwise

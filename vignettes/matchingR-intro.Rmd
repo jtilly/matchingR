@@ -2,7 +2,8 @@
 title: 'Matching Algorithms in R: An Introduction to matchingR'
 author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu) and [Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "August 3, 2015"
-output: html_document
+output: pdf_document
+toc: true
 bibliography: bibliography.bib
 ---
 <!--
@@ -17,7 +18,7 @@ library(matchingR)
 
 # Introduction
 
-This package provides R functions to quickly compute stable matchings for large matching markets. It computes stable matchings for two-sided markets using the Gale-Shapley Algorithm [@gale1962college], and one-sided markets using [@irving1985roommates]'s algorithm. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. The package supports one-to-one, one-to-many, many-to-one, and one-sided matchings.  
+This package provides R functions to quickly compute stable matchings for large matching markets. It computes stable matchings for two-sided markets using the Gale-Shapley Algorithm @gale1962college] and one-sided markets using the algorithm by @irving1985roommates. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The Gale-Shapley implementation of this package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market. 
 
 Matching markets are very common in practice and widely studied by economists. Popular examples include
 
@@ -25,14 +26,11 @@ Matching markets are very common in practice and widely studied by economists. P
  * the matching of students to schools including the New York City High School or the the Boston Public School Match (and many more)
  * the matching of kidney donors to recipients in kidney exchanges.
 
-# Two-sided matching markets
-
-This package implements the the Gale-Shapley Algorithm to compute a stable matching for two-sided markets.
+# Two-sided Matching Markets: Gale-Shapley Algorithm
 
 Consider the following example of the marriage market. Suppose there are `N` men and `N` women. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than to his current spouse `w` and this other woman `w'` would rather be matched to man `m` than to her current spouse `m'`. In other words, a matching is stable when there does not exist a pair `(m, w')` for which both `m` and `w'` are better off than they are with their respective spouses `w`  and `m'`.
 
-
-## Preferences
+## Specification of Preferences
 
 We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Columns in the matrix correspond to men, rows to women. For example: 
 ```{r}
@@ -78,7 +76,7 @@ prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
 
-## Gale-Shapley Algorithm: One-to-one matching
+## Gale-Shapley Algorithm
 
 The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
 
@@ -142,11 +140,11 @@ For the simple 3-by-3 example, we can perform this check by hand:
  
 Thus, this matching is stable.
 
-## Extensions
+## Examples
 
 The following examples illustrate some additional features of this package.
 
-### Marriage Market with Unequal Number of Men and Women
+### Marriage Market
 The following is an example of `one2one` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
 ```{r, results = "hide"}
 # set seed
@@ -167,7 +165,7 @@ checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-### College Admissions Problem: One-to-Many Matching
+### College Admissions Problem
 The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
 ```{r, results = "hide"}
 # set seed
@@ -185,25 +183,25 @@ results = one2many(uStudents, uColleges, slots = 2)
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
 
-# One-sided matching markets
+# One-sided Matching Markets: Irving's Algorithm
 
-This package implements [@irving1985roommates]'s algorithm for one-sided matching markets. 
+This package implements the algorithm by @irving1985roommates for one-sided matching markets. 
 
 Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`. 
 
-## Preferences
+## Specification of Preferences
 
 Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$, 
 ```{r}
-pref = matrix(c(2, 5, 1, 4, 2, 4,
-                3, 4, 3, 1, 0, 0,
-                1, 3, 4, 2, 1, 2,
-                5, 0, 0, 5, 3, 3,
-                4, 2, 5, 0, 5, 1), nrow = 5, ncol = 6, byrow = TRUE)
+pref = matrix(c(3, 6, 2, 5, 3, 5,
+                4, 5, 4, 2, 1, 1,
+                2, 4, 5, 3, 2, 3,
+                6, 1, 1, 6, 4, 4,
+                5, 3, 6, 1, 6, 2), nrow = 5, ncol = 6, byrow = TRUE)
 ```
-Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `0` most prefers to be matched with roommate `2`, followed by `3`, followed by `1`.
+Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
 
-## [@irving1985roommates]'s algorithm
+## Irvings's algorithm
 
 The algorithm proceeds in two phases.
 
@@ -213,54 +211,81 @@ In phase 1, potential roommates take turns sequentially proposing to the other r
 
 In the above example, 
 
-1. Roommate `0` begins by proposing to roommate `2`, he most preferred roommate. `2`, having no better offers, accepts.
-2. `1` proposes to `5`, who accepts.
-3. `2` proposes to `1`, who accepts.
-4. `3` proposes to `4`, who accepts.
-5. `4` proposes to `2`, who accepts. `2` cancels his proposal from `0`.
-6. `0`, having no proposal, proposes to `3`, who accepts.
-7. `5` proposes to `4`, who rejects, having a better proposal from `3`.
-8. `5` proposes to `0`, who accepts.
+1. Roommate `1` begins by proposing to roommate `3`, his most preferred roommate. `3`, having no better offers, accepts.
+2. `2` proposes to `6`, who accepts.
+3. `3` proposes to `2`, who accepts.
+4. `4` proposes to `5`, who accepts.
+5. `5` proposes to `3`, who accepts. `3` cancels his proposal from `1`.
+6. `1`, having no proposal, proposes to `4`, who accepts.
+7. `6` proposes to `5`, who rejects, having a better proposal from `4`.
+8. `6` proposes to `1`, who accepts.
 
 ### Phase 2
 
-In phase 2, we begin by eliminating all potential roommate matches which are worse than the current proposals held. For example, in the above example, `2` has a proposal from `4`, and so we eliminate `0` and `5` from `2`'s column, and symmetrically eliminate `2` from `0` and `5`'s column. This results in the following 'reduced' preference listing:
+In phase 2, we begin by eliminating all potential roommate matches which are worse than the current proposals held. For example, in the above example, `3` has a proposal from `5`, and so we eliminate `1` and `6` from `3`'s column, and symmetrically eliminate `3` from `1` and `6`'s column. This results in the following 'reduced' preference listing:
 ```
-   5, 1, 4, 2,  
-3, 4, 3, 1,    0
-1, 3, 4, 2, 1,  
-5, 0,    5, 3, 3
-   2,    0,    1
+   6, 2, 5, 3,  
+4, 5, 4, 2,    1
+2, 4, 5, 3, 2,  
+6, 1,    6, 4, 4
+   3,    1,    2
 ```
-These preferences form what is called a 'stable' table, or, 's-table'. ('Stable' for short.) The defining characteristic of a stable table is that if `i` is the most preferred roommate on `j`s list, then `j` is the least preferred roommate on `i`s list. For example, `0` most prefers `3`, but `3` least prefers `0`. 
+These preferences form what is called a 'stable' table, or, 's-table'. ('Stable' for short.) The defining characteristic of a stable table is that if `i` is the most preferred roommate on `j`s list, then `j` is the least preferred roommate on `i`s list. For example, `1` most prefers `4`, but `4` least prefers `1`. 
 
 The algorithm proceeds by finding and eliminating 'rotations'. A rotation is a sequence of pairs of roommates, such that there is a distinct roommate in the first position of each pair, the second roommate in each pair least prefers the roommate he is paired with, the first roommate in each pair most prefers the roommate he is paired with, and finally, the first roommate in each pair ranks the second roommate in the following pair second (modulo the number of pairs, that is, the first roommate in the last pair ranks the second roommate in the first pair second) Once a rotation has been identified, removing it results in another stable table.
 
-For example, `(0, 3), (2, 1)` is a rotation in the above table, because `0` loves `3`, `2` loves `1`, `3` hates `0`, `1` hates `2`, `1` is second on `0`s list, and `3` is second on `2`'s list. Eliminating this rotation involves `1` rejecting `2`, `3` rejecting `0`, and then we remove every successive potential roommate as well to preserve the stable table property, resulting in
+For example, `(1, 4), (3, 2)` is a rotation in the above table, because `1` loves `4`, `3` loves `2`, `4` hates `1`, `2` hates `3`, `2` is second on `1`s list, and `4` is second on `3`'s list. Eliminating this rotation involves `2` rejecting `3`, `4` rejecting `1`, and then we remove every successive potential roommate as well to preserve the stable table property, resulting in
 ```
-   5,    4, 2,  
-   4, 3, 1,    0
-1, 3, 4, 2, 1,  
-5, 0,    5, 3, 3
-               1
+   6,    5, 3,  
+   5, 4, 2,    1
+2, 4, 5, 3, 2,  
+6, 1,    6, 4, 4
+               2
 ```
-A further rotation is `(0, 1), (1, 5), (3, 4)`. Eliminating it yields
+A further rotation is `(1, 2), (2, 6), (4, 5)`. Eliminating it yields
 ```
-            2,  
-   4, 3, 1,    0
-   3, 4, 2, 1,  
-5,              
+            3,  
+   5, 4, 2,    1
+   4, 5, 3, 2,  
+6,              
 ```
-A final rotation is `(1, 4), (2, 3)`. Eliminating it yields
+A final rotation is `(2, 5), (3, 4)`. Eliminating it yields
 ```
-            2,  
-         1,    0
-   3, 4,        
-5,              
+            3,  
+         2,    1
+   4, 5,        
+6,              
+
 ```
-Therefore, a stable matching is for `0` and `5` to match, `1` and `3` to match, and `2` and `4` to match. 
+Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, and `3` and `5` to match. 
 ```{r}
-onesided(pref = pref)
+results = onesided(pref = pref - 1)
+results
+```
+
+## Examples
+
+### Roommate problem
+
+The function `onesided` can also be called using a payoff matrix, `u`, to specify preferences. In `u`, the element `[i,j]` refers to the payoff that agent `j` gets from being matched to agent `i`. The main diagonal of this matrix contains no information and will be removed by the algorithm.
+
+```{r}
+# generate preferences
+N = 10
+u = matrix(runif(N^2),  nrow = N, ncol = N)
+results = onesided(utils = u)
+results
+```
+
+### Existence is not guaranteed
+
+Note that in the roommate problem, existence of a stable matching is not guaranteed. When no stable matching can be found, the function `onesided` returns `NULL`.
+```{r}
+set.seed(1)
+N = 512
+u = matrix(runif(N^2),  nrow = N, ncol = N)
+results = onesided(utils = u)
+print(results)
 ```
 
 # Literature

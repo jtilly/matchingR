@@ -64,7 +64,8 @@ stableRoommateMatching <- function(pref) {
 #' one-to-many, or many-to-one matching is stable.
 #'
 #' @param pref is a matrix with ordinal rankings of the participants
-#' @param matchings is an nx1 matrix encoding who is matched to whom
+#' @param matchings is an nx1 matrix encoding who is matched to whom using
+#' R style indexing
 #' @return true if the matching is stable, false otherwise
 checkStabilityRoommate <- function(pref, matchings) {
     .Call('matchingR_checkStabilityRoommate', PACKAGE = 'matchingR', pref, matchings)

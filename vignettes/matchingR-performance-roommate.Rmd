@@ -2,7 +2,7 @@
 title: 'Solving the Stable Roommate Problem in R: Performance'
 author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "July 31, 2015"
-output: html_document
+output: pdf_document
 bibliography: bibliography.bib
 ---
 <!--
@@ -19,13 +19,13 @@ In this vignette, I explore the computational performance of the Irving algorith
 
 The code to find a stable matching, from the documentation, is
 ```{r}
-p = replicate(4, rnorm(3))
-results = onesided(prefUtil = p)
+u = replicate(4, rnorm(3))
+results = onesided(utils = u)
 ```
 The function we use to benchmark is
 ```{r}
 test_roommate = function(n) {
-    onesided(prefUtil = replicate(2*n, rnorm(2*n-1)))
+    onesided(utils = replicate(2*n, rnorm(2*n-1)))
 }
 ```
 That is, $n$ represents the number of rooms available.
@@ -67,7 +67,7 @@ tot_exis = rep(0, 28);
 for (n in 1:28) {
     for (i in 1:N_rep[n]) {
         p = replicate(2*N[n], rnorm(2*N[n]-1))
-        p = validateInputsOneSided(prefUtil = p)
+        p = validateInputsOneSided(utils = p)
         results = onesided(pref = p)
         if (is.integer(results)) {
             tot_exis[n] = tot_exis[n] + 1;

@@ -155,17 +155,16 @@ test_that("Assortative matching?", {
 })
 
 test_that("Stable roommate?", {
-    for (i in c(4, 8, 16, 32, 64, 128, 256, 512)) {
-        p = validateInputsOneSided(prefUtil = replicate(i, rnorm(i-1)))
+    set.seed(1)
+    for (i in c(4, 8, 16, 32, 128, 256)) {
+        p = validateInputsOneSided(utils = replicate(i, rnorm(i-1)))
         results = onesided(pref = p)
-        if (!is.integer(results)) {
-            expect_true(checkStabilityRoommate(pref = p, matchings = results))
-        }
+        expect_true(checkStabilityRoommate(pref = p, matchings = results))
     }
 })
 
 test_that("Check preference orderings for one sided matching", {
     p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
     expect_error(validateInputsOneSided(pref = p))
-    expect_error(validateInputsOneSided(prefUtil = p))
+    expect_error(validateInputsOneSided(utils = p))
 })

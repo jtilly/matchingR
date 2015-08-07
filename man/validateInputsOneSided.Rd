@@ -4,12 +4,12 @@
 \alias{validateInputsOneSided}
 \title{Input validation for one-sided markets}
 \usage{
-validateInputsOneSided(pref = NULL, prefUtil = NULL)
+validateInputsOneSided(pref = NULL, utils = NULL)
 }
 \arguments{
 \item{pref}{is an n-1xn matrix, with each row representing an ordinal ranking.}
 
-\item{prefUtil}{if an n-1xn matrix, with each row representing the cardinal preferences
+\item{utils}{if an n-1xn matrix, with each row representing the cardinal preferences
 of the agents.}
 }
 \value{
