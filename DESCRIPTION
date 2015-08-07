@@ -2,14 +2,16 @@ Package: matchingR
 Type: Package
 Title: Gale-Shapley Algorithm in R and C++
 Version: 1.1
-Date: 2015-05-17
+Date: 2015-08-07
 Authors@R: c(person("Jan", "Tilly", email = "jtilly@econ.upenn.edu", rol = c("aut", "cre")),
              person("Nick", "Janetos", email = "njanetos@econ.upenn.edu", rol = c("aut")))
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
-Description: Computes the Gale-Shapley Algorithm efficiently using Rcpp.
-    Provides algorithms to compute the stable matching for the marriage problem
-    and for the college-admissions problem, i.e. the matching of students to
-    colleges.
+Description: Computes the matching algorithms efficiently using Rcpp.
+    Implements the Gale-Shapley Algorithm to compute the stable matching for
+    two-sided markets, such as for the stable marriage problem and for the 
+    college-admissions problem, i.e. the matching of students to colleges. 
+    Also implements Irving's Algorithm for the Stable Roomate Problem that 
+    computes a stable matching for one-sided markets.
 License: GPL (>= 2)
 URL: https://github.com/jtilly/matchingR
 BugReports: https://github.com/jtilly/matchingR/issues
