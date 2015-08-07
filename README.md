@@ -76,7 +76,7 @@ The male-optimal stable matching is therefore:
 
 This matching can be computed using
 ```{r}
-results = matchingR::one2one(proposerPref = prefM, reviewerPref = prefW)
+results = one2one(proposerPref = prefM, reviewerPref = prefW)
 ```
 The original Gale-Shapley algorithm can be easily modified to accommodate unequal numbers of participants on each side of the market as well as one-to-many matchings, i.e. the matching of workers to multi-worker firms or the matching of students to colleges.
 
