@@ -15,8 +15,6 @@ Matching markets are very common in practice and widely studied by economists. P
 * the matching of students to schools including the New York City High School or the the Boston Public School Match (and many more)
 * the matching of kidney donors to recipients in kidney exchanges.
 
-This package implements the Gale-Shapley Algorithm and Irving's Algorithm to compute a stable matching for such markets.
-
 Installation
 ------------
 
