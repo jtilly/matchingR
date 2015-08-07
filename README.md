@@ -32,8 +32,9 @@ devtools::install_github("jtilly/matchingR.git")
 
 ## Documentation
 * [Reference Manual](http://jtilly.io/matchingR/matchingR-documentation.pdf "Computing Stable Matchings in R: Reference Manual for matchingR")
-* [Vignette: Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.html "Computing Stable Matchings in R: An Introduction")
-* [Vignette: Computational Performance](http://jtilly.io/matchingR/matchingR-performance.html "Computing Stable Matchings in R: Computational Performance")
+* [Vignette: Matching Algorithms in R: An Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.html "Matching Algorithms in R: An Introduction to matchingR")
+* [Vignette: Computing the Gale-Shapley Algorithm in R: Performance](http://jtilly.io/matchingR/matchingR-performance-galeshapley.html "Computing the Gale-Shapley Algorithm in R: Performance")
+* [Vignette: Solving the Stable Roommate Problem in R: Performance](http://jtilly.io/matchingR/matchingR-performance-roommate.html "Solving the Stable Roommate Problem in R: Performance")
 
 ## Gale-Shapley Algorithm: How does it work?
 Consider a market with three men and three women. The men's preferences are given by
