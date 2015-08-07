@@ -38,13 +38,20 @@
 NULL
 
 # Startup message
-.onLoad = function(libname, pkgname) {
+.onAttach = function(libname, pkgname) {
 
-    message(paste("matchingR 1.1: With this update, we changed the",
-                  "layout of payoff and preference matrices. In the",
-                  "matrix `u` element [i,j] now refers to the utility",
-                  "that agent [j] receives from being matched to agent",
-                  "[i], i.e. we store preferences in column-major order",
-                  "instead of row-major order."))
+    packageStartupMessage(paste("=================================\n",
+                                "matchingR 1.1 Update Information:\n",
+                                "=================================\n",
+                                "With this update, we changed the layout of ",
+                                "payoff and preference order matrices. In the ",
+                                "matrix `u`, element [i,j] now refers to the ",
+                                "utility that agent [j] receives from being ",
+                                "matched to agent [i]. Similarly, in matrix ",
+                                "`pref`, element [i,j] refers to the id of the ",
+                                "individual that agent `j` ranks at position ",
+                                "`i`. We store payoffs and preference orders in",
+                                "column-major order instead of row-major order.",
+                                sep = ""))
 
 }
