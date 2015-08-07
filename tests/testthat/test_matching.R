@@ -140,7 +140,7 @@ test_that("Check checkStability", {
     # check if the matching is stable
     expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
     # swap proposals and engagements (this one isn't stable)
-    expect_false(checkStability(uM, uW, matching$engagements, matching$proposals))
+    expect_false(suppressWarnings(checkStability(uM, uW, matching$engagements, matching$proposals)))
 })
 
 

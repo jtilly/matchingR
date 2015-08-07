@@ -50,19 +50,16 @@ NULL
 
 # Startup message
 .onAttach = function(libname, pkgname) {
-
-    packageStartupMessage(paste("=================================\n",
-                                "matchingR 1.1 Update Information:\n",
-                                "=================================\n",
-                                "With this update, we changed the layout of ",
-                                "payoff and preference order matrices. In the ",
-                                "matrix `u`, element [i,j] now refers to the ",
-                                "utility that agent [j] receives from being ",
-                                "matched to agent [i]. Similarly, in the matrix ",
-                                "`pref`, element [i,j] refers to the id of the ",
-                                "individual that agent `j` ranks at position ",
-                                "`i`. I.e., we store payoffs and preference orders in",
-                                "column-major order instead of row-major order.",
-                                sep = ""))
-
+    
+    packageStartupMessage(
+        "\n=================================\n",
+        "matchingR 1.1 Update Information:\n",
+        "=================================\n",
+        "With this update, we changed the layout of  payoff and preference order \n",
+        "matrices. In the  matrix `u`, element [i,j] now refers to the  utility that \n",
+        "agent [j] receives from being  matched to agent [i]. Similarly, in the matrix \n",
+        "`pref`, element [i,j] refers to the id of the  individual that agent `j` \n", 
+        "ranks at position  `i`. I.e., we store payoffs and preference orders in \n",
+        "column-major order instead of row-major order.\n\n", appendLF = TRUE)
+    
 }

@@ -136,7 +136,7 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
                 for(int sfX=0;sfX<slotsReviewers;sfX++) {
                     // check if wX and fX would rather be matched with each other than with their actual matches
                     if(reviewerUtils(wX, fX) > reviewerUtils(engagements(fX, sfX), fX) && proposerUtils(fX, wX) > proposerUtils(proposals(wX, swX), wX)) {
-                        Rprintf("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
+                        ::Rf_warning("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);
                         return false;
                     }
                 }
