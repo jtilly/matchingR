@@ -4,21 +4,27 @@
 #' @docType package
 #' @title matchingR: Efficient Computation of the Gale-Shapley Algorithm in R
 #'   and C++
-#' @description matchingR is an R Package that quickly computes the Gale-Shapley
-#'   Algorithm for large scale matching markets. This package can be useful when
+#' @description matchingR is an R Package that efficiently computes matching
+#'   algorithms for large scale matching markets. It currently implements the
+#'   Gale-Shapley Algorithm for two-sided matching markets and Irving's
+#'   Algorithm for one-sided matching markets. This package can be useful when
 #'   the number of market participants is large or when very many matchings need
 #'   to be computed (e.g. for extensive simulations or for estimation purposes).
 #'   The package has successfully been used to simulate preferences and compute
 #'   the matching with 30,000 participants on each side of the market. The
-#'   algorithm computes the solution to the
+#'   package provides functions to compute the solution to the
 #'   \href{http://en.wikipedia.org/wiki/Stable_matching}{stable marriage
-#'   problem} and to the
+#'   problem}, to the
 #'   \href{http://en.wikipedia.org/wiki/Hospital_resident}{college admission
-#'   problem}.
-#' @author Jan Tilly
+#'   problem}, and to the
+#'   \href{https://en.wikipedia.org/wiki/Stable_roommates_problem}{stable
+#'   roommates problem}
+#' @author Jan Tilly, Nick Janetos
 #' @references Gale, D. and Shapley, L.S. (1962). College admissions and the
-#'   stability of marriage. \emph{The American Mathematical Monthly},
-#'   69(1):9--15.
+#'   stability of marriage. \emph{The American Mathematical Monthly}, 69(1):
+#'   9--15.
+#' @references Irving, R. W. (1985). An efficient algorithm for the “stable
+#'   roommates” problem. \emph{Journal of Algorithms}, 6(4): 577--595
 #' @examples
 #' # stable marriage problem
 #' nmen = 25
@@ -35,6 +41,11 @@
 #' uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 #' results = one2many(uStudents, uColleges, slots=4)
 #' checkStability(uStudents, uColleges, results$proposals, results$engagements)
+#'
+#' # stable roommate problem
+#' N = 10
+#' u = matrix(runif(N^2),  nrow = N, ncol = N)
+#' results = onesided(utils = u)
 NULL
 
 # Startup message

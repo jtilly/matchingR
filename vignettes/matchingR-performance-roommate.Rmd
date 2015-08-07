@@ -2,12 +2,12 @@
 title: 'Solving the Stable Roommate Problem in R: Performance'
 author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "July 31, 2015"
-output: pdf_document
+output: html_document
 bibliography: bibliography.bib
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}
+%\VignetteIndexEntry{Solving the Stable Roommate Problem in R: Performance}
 %\usepackage[utf8]{inputenc}
 -->
 
@@ -61,7 +61,7 @@ res_irving = microbenchmark::microbenchmark(
     test_roommate(N[25]),
     test_roommate(N[26]),
     test_roommate(N[27]),
-    test_roommate(N[28]), times = 1, unit = "s")
+    test_roommate(N[28]), times = 10, unit = "s")
 
 tot_exis = rep(0, 28);
 for (n in 1:28) {
