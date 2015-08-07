@@ -151,5 +151,5 @@ A final rotation is `(1, 4), (2, 3)`. Eliminating it yields
 ```
 Therefore, a stable matching is for `0` and `5` to match, `1` and `3` to match, and `2` and `4` to match. 
 ```{r}
-onesided(pref = pref)
+results = onesided(pref = pref)
 ```
