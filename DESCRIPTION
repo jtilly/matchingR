@@ -3,11 +3,12 @@ Type: Package
 Title: Gale-Shapley Algorithm in R and C++
 Version: 1.1
 Date: 2015-05-17
-Author: Jan Tilly
+Authors@R: c(person("Jan", "Tilly", email = "jtilly@econ.upenn.edu", rol = c("aut", "cre")),
+             person("Nick", "Janetos", email = "njanetos@econ.upenn.edu", rol = c("aut")))
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
-Description: Computes the Gale-Shapley Algorithm efficiently using Rcpp. 
-    Provides algorithms to compute the stable matching for the marriage problem 
-    and for the college-admissions problem, i.e. the matching of students to 
+Description: Computes the Gale-Shapley Algorithm efficiently using Rcpp.
+    Provides algorithms to compute the stable matching for the marriage problem
+    and for the college-admissions problem, i.e. the matching of students to
     colleges.
 License: GPL (>= 2)
 URL: https://github.com/jtilly/matchingR

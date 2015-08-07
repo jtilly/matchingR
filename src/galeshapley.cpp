@@ -1,9 +1,10 @@
 #include <queue>
 #include <matchingR.h>
 
-// [[Rcpp::depends(RcppArmadillo)]]
+#include "utils.h"
+#include "galeshapley.h"
 
-#include "main.h"
+// [[Rcpp::depends(RcppArmadillo)]]
 
 //' Compute the Gale-Shapley Algorithm
 //'
@@ -78,47 +79,8 @@ List galeShapleyMatching(const umat& proposerPref, const mat& reviewerUtils) {
       _["engagements"] = engagements);
 }
 
-//' Sort indices of a matrix within a column
-//'
-//' Within each column of a matrix, this function returns the indices of each
-//' element in descending order
-//'
-//' @param u is the input matrix
-//' @return a matrix with sorted indicies
-//'
-// [[Rcpp::export]]
-umat sortIndex(const mat& u) {
-    int N = u.n_rows;
-    int M = u.n_cols;
-    umat sortedIdx(N,M);
-    for(int jX=0;jX<M;jX++) {
-        sortedIdx.col(jX) = sort_index(u.col(jX), "descend");
-    }
-    return sortedIdx;
-}
 
-//' Rank elements within column of a matrix
-//'
-//' This function returns the rank of each element within each column of a matrix.
-//' The highest element receives the highest rank.
-//'
-//' @param sortedIdx is the input matrix
-//' @return a rank matrix
-//'
-// [[Rcpp::export]]
-umat rankIndex(const umat& sortedIdx) {
-    int N = sortedIdx.n_rows;
-    int M = sortedIdx.n_cols;
-    umat rankedIdx(N,M);
-    for(int iX=0; iX<N; iX++) {
-        for(int jX=0; jX<M; jX++) {
-            rankedIdx.at(sortedIdx.at(iX,jX), jX) = iX;
-        }
-    }
-    return rankedIdx;
-}
-
-//' Check if a matching is stable
+//' Check if a two-sided matching is stable
 //'
 //' This function checks if a given matching is stable for a particular set of
 //' preferences. This function can check if a given check one-to-one,
@@ -138,7 +100,7 @@ umat rankIndex(const umat& sortedIdx) {
 //' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat& proposerUtils, mat& reviewerUtils, umat& proposals, umat& engagements) {
+bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
 
     // number of workers
     const int M = proposerUtils.n_cols;

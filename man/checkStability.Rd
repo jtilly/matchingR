@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{checkStability}
 \alias{checkStability}
-\title{Check if a matching is stable}
+\title{Check if a two-sided matching is stable}
 \usage{
 checkStability(proposerUtils, reviewerUtils, proposals, engagements)
 }

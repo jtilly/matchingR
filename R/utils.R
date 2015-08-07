@@ -47,3 +47,34 @@ checkPreferenceOrder = function(pref) {
     
     return(NULL)
 }
+
+#' Check if preference order for a one-sided market is complete.
+#'
+#' @param pref is a matrix with a preference ordering for a one-sided market. 
+#' If necessary transforms the indices from R indices (starting at 1) to C++
+#' indices (starting at 0).
+#' @return a matrix with preference orderings with proper C++ indices or NULL 
+#' if the preference order is not complete.
+checkPreferenceOrderOnesided = function(pref) {
+    
+    # check if pref is using R instead of C++ indexing
+    if(all(apply(pref,2,sort) == array(1:(NROW(pref)), dim = dim(pref)))) {
+        return(pref-1)
+    }
+    
+    comp = array(1:(NROW(pref)), dim = dim(pref))-1
+    for (i in 1:NROW(comp)) {
+        for (j in 1:NCOL(comp)) {
+            if (i >= j) {
+                comp[i, j] = comp[i, j] + 1;
+            }
+        }
+    }
+    
+    # check if pref has a complete listing otherwise given an error
+    if(all(apply(pref,2,sort) == comp)) {
+        return(pref)
+    }  
+    
+    return(NULL)
+}

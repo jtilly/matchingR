@@ -10,6 +10,7 @@ sudo: false
 branches: 
   only: 
    - master
+   - feature/roommate
 
 # install r-base-dev:
 # use r-packages-precise (https://cran.r-project.org/bin/linux/ubuntu/precise/) as source

@@ -1,0 +1,94 @@
+---
+title: 'Solving the Stable Roommate Problem in R: Performance'
+author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
+date: "July 31, 2015"
+output: html_document
+bibliography: bibliography.bib
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Solving the stable roommate problem in R: Performance}
+%\usepackage[utf8]{inputenc}
+-->
+
+```{r, results = "hide", echo=FALSE, message = FALSE}
+library(matchingR)
+```
+
+In this vignette, I explore the computational performance of the Irving algorithm [@irving1985roommates] implemented in this package. Existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
+
+The code to find a stable matching, from the documentation, is
+```{r}
+p = replicate(4, rnorm(3))
+results = onesided(prefUtil = p)
+```
+The function we use to benchmark is
+```{r}
+test_roommate = function(n) {
+    onesided(prefUtil = replicate(2*n, rnorm(2*n-1)))
+}
+```
+That is, $n$ represents the number of rooms available.
+```{r, echo=FALSE}
+N = c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 30, 35, 40, 45)
+N_rep = c(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100)/2
+
+res_irving = microbenchmark::microbenchmark(
+    test_roommate(N[1]),
+    test_roommate(N[2]),
+    test_roommate(N[3]),
+    test_roommate(N[4]),
+    test_roommate(N[5]),
+    test_roommate(N[6]),
+    test_roommate(N[7]),
+    test_roommate(N[8]),
+    test_roommate(N[9]),
+    test_roommate(N[10]),
+    test_roommate(N[11]),
+    test_roommate(N[12]),
+    test_roommate(N[13]),
+    test_roommate(N[14]),
+    test_roommate(N[15]),
+    test_roommate(N[16]),
+    test_roommate(N[17]),
+    test_roommate(N[18]),
+    test_roommate(N[19]),
+    test_roommate(N[20]),
+    test_roommate(N[21]),
+    test_roommate(N[22]),
+    test_roommate(N[23]),
+    test_roommate(N[24]),
+    test_roommate(N[25]),
+    test_roommate(N[26]),
+    test_roommate(N[27]),
+    test_roommate(N[28]), times = 1, unit = "s")
+
+tot_exis = rep(0, 28);
+for (n in 1:28) {
+    for (i in 1:N_rep[n]) {
+        p = replicate(2*N[n], rnorm(2*N[n]-1))
+        p = validateInputsOneSided(prefUtil = p)
+        results = onesided(pref = p)
+        if (is.integer(results)) {
+            tot_exis[n] = tot_exis[n] + 1;
+        }
+    }
+}
+
+irving_original_prop = c(0.961, 0.931, 0.909, 0.868, 0.871, 0.867, 0.857, 0.830, 0.815, 0.808, 0.816, 0.788, 0.750, 0.766, 0.755, 0.770, 0.740, 0.725, 0.745, 0.775, 0.740, 0.740, 0.730, 0.710, 0.725, 0.670, 0.675, 0.690)
+```
+
+```{r, echo=FALSE}
+tab = matrix(c(N_rep,
+               N_rep-tot_exis,
+               (N_rep-tot_exis)/N_rep,
+               irving_original_prop,
+               summary(res_irving)$mean), 
+             ncol = 5, 
+             nrow = 28,
+             dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
+                  "t" = c("No. of instances", "No. with solution", "Proportion with solution", "Proportion with solution (Irving 1985)", "Average cpu time")))
+knitr::kable(tab, digits = 6, caption = "Proportion of matchings which exist and run time (in seconds) for the stable roommate algorithm.")
+```
+
+## Literature

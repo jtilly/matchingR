@@ -153,3 +153,19 @@ test_that("Assortative matching?", {
     expect_true(all(matching$proposals == 1:4))
     expect_true(all(matching$engagements == 1:4))
 })
+
+test_that("Stable roommate?", {
+    for (i in c(4, 8, 16, 32, 64, 128, 256, 512)) {
+        p = validateInputsOneSided(prefUtil = replicate(i, rnorm(i-1)))
+        results = onesided(pref = p)
+        if (!is.integer(results)) {
+            expect_true(checkStabilityRoommate(pref = p, matchings = results))
+        }
+    }
+})
+
+test_that("Check preference orderings for one sided matching", {
+    p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
+    expect_error(validateInputsOneSided(pref = p))
+    expect_error(validateInputsOneSided(prefUtil = p))
+})
