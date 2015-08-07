@@ -1,6 +1,6 @@
 ---
-title: 'Matching algorithms in R: An introduction to matchingR'
-author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu)'
+title: 'Matching Algorithms in R: An Introduction to matchingR'
+author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu) and [Nick Janetos](mailto:njanetos@econ.upenn.edu)'
 date: "August 3, 2015"
 output: html_document
 bibliography: bibliography.bib
@@ -250,7 +250,6 @@ A further rotation is `(0, 1), (1, 5), (3, 4)`. Eliminating it yields
    4, 3, 1,    0
    3, 4, 2, 1,  
 5,              
-                
 ```
 A final rotation is `(1, 4), (2, 3)`. Eliminating it yields
 ```
@@ -258,7 +257,6 @@ A final rotation is `(1, 4), (2, 3)`. Eliminating it yields
          1,    0
    3, 4,        
 5,              
-                
 ```
 Therefore, a stable matching is for `0` and `5` to match, `1` and `3` to match, and `2` and `4` to match. 
 ```{r}
