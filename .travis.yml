@@ -24,6 +24,7 @@ addons:
     - r-recommended
     - pandoc
     - texlive
+    - qpdf
 
 # cache local R libraries directory:
 cache:
