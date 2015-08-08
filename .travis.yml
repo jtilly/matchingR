@@ -50,6 +50,7 @@ install:
 
 # build and check package
 script: 
+  - rm GALESHAPLEY.md IRVING.md
   - R CMD build .
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
   - R CMD check "${PKG_FILE_NAME}" --as-cran
