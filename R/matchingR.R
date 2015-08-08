@@ -23,8 +23,8 @@
 #' @references Gale, D. and Shapley, L.S. (1962). College admissions and the
 #'   stability of marriage. \emph{The American Mathematical Monthly}, 69(1):
 #'   9--15.
-#' @references Irving, R. W. (1985). An efficient algorithm for the “stable
-#'   roommates” problem. \emph{Journal of Algorithms}, 6(4): 577--595
+#' @references Irving, R. W. (1985). An efficient algorithm for the "stable
+#'   roommates" problem. \emph{Journal of Algorithms}, 6(4): 577--595
 #' @examples
 #' # stable marriage problem
 #' nmen = 25
