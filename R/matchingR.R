@@ -2,7 +2,7 @@
 
 #' @name matchingR-package
 #' @docType package
-#' @title matchingR: Efficient Computation of the Gale-Shapley Algorithm in R
+#' @title matchingR: Efficient Computation of Matching Algorithms in R
 #'   and C++
 #' @description matchingR is an R Package that efficiently computes matching
 #'   algorithms for large scale matching markets. It currently implements the
