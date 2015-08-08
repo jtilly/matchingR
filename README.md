@@ -34,7 +34,7 @@ devtools::install_github("jtilly/matchingR.git")
 ```
 
 ## Readme
-* [Gale Shapley Algorithm](GALESHAPLEY.md)
+* [Gale-Shapley Algorithm](GALESHAPLEY.md)
 * [Irving's Algorithm for the Stable Roommate Problem](IRVING.md)
 
 ## Documentation

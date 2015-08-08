@@ -1,7 +1,5 @@
 ---
 title: 'Solving the Stable Roommate Problem in R: Performance'
-author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
-date: "July 31, 2015"
 output: html_document
 bibliography: bibliography.bib
 ---

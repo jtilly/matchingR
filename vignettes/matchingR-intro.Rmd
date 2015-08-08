@@ -1,7 +1,5 @@
 ---
 title: 'Matching Algorithms in R: An Introduction to matchingR'
-author: '[Jan Tilly](mailto:jtilly@econ.upenn.edu) and [Nick Janetos](mailto:njanetos@econ.upenn.edu)'
-date: "August 3, 2015"
 output: pdf_document
 toc: true
 bibliography: bibliography.bib
@@ -95,7 +93,7 @@ For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley 
  5. * Man `1` proposes to woman `2`, his most-preferred available choice. 
     * All men are now matched.
  
- The man-optimal stable matching is thefore:
+ The man-optimal stable matching is therefore:
  
  |-------|---------|
  | Man 1 | Woman 2 |
