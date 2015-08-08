@@ -6,19 +6,15 @@
 *-Ex.R
 # RStudio files
 .Rproj.user/
-# produced vignettes
-vignettes/*.html
 *__packages
 *.rdx
 *.rdb
 .Rproj.user
-.Rbuildignore
 *.o
 *.so
 *.Rproj
 src/symbols.rds
 inst/doc
-vignettes/matchingR-performance_cache/
 # code::blocks
 *.cbp
 *.depend
