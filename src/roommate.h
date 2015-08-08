@@ -6,5 +6,6 @@
 #include "matchingR.h"
 
 List stableRoommateMatching(const umat pref);
+bool checkStabilityRoommate(umat pref, umat matchings);
 
 #endif
