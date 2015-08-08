@@ -71,8 +71,8 @@ after_success:
   - git config user.email "jantilly@gmail.com"
   - git checkout gh-pages
   - git pull origin gh-pages
-  - mv -f ${TRAVIS_BUILD_DIR}/inst/doc/*.html .
-  - mv -f ${TRAVIS_BUILD_DIR}/inst/doc/*.pdf .
+  - cp -f ~/Rlib/matchingR/doc/*.html .
+  - cp -f ~/Rlib/matchingR/doc/*.pdf .
   - git add *.pdf
   - git add *.html
   - git commit -m "Automatic Travis update of vignettes"
