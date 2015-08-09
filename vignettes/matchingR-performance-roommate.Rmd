@@ -1,7 +1,5 @@
 ---
 title: 'Solving the Stable Roommate Problem in R: Performance'
-author: '[Nick Janetos](mailto:njanetos@econ.upenn.edu)'
-date: "July 31, 2015"
 output: html_document
 bibliography: bibliography.bib
 ---
@@ -15,7 +13,7 @@ bibliography: bibliography.bib
 library(matchingR)
 ```
 
-In this vignette, I explore the computational performance of the Irving algorithm [@irving1985roommates] implemented in this package. Existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
+In this vignette, we explore the computational performance of the Irving algorithm [@irving1985roommates] implemented in this package. Existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
 
 The code to find a stable matching, from the documentation, is
 ```{r}

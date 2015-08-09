@@ -1,5 +1,5 @@
-# test_matching.R
-# test the matching algorithms
+# test_galeshapley.R
+# test matching with the Gale-Shapley Algorithm
 
 test_that("Check if one2one matching is stable", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
@@ -154,17 +154,3 @@ test_that("Assortative matching?", {
     expect_true(all(matching$engagements == 1:4))
 })
 
-test_that("Stable roommate?", {
-    set.seed(1)
-    for (i in c(4, 8, 16, 32, 128, 256)) {
-        p = validateInputsOneSided(utils = replicate(i, rnorm(i-1)))
-        results = onesided(pref = p)
-        expect_true(checkStabilityRoommate(pref = p, matchings = results))
-    }
-})
-
-test_that("Check preference orderings for one sided matching", {
-    p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
-    expect_error(validateInputsOneSided(pref = p))
-    expect_error(validateInputsOneSided(utils = p))
-})
