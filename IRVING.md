@@ -1,6 +1,6 @@
 ## Irving's Stable Roommate Algorithm: How does it work?
 
-Preferences of potential roommates are summarized by an `n-1 \times n` dimensional matrix, e.g., if `n = 6`, 
+Preferences of potential roommates are summarized by an `n-1 x n` dimensional matrix, e.g., if `n = 6`, 
 ```{r}
 pref = matrix(c(3, 6, 2, 5, 3, 5,
                 4, 5, 4, 2, 1, 1,
