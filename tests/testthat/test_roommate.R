@@ -15,3 +15,26 @@ test_that("Check preference orderings for one sided matching", {
     expect_error(validateInputsOneSided(pref = p))
     expect_error(validateInputsOneSided(utils = p))
 })
+
+
+test_that("Row vs column major?", {
+    # generate preferences
+    set.seed(1)
+    utils = matrix(rnorm(100), ncol=10, nrow=10)
+    p = validateInputsOneSided(utils = utils)
+    
+    # use preference orderings
+    set.row.major()
+    results.row.major = onesided(pref = t(p))
+    set.column.major()
+    results.column.major = onesided(pref = p)
+    expect_true(identical(results.row.major, results.column.major))
+    
+    # do the same with payoff matrices instead of preference orderings
+    set.row.major()
+    results.row.major = onesided(utils = t(utils))
+    set.column.major()
+    results.column.major = onesided(utils = utils)
+    expect_true(identical(results.row.major, results.column.major))
+    
+})

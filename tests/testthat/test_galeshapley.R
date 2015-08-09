@@ -154,3 +154,27 @@ test_that("Assortative matching?", {
     expect_true(all(matching$engagements == 1:4))
 })
 
+test_that("Check if we can store preferences in row-major order:", {
+    
+    # simulate preferences
+    uM = matrix(runif(12), nrow = 4, ncol = 3)
+    uW = matrix(runif(12), nrow = 3, ncol = 4)
+    prefM = sortIndex(uM)
+    prefW = sortIndex(uW)
+    
+    # use payoff matrices to define preferences
+    set.row.major()
+    matching.row.major = one2one(t(uM), t(uW))
+    set.column.major()
+    matching.column.major = one2one(uM, uW)
+    expect_true(identical(matching.column.major$proposals, matching.row.major$proposals))
+    expect_true(identical(matching.column.major$engagements, matching.row.major$engagements))
+    
+    # repeat the same thing with preference orders as arguments
+    set.row.major()
+    matching.row.major = one2one(proposerPref = t(prefM), reviewerPref = t(prefW))
+    set.column.major()
+    matching.column.major = one2one(proposerPref = prefM, reviewerPref = prefW)
+    expect_true(identical(matching.column.major$proposals, matching.row.major$proposals))
+    expect_true(identical(matching.column.major$engagements, matching.row.major$engagements))
+})

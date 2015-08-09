@@ -56,6 +56,10 @@ set.row.major = function() {
     assign("column.major", FALSE, envir = pkg.env)
 }
 
+set.column.major = function() {
+    assign("column.major", TRUE, envir = pkg.env)
+}
+
 # Startup message
 .onAttach = function(libname, pkgname) {
     
@@ -63,15 +67,15 @@ set.row.major = function() {
         "\n=================================\n",
         "matchingR 1.1 Update Information:\n",
         "=================================\n",
-        "With this update, we changed the layout of  payoff and preference order \n",
-        "matrices. In the  matrix `u`, element [i,j] now refers to the  utility that \n",
+        "With this update, we changed the layout of payoff and preference order \n",
+        "matrices. In the matrix `u`, element [i,j] now refers to the utility that \n",
         "agent [j] receives from being  matched to agent [i]. Similarly, in the matrix \n",
         "`pref`, element [i,j] refers to the id of the  individual that agent `j` \n", 
-        "ranks at position  `i`. I.e., we store payoffs and preference orders in \n",
+        "ranks at position `i`. I.e., we store payoffs and preference orders in \n",
         "column-major order instead of row-major order.\n\n", 
         "If you rather store preferences in row-major order as in version 1.0 of \n", 
         "this package, you need to load the package using \n\n",
         "library(\"matchingR\")\n",
-        "set.row.major(FALSE)\n\n", appendLF = TRUE)
+        "set.row.major()\n\n", appendLF = TRUE)
     
 }
