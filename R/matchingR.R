@@ -52,10 +52,20 @@ NULL
 pkg.env = new.env()
 assign("column.major", TRUE, envir = pkg.env)
 
+#' Store preference in row major order
+#' 
+#' After calling this functions, all preferences should be stored in row major
+#' order.
+#' 
 set.row.major = function() {
     assign("column.major", FALSE, envir = pkg.env)
 }
 
+#' Store preferences in column major order
+#' 
+#' After calling this functions, all preferences should be stored in column major
+#' order. This is the default.
+#' 
 set.column.major = function() {
     assign("column.major", TRUE, envir = pkg.env)
 }
