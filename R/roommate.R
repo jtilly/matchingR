@@ -40,35 +40,44 @@ onesided = function(pref = NULL, utils = NULL) {
 #' of the agents.
 #' @return The validated inputs, ready to be sent to C++ code.
 validateInputsOneSided = function(pref = NULL, utils = NULL) {
-
+    
+    if(get("column.major", envir = pkg.env) == FALSE) {
+        if(!is.null(pref)) {
+            pref = t(pref)
+        }
+        if(!is.null(utils)) {
+            utils = t(utils)
+        }
+    }
+    
     # Convert cardinal utility to ordinal, if necessary
     if (is.null(pref) && !is.null(utils)) {
-
+        
         # remove main diagonal from matrix if NROW = NCOL
         if (NROW(utils) == NCOL(utils)) {
             utils = matrix(
                 utils[-c(seq(from = 1, to = NROW(utils) ^ 2, length.out = NROW(utils)))],
                 nrow = NROW(utils) - 1, ncol = NCOL(utils))
         }
-
+        
         if (NROW(utils) + 1 != NCOL(utils)) {
             stop("preference matrix must be n-1xn")
         }
-
+        
         pref = sortIndexOneSided(as.matrix(utils))
     }
-
+    
     if (NROW(pref) + 1 != NCOL(pref)) {
         stop("preference matrix must be n-1xn")
     }
-
+    
     pref = checkPreferenceOrderOnesided(pref)
     if (is.null(pref)) {
         stop(
             "preferences are not a complete list of preference orderings"
         )
     }
-
+    
     return(pref)
 }
 
@@ -80,13 +89,13 @@ validateInputsOneSided = function(pref = NULL, utils = NULL) {
 #' @return a matrix with preference orderings with proper C++ indices or NULL
 #' if the preference order is not complete.
 checkPreferenceOrderOnesided = function(pref) {
-
+    
     # check if pref is using R instead of C++ indexing
     if (all(apply(rbind(pref, c(1:NCOL(pref))), 2, sort) ==
-            matrix(1:NCOL(pref), nrow = NCOL(pref), ncol = NCOL(pref)))) {
+                matrix(1:NCOL(pref), nrow = NCOL(pref), ncol = NCOL(pref)))) {
         return(pref - 1)
     }
-
+    
     comp = array(1:(NROW(pref)), dim = dim(pref)) - 1
     for (i in 1:NROW(comp)) {
         for (j in 1:NCOL(comp)) {
@@ -95,11 +104,11 @@ checkPreferenceOrderOnesided = function(pref) {
             }
         }
     }
-
+    
     # check if pref has a complete listing otherwise given an error
     if (all(apply(pref,2,sort) == comp)) {
         return(pref)
     }
-
+    
     return(NULL)
 }

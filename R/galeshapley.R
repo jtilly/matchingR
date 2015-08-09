@@ -237,6 +237,22 @@ many2one = function(proposerUtils = NULL,
 #'   (reviewerPref are not required after they are translated into
 #'   reviewerUtils).
 validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPref) {
+    
+    if(get("column.major", envir = pkg.env) == FALSE) {
+        if(!is.null(proposerUtils)) {
+            proposerUtils = t(proposerUtils)
+        }
+        if(!is.null(reviewerUtils)) {
+            reviewerUtils = t(reviewerUtils)
+        }
+        if(!is.null(proposerPref)) {
+            proposerPref = t(proposerPref)
+        }
+        if(!is.null(reviewerPref)){
+            reviewerPref = t(reviewerPref)
+        }
+    }
+    
     if (!is.null(reviewerPref)) {
         reviewerPref = checkPreferenceOrder(reviewerPref)
         if (is.null(reviewerPref)) {

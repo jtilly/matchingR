@@ -48,6 +48,14 @@
 #' results = onesided(utils = u)
 NULL
 
+# Make a package environmental variable with the storage order
+pkg.env = new.env()
+assign("column.major", TRUE, envir = pkg.env)
+
+set.row.major = function() {
+    assign("column.major", FALSE, envir = pkg.env)
+}
+
 # Startup message
 .onAttach = function(libname, pkgname) {
     
@@ -60,6 +68,10 @@ NULL
         "agent [j] receives from being  matched to agent [i]. Similarly, in the matrix \n",
         "`pref`, element [i,j] refers to the id of the  individual that agent `j` \n", 
         "ranks at position  `i`. I.e., we store payoffs and preference orders in \n",
-        "column-major order instead of row-major order.\n\n", appendLF = TRUE)
+        "column-major order instead of row-major order.\n\n", 
+        "If you rather store preferences in row-major order as in version 1.0 of \n", 
+        "this package, you need to load the package using \n\n",
+        "library(\"matchingR\")\n",
+        "set.row.major(FALSE)\n\n", appendLF = TRUE)
     
 }
