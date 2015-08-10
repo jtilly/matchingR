@@ -4,10 +4,11 @@ output: html_document
 bibliography: bibliography.bib
 ---
 <!--
-%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEngine{knitr::rmarkdown}  
 %\VignetteIndexEntry{Solving the Stable Roommate Problem in R: Performance}
 %\usepackage[utf8]{inputenc}
 -->
+
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
 library(matchingR)

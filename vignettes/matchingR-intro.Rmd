@@ -6,7 +6,7 @@ bibliography: bibliography.bib
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
-%\VignetteIndexEntry{Matching algorithms in R: An introduction to matchingR}
+%\VignetteIndexEntry{Matching Algorithms in R: An Introduction to matchingR}
 %\usepackage[utf8]{inputenc}
 -->
 
