@@ -1,4 +1,4 @@
-Matching Algorithms in R: Gale-Shapley and Irving's Stable Roommate Problem
+Matching Algorithms in R: Gale-Shapley Algorithm and Irving's Algorithm
 ===============
 [![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR) 
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
@@ -40,5 +40,5 @@ devtools::install_github("jtilly/matchingR.git")
 ## Documentation
 * [Reference Manual](http://jtilly.io/matchingR/matchingR-documentation.pdf "Computing Stable Matchings in R: Reference Manual for matchingR")
 * [Vignette: Matching Algorithms in R: An Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.pdf "Matching Algorithms in R: An Introduction to matchingR")
-* Computational Performance: [Gale-Shapley](http://jtilly.io/matchingR/matchingR-performance-galeshapley.html "Computing the Gale-Shapley Algorithm in R: Performance"), [Stable Roommate Problem](http://jtilly.io/matchingR/matchingR-performance-roommate.html "Solving the Stable Roommate Problem in R")
+* *Computational Performance*: [Gale-Shapley](http://jtilly.io/matchingR/matchingR-performance-galeshapley.html "Computing the Gale-Shapley Algorithm in R: Performance"), [Stable Roommate Problem](http://jtilly.io/matchingR/matchingR-performance-roommate.html "Solving the Stable Roommate Problem in R")
 
