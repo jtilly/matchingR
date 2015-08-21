@@ -56,6 +56,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// topTradingCycle
+List topTradingCycle(const umat pref);
+RcppExport SEXP matchingR_topTradingCycle(SEXP prefSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
+    __result = Rcpp::wrap(topTradingCycle(pref));
+    return __result;
+END_RCPP
+}
 // sortIndex
 umat sortIndex(const mat& u);
 RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {
