@@ -14,6 +14,9 @@
 // [[Rcpp::export]]
 List topTradingCycle(const umat pref) {
     
+    // maximum value of uword
+    uword NULL_VAL = static_cast<uword>(-1);
+    
     // the number of participants
     uword N = pref.n_cols;
     
@@ -25,24 +28,37 @@ List topTradingCycle(const umat pref) {
     
     // the vector of matchings to be returned
     uvec matchings(N);
-    matchings.fill(-1);
+    matchings.fill(NULL_VAL);
     
     // used for the algorithm below
-    uword current_agent = -1;
+    uword current_agent = NULL_VAL;
     
     // loop until everyone's been matched
     while (true) {
         
-        // if current_agent = -1, then set current_agent to be
-        // the first unmmatched guy
+        // if current_agent = -1, then set current_agent to be the first unmmatched guy
+        if (current_agent == NULL_VAL) { 
+            // find the first unmmatched guy
+            for (uword i = 0; i < N; ++i) {
+                if (is_matched(i) == 0) {
+                    current_agent = i;
+                    break;
+                }
+            }
+        }
         
         // now identify rotations
         while(true) {
             // start cycling through preferences, starting with current_agent
             
             // find current_agent's most preferred, unmatched outcome, p
-            
-            // set matchings[current_agent] = p
+            // provisionally match current_agent to p by setting matchings[current_agent] = p
+            for (uword i = 0; i < N; ++i) {
+                if (is_matched(pref(i, current_agent)) == 0) {
+                    matchings(current_agent) = pref(i, current_agent);
+                    break;
+                }
+            }
             
             // check if p has already shown up in this chain by checking if
             // matchings[p] is larger than -1. if it is larger than -1, then
@@ -52,6 +68,9 @@ List topTradingCycle(const umat pref) {
             
             // if matchings is larger than -1, then we have a rotation, starting
             // with p, and ending with current_agent, so break
+            if (matchings(matchings(current_agent)) != NULL_VAL) {
+                break;
+            }
             
             // otherwise, continue looking for a rotation
         }
@@ -59,20 +78,34 @@ List topTradingCycle(const umat pref) {
         // loop through, starting with p, then matchings[p], etc., and
         // ending with current_agent. for each agent, set is_matched to
         // 1. 
+        for (uword i = matchings(matchings(current_agent)); i != current_agent; i = matchings(i)) {
+            is_matched(i) = 1;
+        }
+        is_matched(current_agent) = 1;
         
         // check if everyone's matched, if so, we're done, so break
-        if (sum(unmatched) == N) break;
+        if (sum(is_matched) == N) break;
         
         // otherwise, we need to set current_agent in such a way so as to continue
         // looking for rotations
         
         // one way to do this would be to check if (1-is_matched) .* matchings = -1*sum(1-is_matched)
-        // if true, then set current_agent equal to the first unmmatched agent
-        // otherwise, we just cut off the 'tail' when we removed the rotation, and the body
-        // can be used to find a new rotation
-        // in this case, set current_agent to be the last agent in the head, i.e., the agent who we 
-        // matched to p. 
+        // if true, then set current_agent equal to -1 to reset the rotation finding process
+        if (sum((1-is_matched)%matchings) == -1*sum(1-is_matched)) {
+            current_agent = -1;
+        } else {
+            // otherwise, we just cut off the 'tail' when we removed the rotation, and the body
+            // can be used to find a new rotation
+            // in this case, set current_agent to be the last agent in the head, i.e., the agent who we 
+            // matched to matchings(matchings(current_agent)), but who was not actually matched.
+            for (uword i = 0; i < N; ++i) {
+                if (matchings(i) == matchings(matchings(current_agent)) && is_matched(i) == NULL_VAL) {
+                    current_agent = i;
+                    break;
+                }
+            }
+        }
     }
     
-    return 0;
+    return List::create(_["matchings"] = matchings);
 }
