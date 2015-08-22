@@ -4,13 +4,15 @@
 
 //' Computes the top trading cycle algorithm
 //'
-//' This function uses the top trading cycle algorithm to find a stable trade between participants,
-//' each with some indivisible good, and with preferences over the goods of other participants.
+//' This function uses the top trading cycle algorithm to find a stable trade between agents,
+//' each with some indivisible good, and with preferences over the goods of other agents. Each
+//' agent is matched to one other agent, and matchings are not necessarily two-way. Agents may
+//' be matched with themselves. 
 //'
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
 //' @return A list with the matchings made. The matchings are encoded as follows: The first value
-//' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
-//' is the individual to whom agent 2 will be giving his good, etc. 
+//' in the list is the individual to whom agent 0 will be giving his good, the second value in the list
+//' is the individual to whom agent 1 will be giving his good, etc. 
 // [[Rcpp::export]]
 List topTradingCycle(const umat pref) {
     

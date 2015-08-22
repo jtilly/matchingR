@@ -53,7 +53,7 @@ table = matrix(c(rep(1, 14), summary(res_irving)$mean),
                dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
                                "t" = c("No. of instances", 
                                        "Average cpu time")))
-knitr::kable(table, digits = 6, caption = "Run time (in ms) for top trading cycle algorithm")
+knitr::kable(table, digits = 6, caption = "Run time (in s) for top trading cycle algorithm")
 ```
 
 ## Literature
