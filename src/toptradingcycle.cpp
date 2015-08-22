@@ -47,12 +47,7 @@ List topTradingCycle(const umat pref) {
         // if current_agent = -1, then set current_agent to be the first unmmatched guy
         if (current_agent == NULL_VAL) { 
             // find the first unmmatched guy
-            for (uword i = 0; i < N; ++i) {
-                if (is_matched(i) == 0) {
-                    current_agent = i;
-                    break;
-                }
-            }
+            current_agent = as_scalar(find(is_matched == 0, 1));
         }
         
         // logg.info() << "Beginning outer loop.";
