@@ -4,8 +4,10 @@
 test_that("Stable?", {
     set.seed(1)
     for (i in c(4, 8, 16, 32, 128, 256)) {
-        p = validateInputsOneSided(utils = replicate(i, rnorm(i-1)))
-        results = onesided(pref = p)
-        expect_true(checkStabilityRoommate(pref = p, matchings = results))
+        utils = replicate(i, rnorm(i))
+        pref = NULL
+        args = validateInputs(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)$proposerPref
+        results = toptrading(pref = args)
+        expect_true(checkStabilityTopTradingCycle(pref = args, matchings = results))
     }
 })

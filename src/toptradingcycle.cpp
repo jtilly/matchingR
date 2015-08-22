@@ -140,3 +140,47 @@ List topTradingCycle(const umat pref) {
     
     return List::create(_["matchings"] = matchings + 1);
 }
+
+//' Check if a one-sided matching for the top trading cycle algorithm is stable
+//'
+//' @param pref is a matrix with ordinal rankings of the participants
+//' @param matchings is an nx1 matrix encoding who is matched to whom using
+//' R style indexing
+//' @return true if the matching is stable, false otherwise
+// [[Rcpp::export]]
+bool checkStabilityTopTradingCycle(umat pref, umat matchings) {
+    
+    // convert to c++ indexing
+    matchings = matchings - 1;
+    
+    // loop through everyone and check whether there's anyone else
+    // who they'd rather be with
+    for (uword i=0; i<pref.n_cols; i++) {
+        for (uword j=i+1; j<pref.n_cols; j++) {
+            
+            // do i, j prefer to switch?
+            bool i_prefers = false;
+            bool j_prefers = false;
+            
+            // i?
+            for (uword k=0; k<pref.n_rows; k++) {
+                if (pref(k, i) == j) i_prefers = true;
+                if (pref(k, i) == matchings(i)) break;
+            }
+            
+            // j?
+            for (uword k=0; k<pref.n_rows; k++) {
+                if (pref(k, j) == j) j_prefers = true;
+                if (pref(k, j) == matchings(j)) break;
+            }
+            
+            // do they both want to switch?
+            if (i_prefers && j_prefers) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+
+}

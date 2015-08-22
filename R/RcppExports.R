@@ -86,6 +86,16 @@ topTradingCycle <- function(pref) {
     .Call('matchingR_topTradingCycle', PACKAGE = 'matchingR', pref)
 }
 
+#' Check if a one-sided matching for the top trading cycle algorithm is stable
+#'
+#' @param pref is a matrix with ordinal rankings of the participants
+#' @param matchings is an nx1 matrix encoding who is matched to whom using
+#' R style indexing
+#' @return true if the matching is stable, false otherwise
+checkStabilityTopTradingCycle <- function(pref, matchings) {
+    .Call('matchingR_checkStabilityTopTradingCycle', PACKAGE = 'matchingR', pref, matchings)
+}
+
 #' Sort indices of a matrix within a column
 #'
 #' Within each column of a matrix, this function returns the indices of each
