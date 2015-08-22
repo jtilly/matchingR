@@ -136,5 +136,5 @@ List topTradingCycle(const umat pref) {
         }
     }
     
-    return List::create(_["matchings"] = matchings);
+    return List::create(_["matchings"] = matchings + 1);
 }

@@ -1,8 +1,8 @@
 ---
 title: 'Matching Algorithms in R: An Introduction to matchingR'
-output: pdf_document
-toc: true
+output: html_document
 bibliography: bibliography.bib
+toc: yes
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
@@ -285,5 +285,54 @@ u = matrix(runif(N^2),  nrow = N, ncol = N)
 results = onesided(utils = u)
 print(results)
 ```
+
+# Kidneys and Housing: The Top Trading Cycle Algorithm
+
+This package implements the top trading cycle algorithm.
+
+Consider the following problem: A set of $n$ agents each currently own their own home, and have preferences over the homes of other agents. The problem is to trade the homes between the agents in such a way so that no two agents want to swap homes. 
+
+## Specification of Preferences
+
+Preferences of agents are summarized by an $n \times n$ dimensional matrix, e.g., if $n = 4$, 
+```{r}
+pref = matrix(c(4, 4, 2, 4,
+                2, 1, 1, 1,
+                1, 2, 3, 3,
+                3, 3, 4, 2), nrow = 4, ncol = 4, byrow = TRUE)
+```
+
+Column $i$ represents the preferences of the $i$th agent, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, agent `1` most prefers the home of agent `4`, followed by `2`, followed by `1`, followed by `3`.
+
+## Top Trading Cycle Algorithm
+
+Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home. 
+
+```
+4,  4,  2,  4 
+2,  1,  1,  1 
+1,  2,  3,  3 
+3,  3,  4,  2 
+```
+
+For example, for the above preference matrix, when all the agents are unmmatched, the only rotation is $\{4\}$, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
+
+```
+        2
+2,  1,  1 
+1,  2,  3 
+3,  3,    
+```
+
+Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by his lonesome. 
+
+```
+         
+          
+        3 
+          
+```
+
+Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes. 
 
 # Literature
