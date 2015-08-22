@@ -9,7 +9,7 @@ Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
 Description: Computes matching algorithms efficiently using Rcpp.
     Implements the Gale-Shapley Algorithm to compute the stable matching for
     two-sided markets, such as the stable marriage problem and the
-    college-admissions problem. Also implements Irving's Algorithm for 
+    college-admissions problem. Also implements Irving's Algorithm for
     the stable roommate problem.
 License: GPL (>= 2)
 URL: https://github.com/jtilly/matchingR
