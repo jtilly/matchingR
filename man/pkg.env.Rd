@@ -4,7 +4,7 @@
 \name{pkg.env}
 \alias{pkg.env}
 \title{Make a package environmental variable with the storage order}
-\format{\preformatted{<environment: 0x2b5b4d0> 
+\format{\preformatted{<environment: 0x56a2f50> 
 }}
 \usage{
 pkg.env
