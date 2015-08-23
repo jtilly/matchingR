@@ -1,4 +1,7 @@
 #include "toptradingcycle.h"
+#include <RcppLogger.h>
+
+using namespace RcppLogger;
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -16,7 +19,7 @@
 // [[Rcpp::export]]
 List topTradingCycle(const umat pref) {
     
-    // logger logg(ALL);
+    logger logg(QUIET);
     
     // maximum value of uword
     uword NULL_VAL = static_cast<uword>(-1);
@@ -24,7 +27,7 @@ List topTradingCycle(const umat pref) {
     // the number of participants
     uword N = pref.n_cols;
     
-    // logg.info() << "There are " << N << " participants.";
+    logg.info() << "There are " << N << " participants.";
     
     // a vector of zeros and ones, encodes whether a
     // participant has been matched or not
@@ -39,7 +42,7 @@ List topTradingCycle(const umat pref) {
     // used for the algorithm below
     uword current_agent = NULL_VAL;
     
-    // logg.info() << "Ready to begin!";
+    logg.info() << "Ready to begin!";
 
     // loop until everyone's been matched
     while (true) {
@@ -55,7 +58,7 @@ List topTradingCycle(const umat pref) {
             }
         }
         
-        // logg.info() << "Beginning outer loop.";
+        logg.info() << "Beginning outer loop.";
 
         // now identify rotations
         while(true) {
@@ -70,9 +73,9 @@ List topTradingCycle(const umat pref) {
                 }
             }
             
-            // logg.info() << "Current agent is " << current_agent << ".";
+            logg.info() << "Current agent is " << current_agent << ".";
             
-            // logg.info() << "Agent " << current_agent << " most prefers " << matchings(current_agent) << ".";
+            logg.info() << "Agent " << current_agent << " most prefers " << matchings(current_agent) << ".";
             
             // check if p has already shown up in this chain by checking if
             // matchings[p] is larger than -1. if it is larger than -1, then
@@ -90,10 +93,10 @@ List topTradingCycle(const umat pref) {
             current_agent = matchings(current_agent);
         }
         
-        // logg.info() << "Rotation found! Starts with agent " << matchings(current_agent) << " and ends with " << current_agent << ".";
+        logg.info() << "Rotation found! Starts with agent " << matchings(current_agent) << " and ends with " << current_agent << ".";
         
-        // logg.info() << "Removing identified rotation...";
-        // logg.info() << "Current status:";
+        logg.info() << "Removing identified rotation...";
+        logg.info() << "Current status:";
         
         // loop through, starting with p, then matchings[p], etc., and
         // ending with current_agent. for each agent, set is_matched to
@@ -104,16 +107,14 @@ List topTradingCycle(const umat pref) {
         is_matched(current_agent) = 1;
         
         for (uword i = 0; i < N; i++) {
-            // logg.info() << "Agent " << i << " match status is " << is_matched(i) << ".";
-            if (is_matched(i) == 1) {
-                // logg.info() << "   -- He's matched to " << matchings(i) << ".";
-            }
+            logg.info() << "Agent " << i << " match status is " << is_matched(i) << ".";
+            logg.info() << "   -- He's matched to " << matchings(i) << ".";
         }
         
         // check if everyone's matched, if so, we're done, so break
         if (sum(is_matched) == N) break;
         
-        // logg.info() << "But we're not done yet!";
+        logg.info() << "But we're not done yet!";
 
         // otherwise, we need to set current_agent in such a way so as to continue
         // looking for rotations
@@ -121,7 +122,7 @@ List topTradingCycle(const umat pref) {
         // one way to do this would be to check if (1-is_matched) .* matchings = -1*sum(1-is_matched)
         // if true, then set current_agent equal to -1 to reset the rotation finding process
         if (sum((1-is_matched)%matchings) == -1*sum(1-is_matched)) {
-            // logg.info() << "We completely removed that rotation, so now the current_agent is reset!";
+            logg.info() << "We completely removed that rotation, so now the current_agent is reset!";
             current_agent = -1;
         } else {
             // otherwise, we just cut off the 'tail' when we removed the rotation, and the body
@@ -129,12 +130,12 @@ List topTradingCycle(const umat pref) {
             // in this case, set current_agent to be the last agent in the head, i.e., the agent who we 
             // matched to matchings(matchings(current_agent)), but who was not actually matched.
             for (uword i = 0; i < N; ++i) {
-                if (matchings(i) == matchings(matchings(current_agent)) && is_matched(i) == 0) {
+                if (matchings(i) == matchings(current_agent) && is_matched(i) == 0) {
                     current_agent = i;
                     break;
                 }
             }
-            // logg.info() << "We only cut off the tail, so the current agent has been reset to " << current_agent << ".";
+            logg.info() << "We only cut off the tail, so the current agent has been reset to " << current_agent << ".";
         }
     }
     
@@ -148,15 +149,12 @@ List topTradingCycle(const umat pref) {
 //' R style indexing
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStabilityTopTradingCycle(umat pref, umat matchings) {
-    
-    // convert to c++ indexing
-    matchings = matchings - 1;
+bool checkStabilityTopTradingCycle(umat pref, uvec matchings) {
     
     // loop through everyone and check whether there's anyone else
     // who they'd rather be with
     for (uword i=0; i<pref.n_cols; i++) {
-        for (uword j=i+1; j<pref.n_cols; j++) {
+        for (uword j=i; j<pref.n_cols; j++) {
             
             // do i, j prefer to switch?
             bool i_prefers = false;
@@ -164,14 +162,14 @@ bool checkStabilityTopTradingCycle(umat pref, umat matchings) {
             
             // i?
             for (uword k=0; k<pref.n_rows; k++) {
-                if (pref(k, i) == j) i_prefers = true;
                 if (pref(k, i) == matchings(i)) break;
+                if (pref(k, i) == j) i_prefers = true;
             }
             
             // j?
             for (uword k=0; k<pref.n_rows; k++) {
-                if (pref(k, j) == j) j_prefers = true;
                 if (pref(k, j) == matchings(j)) break;
+                if (pref(k, j) == i) j_prefers = true;
             }
             
             // do they both want to switch?

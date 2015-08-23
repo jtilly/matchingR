@@ -15,6 +15,6 @@ License: GPL (>= 2)
 URL: https://github.com/jtilly/matchingR
 BugReports: https://github.com/jtilly/matchingR/issues
 Depends: Rcpp
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo, RcppLogger
 Suggests: testthat, knitr, microbenchmark
 VignetteBuilder: knitr
