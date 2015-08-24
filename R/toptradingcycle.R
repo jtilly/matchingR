@@ -7,8 +7,8 @@
 #' over other agents. E.g., if the jth row of the ith column is 2.3, then agent i gets
 #' utility of 2.3 from being matched to agent j. 
 #' @return A vector of length n corresponding to the matchings being made, so that
-#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
-#' uses R style indexing. If no stable matching exists, it returns NULL.
+#' e.g. if the 4th element is 6 then agent 4 was matched to agent 6. This vector
+#' uses R style indexing.
 #' @examples
 #' results = toptrading(utils = replicate(4, rnorm(4)))
 toptrading = function(pref = NULL, utils = NULL) {
