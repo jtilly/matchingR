@@ -3,7 +3,7 @@
 #' @param pref An nxn matrix, each column representing each agent's ordinal preferences 
 #' over other agents. E.g., if the jth row of the ith column is 4, then agent i ranks 
 #' agent 4 jth.
-#' @param util An nxn matrix, each column representing each agent's cardinal preferences
+#' @param utils An nxn matrix, each column representing each agent's cardinal preferences
 #' over other agents. E.g., if the jth row of the ith column is 2.3, then agent i gets
 #' utility of 2.3 from being matched to agent j. 
 #' @return A vector of length n corresponding to the matchings being made, so that

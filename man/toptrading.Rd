@@ -11,7 +11,7 @@ toptrading(pref = NULL, utils = NULL)
 over other agents. E.g., if the jth row of the ith column is 4, then agent i ranks
 agent 4 jth.}
 
-\item{util}{An nxn matrix, each column representing each agent's cardinal preferences
+\item{utils}{An nxn matrix, each column representing each agent's cardinal preferences
 over other agents. E.g., if the jth row of the ith column is 2.3, then agent i gets
 utility of 2.3 from being matched to agent j.}
 }
