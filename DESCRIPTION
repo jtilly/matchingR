@@ -1,6 +1,6 @@
 Package: matchingR
 Type: Package
-Title: Gale-Shapley Algorithm in R and C++
+Title: Matching Algorithms in R and C++
 Version: 1.1
 Date: 2015-08-07
 Authors@R: c(person("Jan", "Tilly", email = "jtilly@econ.upenn.edu", rol = c("aut", "cre")),
