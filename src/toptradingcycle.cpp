@@ -58,12 +58,7 @@ List topTradingCycle(const umat pref) {
             
             // find current_agent's most preferred, unmatched outcome, p
             // provisionally match current_agent to p by setting matchings[current_agent] = p
-            for (uword i = 0; i < N; ++i) {
-                if (is_matched(pref(i, current_agent)) == 0) {
-                    matchings(current_agent) = pref(i, current_agent);
-                    break;
-                }
-            }
+            matchings(current_agent) = as_scalar(find(is_matched(pref.col(current_agent)) == 0, 1));
             
             // logg.info() << "Current agent is " << current_agent << ".";
             
