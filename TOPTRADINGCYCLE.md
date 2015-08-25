@@ -9,7 +9,7 @@ Roughly speaking, the top trading cycle algorithm proceeds by identifying cycles
 3,  3,  4,  2 
 ```
 
-For example, for the above preference matrix, when all the agents are unmmatched, the only rotation is $\{4\}$, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
+For example, for the above preference matrix, when all the agents are unmmatched, the only rotation is `{4}`, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
 
 ```
         2
@@ -18,7 +18,7 @@ For example, for the above preference matrix, when all the agents are unmmatched
 3,  3,    
 ```
 
-Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by his lonesome. 
+Now, a rotation is `{1, 2}`, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by his lonesome. 
 
 ```
          
