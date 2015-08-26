@@ -71,6 +71,31 @@ checkStabilityRoommate <- function(pref, matchings) {
     .Call('matchingR_checkStabilityRoommate', PACKAGE = 'matchingR', pref, matchings)
 }
 
+#' Computes the top trading cycle algorithm
+#'
+#' This function uses the top trading cycle algorithm to find a stable trade between agents,
+#' each with some indivisible good, and with preferences over the goods of other agents. Each
+#' agent is matched to one other agent, and matchings are not necessarily two-way. Agents may
+#' be matched with themselves. 
+#'
+#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @return A list with the matchings made. The matchings are encoded as follows: The first value
+#' in the list is the individual to whom agent 0 will be giving his good, the second value in the list
+#' is the individual to whom agent 1 will be giving his good, etc. 
+topTradingCycle <- function(pref) {
+    .Call('matchingR_topTradingCycle', PACKAGE = 'matchingR', pref)
+}
+
+#' Check if a one-sided matching for the top trading cycle algorithm is stable
+#'
+#' @param pref is a matrix with ordinal rankings of the participants
+#' @param matchings is an nx1 matrix encoding who is matched to whom using
+#' R style indexing
+#' @return true if the matching is stable, false otherwise
+checkStabilityTopTradingCycle <- function(pref, matchings) {
+    .Call('matchingR_checkStabilityTopTradingCycle', PACKAGE = 'matchingR', pref, matchings)
+}
+
 #' Sort indices of a matrix within a column
 #'
 #' Within each column of a matrix, this function returns the indices of each

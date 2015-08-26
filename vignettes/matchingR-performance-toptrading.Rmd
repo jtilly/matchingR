@@ -1,0 +1,59 @@
+---
+title: 'Solving the Top Trading Cycle Algorithm in R: Performance'
+output: html_document
+bibliography: bibliography.bib
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}  
+%\VignetteIndexEntry{Solving the Top Trading Cycle Algorithm in R: Performance}
+%\usepackage[utf8]{inputenc}
+-->
+
+
+```{r, results = "hide", echo=FALSE, message = FALSE}
+library(matchingR)
+```
+
+In this vignette, we explore the computational performance of the top trading cycle algorithm implemented in this package. The code to find a stable matching, from the documentation, is
+```{r}
+u = matrix(rnorm(16), nrow = 4)
+results = toptrading(utils = u)
+```
+The function we use to benchmark is
+```{r}
+test_toptrading = function(n) {
+    toptrading(utils = matrix(rnorm( n ^ 2 ), nrow = n))
+}
+```
+so that `n` represents the number of agents in the market.
+```{r, echo=FALSE}
+N = c(2, 4, 8, 16, 32, 64, 128, 256, 512, 
+      1024, 2048, 4096, 4096*2, 4096*3)
+
+res_irving = microbenchmark::microbenchmark(
+    test_toptrading(N[1]),
+    test_toptrading(N[2]),
+    test_toptrading(N[3]),
+    test_toptrading(N[4]),
+    test_toptrading(N[5]),
+    test_toptrading(N[6]),
+    test_toptrading(N[7]),
+    test_toptrading(N[8]),
+    test_toptrading(N[9]),
+    test_toptrading(N[10]),
+    test_toptrading(N[11]),
+    test_toptrading(N[12]),
+    test_toptrading(N[13]),
+    test_toptrading(N[14]), times = 1, unit = "s")
+```
+
+```{r, echo=FALSE}
+table = matrix(c(rep(1, 14), summary(res_irving)$mean),  
+               ncol = 2, nrow = 14, 
+               dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
+                               "t" = c("No. of instances", 
+                                       "Average cpu time")))
+knitr::kable(table, digits = 6, caption = "Run time (in s) for top trading cycle algorithm")
+```
+
+## Literature
