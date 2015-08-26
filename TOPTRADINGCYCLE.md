@@ -1,4 +1,4 @@
-## Top Trading Cycle Algorithm: How does it work?]
+## Top Trading Cycle Algorithm: How does it work?
 
 Roughly speaking, the top trading cycle algorithm proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home.
 
@@ -18,7 +18,7 @@ For example, for the above preference matrix, when all the agents are unmmatched
 3,  3,
 ```
 
-Now, a rotation is `{1, 2}`, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by his lonesome.
+Now, a rotation is `{1, 2}`, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by himself.
 
 ```
 
