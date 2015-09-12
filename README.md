@@ -35,7 +35,7 @@ devtools::install_github("jtilly/matchingR.git")
 ```
 
 ## Examples
-```
+```{r}
 # stable marriage problem
 nmen = 25
 nwomen = 20
