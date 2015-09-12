@@ -53,13 +53,13 @@ results = one2many(uStudents, uColleges, slots=4)
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 
 # stable roommate problem
-N = 10
-u = matrix(runif(N^2),  nrow = N, ncol = N)
+n = 10
+u = matrix(runif(N^2),  nrow = n, ncol = n)
 results = onesided(utils = u)
 
 # top trading cycle algorithm
-N = 10
-u = matrix(runif(N^2),  nrow = N, ncol = N)
+n = 10
+u = matrix(runif(N^2),  nrow = n, ncol = n)
 results = toptrading(utils = u)
 ```
 
