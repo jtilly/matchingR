@@ -10,7 +10,6 @@ sudo: false
 branches:
   only:
    - master
-   - feature/roommate
 
 # install r-base-dev:
 # use r-packages-precise (https://cran.r-project.org/bin/linux/ubuntu/precise/) as source
@@ -49,7 +48,6 @@ install:
 
 # build and check package
 script:
-  - rm GALESHAPLEY.md IRVING.md TOPTRADINGCYCLE.md
   - R CMD build . --no-manual --no-build-vignettes
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
   - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes
