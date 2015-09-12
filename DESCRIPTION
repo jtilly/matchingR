@@ -2,7 +2,7 @@ Package: matchingR
 Type: Package
 Title: Matching Algorithms in R and C++
 Version: 1.1
-Date: 2015-08-07
+Date: 2015-09-12
 Authors@R: c(person("Jan", "Tilly", email = "jtilly@econ.upenn.edu", rol = c("aut", "cre")),
              person("Nick", "Janetos", email = "njanetos@econ.upenn.edu", rol = c("aut")))
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
