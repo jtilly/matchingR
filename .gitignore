@@ -2,7 +2,6 @@
 *.o
 *.so
 *.Rproj
-inst/doc
 .Rbuildignore
 .Rhistory
 *.RData
