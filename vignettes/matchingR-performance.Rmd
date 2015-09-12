@@ -14,8 +14,8 @@ library(matchingR)
 ```
 In this vignette, we explore the computational performance of the various algorithms implemented in this package.
 
-# Gale-Shapley Algorithm [@gale1962college]
-The computational performance highly depends on how similar agents' preferences are. When some woman is the most preferred to many men, the algorithm will require a lot more rounds to compute the stable matching than when preferences are completely random. To capture this we will construct preferences that feature a common and an idiosyncratic component. The weight on the common component ("the level of commonality") is denoted by $\lambda$. When $\lambda=1$, all men have identical preferences over all women and vice versa. When $\lambda=0$, all preferences are completely random.
+# Gale-Shapley Algorithm 
+The computational performance of the Gale-Shapley Algorithm highly depends on how similar agents' preferences are. When some woman is the most preferred to many men, the algorithm will require a lot more rounds to compute the stable matching than when preferences are completely random. To capture this we will construct preferences that feature a common and an idiosyncratic component. The weight on the common component ("the level of commonality") is denoted by $\lambda$. When $\lambda=1$, all men have identical preferences over all women and vice versa. When $\lambda=0$, all preferences are completely random.
 
 Preferences for men are then constructed as follows:
 
@@ -119,7 +119,7 @@ knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matchin
 
 # Irving's Algorithm [@irving1985roommates]
 
-Existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
+In the roommate problem, existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
 
 The code to find a stable matching, from the documentation, is
 ```{r}
@@ -202,7 +202,7 @@ knitr::kable(table, digits = 6, caption = "Proportion of matchings which exist a
 
 # Top Trading Cycle Algorithm [@shapley1973cores]
 
-The code to find a stable matching, from the documentation, is
+The code to find a stable matching using the top trading cycle algorithm is
 ```{r}
 u = matrix(rnorm(16), nrow = 4)
 results = toptrading(utils = u)
