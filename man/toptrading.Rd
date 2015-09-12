@@ -17,8 +17,8 @@ utility of 2.3 from being matched to agent j.}
 }
 \value{
 A vector of length n corresponding to the matchings being made, so that
-e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
-uses R style indexing. If no stable matching exists, it returns NULL.
+e.g. if the 4th element is 6 then agent 4 was matched to agent 6. This vector
+uses R style indexing.
 }
 \description{
 Compute the top trading cycle algorithm

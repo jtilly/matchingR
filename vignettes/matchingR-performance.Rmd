@@ -1,11 +1,11 @@
 ---
-title: 'Computing the Gale-Shapley Algorithm in R: Performance'
+title: 'Matching Algorithms in R: Computational Performance'
 output: html_document
 bibliography: bibliography.bib
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
-%\VignetteIndexEntry{Computing the Gale-Shapley Algorithm in R: Performance}
+%\VignetteIndexEntry{Matching Algorithms in R: Computational Performance}
 %\usepackage[utf8]{inputenc}
 -->
     

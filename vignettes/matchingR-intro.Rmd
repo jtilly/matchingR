@@ -78,21 +78,21 @@ The matching algorithm discussed below can take either payoff matrices of the ty
 
 The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
 
-For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single. 
+For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single.
 
  1. * Man `1` proposes to woman `1`, his most-preferred choice.
     * Unmatched men: `2`, `3`
- 2. * Man `2` proposes to woman `3`, his most-preferred choice. 
+ 2. * Man `2` proposes to woman `3`, his most-preferred choice.
     * Unmatched men: `3`
  3. * Man `3` proposes to woman `3`, his most-preferred choice.
-    * Woman `3` now dumps man `2`. 
+    * Woman `3` now dumps man `2`.
     * Unmatched men: `2`
- 4. * Man `2` proposes to woman `1`, his most-preferred available choice. 
-    * Woman `1` now dumps man `1`. 
+ 4. * Man `2` proposes to woman `1`, his most-preferred available choice.
+    * Woman `1` now dumps man `1`.
     * Unmatched men: `1`
- 5. * Man `1` proposes to woman `2`, his most-preferred available choice. 
+ 5. * Man `1` proposes to woman `2`, his most-preferred available choice.
     * All men are now matched.
- 
+
  The man-optimal stable matching is therefore:
 
  |Man | Woman|
@@ -112,15 +112,15 @@ matching = one2one(proposerPref = prefM, reviewerPref = prefW)
 ```
 The function `one2one` returns a list `matching` that includes the vectors `proposals` and `engagements` with the final proposals and engagements, respectively. These two vectors contain the same information (i.e. they tell us who is matched with whom). For the example above, the vector of proposals contains
 ```{r, echo=FALSE}
-dimnames(matching$proposals) = list(rows = c("Man 1", "Man 2", "Man 3"), 
+dimnames(matching$proposals) = list(rows = c("Man 1", "Man 2", "Man 3"),
                                     cols = c("Proposed to Woman"))
 ```
 ```{r}
 matching$proposals
 ```
-The first element in the vector tells us that man `1` is matched with woman `2`. Man `2` is matched to woman `1`, and man `3` is matched to woman `3`. The vector of engagement contains 
+The first element in the vector tells us that man `1` is matched with woman `2`. Man `2` is matched to woman `1`, and man `3` is matched to woman `3`. The vector of engagement contains
 ```{r, echo=FALSE}
-dimnames(matching$engagements) = list(rows = c("Woman 1", "Woman 2", "Woman 3"), 
+dimnames(matching$engagements) = list(rows = c("Woman 1", "Woman 2", "Woman 3"),
                                       cols = c("Engaged to Man"))
 ```
 ```{r}
@@ -136,8 +136,8 @@ For the simple 3-by-3 example, we can perform this check by hand:
 
  * Man `1` is matched to woman `2`, his second-most preferred choice. His most preferred choice is woman `1`. Woman `1` is matched with man `2` who she prefers over man `1`. Thus man `1` cannot do better than woman `2`.
  * Man `2` is matched to woman `1`, his second-most preferred choice. His most preferred woman is woman `3`, who is     matched with man `3`. Since man `3` is her most-preferred choice, man `2` cannot do better than woman `1`.
- * Man `3` is matched to women `3`, his most preferred choice, so he cannot do better. 
- 
+ * Man `3` is matched to women `3`, his most preferred choice, so he cannot do better.
+
 Thus, this matching is stable.
 
 The following examples illustrate some additional features of this package.
@@ -152,8 +152,8 @@ nmen = 2500
 # set number of women
 nwomen = 2000
 # generate preferences
-uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen) 
-uW = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen) 
+uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
+uW = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen)
 # male optimal matching
 resultsM = one2one(uM, uW)
 # female optimal matching
@@ -173,8 +173,8 @@ nstudents = 1000
 # set number of colleges
 ncolleges = 400
 # generate preferences
-uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = nstudents) 
-uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges) 
+uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = nstudents)
+uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges)
 # worker optimal matching
 results = one2many(uStudents, uColleges, slots = 2)
 # check if matching is stable
@@ -183,9 +183,9 @@ checkStability(uStudents, uColleges, results$proposals, results$engagements)
 
 # One-sided Matching Markets: Irving's Algorithm
 
-This package implements the algorithm by @irving1985roommates for one-sided matching markets. 
+This package implements the algorithm by @irving1985roommates for one-sided matching markets.
 
-Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`. 
+Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
 
 Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$, 
 ```{r}
@@ -201,7 +201,7 @@ The algorithm proceeds in two phases.
 
 In phase 1, potential roommates take turns sequentially proposing to the other roommates. Each roommate who is proposed to can accept or reject the proposal. A roommate accepts if he currently has made no better proposal which was accepted to another roommate. If a roommate has accepted a proposal, and then receives a better proposal, he rejects the old proposal and substitutes in the new proposal. 
 
-In the above example, 
+In the above example,
 
 1. Roommate `1` begins by proposing to roommate `3`, his most preferred roommate. `3`, having no better offers, accepts.
 2. `2` proposes to `6`, who accepts.
@@ -220,7 +220,7 @@ In phase 2, we begin by eliminating all potential roommate matches which are wor
 6, 1,    6, 4, 4
    3,    1,    2
 ```
-These preferences form what is called a 'stable' table, or, 's-table'. ('Stable' for short.) The defining characteristic of a stable table is that if `i` is the most preferred roommate on `j`s list, then `j` is the least preferred roommate on `i`s list. For example, `1` most prefers `4`, but `4` least prefers `1`. 
+These preferences form what is called a 'stable' table, or, 's-table'. ('Stable' for short.) The defining characteristic of a stable table is that if `i` is the most preferred roommate on `j`s list, then `j` is the least preferred roommate on `i`s list. For example, `1` most prefers `4`, but `4` least prefers `1`.
 
 The algorithm proceeds by finding and eliminating 'rotations'. A rotation is a sequence of pairs of roommates, such that there is a distinct roommate in the first position of each pair, the second roommate in each pair least prefers the roommate he is paired with, the first roommate in each pair most prefers the roommate he is paired with, and finally, the first roommate in each pair ranks the second roommate in the following pair second (modulo the number of pairs, that is, the first roommate in the last pair ranks the second roommate in the first pair second) Once a rotation has been identified, removing it results in another stable table.
 
@@ -237,17 +237,17 @@ A further rotation is `(1, 2), (2, 6), (4, 5)`. Eliminating it yields
             3,  
    5, 4, 2,    1
    4, 5, 3, 2,  
-6,              
+6,
 ```
 A final rotation is `(2, 5), (3, 4)`. Eliminating it yields
 ```
             3,  
          2,    1
-   4, 5,        
-6,              
+   4, 5,
+6,
 
 ```
-Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, and `3` and `5` to match. 
+Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, and `3` and `5` to match.
 ```{r}
 results = onesided(pref = pref - 1)
 results
@@ -280,9 +280,10 @@ print(results)
 
 This package implements the top trading cycle algorithm.
 
-Consider the following problem: A set of $n$ agents each currently own their own home, and have preferences over the homes of other agents. The problem is to trade the homes between the agents in such a way so that no two agents want to swap homes. 
+Consider the following problem: A set of $n$ agents each currently own their own home, and have preferences over the homes of other agents. The problem is to trade the homes between the agents in such a way so that no two agents want to swap homes.
 
 Preferences of agents are summarized by an $n \times n$ dimensional matrix, e.g., if $n = 4$, 
+
 ```{r}
 pref = matrix(c(4, 4, 2, 4,
                 2, 1, 1, 1,
@@ -295,30 +296,30 @@ Column $i$ represents the preferences of the $i$th agent, and row $j$ represents
 Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home. 
 
 ```
-4,  4,  2,  4 
-2,  1,  1,  1 
-1,  2,  3,  3 
-3,  3,  4,  2 
+4,  4,  2,  4
+2,  1,  1,  1
+1,  2,  3,  3
+3,  3,  4,  2
 ```
 
 For example, for the above preference matrix, when all the agents are unmmatched, the only rotation is $\{4\}$, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
 
 ```
         2
-2,  1,  1 
-1,  2,  3 
-3,  3,    
+2,  1,  1
+1,  2,  3
+3,  3,
 ```
 
-Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by his lonesome. 
+Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most prefers `1`s house. So agents `1` and `2` will swap homes, leaving agent `3` all by himself. 
 
 ```
-         
-          
-        3 
-          
+
+
+        3
+
 ```
 
-Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes. 
+Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes.
 
 # Literature
