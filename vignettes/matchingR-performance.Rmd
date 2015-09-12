@@ -191,7 +191,7 @@ irving_original_prop = c(0.961, 0.931, 0.909, 0.868,
 ```{r, echo=FALSE}
 table = matrix(c(rep(100, 28), solution_exists, solution_exists/100, irving_original_prop, summary(res_irving)$mean),  
                ncol = 5, nrow = 28, 
-               dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
+               dimnames = list("N" = gsub(" ", "", sprintf("N = %s", format(N, big.mark = ","))), 
                                "t" = c("No. of instances", 
                                        "No. with solution", 
                                        "Proportion with solution", 
@@ -238,7 +238,7 @@ res_irving = microbenchmark::microbenchmark(
 ```{r, echo=FALSE}
 table = matrix(c(rep(1, 14), summary(res_irving)$mean),  
                ncol = 2, nrow = 14, 
-               dimnames = list("N" = gsub(" ", "", sprintf("n = %s", format(N, big.mark = ","))), 
+               dimnames = list("N" = gsub(" ", "", sprintf("N = %s", format(N, big.mark = ","))), 
                                "t" = c("No. of instances", 
                                        "Average cpu time")))
 knitr::kable(table, digits = 6, caption = "Run time (in s) for top trading cycle algorithm")
