@@ -1,7 +1,6 @@
 ---
 title: 'Matching Algorithms in R: Computational Performance'
 output: html_document
-bibliography: bibliography.bib
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
@@ -117,7 +116,7 @@ table = matrix(c(summary(res1, unit = 's')$mean,
 knitr::kable(table, digits = 6, caption = "Run time (in seconds) for the matching of men to women")
 ```
 
-# Irving's Algorithm [@irving1985roommates]
+# Irving's Algorithm
 
 In the roommate problem, existence of a stable matching is not guaranteed, and indeed for large markets, can be very likely to not exist. Therefore, there are two relevant measures of speed to be considered: First, the average time to find a stable matching or to verify that no stable matching exists, and second, the average time to find a stable matching, conditional on such a matching existing. 
 
@@ -200,7 +199,7 @@ table = matrix(c(rep(100, 28), solution_exists, solution_exists/100, irving_orig
 knitr::kable(table, digits = 6, caption = "Proportion of matchings which exist and run time (in seconds) for the stable roommate algorithm.")
 ```
 
-# Top Trading Cycle Algorithm [@shapley1973cores]
+# Top Trading Cycle Algorithm
 
 The code to find a stable matching using the top trading cycle algorithm is
 ```{r}
@@ -243,5 +242,3 @@ table = matrix(c(rep(1, 14), summary(res_irving)$mean),
                                        "Average cpu time")))
 knitr::kable(table, digits = 6, caption = "Run time (in s) for top trading cycle algorithm")
 ```
-
-## Literature
