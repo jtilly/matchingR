@@ -2,7 +2,6 @@
 title: 'Matching Algorithms in R: An Introduction to matchingR'
 output: html_document
 bibliography: bibliography.bib
-toc: yes
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
@@ -16,21 +15,24 @@ library(matchingR)
 
 # Introduction
 
-This package provides R functions to quickly compute stable matchings for large matching markets. It computes stable matchings for two-sided markets using the Gale-Shapley Algorithm [@gale1962college] and one-sided markets using the algorithm by @irving1985roommates. This package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The Gale-Shapley implementation of this package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
+`matchingR` is an R package that efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726) [@gale1962college], [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331) [@irving1985roommates], and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) [@shapley1973cores] for large matching markets. The package provides functions to compute the solutions to the
+  [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), to the
+  [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
+  [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the
+  [house allocation problem](http://web.stanford.edu/~niederle/HouseAllocation.pdf).
+  
+The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The Gale-Shapley function of this package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
 
 Matching markets are very common in practice and widely studied by economists. Popular examples include
-
- * the National Resident Matching Program that matches recent graduates from medical school to residency programs at teaching hospitals throughout the United States
- * the matching of students to schools including the New York City High School or the the Boston Public School Match (and many more)
- * the matching of kidney donors to recipients in kidney exchanges.
+* the [National Resident Matching Program](http://www.nrmp.org/) that matches graduates from medical school to residency programs at teaching hospitals throughout the United States
+* the matching of students to schools including the [New York City High School Match](http://www.jstor.org/stable/4132848) or the the [Boston Public School Match](http://www.jstor.org/stable/4132849) (and many more)
+* the matching of kidney donors to recipients in [kidney exchanges](http://www.jstor.org/stable/4132851).
 
 # Two-sided Matching Markets: Gale-Shapley Algorithm
 
 Consider the following example of the marriage market. Suppose there are `N` men and `N` women. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than to his current spouse `w` and this other woman `w'` would rather be matched to man `m` than to her current spouse `m'`. In other words, a matching is stable when there does not exist a pair `(m, w')` for which both `m` and `w'` are better off than they are with their respective spouses `w`  and `m'`.
 
-## Specification of Preferences
-
-We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Columns in the matrix correspond to men, rows to women. For example:
+We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Columns in the matrix correspond to men, rows to women. For example: 
 ```{r}
 uM = matrix(c(1.0, 0.5, 0.0,
               0.5, 0.0, 0.5,
@@ -74,9 +76,7 @@ prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
 
-## Gale-Shapley Algorithm
-
-The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women.
+The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
 
 For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single.
 
@@ -95,10 +95,12 @@ For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley 
 
  The man-optimal stable matching is therefore:
 
+ |Man | Woman|
  |-------|---------|
- | Man 1 | Woman 2 |
- | Man 2 | Woman 1 |
- | Man 3 | Woman 3 |
+ | 1 |  2 |
+ |  2 |  1 |
+ |  3 |  3 |
+
 
 The package computes the Gale-Shapley algorithm using the function `one2one`:
 ```{r}
@@ -138,11 +140,9 @@ For the simple 3-by-3 example, we can perform this check by hand:
 
 Thus, this matching is stable.
 
-## Examples
-
 The following examples illustrate some additional features of this package.
 
-### Marriage Market
+### Example: Marriage Market
 The following is an example of `one2one` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
 ```{r, results = "hide"}
 # set seed
@@ -163,8 +163,8 @@ checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
-### College Admissions Problem
-The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution.
+### Example: College Admissions Problem
+The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
 ```{r, results = "hide"}
 # set seed
 set.seed(1)
@@ -187,9 +187,7 @@ This package implements the algorithm by @irving1985roommates for one-sided matc
 
 Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
 
-## Specification of Preferences
-
-Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$,
+Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$, 
 ```{r}
 pref = matrix(c(3, 6, 2, 5, 3, 5,
                 4, 5, 4, 2, 1, 1,
@@ -199,13 +197,9 @@ pref = matrix(c(3, 6, 2, 5, 3, 5,
 ```
 Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
 
-## Irvings's algorithm
-
 The algorithm proceeds in two phases.
 
-### Phase 1
-
-In phase 1, potential roommates take turns sequentially proposing to the other roommates. Each roommate who is proposed to can accept or reject the proposal. A roommate accepts if he currently has made no better proposal which was accepted to another roommate. If a roommate has accepted a proposal, and then receives a better proposal, he rejects the old proposal and substitutes in the new proposal.
+In phase 1, potential roommates take turns sequentially proposing to the other roommates. Each roommate who is proposed to can accept or reject the proposal. A roommate accepts if he currently has made no better proposal which was accepted to another roommate. If a roommate has accepted a proposal, and then receives a better proposal, he rejects the old proposal and substitutes in the new proposal. 
 
 In the above example,
 
@@ -217,8 +211,6 @@ In the above example,
 6. `1`, having no proposal, proposes to `4`, who accepts.
 7. `6` proposes to `5`, who rejects, having a better proposal from `4`.
 8. `6` proposes to `1`, who accepts.
-
-### Phase 2
 
 In phase 2, we begin by eliminating all potential roommate matches which are worse than the current proposals held. For example, in the above example, `3` has a proposal from `5`, and so we eliminate `1` and `6` from `3`'s column, and symmetrically eliminate `3` from `1` and `6`'s column. This results in the following 'reduced' preference listing:
 ```
@@ -261,9 +253,7 @@ results = onesided(pref = pref - 1)
 results
 ```
 
-## Examples
-
-### Roommate problem
+### Example: Roommate problem
 
 The function `onesided` can also be called using a payoff matrix, `u`, to specify preferences. In `u`, the element `[i,j]` refers to the payoff that agent `j` gets from being matched to agent `i`. The main diagonal of this matrix contains no information and will be removed by the algorithm.
 
@@ -275,7 +265,7 @@ results = onesided(utils = u)
 results
 ```
 
-### Existence is not guaranteed
+### Example: Roommate problem when no stable matching exists
 
 Note that in the roommate problem, existence of a stable matching is not guaranteed. When no stable matching can be found, the function `onesided` returns `NULL`.
 ```{r}
@@ -292,9 +282,8 @@ This package implements the top trading cycle algorithm.
 
 Consider the following problem: A set of $n$ agents each currently own their own home, and have preferences over the homes of other agents. The problem is to trade the homes between the agents in such a way so that no two agents want to swap homes.
 
-## Specification of Preferences
+Preferences of agents are summarized by an $n \times n$ dimensional matrix, e.g., if $n = 4$, 
 
-Preferences of agents are summarized by an $n \times n$ dimensional matrix, e.g., if $n = 4$,
 ```{r}
 pref = matrix(c(4, 4, 2, 4,
                 2, 1, 1, 1,
@@ -304,9 +293,7 @@ pref = matrix(c(4, 4, 2, 4,
 
 Column $i$ represents the preferences of the $i$th agent, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, agent `1` most prefers the home of agent `4`, followed by `2`, followed by `1`, followed by `3`.
 
-## Top Trading Cycle Algorithm
-
-Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home.
+Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home. 
 
 ```
 4,  4,  2,  4

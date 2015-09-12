@@ -63,12 +63,7 @@ u = matrix(runif(N^2),  nrow = n, ncol = n)
 results = toptrading(utils = u)
 ```
 
-## Readme
-* [Gale-Shapley Algorithm](GALESHAPLEY.md)
-* [Irving's Algorithm for the Stable Roommate Problem](IRVING.md)
-* [Top Trading Cycle Algorithm](TOPTRADINGCYCLE.md)
-
 ## Documentation
 * [Reference Manual](http://jtilly.io/matchingR/matchingR-documentation.pdf "Computing Stable Matchings in R: Reference Manual for matchingR")
 * [Vignette: Matching Algorithms in R: An Introduction to matchingR](http://jtilly.io/matchingR/matchingR-intro.pdf "Matching Algorithms in R: An Introduction to matchingR")
-* *Computational Performance*: [Gale-Shapley](http://jtilly.io/matchingR/matchingR-performance-galeshapley.html "Computing the Gale-Shapley Algorithm in R: Performance"), [Stable Roommate Problem](http://jtilly.io/matchingR/matchingR-performance-roommate.html "Solving the Stable Roommate Problem in R")
+* [Vignette: Matching Algorithms in R: Computational Performance](http://jtilly.io/matchingR/matchingR-performance.pdf "Matching Algorithms in R: Computational Performance")

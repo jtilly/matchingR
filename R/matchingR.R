@@ -4,27 +4,36 @@
 #' @docType package
 #' @title matchingR: Efficient Computation of Matching Algorithms in R
 #'   and C++
-#' @description matchingR is an R Package that efficiently computes matching
-#'   algorithms for large scale matching markets. It currently implements the
-#'   Gale-Shapley Algorithm for two-sided matching markets and Irving's
-#'   Algorithm for one-sided matching markets. This package can be useful when
-#'   the number of market participants is large or when very many matchings need
-#'   to be computed (e.g. for extensive simulations or for estimation purposes).
-#'   The package has successfully been used to simulate preferences and compute
-#'   the matching with 30,000 participants on each side of the market. The
-#'   package provides functions to compute the solution to the
-#'   \href{http://en.wikipedia.org/wiki/Stable_matching}{stable marriage
-#'   problem}, to the
-#'   \href{http://en.wikipedia.org/wiki/Hospital_resident}{college admission
-#'   problem}, and to the
-#'   \href{https://en.wikipedia.org/wiki/Stable_roommates_problem}{stable
-#'   roommates problem}
+#' @description matchingR is an R package that efficiently computes the 
+#'   Gale-Shapley algorithm for both the stable marriage problem and the college
+#'   admissions problem, Irving's algorithm for the stable roommate problem, and
+#'   the top trading cycle algorithm for large matching markets. The package 
+#'   provides functions to compute the solutions to the stable marriage problem,
+#'   to the college admission problem, the stable roommates problem, and the 
+#'   house allocation problem.
+#'   
+#'   The package can be useful when the number of market participants is large
+#'   or when very many matchings need to be computed (e.g. for extensive
+#'   simulations or for estimation purposes). The Gale-Shapley function of this
+#'   package has successfully been used to simulate preferences and compute the
+#'   matching with 30,000 participants on each side of the market.
+#'   
+#'   Matching markets are very common in practice and widely studied by
+#'   economists. Popular examples include
+#'   
+#'   the National Resident Matching Program that matches graduates from medical
+#'   school to residency programs at teaching hospitals throughout the United
+#'   States the matching of students to schools including the New York City High
+#'   School Match or the the Boston Public School Match (and many more) the
+#'   matching of kidney donors to recipients in kidney exchanges.
 #' @author Jan Tilly, Nick Janetos
 #' @references Gale, D. and Shapley, L.S. (1962). College admissions and the
 #'   stability of marriage. \emph{The American Mathematical Monthly}, 69(1):
 #'   9--15.
 #' @references Irving, R. W. (1985). An efficient algorithm for the "stable
 #'   roommates" problem. \emph{Journal of Algorithms}, 6(4): 577--595
+#' @references Shapley, L., & Scarf, H. (1974). On cores and indivisibility.
+#'   \emph{Journal of Mathematical Economics}, 1(1), 23-37.
 #' @examples
 #' # stable marriage problem
 #' nmen = 25
@@ -46,6 +55,11 @@
 #' N = 10
 #' u = matrix(runif(N^2),  nrow = N, ncol = N)
 #' results = onesided(utils = u)
+#' 
+#' # top trading cycle algorithm
+#' N = 10
+#' u = matrix(runif(N^2),  nrow = N, ncol = N)
+#' results = toptrading(utils = u)
 NULL
 
 #' Make a package environmental variable with the storage order
@@ -81,8 +95,8 @@ set.column.major = function() {
         "=================================\n",
         "With this update, we changed the layout of payoff and preference order \n",
         "matrices. In the matrix `u`, element [i,j] now refers to the utility that \n",
-        "agent [j] receives from being  matched to agent [i]. Similarly, in the matrix \n",
-        "`pref`, element [i,j] refers to the id of the  individual that agent `j` \n", 
+        "agent [j] receives from being matched to agent [i]. Similarly, in the matrix \n",
+        "`pref`, element [i,j] refers to the id of the individual that agent `j` \n", 
         "ranks at position `i`. I.e., we store payoffs and preference orders in \n",
         "column-major order instead of row-major order.\n\n", 
         "If you rather store preferences in row-major order as in version 1.0 of \n", 
