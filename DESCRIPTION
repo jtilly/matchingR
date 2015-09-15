@@ -1,10 +1,9 @@
 Package: matchingR
 Type: Package
 Title: Matching Algorithms in R and C++
-Version: 1.1
+Version: 1.2
 Date: 2015-09-12
-Authors@R: c(person("Jan", "Tilly", email = "jtilly@econ.upenn.edu", rol = c("aut", "cre")),
-             person("Nick", "Janetos", email = "njanetos@econ.upenn.edu", rol = c("aut")))
+Author: Jan Tilly, Nick Janetos
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
 Description: Computes matching algorithms efficiently using Rcpp.
     Implements the Gale-Shapley Algorithm to compute the stable matching for
