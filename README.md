@@ -36,7 +36,7 @@ devtools::install_github("jtilly/matchingR")
 
 ## Examples
 
-### Gale-Shapley Algorithm
+### Gale-Shapley Algorithm for Two-Sided Markets
 ``` r
 # stable marriage problem with three men and two women
 uM = matrix(c(1.0, 0.5, 0.0,
@@ -72,7 +72,7 @@ checkStability(uStudents, uColleges, matching$proposals, matching$engagements)
 #> [1] TRUE
 ```
 
-### Irving's Algorithm
+### Irving's Algorithm for the Stable Roommate Problem
 ``` r
 # stable roommate problem
 set.seed(2)
@@ -93,7 +93,7 @@ results
 #> [4,]    3
 ```
 
-### Top-Trading Cycle Algorithm
+### Top-Trading Cycle Algorithm for the Stable Housing Problem
 ``` r
 # top trading cycle algorithm
 set.seed(2)
