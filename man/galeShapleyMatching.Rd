@@ -8,7 +8,7 @@ galeShapleyMatching(proposerPref, reviewerUtils)
 }
 \arguments{
 \item{proposerPref}{is a matrix with the preference order of the proposing side of
-the market}
+the market (using C++ indexing that starts at zero)}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side of the
 market}
@@ -16,14 +16,13 @@ market}
 \value{
 A list with the successful proposals and engagements.
 \code{proposals} is a vector whose nth element contains the id of the reviewer
-that proposer n is matched to.
+that proposer n is matched to (using C++ indexing that starts at zero).
 \code{engagements} is a vector whose nth element contains the id of the proposer
-that reviewer n is matched to.
+that reviewer n is matched to (using C++ indexing that starts at zero).
 }
 \description{
-This function computes the Gale-Shapley Algorithm with one-to-one matching.
-This function requires very specific types of arguments. It might be more
-convenient to call the function \code{one2one()} instead that allows for
-more flexible input choices.
+This function provides an R wrapper for the C++ backend. Users should not
+call this function directly and instead use \code{one2one}, \code{many2one},
+\code{one2many}.
 }
 
