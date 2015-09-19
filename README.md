@@ -31,7 +31,7 @@ install.packages("matchingR")
 The latest development release is available from GitHub:
 ```{r}
 #install.packages("devtools")
-devtools::install_github("jtilly/matchingR.git")
+devtools::install_github("jtilly/matchingR")
 ```
 
 ## Examples
