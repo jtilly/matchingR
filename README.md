@@ -74,7 +74,7 @@ checkStability(uStudents, uColleges, matching$proposals, matching$engagements)
 
 ### Irving's Algorithm for the Stable Roommate Problem
 ``` r
-# stable roommate problem
+# stable roommate problem with four students and two rooms
 set.seed(2)
 n = 4
 u = matrix(runif(n^2),  nrow = n, ncol = n)
@@ -93,9 +93,9 @@ results
 #> [4,]    3
 ```
 
-### Top-Trading Cycle Algorithm for the Stable Housing Problem
+### Top-Trading Cycle Algorithm
 ``` r
-# top trading cycle algorithm
+# top trading cycle algorithm with four houses
 set.seed(2)
 n = 4
 u = matrix(runif(n^2),  nrow = n, ncol = n)
