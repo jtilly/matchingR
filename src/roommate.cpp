@@ -46,33 +46,14 @@ List stableRoommateMatching(const umat pref) {
                 uword proposee = pref(proposed_to(n), n);
 
                 // proposee's preferences
-                //const uword * prop_call = pref.colptr(proposee);
-                const uvec prop_call = pref.col(proposee);
-                
-                // find proposee's opinion of the proposer (lower is better)
-                uword op = N;
-                for (uword i = 0; i < prop_call.n_elem; i++) {
-                    if (prop_call(i) == n) {
-                        op = i;
-                        break;
-                    }
-                }
-                
-                if (op == N) {
-                    stop("Invalid preference matrix: Incomplete preferences.");
-                }
-                
-                // find proposee's opinion of his current match
-                // lower is better
-                // unmmatched is N
-                uword op_curr = N;
-                for (uword i = 0; i < prop_call.n_elem; i++) {
-                    if (prop_call(i) == proposal_from(proposee)) {
-                        op_curr = i;
-                        break;
-                    }
-                }
-                
+                const uword * prop_call = pref.colptr(proposee);
+
+                // proposee's opinion of the proposer (lower is better)
+                uword op = find(prop_call, prop_call + N, n) - prop_call;
+
+                // opinion of his current match
+                uword op_curr = find(prop_call, prop_call + N, proposal_from(proposee)) - prop_call;
+
                 // if the next best guy likes him he accepts
                 if (op < op_curr) {
 
