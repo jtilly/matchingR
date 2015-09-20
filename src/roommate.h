@@ -3,6 +3,7 @@
 
 #include <queue>
 #include <deque>
+#include <string>
 #include "matchingR.h"
 
 List stableRoommateMatching(const umat pref);
