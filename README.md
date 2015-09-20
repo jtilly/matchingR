@@ -57,17 +57,29 @@ checkStability(uM, uW, matching$proposals, matching$engagements)
 #> [1] TRUE
 
 # college admissions problem with five students and two colleges with two slots each
+set.seed(1)
 nstudents = 5
 ncolleges = 2
 uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+uStudents
+#>           [,1]      [,2]      [,3]      [,4]       [,5]
+#> [1,] 0.2655087 0.5728534 0.2016819 0.9446753 0.62911404
+#> [2,] 0.3721239 0.9082078 0.8983897 0.6607978 0.06178627
 uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
+uColleges
+#>           [,1]      [,2]
+#> [1,] 0.2059746 0.4976992
+#> [2,] 0.1765568 0.7176185
+#> [3,] 0.6870228 0.9919061
+#> [4,] 0.3841037 0.3800352
+#> [5,] 0.7698414 0.7774452
 matching = one2many(uStudents, uColleges, slots=2)
 matching$engagements
 #>      [,1] [,2]
-#> [1,]    1    4
-#> [2,]    3    5
+#> [1,]    5    4
+#> [2,]    3    2
 matching$single.proposers
-#> [1] 2
+#> [1] 1
 checkStability(uStudents, uColleges, matching$proposals, matching$engagements)
 #> [1] TRUE
 ```
