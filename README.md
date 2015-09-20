@@ -25,11 +25,11 @@ Installation
 ------------
 
 `matchingR` can be installed from [CRAN](http://cran.r-project.org/web/packages/matchingR/):
-```{r}
+```R
 install.packages("matchingR")
 ```
 The latest development release is available from GitHub:
-```{r}
+```R
 #install.packages("devtools")
 devtools::install_github("jtilly/matchingR")
 ```
@@ -37,7 +37,7 @@ devtools::install_github("jtilly/matchingR")
 ## Examples
 
 ### Gale-Shapley Algorithm for Two-Sided Markets
-``` r
+```R
 # stable marriage problem with three men and two women
 uM = matrix(c(1.0, 0.5, 0.0,
               0.5, 0.0, 0.5), nrow = 2, ncol = 3, byrow = TRUE)
@@ -85,7 +85,7 @@ checkStability(uStudents, uColleges, matching$proposals, matching$engagements)
 ```
 
 ### Irving's Algorithm for the Stable Roommate Problem
-``` r
+```R
 # stable roommate problem with four students and two rooms
 set.seed(2)
 n = 4
@@ -106,7 +106,7 @@ results
 ```
 
 ### Top-Trading Cycle Algorithm
-``` r
+```R
 # top trading cycle algorithm with four houses
 set.seed(2)
 n = 4
@@ -126,7 +126,6 @@ results
 #> [3,]    3
 #> [4,]    4
 ```
-
 
 ## Documentation
 * [Reference Manual](http://jtilly.io/matchingR/matchingR-documentation.pdf "Computing Stable Matchings in R: Reference Manual for matchingR")

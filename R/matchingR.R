@@ -4,23 +4,23 @@
 #' @docType package
 #' @title matchingR: Efficient Computation of Matching Algorithms in R
 #'   and C++
-#' @description matchingR is an R package that efficiently computes the 
+#' @description matchingR is an R package that efficiently computes the
 #'   Gale-Shapley algorithm for both the stable marriage problem and the college
 #'   admissions problem, Irving's algorithm for the stable roommate problem, and
-#'   the top trading cycle algorithm for large matching markets. The package 
+#'   the top trading cycle algorithm for large matching markets. The package
 #'   provides functions to compute the solutions to the stable marriage problem,
-#'   to the college admission problem, the stable roommates problem, and the 
+#'   to the college admission problem, the stable roommates problem, and the
 #'   house allocation problem.
-#'   
+#'
 #'   The package can be useful when the number of market participants is large
 #'   or when very many matchings need to be computed (e.g. for extensive
 #'   simulations or for estimation purposes). The Gale-Shapley function of this
 #'   package has successfully been used to simulate preferences and compute the
 #'   matching with 30,000 participants on each side of the market.
-#'   
+#'
 #'   Matching markets are very common in practice and widely studied by
 #'   economists. Popular examples include
-#'   
+#'
 #'   the National Resident Matching Program that matches graduates from medical
 #'   school to residency programs at teaching hospitals throughout the United
 #'   States the matching of students to schools including the New York City High
@@ -55,7 +55,7 @@
 #' N = 10
 #' u = matrix(runif(N^2),  nrow = N, ncol = N)
 #' results = onesided(utils = u)
-#' 
+#'
 #' # top trading cycle algorithm
 #' N = 10
 #' u = matrix(runif(N^2),  nrow = N, ncol = N)
@@ -63,7 +63,7 @@
 NULL
 
 #' Make a package environmental variable with the storage order
-#' 
+#'
 #' \code{pkg.env} is a package environment that contains the variable
 #' \code{column.major} that indicates if preferences are stored in column
 #' major order (default) or row major order.
@@ -71,7 +71,7 @@ pkg.env = new.env()
 assign("column.major", TRUE, envir = pkg.env)
 
 #' Store preference in row major order
-#' 
+#'
 #' After calling this functions, all preferences should be stored in row major
 #' order.
 set.row.major = function() {
@@ -79,7 +79,7 @@ set.row.major = function() {
 }
 
 #' Store preferences in column major order
-#' 
+#'
 #' After calling this functions, all preferences should be stored in column major
 #' order. This is the default.
 set.column.major = function() {
@@ -88,20 +88,20 @@ set.column.major = function() {
 
 # Startup message
 .onAttach = function(libname, pkgname) {
-    
+
     packageStartupMessage(
         "\n=================================\n",
-        "matchingR 1.1 Update Information:\n",
+        "matchingR 1.1.x Update Information:\n",
         "=================================\n",
         "With this update, we changed the layout of payoff and preference order \n",
         "matrices. In the matrix `u`, element [i,j] now refers to the utility that \n",
         "agent [j] receives from being matched to agent [i]. Similarly, in the matrix \n",
-        "`pref`, element [i,j] refers to the id of the individual that agent `j` \n", 
+        "`pref`, element [i,j] refers to the id of the individual that agent `j` \n",
         "ranks at position `i`. I.e., we store payoffs and preference orders in \n",
-        "column-major order instead of row-major order.\n\n", 
-        "If you rather store preferences in row-major order as in version 1.0 of \n", 
+        "column-major order instead of row-major order.\n\n",
+        "If you rather store preferences in row-major order as in version 1.0 of \n",
         "this package, you need to load the package using \n\n",
         "library(\"matchingR\")\n",
         "set.row.major()\n\n", appendLF = TRUE)
-    
+
 }
