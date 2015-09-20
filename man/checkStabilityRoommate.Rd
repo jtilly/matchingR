@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{checkStabilityRoommate}
 \alias{checkStabilityRoommate}
-\title{Check if a two-sided matching is stable}
+\title{Check if a matching solves the stable roommate problem}
 \usage{
 checkStabilityRoommate(pref, matchings)
 }
@@ -17,7 +17,7 @@ true if the matching is stable, false otherwise
 }
 \description{
 This function checks if a given matching is stable for a particular set of
-preferences. This function can check if a given check one-to-one,
-one-to-many, or many-to-one matching is stable.
+preferences. This function checks if there's an unmatched pair that would
+rather be matched with each other than with their assigned partners.
 }
 
