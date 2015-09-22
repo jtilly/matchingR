@@ -37,6 +37,9 @@ devtools::install_github("jtilly/matchingR")
 ## Examples
 
 ### Gale-Shapley Algorithm for Two-Sided Markets
+
+**Stable Marriage Problem**
+
 ```R
 # stable marriage problem with three men and two women
 uM = matrix(c(1.0, 0.5, 0.0,
@@ -55,7 +58,11 @@ matching$single.proposers
 #> [1] 2
 checkStability(uM, uW, matching$proposals, matching$engagements)
 #> [1] TRUE
+```
 
+**College Admissions Problem**
+
+```R
 # college admissions problem with five students and two colleges with two slots each
 set.seed(1)
 nstudents = 5
