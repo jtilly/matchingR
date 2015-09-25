@@ -14,7 +14,7 @@
 #'   provided)
 #' @param reviewerPref is a matrix with the preference order of the courted side
 #'   of the market (only required when \code{reviewerUtils} is not provided)
-#' @aliases  A list with the successful proposals and engagements:
+#' @return  A list with the successful proposals and engagements:
 #'   \code{proposals} is a vector whose nth element contains the id of the
 #'   reviewer that proposer n is matched to. \code{engagements} is a vector
 #'   whose nth element contains the id of the proposer that reviewer n is
@@ -416,7 +416,7 @@ many2one = function(proposerUtils = NULL,
 #'   provided)
 #' @param reviewerPref is a matrix with the preference order of the courted side
 #'   of the market (only required when \code{reviewerUtils} is not provided)
-#' @aliases  A list with the successful proposals and engagements:
+#' @return  A list with the successful proposals and engagements:
 #'   \code{proposals} is a vector whose nth element contains the id of the
 #'   reviewer that proposer n is matched to. \code{engagements} is a vector
 #'   whose nth element contains the id of the proposer that reviewer n is
