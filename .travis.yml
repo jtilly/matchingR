@@ -8,9 +8,10 @@ sudo: false
 
 # define environmental variables for R CMD check 
 env: 
- - _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
- - _R_CHECK_CRAN_INCOMING_=FALSE
- - _R_CHECK_FORCE_SUGGESTS_=FALSE
+ global:
+  - _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
+  - _R_CHECK_CRAN_INCOMING_=FALSE
+  - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 # only run for pushes to master branch
 branches:
