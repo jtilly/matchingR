@@ -7,15 +7,15 @@
 
 using namespace Rcpp;
 
-// galeShapleyMatching
-List galeShapleyMatching(const umat& proposerPref, const mat& reviewerUtils);
-RcppExport SEXP matchingR_galeShapleyMatching(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
+// cpp_wrapper_galeshapley
+List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils);
+RcppExport SEXP matchingR_cpp_wrapper_galeshapley(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const umat& >::type proposerPref(proposerPrefSEXP);
     Rcpp::traits::input_parameter< const mat& >::type reviewerUtils(reviewerUtilsSEXP);
-    __result = Rcpp::wrap(galeShapleyMatching(proposerPref, reviewerUtils));
+    __result = Rcpp::wrap(cpp_wrapper_galeshapley(proposerPref, reviewerUtils));
     return __result;
 END_RCPP
 }
@@ -33,14 +33,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// stableRoommateMatching
-List stableRoommateMatching(const umat pref);
-RcppExport SEXP matchingR_stableRoommateMatching(SEXP prefSEXP) {
+// cpp_wrapper_irving
+List cpp_wrapper_irving(const umat pref);
+RcppExport SEXP matchingR_cpp_wrapper_irving(SEXP prefSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
-    __result = Rcpp::wrap(stableRoommateMatching(pref));
+    __result = Rcpp::wrap(cpp_wrapper_irving(pref));
     return __result;
 END_RCPP
 }
@@ -56,14 +56,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// topTradingCycle
-List topTradingCycle(const umat pref);
-RcppExport SEXP matchingR_topTradingCycle(SEXP prefSEXP) {
+// cpp_wrapper_ttc
+List cpp_wrapper_ttc(const umat pref);
+RcppExport SEXP matchingR_cpp_wrapper_ttc(SEXP prefSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< const umat >::type pref(prefSEXP);
-    __result = Rcpp::wrap(topTradingCycle(pref));
+    __result = Rcpp::wrap(cpp_wrapper_ttc(pref));
     return __result;
 END_RCPP
 }

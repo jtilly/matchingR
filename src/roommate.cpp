@@ -12,7 +12,7 @@
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
 //' @return A list with the matchings made. Unmatched agents are 'matched' to N.
 // [[Rcpp::export]]
-List stableRoommateMatching(const umat pref) {
+List cpp_wrapper_irving(const umat pref) {
 
     // Number of participants
     uword N = pref.n_cols;
@@ -48,7 +48,7 @@ List stableRoommateMatching(const umat pref) {
                 // proposee's preferences
                 //const uword * prop_call = pref.colptr(proposee);
                 const uvec prop_call = pref.col(proposee);
-                
+
                 // find proposee's opinion of the proposer (lower is better)
                 uword op = N;
                 for (uword i = 0; i < prop_call.n_elem; i++) {
@@ -57,11 +57,11 @@ List stableRoommateMatching(const umat pref) {
                         break;
                     }
                 }
-                
+
                 if (op == N) {
                     stop("Invalid preference matrix: Incomplete preferences.");
                 }
-                
+
                 // find proposee's opinion of his current match
                 // lower is better
                 // unmmatched is N
@@ -72,7 +72,7 @@ List stableRoommateMatching(const umat pref) {
                         break;
                     }
                 }
-                
+
                 // if the next best guy likes him he accepts
                 if (op < op_curr) {
 

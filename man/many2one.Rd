@@ -34,7 +34,7 @@ A list with the successful proposals and engagements:
   remaining single reviewers
 }
 \description{
-This function returns the many-to-many matching. The function needs some
+This function returns the many-to-one matching. The function needs some
 description of individuals preferences as inputs. That can be in the form of
 cardinal utilities or preference orders (or both). It is computationally most
 efficient to provide cardinal utilities for the proposers

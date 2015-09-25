@@ -6,23 +6,24 @@
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
-//' Compute the Gale-Shapley Algorithm
+//' C++ wrapper for Gale-Shapley algorithm
 //'
-//' This function provides an R wrapper for the C++ backend. Users should not 
-//' call this function directly and instead use \code{one2one}, \code{many2one},
-//' \code{one2many}. 
+//' This function provides an R wrapper for the C++ backend. Users should not
+//' call this function directly and instead use
+//' \code{galeShapley.marriageMarket} or \code{galeShapley.collegeAdmissions}.
 //'
-//' @param proposerPref is a matrix with the preference order of the proposing side of
-//' the market (using C++ indexing that starts at zero)
-//' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
-//' market
+//' @param proposerPref is a matrix with the preference order of the proposing
+//'   side of the market (using C++ indexing that starts at zero)
+//' @param reviewerUtils is a matrix with cardinal utilities of the courted side
+//'   of the market
 //' @return A list with the successful proposals and engagements.
-//' \code{proposals} is a vector whose nth element contains the id of the reviewer
-//' that proposer n is matched to (using C++ indexing that starts at zero).
-//' \code{engagements} is a vector whose nth element contains the id of the proposer
-//' that reviewer n is matched to (using C++ indexing that starts at zero).
+//'   \code{proposals} is a vector whose nth element contains the id of the
+//'   reviewer that proposer n is matched to (using C++ indexing that starts at
+//'   zero). \code{engagements} is a vector whose nth element contains the id of
+//'   the proposer that reviewer n is matched to (using C++ indexing that starts
+//'   at zero).
 // [[Rcpp::export]]
-List galeShapleyMatching(const umat& proposerPref, const mat& reviewerUtils) {
+List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils) {
 
     // number of proposers (men)
     int M = proposerPref.n_cols;
