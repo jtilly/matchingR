@@ -2,7 +2,7 @@
 % Please edit documentation in R/toptradingcycle.R
 \name{topTradingCycle}
 \alias{topTradingCycle}
-\title{C++ wrapper for top trading cycle algorithm}
+\title{C++ wrapper for top trading cycle algorithm (Deprecated)}
 \usage{
 topTradingCycle(pref)
 }

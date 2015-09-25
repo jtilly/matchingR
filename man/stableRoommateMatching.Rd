@@ -2,7 +2,7 @@
 % Please edit documentation in R/roommate.R
 \name{stableRoommateMatching}
 \alias{stableRoommateMatching}
-\title{C++ wrapper for Irving's Algorithm}
+\title{C++ wrapper for Irving's Algorithm (Deprecated)}
 \usage{
 stableRoommateMatching(pref)
 }

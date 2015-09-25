@@ -1,19 +1,32 @@
-#' Uses the Gale-Shapley Algorithm to find solution to the stable marriage
+#' Computes Gale-Shapley algorithm to find solution to the stable marriage
 #' problem
 #'
-#' This function returns the proposer-optimal one-to-one matching. The function
-#' needs some description of individuals preferences as inputs. That can be in
-#' the form of cardinal utilities or preference orders (or both).
+#' This function returns the one-to-one matching. The function needs some
+#' description of individuals preferences as inputs. That can be in the form of
+#' cardinal utilities or preference orders (or both).
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
-#'   side of the market
+#'   side of the market. If there are \code{n} proposers and \code{m} reviewers
+#'   in the market, then this matrix will be of dimension \code{m} by \code{n}.
+#'   The \code{i,j}th element refers to the payoff that individual \code{j}
+#'   receives from being matched to individual \code{i}.
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side
-#'   of the market
+#'   of the market. If there are \code{n} proposers and \code{m} reviewers
+#'   in the market, then this matrix will be of dimension \code{n} by \code{m}.
+#'   The \code{i,j}th element refers to the payoff that individual \code{j}
+#'   receives from being matched to individual \code{i}.
 #' @param proposerPref is a matrix with the preference order of the proposing
 #'   side of the market (only required when \code{proposerUtils} is not
-#'   provided)
+#'   provided). If there are \code{n} proposers and \code{m} reviewers
+#'   in the market, then this matrix will be of dimension \code{m} by \code{n}.
+#'   The \code{i,j}th element refers to the ID of individual \code{j}'s
+#'   \code{i}th most favorite partner.
 #' @param reviewerPref is a matrix with the preference order of the courted side
-#'   of the market (only required when \code{reviewerUtils} is not provided)
+#'   of the market (only required when \code{reviewerUtils} is not provided). If
+#'   there are \code{n} proposers and \code{m} reviewers in the market, then
+#'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+#'   element refers to the ID of individual \code{j}'s \code{i}th most favorite
+#'   partner.
 #' @return  A list with the successful proposals and engagements:
 #'   \code{proposals} is a vector whose nth element contains the id of the
 #'   reviewer that proposer n is matched to. \code{engagements} is a vector
@@ -22,10 +35,10 @@
 #'   remaining single proposers. \code{single.reviewers} is a vector that lists
 #'   the ids of remaining single reviewers.
 #' @examples
-#' nmen = 25
-#' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
+#' nmen = 5
+#' nwomen = 4
+#' uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
+#' uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
 #' results = galeShapley.marriageMarket(uM, uW)
 #'
 #' prefM = sortIndex(uM)
@@ -41,7 +54,10 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
     # use galeShapleyMatching to compute matching
     res = cpp_wrapper_galeshapley(args$proposerPref, args$reviewerUtils)
 
+    # number of proposals
     M = length(res$proposals)
+
+    # number of engagements
     N = length(res$engagements)
 
     # turn these into R indices by adding +1
@@ -49,7 +65,6 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
         "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
         "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
     ))
-
     res$proposals = matrix(res$proposals, ncol = 1) + 1
     res$engagements = matrix(res$engagements, ncol = 1) + 1
 
@@ -66,13 +81,25 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
 #' utilities or preference orders (or both).
 #'
 #' @param studentUtils is a matrix with cardinal utilities of the proposing side
-#'   of the market
+#'   of the market. If there are \code{n} students and \code{m} colleges
+#'   in the market, then this matrix will be of dimension \code{m} by \code{n}.
+#'   The \code{i,j}th element refers to the payoff that student \code{j}
+#'   receives from being matched to college \code{i}.
 #' @param collegeUtils is a matrix with cardinal utilities of the courted side
-#'   of the market
+#'   of the market. If there are \code{n} students and \code{m} colleges
+#'   in the market, then this matrix will be of dimension \code{n} by \code{m}.
+#'   The \code{i,j}th element refers to the payoff that college \code{j}
+#'   receives from being matched to student \code{i}.
 #' @param studentPref is a matrix with the preference order of the students
-#'   (only required when \code{studentUtils} is not provided)
+#'   (only required when \code{studentUtils} is not provided). If there are
+#'   \code{n} students and \code{m} colleges in the market, then this matrix
+#'   will be of dimension \code{m} by \code{n}. The \code{i,j}th element refers
+#'   to the ID of student \code{j}'s \code{i}th most favorite college.
 #' @param collegePref is a matrix with the preference order of the colleges
-#'   (only required when \code{collegeUtils} is not provided)
+#'   (only required when \code{collegeUtils} is not provided).  If there are
+#'   \code{n} students and \code{m} colleges in the market, then this matrix
+#'   will be of dimension \code{n} by \code{m}. The \code{i,j}th element refers
+#'   to the ID of college \code{j}'s \code{i}th most favorite student
 #' @param slots is the number of slots per college (this is an integer, i.e. all
 #'   colleges have the same number of slots)
 #' @param studentOptimal is a boolean indicating the proposing side in this
@@ -107,7 +134,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
                     slots = 1,
                     studentOptimal = TRUE) {
 
-    if(studentOptimal) {
+    if (studentOptimal) {
 
         # validate the inputs
         args = validateInputs(studentUtils, collegeUtils, studentPref, collegePref)
@@ -312,13 +339,14 @@ checkPreferenceOrder = function(pref) {
 }
 
 
-#' Compute the one-to-many matching
+#' Compute the one-to-many matching (Deprecated)
 #'
-#' This function returns the one-to-many matching. The function needs some
-#' description of individuals preferences as inputs. That can be in the form of
-#' cardinal utilities or preference orders (or both). It is computationally most
-#' efficient to provide cardinal utilities for the proposers
-#' \code{proposerUtils} and cardinal utilities for the reviewers
+#' This function is deprecated. Please use \code{galeShapley.marriageMarket}
+#' instead. This function returns the one-to-many matching. The function needs
+#' some description of individuals preferences as inputs. That can be in the
+#' form of cardinal utilities or preference orders (or both). It is
+#' computationally most efficient to provide cardinal utilities for the
+#' proposers \code{proposerUtils} and cardinal utilities for the reviewers
 #' \code{reviewerUtils}.
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
@@ -339,12 +367,6 @@ checkPreferenceOrder = function(pref) {
 #'   remaining single proposers \code{single.reviewers} is a vector that lists
 #'   the ids of remaining single reviewers (if a reviewer has two vacancies left
 #'   it will be listed twice)
-#' @examples
-#' nfirms = 10
-#' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' results = one2many(uWorkers, uFirms, slots=2)
 one2many = function(proposerUtils = NULL,
                     reviewerUtils = NULL,
                     proposerPref = NULL,
@@ -357,13 +379,14 @@ one2many = function(proposerUtils = NULL,
 }
 
 
-#' Compute the many-to-one matching
+#' Compute the many-to-one matching (Deprecated)
 #'
-#' This function returns the many-to-one matching. The function needs some
-#' description of individuals preferences as inputs. That can be in the form of
-#' cardinal utilities or preference orders (or both). It is computationally most
-#' efficient to provide cardinal utilities for the proposers
-#' \code{proposerUtils} and cardinal utilities for the reviewers
+#' This function is deprecated. Please use \code{galeShapley.collegeAdmissions}
+#' instead. This function returns the many-to-one matching. The function needs
+#' some description of individuals preferences as inputs. That can be in the
+#' form of cardinal utilities or preference orders (or both). It is
+#' computationally most efficient to provide cardinal utilities for the
+#' proposers \code{proposerUtils} and cardinal utilities for the reviewers
 #' \code{reviewerUtils}.
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
@@ -384,12 +407,6 @@ one2many = function(proposerUtils = NULL,
 #'   remaining single proposers (if a proposer has two vacancies left it will be
 #'   listed twice) \code{single.reviewers} is a vector that lists the ids of
 #'   remaining single reviewers
-#' @examples
-#' nfirms = 10
-#' nworkers = 25
-#' uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
-#' uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-#' results = many2one(uFirms, uWorkers, slots=2)
 many2one = function(proposerUtils = NULL,
                     reviewerUtils = NULL,
                     proposerPref = NULL,
@@ -401,11 +418,12 @@ many2one = function(proposerUtils = NULL,
 }
 
 
-#' Compute one-to-one matching
+#' Compute one-to-one matching (Deprecated)
 #'
-#' This function returns the proposer-optimal one-to-one matching. The function
-#' needs some description of individuals preferences as inputs. That can be in
-#' the form of cardinal utilities or preference orders (or both).
+#' This function is deprecated. Please use \code{galeShapley.collegeAdmissions}
+#' instead. This function returns the proposer-optimal one-to-one matching. The
+#' function needs some description of individuals preferences as inputs. That
+#' can be in the form of cardinal utilities or preference orders (or both).
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market
@@ -423,16 +441,6 @@ many2one = function(proposerUtils = NULL,
 #'   matched to. \code{single.proposers} is a vector that lists the ids of
 #'   remaining single proposers. \code{single.reviewers} is a vector that lists
 #'   the ids of remaining single reviewers.
-#' @examples
-#' nmen = 25
-#' nwomen = 20
-#' uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
-#' uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
-#' results = one2one(uM, uW)
-#'
-#' prefM = sortIndex(uM)
-#' prefW = sortIndex(uW)
-#' results = one2one(proposerPref = prefM, reviewerPref = prefW)
 one2one = function(proposerUtils = NULL,
                    reviewerUtils = NULL,
                    proposerPref = NULL,
@@ -444,10 +452,11 @@ one2one = function(proposerUtils = NULL,
 }
 
 
-#' C++ wrapper for Gale-Shapley algorithm
+#' C++ wrapper for Gale-Shapley algorithm (Deprecated)
 #'
-#' This function provides an R wrapper for the C++ backend. Users should not
-#' call this function directly and instead use
+#' This function is deprecated. Please use \code{cpp_wrapper_galeshapley}
+#' instead. This function provides an R wrapper for the C++ backend. Users
+#' should not call this function directly and instead use
 #' \code{galeShapley.marriageMarket} or \code{galeShapley.collegeAdmissions}.
 #'
 #' @param proposerPref is a matrix with the preference order of the proposing

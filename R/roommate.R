@@ -113,7 +113,7 @@ checkPreferenceOrderOnesided = function(pref) {
     return(NULL)
 }
 
-#' C++ wrapper for Irving's Algorithm
+#' C++ wrapper for Irving's Algorithm (Deprecated)
 #'
 #' This function computes the Irving (1985) algorithm for finding
 #' a stable matching in a one-sided matching market. Note that neither
@@ -127,7 +127,7 @@ stableRoommateMatching = function(pref) {
     cpp_wrapper_irving(pref)
 }
 
-#' Compute matching for one-sided markets
+#' Compute matching for one-sided markets (Deprecated)
 #'
 #' This function returns a stable roommate matching for a one-sided market
 #' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
@@ -145,8 +145,6 @@ stableRoommateMatching = function(pref) {
 #' @return A vector of length n corresponding to the matchings being made, so that
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
 #' uses R style indexing. If no stable matching exists, it returns NULL.
-#' @examples
-#' results = onesided(utils = replicate(4, rnorm(3)))
 onesided = function(pref = NULL, utils = NULL) {
    .Deprecated("roommate")
     roommate(pref, utils)

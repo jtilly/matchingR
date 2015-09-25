@@ -2,7 +2,7 @@
 % Please edit documentation in R/galeshapley.R
 \name{one2many}
 \alias{one2many}
-\title{Compute the one-to-many matching}
+\title{Compute the one-to-many matching (Deprecated)}
 \usage{
 one2many(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL,
   reviewerPref = NULL, slots = 1)
@@ -34,18 +34,12 @@ A list with the successful proposals and engagements:
   it will be listed twice)
 }
 \description{
-This function returns the one-to-many matching. The function needs some
-description of individuals preferences as inputs. That can be in the form of
-cardinal utilities or preference orders (or both). It is computationally most
-efficient to provide cardinal utilities for the proposers
-\code{proposerUtils} and cardinal utilities for the reviewers
+This function is deprecated. Please use \code{galeShapley.marriageMarket}
+instead. This function returns the one-to-many matching. The function needs
+some description of individuals preferences as inputs. That can be in the
+form of cardinal utilities or preference orders (or both). It is
+computationally most efficient to provide cardinal utilities for the
+proposers \code{proposerUtils} and cardinal utilities for the reviewers
 \code{reviewerUtils}.
-}
-\examples{
-nfirms = 10
-nworkers = 25
-uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
-uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-results = one2many(uWorkers, uFirms, slots=2)
 }
 

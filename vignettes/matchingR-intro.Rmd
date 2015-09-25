@@ -103,15 +103,15 @@ For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley 
  |  3 |  3 |
 
 
-The package computes the Gale-Shapley algorithm using the function `one2one`:
+The package computes the Gale-Shapley algorithm using the function `galeShapley.marriageMarket`:
 ```{r}
-matching = one2one(uM, uW)
+matching = galeShapley.marriageMarket(uM, uW)
 ```
 Note that we can obtain equivalent results when we use `prefM` and `prefW` as arguments:
 ```{r}
-matching = one2one(proposerPref = prefM, reviewerPref = prefW)
+matching = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
 ```
-The function `one2one` returns a list `matching` that includes the vectors `proposals` and `engagements` with the final proposals and engagements, respectively. These two vectors contain the same information (i.e. they tell us who is matched with whom). For the example above, the vector of proposals contains
+The function `galeShapley.marriageMarket` returns a list `matching` that includes the vectors `proposals` and `engagements` with the final proposals and engagements, respectively. These two vectors contain the same information (i.e. they tell us who is matched with whom). For the example above, the vector of proposals contains
 ```{r, echo=FALSE}
 dimnames(matching$proposals) = list(rows = c("Man 1", "Man 2", "Man 3"),
                                     cols = c("Proposed to Woman"))
@@ -144,7 +144,7 @@ Thus, this matching is stable.
 The following examples illustrate some additional features of this package.
 
 ### Example: Marriage Market
-The following is an example of `one2one` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
+The following is an example of `galeShapley.marriageMarket` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
 ```{r, results = "hide"}
 # set seed
 set.seed(1)
@@ -156,16 +156,16 @@ nwomen = 2000
 uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
 uW = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen)
 # male optimal matching
-resultsM = one2one(uM, uW)
+resultsM = galeShapley.marriageMarket(uM, uW)
 # female optimal matching
-resultsW = one2one(uW, uM)
+resultsW = galeShapley.marriageMarket(uW, uM)
 # check if matchings are stable
 checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
 checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
 ### Example: College Admissions Problem
-The following is an example of `one2many` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
+The following is an example of `galeShapley.collegeAdmissions` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
 ```{r, results = "hide"}
 # set seed
 set.seed(1)
@@ -177,7 +177,7 @@ ncolleges = 400
 uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = nstudents)
 uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges)
 # worker optimal matching
-results = one2many(uStudents, uColleges, slots = 2)
+results = galeShapley.collegeAdmissions(studentUtils =  uStudents, collegeUtils =  uColleges, slots = 2)
 # check if matching is stable
 checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
@@ -250,30 +250,30 @@ A final rotation is `(2, 5), (3, 4)`. Eliminating it yields
 ```
 Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, and `3` and `5` to match.
 ```{r}
-results = onesided(pref = pref - 1)
+results = roommate(pref = pref - 1)
 results
 ```
 
 ### Example: Roommate problem
 
-The function `onesided` can also be called using a payoff matrix, `u`, to specify preferences. In `u`, the element `[i,j]` refers to the payoff that agent `j` gets from being matched to agent `i`. The main diagonal of this matrix contains no information and will be removed by the algorithm.
+The function `roommate` can also be called using a payoff matrix, `u`, to specify preferences. In `u`, the element `[i,j]` refers to the payoff that agent `j` gets from being matched to agent `i`. The main diagonal of this matrix contains no information and will be removed by the algorithm.
 
 ```{r}
 # generate preferences
 N = 10
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = onesided(utils = u)
+results = roommate(utils = u)
 results
 ```
 
 ### Example: Roommate problem when no stable matching exists
 
-Note that in the roommate problem, existence of a stable matching is not guaranteed. When no stable matching can be found, the function `onesided` returns `NULL`.
+Note that in the roommate problem, existence of a stable matching is not guaranteed. When no stable matching can be found, the function `roommate` returns `NULL`.
 ```{r}
 set.seed(1)
 N = 512
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = onesided(utils = u)
+results = roommate(utils = u)
 print(results)
 ```
 
@@ -322,5 +322,10 @@ Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most
 ```
 
 Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes.
+
+```{r}
+results = toptrading(pref)
+results
+```
 
 # Literature

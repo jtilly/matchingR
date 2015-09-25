@@ -2,7 +2,7 @@
 % Please edit documentation in R/galeshapley.R
 \name{galeShapleyMatching}
 \alias{galeShapleyMatching}
-\title{C++ wrapper for Gale-Shapley algorithm}
+\title{C++ wrapper for Gale-Shapley algorithm (Deprecated)}
 \usage{
 galeShapleyMatching(proposerPref, reviewerUtils)
 }
@@ -22,8 +22,9 @@ A list with the successful proposals and engagements.
   at zero).
 }
 \description{
-This function provides an R wrapper for the C++ backend. Users should not
-call this function directly and instead use
+This function is deprecated. Please use \code{cpp_wrapper_galeshapley}
+instead. This function provides an R wrapper for the C++ backend. Users
+should not call this function directly and instead use
 \code{galeShapley.marriageMarket} or \code{galeShapley.collegeAdmissions}.
 }
 

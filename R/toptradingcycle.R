@@ -16,7 +16,7 @@ toptrading = function(pref = NULL, utils = NULL) {
     cpp_wrapper_ttc(args)
 }
 
-#' C++ wrapper for top trading cycle algorithm
+#' C++ wrapper for top trading cycle algorithm (Deprecated)
 #'
 #' This function uses the top trading cycle algorithm to find a stable trade between agents,
 #' each with some indivisible good, and with preferences over the goods of other agents. Each

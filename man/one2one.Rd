@@ -2,7 +2,7 @@
 % Please edit documentation in R/galeshapley.R
 \name{one2one}
 \alias{one2one}
-\title{Compute one-to-one matching}
+\title{Compute one-to-one matching (Deprecated)}
 \usage{
 one2one(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL,
   reviewerPref = NULL)
@@ -31,19 +31,9 @@ A list with the successful proposals and engagements:
   the ids of remaining single reviewers.
 }
 \description{
-This function returns the proposer-optimal one-to-one matching. The function
-needs some description of individuals preferences as inputs. That can be in
-the form of cardinal utilities or preference orders (or both).
-}
-\examples{
-nmen = 25
-nwomen = 20
-uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
-uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
-results = one2one(uM, uW)
-
-prefM = sortIndex(uM)
-prefW = sortIndex(uW)
-results = one2one(proposerPref = prefM, reviewerPref = prefW)
+This function is deprecated. Please use \code{galeShapley.collegeAdmissions}
+instead. This function returns the proposer-optimal one-to-one matching. The
+function needs some description of individuals preferences as inputs. That
+can be in the form of cardinal utilities or preference orders (or both).
 }
 

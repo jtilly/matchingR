@@ -2,7 +2,7 @@
 % Please edit documentation in R/galeshapley.R
 \name{many2one}
 \alias{many2one}
-\title{Compute the many-to-one matching}
+\title{Compute the many-to-one matching (Deprecated)}
 \usage{
 many2one(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL,
   reviewerPref = NULL, slots = 1)
@@ -34,18 +34,12 @@ A list with the successful proposals and engagements:
   remaining single reviewers
 }
 \description{
-This function returns the many-to-one matching. The function needs some
-description of individuals preferences as inputs. That can be in the form of
-cardinal utilities or preference orders (or both). It is computationally most
-efficient to provide cardinal utilities for the proposers
-\code{proposerUtils} and cardinal utilities for the reviewers
+This function is deprecated. Please use \code{galeShapley.collegeAdmissions}
+instead. This function returns the many-to-one matching. The function needs
+some description of individuals preferences as inputs. That can be in the
+form of cardinal utilities or preference orders (or both). It is
+computationally most efficient to provide cardinal utilities for the
+proposers \code{proposerUtils} and cardinal utilities for the reviewers
 \code{reviewerUtils}.
-}
-\examples{
-nfirms = 10
-nworkers = 25
-uFirms = matrix(runif(nfirms*nworkers), nrow=nworkers, ncol=nfirms)
-uWorkers = matrix(runif(nfirms*nworkers), nrow=nfirms, ncol=nworkers)
-results = many2one(uFirms, uWorkers, slots=2)
 }
 

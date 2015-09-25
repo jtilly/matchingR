@@ -2,7 +2,7 @@
 % Please edit documentation in R/galeshapley.R
 \name{galeShapley.marriageMarket}
 \alias{galeShapley.marriageMarket}
-\title{Uses the Gale-Shapley Algorithm to find solution to the stable marriage
+\title{Computes Gale-Shapley algorithm to find solution to the stable marriage
 problem}
 \usage{
 galeShapley.marriageMarket(proposerUtils = NULL, reviewerUtils = NULL,
@@ -10,17 +10,30 @@ galeShapley.marriageMarket(proposerUtils = NULL, reviewerUtils = NULL,
 }
 \arguments{
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
-side of the market}
+side of the market. If there are \code{n} proposers and \code{m} reviewers
+in the market, then this matrix will be of dimension \code{m} by \code{n}.
+The \code{i,j}th element refers to the payoff that individual \code{j}
+receives from being matched to individual \code{i}.}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
-of the market}
+of the market. If there are \code{n} proposers and \code{m} reviewers
+in the market, then this matrix will be of dimension \code{n} by \code{m}.
+The \code{i,j}th element refers to the payoff that individual \code{j}
+receives from being matched to individual \code{i}.}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
 side of the market (only required when \code{proposerUtils} is not
-provided)}
+provided). If there are \code{n} proposers and \code{m} reviewers
+in the market, then this matrix will be of dimension \code{m} by \code{n}.
+The \code{i,j}th element refers to the ID of individual \code{j}'s
+\code{i}th most favorite partner.}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
-of the market (only required when \code{reviewerUtils} is not provided)}
+of the market (only required when \code{reviewerUtils} is not provided). If
+there are \code{n} proposers and \code{m} reviewers in the market, then
+this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+element refers to the ID of individual \code{j}'s \code{i}th most favorite
+partner.}
 }
 \value{
 A list with the successful proposals and engagements:
@@ -32,15 +45,15 @@ A list with the successful proposals and engagements:
   the ids of remaining single reviewers.
 }
 \description{
-This function returns the proposer-optimal one-to-one matching. The function
-needs some description of individuals preferences as inputs. That can be in
-the form of cardinal utilities or preference orders (or both).
+This function returns the one-to-one matching. The function needs some
+description of individuals preferences as inputs. That can be in the form of
+cardinal utilities or preference orders (or both).
 }
 \examples{
-nmen = 25
-nwomen = 20
-uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
-uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
+nmen = 5
+nwomen = 4
+uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
+uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
 results = galeShapley.marriageMarket(uM, uW)
 
 prefM = sortIndex(uM)

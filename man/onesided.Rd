@@ -2,7 +2,7 @@
 % Please edit documentation in R/roommate.R
 \name{onesided}
 \alias{onesided}
-\title{Compute matching for one-sided markets}
+\title{Compute matching for one-sided markets (Deprecated)}
 \usage{
 onesided(pref = NULL, utils = NULL)
 }
@@ -27,8 +27,5 @@ uses R style indexing. If no stable matching exists, it returns NULL.
 This function returns a stable roommate matching for a one-sided market
 using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
 to exist, nor to be unique. If no stable matching exists, 0 is returned.
-}
-\examples{
-results = onesided(utils = replicate(4, rnorm(3)))
 }
 
