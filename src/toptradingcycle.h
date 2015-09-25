@@ -3,7 +3,7 @@
 
 #include "matchingR.h"
 
-List topTradingCycle(const umat pref);
+List cpp_wrapper_ttc(const umat pref);
 bool checkStabilityTopTradingCycle(umat pref, umat matchings);
 
 #endif
