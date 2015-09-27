@@ -49,7 +49,7 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
                    proposerPref = NULL,
                    reviewerPref = NULL) {
     # validate the inputs
-    args = validateInputs(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
+    args = galeShapley.validate(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
 
     # use galeShapleyMatching to compute matching
     res = cpp_wrapper_galeshapley(args$proposerPref, args$reviewerUtils)
@@ -137,7 +137,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
     if (studentOptimal) {
 
         # validate the inputs
-        args = validateInputs(studentUtils, collegeUtils, studentPref, collegePref)
+        args = galeShapley.validate(studentUtils, collegeUtils, studentPref, collegePref)
 
         # number of colleges
         number_of_colleges = NROW(args$reviewerUtils)
@@ -177,7 +177,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
     } else {
 
         # validate the inputs
-        args = validateInputs(collegeUtils, studentUtils, collegePref, studentPref)
+        args = galeShapley.validate(collegeUtils, studentUtils, collegePref, studentPref)
 
         # number of colleges
         number_of_colleges = NROW(args$proposerUtils)
@@ -240,7 +240,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 #' @return a list containing proposerUtils, reviewerUtils, proposerPref
 #'   (reviewerPref are not required after they are translated into
 #'   reviewerUtils).
-validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPref) {
+galeShapley.validate = function(proposerUtils, reviewerUtils, proposerPref, reviewerPref) {
 
     if(get("column.major", envir = pkg.env) == FALSE) {
         if(!is.null(proposerUtils)) {
@@ -258,7 +258,7 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
     }
 
     if (!is.null(reviewerPref)) {
-        reviewerPref = checkPreferenceOrder(reviewerPref)
+        reviewerPref = galeShapley.checkPreferences(reviewerPref)
         if (is.null(reviewerPref)) {
             stop(
                 "reviewerPref was defined by the user but is not a complete list of preference orderings"
@@ -267,7 +267,7 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
     }
 
     if (!is.null(proposerPref)) {
-        proposerPref = checkPreferenceOrder(proposerPref)
+        proposerPref = galeShapley.checkPreferences(proposerPref)
         if (is.null(proposerPref)) {
             stop(
                 "proposerPref was defined by the user but is not a complete list of preference orderings"
@@ -313,6 +313,31 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
     )
 }
 
+#' Check if a two-sided matching is stable
+#'
+#' This function checks if a given matching is stable for a particular set of
+#' preferences. This function can check if a given check one-to-one,
+#' one-to-many, or many-to-one matching is stable.
+#'
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the
+#' market
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
+#' market
+#' @param proposals is a matrix that contains the id of the reviewer that a given
+#' proposer is matched to: the first row contains the id of the reviewer that is
+#' matched with the first proposer, the second row contains the id of the reviewer
+#' that is matched with the second proposer, etc. The column dimension accommodates
+#' proposers with multiple slots.
+#' @param engagements is a matrix that contains the id of the proposer that a given
+#' reviewer is matched to. The column dimension accommodates reviewers with multiple
+#' slots
+#' @return true if the matching is stable, false otherwise
+galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
+    # turn proposals and engagements into C++ style indexing
+    proposals = proposals - 1
+    engagements = engagements - 1
+    cpp_wrapper_galeshapley_check_stability(proposerUtils, reviewerUtils, proposals, engagements)
+}
 
 #' Check if preference order is complete
 #'
@@ -323,7 +348,7 @@ validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPr
 #' @param pref is a matrix with a preference ordering
 #' @return a matrix with preference orderings with proper C++ indices or NULL
 #' if the preference order is not complete.
-checkPreferenceOrder = function(pref) {
+galeShapley.checkPreferences = function(pref) {
 
     # check if pref is using R instead of C++ indexing
     if(all(apply(pref,2,sort) == array(1:(NROW(pref)), dim = dim(pref)))) {
@@ -336,6 +361,70 @@ checkPreferenceOrder = function(pref) {
     }
 
     return(NULL)
+}
+
+#' Input validation (Deprecated)
+#'
+#' This function parses and validates the arguments that are passed on to the
+#' functions one2one, one2many, and many2one. In particular, it checks if
+#' user-defined preference orders are complete. If user-defined orderings are
+#' given in terms of R indices (starting at 1), then these are transformed into
+#' C++ indices (starting at zero).
+#'
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing
+#'   side of the market
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side
+#'   of the market
+#' @param proposerPref is a matrix with the preference order of the proposing
+#'   side of the market (only required when \code{proposerUtils} is not
+#'   provided)
+#' @param reviewerPref is a matrix with the preference order of the courted side
+#'   of the market (only required when \code{reviewerUtils} is not provided)
+#' @return a list containing proposerUtils, reviewerUtils, proposerPref
+#'   (reviewerPref are not required after they are translated into
+#'   reviewerUtils).
+validateInputs = function(proposerUtils, reviewerUtils, proposerPref, reviewerPref) {
+    .Deprecated(galeShapley.validate)
+    galeShapley.validate(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
+}
+
+
+#' Check if a two-sided matching is stable (Deprecated)
+#'
+#' This function checks if a given matching is stable for a particular set of
+#' preferences. This function can check if a given check one-to-one,
+#' one-to-many, or many-to-one matching is stable.
+#'
+#' @param proposerUtils is a matrix with cardinal utilities of the proposing side of the
+#' market
+#' @param reviewerUtils is a matrix with cardinal utilities of the courted side of the
+#' market
+#' @param proposals is a matrix that contains the id of the reviewer that a given
+#' proposer is matched to: the first row contains the id of the reviewer that is
+#' matched with the first proposer, the second row contains the id of the reviewer
+#' that is matched with the second proposer, etc. The column dimension accommodates
+#' proposers with multiple slots.
+#' @param engagements is a matrix that contains the id of the proposer that a given
+#' reviewer is matched to. The column dimension accommodates reviewers with multiple
+#' slots
+#' @return true if the matching is stable, false otherwise
+checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
+    .Deprecated(galeShapley.checkStability)
+}
+
+
+#' Check if preference order is complete (Deprecated)
+#'
+#' This function checks if a given preference ordering is complete. If needed
+#' it transforms the indices from R indices (starting at 1) to C++ indices
+#' (starting at zero).
+#'
+#' @param pref is a matrix with a preference ordering
+#' @return a matrix with preference orderings with proper C++ indices or NULL
+#' if the preference order is not complete.
+checkPreferenceOrder = function(pref) {
+    .Deprecated(galeShapley.checkPreferences)
+    galeShapley.checkPreferences(pref)
 }
 
 

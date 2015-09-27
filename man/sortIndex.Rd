@@ -7,10 +7,10 @@
 sortIndex(u)
 }
 \arguments{
-\item{u}{is the input matrix}
+\item{u}{is the input matrix with cardinal preferences}
 }
 \value{
-a matrix with sorted indicies
+a matrix with sorted indices (the agents' ordinal preferences)
 }
 \description{
 Within each column of a matrix, this function returns the indices of each

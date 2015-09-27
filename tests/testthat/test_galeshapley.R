@@ -5,9 +5,9 @@ test_that("Check if galeShapley.marriageMarket matching is stable", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
     uW = matrix(runif(12), nrow = 3, ncol = 4)
     matching.one2one = one2one(uM, uW)
-    expect_true(checkStability(uM, uW, matching.one2one$proposals, matching.one2one$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching.one2one$proposals, matching.one2one$engagements))
     matching.marriageMarket = galeShapley.marriageMarket(uM, uW)
-    expect_true(checkStability(uM, uW, matching.marriageMarket$proposals, matching.marriageMarket$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching.marriageMarket$proposals, matching.marriageMarket$engagements))
     expect_true(identical(matching.marriageMarket, matching.one2one))
 })
 
@@ -16,18 +16,18 @@ test_that("Check if galeShapley.collegeAdmissions matching is stable", {
     uM = matrix(runif(16), nrow = 2, ncol = 8)
     uW = matrix(runif(16), nrow = 8, ncol = 2)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 4)
-    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 8)
-    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 10)
-    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
 })
 
 test_that("Check if college-optimal galeShapley.collegeAdmissions matching is stable", {
     uM = matrix(runif(6), nrow = 3, ncol = 2)
     uW = matrix(runif(6), nrow = 2, ncol = 3)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 2, studentOptimal = FALSE)
-    expect_true(checkStability(uW, uM, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uW, uM, matching$proposals, matching$engagements))
 })
 
 test_that(
@@ -142,9 +142,9 @@ test_that("Check checkStability", {
     matching = list("engagements" = as.matrix(c(1,2) + 1),
                     "proposals" = as.matrix(c(2, 0, 1) + 1))
     # check if the matching is stable
-    expect_true(checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
     # swap proposals and engagements (this one isn't stable)
-    expect_false(suppressWarnings(checkStability(uM, uW, matching$engagements, matching$proposals)))
+    expect_false(suppressWarnings(galeShapley.checkStability(uM, uW, matching$engagements, matching$proposals)))
 })
 
 

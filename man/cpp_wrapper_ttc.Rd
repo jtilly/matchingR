@@ -10,9 +10,9 @@ cpp_wrapper_ttc(pref)
 \item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences.}
 }
 \value{
-A list with the matchings made. The matchings are encoded as follows: The first value
-in the list is the individual to whom agent 0 will be giving his good, the second value in the list
-is the individual to whom agent 1 will be giving his good, etc.
+A vector with the matchings made. The matchings are encoded as follows: The first value
+in the list is the individual to whom agent 1 will be giving his good, the second value in the list
+is the individual to whom agent 2 will be giving his good, etc.
 }
 \description{
 This function uses the top trading cycle algorithm to find a stable trade between agents,

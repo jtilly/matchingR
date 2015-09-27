@@ -11,8 +11,8 @@ topTradingCycle(pref)
 }
 \value{
 A list with the matchings made. The matchings are encoded as follows: The first value
-in the list is the individual to whom agent 0 will be giving his good, the second value in the list
-is the individual to whom agent 1 will be giving his good, etc.
+in the list is the individual to whom agent 1 will be giving his good, the second value in the list
+is the individual to whom agent 2 will be giving his good, etc.
 }
 \description{
 This function uses the top trading cycle algorithm to find a stable trade between agents,

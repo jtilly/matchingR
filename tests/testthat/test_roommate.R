@@ -4,16 +4,16 @@
 test_that("Stable roommate?", {
     set.seed(1)
     for (i in c(4, 8, 16, 32, 128, 256)) {
-        p = validateInputsOneSided(utils = replicate(i, rnorm(i-1)))
-        results = onesided(pref = p)
-        expect_true(checkStabilityRoommate(pref = p, matchings = results))
+        p = roommate.validate(utils = replicate(i, rnorm(i-1)))
+        results = roommate.matching(pref = p)
+        expect_true(roommate.checkStability(pref = p, matchings = results))
     }
 })
 
 test_that("Check preference orderings for one sided matching", {
     p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
-    expect_error(validateInputsOneSided(pref = p))
-    expect_error(validateInputsOneSided(utils = p))
+    expect_error(roommate.validate(pref = p))
+    expect_error(roommate.validate(utils = p))
 })
 
 
@@ -21,20 +21,20 @@ test_that("Row vs column major?", {
     # generate preferences
     set.seed(1)
     utils = matrix(rnorm(100), ncol=10, nrow=10)
-    p = validateInputsOneSided(utils = utils)
+    p = roommate.validate(utils = utils)
     
     # use preference orderings
     set.row.major()
-    results.row.major = onesided(pref = t(p))
+    results.row.major = roommate.matching(pref = t(p))
     set.column.major()
-    results.column.major = onesided(pref = p)
+    results.column.major = roommate.matching(pref = p)
     expect_true(identical(results.row.major, results.column.major))
     
     # do the same with payoff matrices instead of preference orderings
     set.row.major()
-    results.row.major = onesided(utils = t(utils))
+    results.row.major = roommate.matching(utils = t(utils))
     set.column.major()
-    results.column.major = onesided(utils = utils)
+    results.column.major = roommate.matching(utils = utils)
     expect_true(identical(results.row.major, results.column.major))
     
 })

@@ -40,8 +40,8 @@ cpp_wrapper_galeshapley <- function(proposerPref, reviewerUtils) {
 #' reviewer is matched to. The column dimension accommodates reviewers with multiple
 #' slots
 #' @return true if the matching is stable, false otherwise
-checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
-    .Call('matchingR_checkStability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
+cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
+    .Call('matchingR_cpp_wrapper_galeshapley_check_stability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
 }
 
 #' Computes a stable roommate matching
@@ -52,7 +52,7 @@ checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements)
 #' matching, not all of them. If no matching exists, returns 0.
 #'
 #' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-#' @return A list with the matchings made. Unmatched agents are 'matched' to N.
+#' @return A vector with the matchings made. Unmatched agents are 'matched' to N.
 cpp_wrapper_irving <- function(pref) {
     .Call('matchingR_cpp_wrapper_irving', PACKAGE = 'matchingR', pref)
 }
@@ -65,10 +65,10 @@ cpp_wrapper_irving <- function(pref) {
 #'
 #' @param pref is a matrix with ordinal rankings of the participants
 #' @param matchings is an nx1 matrix encoding who is matched to whom using
-#' R style indexing
+#' C++ style indexing
 #' @return true if the matching is stable, false otherwise
-checkStabilityRoommate <- function(pref, matchings) {
-    .Call('matchingR_checkStabilityRoommate', PACKAGE = 'matchingR', pref, matchings)
+cpp_wrapper_irving_check_stability <- function(pref, matchings) {
+    .Call('matchingR_cpp_wrapper_irving_check_stability', PACKAGE = 'matchingR', pref, matchings)
 }
 
 #' Computes the top trading cycle algorithm
@@ -79,9 +79,9 @@ checkStabilityRoommate <- function(pref, matchings) {
 #' be matched with themselves.
 #'
 #' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-#' @return A list with the matchings made. The matchings are encoded as follows: The first value
-#' in the list is the individual to whom agent 0 will be giving his good, the second value in the list
-#' is the individual to whom agent 1 will be giving his good, etc.
+#' @return A vector with the matchings made. The matchings are encoded as follows: The first value
+#' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
+#' is the individual to whom agent 2 will be giving his good, etc.
 cpp_wrapper_ttc <- function(pref) {
     .Call('matchingR_cpp_wrapper_ttc', PACKAGE = 'matchingR', pref)
 }
@@ -90,10 +90,10 @@ cpp_wrapper_ttc <- function(pref) {
 #'
 #' @param pref is a matrix with ordinal rankings of the participants
 #' @param matchings is an nx1 matrix encoding who is matched to whom using
-#' R style indexing
+#' C++ style indexing
 #' @return true if the matching is stable, false otherwise
-checkStabilityTopTradingCycle <- function(pref, matchings) {
-    .Call('matchingR_checkStabilityTopTradingCycle', PACKAGE = 'matchingR', pref, matchings)
+cpp_wrapper_ttc_check_stability <- function(pref, matchings) {
+    .Call('matchingR_cpp_wrapper_ttc_check_stability', PACKAGE = 'matchingR', pref, matchings)
 }
 
 #' Sort indices of a matrix within a column
@@ -101,8 +101,8 @@ checkStabilityTopTradingCycle <- function(pref, matchings) {
 #' Within each column of a matrix, this function returns the indices of each
 #' element in descending order
 #'
-#' @param u is the input matrix
-#' @return a matrix with sorted indicies
+#' @param u is the input matrix with cardinal preferences
+#' @return a matrix with sorted indices (the agents' ordinal preferences)
 #'
 sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
@@ -115,8 +115,8 @@ sortIndex <- function(u) {
 #' column 3 will be 34 -- unless it is column 34, in which case it will
 #' be 35, to adjust for the fact that this is a single-sided market.
 #'
-#' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-#' @return A list with the matchings made.
+#' @param u A matrix with agents' cardinal preferences. Column i is agent i's preferences.
+#' @return a matrix with the agents' ordinal preferences
 sortIndexOneSided <- function(u) {
     .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
 }

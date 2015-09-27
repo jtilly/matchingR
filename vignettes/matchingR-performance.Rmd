@@ -101,12 +101,12 @@ In the roommate problem, existence of a stable matching is not guaranteed, and i
 The code to find a stable matching, from the documentation, is
 ```{r}
 u = matrix(rnorm(16), nrow = 4)
-results = roommate(utils = u)
+results = roommate.matching(utils = u)
 ```
 The function we use to benchmark is
 ```{r}
 test_roommate = function(n) {
-    roommate(utils = matrix(rnorm( 4 * n ^ 2 ), nrow = 2 * n))
+    roommate.matching(utils = matrix(rnorm( 4 * n ^ 2 ), nrow = 2 * n))
 }
 ```
 That is, $n$ represents the number of rooms available.
@@ -139,7 +139,7 @@ res_irving = microbenchmark::microbenchmark(
 solution_exists = rep(0, 19);
 for (n in 1:19) {
     for (i in 1:50) {
-        results = roommate(utils = matrix(rnorm( 4 * N[n] ^ 2 ), nrow = 2 * N[n]))
+        results = roommate.matching(utils = matrix(rnorm( 4 * N[n] ^ 2 ), nrow = 2 * N[n]))
         if (!is.null(results)) {
             solution_exists[n] = solution_exists[n] + 1;
         }
@@ -172,12 +172,12 @@ knitr::kable(table, digits = 6, caption = "Proportion of matchings which exist a
 The code to find a stable matching using the top trading cycle algorithm is
 ```{r}
 u = matrix(rnorm(16), nrow = 4)
-results = toptrading(utils = u)
+results = toptrading.matching(utils = u)
 ```
 The function we use to benchmark is
 ```{r}
 test_toptrading = function(n) {
-    toptrading(utils = matrix(rnorm( n ^ 2 ), nrow = n))
+    toptrading.matching(utils = matrix(rnorm( n ^ 2 ), nrow = n))
 }
 ```
 so that `n` represents the number of agents in the market.

@@ -7,10 +7,10 @@
 sortIndexOneSided(u)
 }
 \arguments{
-\item{u}{A matrix with agent's cardinal preferences. Column i is agent i's preferences.}
+\item{u}{A matrix with agents' cardinal preferences. Column i is agent i's preferences.}
 }
 \value{
-A list with the matchings made.
+a matrix with the agents' ordinal preferences
 }
 \description{
 Returns the rank of each element with each column of a matrix. So,

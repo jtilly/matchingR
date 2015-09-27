@@ -100,7 +100,7 @@ List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils)
 //' slots
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
+bool cpp_wrapper_galeshapley_check_stability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
 
     // number of workers
     const int M = proposerUtils.n_cols;
@@ -110,11 +110,6 @@ bool checkStability(mat proposerUtils, mat reviewerUtils, umat proposals, umat e
     const int slotsReviewers = engagements.n_cols;
     // number of slots per worker
     const int slotsProposers = proposals.n_cols;
-
-    // turn proposals into C++ indices
-    proposals = proposals-1;
-    // turn engagements into C++ indices
-    engagements = engagements-1;
 
     // more jobs than workers (add utility from being unmatched to firms' preferences)
     if(N*slotsReviewers>M*slotsProposers) {

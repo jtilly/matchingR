@@ -131,7 +131,7 @@ The first element in the vector tells us that woman `1` is matched to man `2`, w
 
 We can then check if the computed matching is stable using the function `checkStability`. To check if a matching is stable, we check for each assignment `(m,w)` if there is some other woman `w'` that man `m` would rather be matched with and who would rather be matched to man `m`. This function will return `true` if the matching is stable and `false` otherwise.
 ```{r, results = "hide", message=FALSE}
-checkStability(uM, uW, matching$proposals, matching$engagements)
+galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
 For the simple 3-by-3 example, we can perform this check by hand:
 
@@ -160,8 +160,8 @@ resultsM = galeShapley.marriageMarket(uM, uW)
 # female optimal matching
 resultsW = galeShapley.marriageMarket(uW, uM)
 # check if matchings are stable
-checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
-checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
+galeShapley.checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
+galeShapley.checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
 ### Example: College Admissions Problem
@@ -179,7 +179,7 @@ uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncollege
 # worker optimal matching
 results = galeShapley.collegeAdmissions(studentUtils =  uStudents, collegeUtils =  uColleges, slots = 2)
 # check if matching is stable
-checkStability(uStudents, uColleges, results$proposals, results$engagements)
+galeShapley.checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
 
 # One-sided Matching Markets: Irving's Algorithm
@@ -250,7 +250,7 @@ A final rotation is `(2, 5), (3, 4)`. Eliminating it yields
 ```
 Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, and `3` and `5` to match.
 ```{r}
-results = roommate(pref = pref - 1)
+results = roommate.matching(pref = pref)
 results
 ```
 
@@ -262,7 +262,7 @@ The function `roommate` can also be called using a payoff matrix, `u`, to specif
 # generate preferences
 N = 10
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = roommate(utils = u)
+results = roommate.matching(utils = u)
 results
 ```
 
@@ -273,7 +273,7 @@ Note that in the roommate problem, existence of a stable matching is not guarant
 set.seed(1)
 N = 512
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = roommate(utils = u)
+results = roommate.matching(utils = u)
 print(results)
 ```
 
@@ -324,8 +324,9 @@ Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most
 Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes.
 
 ```{r}
-results = toptrading(pref)
+results = toptrading.matching(pref)
 results
+toptrading.checkStability(pref, results)
 ```
 
 # Literature

@@ -10,11 +10,11 @@
 //' be matched with themselves.
 //'
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A list with the matchings made. The matchings are encoded as follows: The first value
-//' in the list is the individual to whom agent 0 will be giving his good, the second value in the list
-//' is the individual to whom agent 1 will be giving his good, etc.
+//' @return A vector with the matchings made. The matchings are encoded as follows: The first value
+//' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
+//' is the individual to whom agent 2 will be giving his good, etc.
 // [[Rcpp::export]]
-List cpp_wrapper_ttc(const umat pref) {
+uvec cpp_wrapper_ttc(const umat pref) {
 
     // logger logg(QUIET);
 
@@ -130,18 +130,18 @@ List cpp_wrapper_ttc(const umat pref) {
             // logg.info() << "We only cut off the tail, so the current agent has been reset to " << current_agent << ".";
         }
     }
-
-    return List::create(_["matchings"] = matchings + 1);
+    matchings = matchings + 1;
+    return matchings;
 }
 
 //' Check if a one-sided matching for the top trading cycle algorithm is stable
 //'
 //' @param pref is a matrix with ordinal rankings of the participants
 //' @param matchings is an nx1 matrix encoding who is matched to whom using
-//' R style indexing
+//' C++ style indexing
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStabilityTopTradingCycle(umat pref, uvec matchings) {
+bool cpp_wrapper_ttc_check_stability(umat pref, uvec matchings) {
 
     // loop through everyone and check whether there's anyone else
     // who they'd rather be with

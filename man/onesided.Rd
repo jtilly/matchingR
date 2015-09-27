@@ -7,13 +7,13 @@
 onesided(pref = NULL, utils = NULL)
 }
 \arguments{
-\item{pref}{An n-1xn matrix, with each column representing the cardinal
+\item{pref}{An n-1xn matrix, with each column representing the ordinal
 utilities of each agent over matches with the other agents, so that, e.g.,
 if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
 matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
 style).}
 
-\item{utils}{An n-1xn matrix, each column representing ordinal preferences
+\item{utils}{An n-1xn matrix, each column representing cardinal preferences
 of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. For example, if
 element (4, 6) of this matrix is 2, then agent 4 gets utility 2 from agent
 6.}

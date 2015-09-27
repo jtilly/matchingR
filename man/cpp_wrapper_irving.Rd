@@ -10,7 +10,7 @@ cpp_wrapper_irving(pref)
 \item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences.}
 }
 \value{
-A list with the matchings made. Unmatched agents are 'matched' to N.
+A vector with the matchings made. Unmatched agents are 'matched' to N.
 }
 \description{
 This function computes the Irving (1985) algorithm for finding

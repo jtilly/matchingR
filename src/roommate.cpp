@@ -10,9 +10,9 @@
 //' matching, not all of them. If no matching exists, returns 0.
 //'
 //' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A list with the matchings made. Unmatched agents are 'matched' to N.
+//' @return A vector with the matchings made. Unmatched agents are 'matched' to N.
 // [[Rcpp::export]]
-List cpp_wrapper_irving(const umat pref) {
+uvec cpp_wrapper_irving(const umat pref) {
 
     // Number of participants
     uword N = pref.n_cols;
@@ -37,7 +37,7 @@ List cpp_wrapper_irving(const umat pref) {
         stable = true;
         for (uword n = 0; n < N; n++) {
             // n proposes to the next best guy if he hasn't proposed to everyone already...
-            if (proposed_to(n) >= N-1) { return List::create(_["matchings"] = 0); }
+            if (proposed_to(n) >= N-1) { return matchings.zeros(); }
 
             // or if he has no proposals accepted by anyone.
             if (proposal_to(n) == N) {
@@ -113,7 +113,7 @@ List cpp_wrapper_irving(const umat pref) {
             if (table[n][i] == proposal_from(n)) {
                 break;
             } else {
-                if (table[n].size() == 0) { return List::create(_["matchings"] = 0); }
+                if (table[n].size() == 0) { return matchings.zeros(); }
                 // find and erase from the table
                 bool erased = false;
                 for (uword j = 0; j < table[table[n].back()].size(); j++) {
@@ -123,7 +123,7 @@ List cpp_wrapper_irving(const umat pref) {
                         break;
                     }
                 }
-                if (!erased) { return List::create(_["matchings"]   = 0); }
+                if (!erased) { return matchings.zeros(); }
                 table[n].pop_back();
             }
         }
@@ -170,7 +170,7 @@ List cpp_wrapper_irving(const umat pref) {
                                 break;
                             }
                         }
-                        if (!erased) { return List::create(_["matchings"]   = 0); }
+                        if (!erased) { return matchings.zeros(); }
                         table[x[i]].pop_back();
                     }
                 }
@@ -181,7 +181,7 @@ List cpp_wrapper_irving(const umat pref) {
     // Check if anything is empty
     for (uword i = 0; i < table.size(); i++) {
         if (table[i].empty()) {
-            return List::create(_["matchings"] = 0);
+            return matchings.zeros();
         }
     }
 
@@ -191,7 +191,8 @@ List cpp_wrapper_irving(const umat pref) {
         matchings[n] = table[n][0];
     }
 
-    return List::create(_["matchings"] = matchings);
+    matchings = matchings + 1;
+    return matchings;
 }
 
 //' Check if a matching solves the stable roommate problem
@@ -202,12 +203,10 @@ List cpp_wrapper_irving(const umat pref) {
 //'
 //' @param pref is a matrix with ordinal rankings of the participants
 //' @param matchings is an nx1 matrix encoding who is matched to whom using
-//' R style indexing
+//' C++ style indexing
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
-bool checkStabilityRoommate(umat& pref, umat& matchings) {
-
-    matchings = matchings - 1;
+bool cpp_wrapper_irving_check_stability(umat& pref, umat& matchings) {
 
     // loop through everyone and check whether there's anyone else
     // who they'd rather be with

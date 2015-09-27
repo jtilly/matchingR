@@ -9,8 +9,8 @@
 //' Within each column of a matrix, this function returns the indices of each
 //' element in descending order
 //'
-//' @param u is the input matrix
-//' @return a matrix with sorted indicies
+//' @param u is the input matrix with cardinal preferences
+//' @return a matrix with sorted indices (the agents' ordinal preferences)
 //'
 // [[Rcpp::export]]
 umat sortIndex(const mat& u) {
@@ -30,8 +30,8 @@ umat sortIndex(const mat& u) {
 //' column 3 will be 34 -- unless it is column 34, in which case it will
 //' be 35, to adjust for the fact that this is a single-sided market.
 //'
-//' @param u A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A list with the matchings made.
+//' @param u A matrix with agents' cardinal preferences. Column i is agent i's preferences.
+//' @return a matrix with the agents' ordinal preferences
 // [[Rcpp::export]]
 umat sortIndexOneSided(const mat& u) {
     uword N = u.n_rows;

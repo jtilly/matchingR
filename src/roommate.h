@@ -6,7 +6,7 @@
 #include <string>
 #include "matchingR.h"
 
-List cpp_wrapper_irving(const umat pref);
-bool checkStabilityRoommate(umat pref, umat matchings);
+uvec cpp_wrapper_irving(const umat pref);
+bool cpp_wrapper_irving_check_stability(umat pref, umat matchings);
 
 #endif
