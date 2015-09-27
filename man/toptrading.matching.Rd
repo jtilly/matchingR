@@ -24,6 +24,6 @@ uses R style indexing.
 Compute the top trading cycle algorithm
 }
 \examples{
-results = toptrading(utils = replicate(4, rnorm(4)))
+results = toptrading.matching(utils = replicate(4, rnorm(4)))
 }
 

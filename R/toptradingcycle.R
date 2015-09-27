@@ -10,7 +10,7 @@
 #' e.g. if the 4th element is 6 then agent 4 was matched to agent 6. This vector
 #' uses R style indexing.
 #' @examples
-#' results = toptrading(utils = replicate(4, rnorm(4)))
+#' results = toptrading.matching(utils = replicate(4, rnorm(4)))
 toptrading.matching = function(pref = NULL, utils = NULL) {
     args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)
     cpp_wrapper_ttc(args$proposerPref)

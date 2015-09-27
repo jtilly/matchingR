@@ -17,7 +17,7 @@
 #' e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
 #' uses R style indexing. If no stable matching exists, it returns NULL.
 #' @examples
-#' results = roommate(utils = replicate(4, rnorm(3)))
+#' results = roommate.matching(utils = replicate(4, rnorm(3)))
 roommate.matching = function(pref = NULL, utils = NULL) {
     args = roommate.validate(pref = pref, utils = utils);
     res = cpp_wrapper_irving(args);

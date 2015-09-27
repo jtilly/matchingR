@@ -29,6 +29,6 @@ using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
 to exist, nor to be unique. If no stable matching exists, 0 is returned.
 }
 \examples{
-results = roommate(utils = replicate(4, rnorm(3)))
+results = roommate.matching(utils = replicate(4, rnorm(3)))
 }
 
