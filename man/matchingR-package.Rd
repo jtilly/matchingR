@@ -36,7 +36,7 @@ nwomen = 20
 uM = matrix(runif(nmen*nwomen), nrow=nwomen, ncol=nmen)
 uW = matrix(runif(nwomen*nmen), nrow=nmen, ncol=nwomen)
 results = galeShapley.marriageMarket(uM, uW)
-checkStability(uM, uW, results$proposals, results$engagements)
+galeShapley.checkStability(uM, uW, results$proposals, results$engagements)
 
 # college admissions problem
 nstudents = 25
@@ -45,18 +45,18 @@ uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
 uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 results = galeShapley.collegeAdmissions(studentUtils = uStudents, collegeUtils = uColleges, slots=4)
 results
-checkStability(uStudents, uColleges, results$proposals, results$engagements)
+galeShapley.checkStability(uStudents, uColleges, results$proposals, results$engagements)
 
 # stable roommate problem
 N = 10
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = roommate(utils = u)
+results = roommate.matching(utils = u)
 results
 
 # top trading cycle algorithm
 N = 10
 u = matrix(runif(N^2),  nrow = N, ncol = N)
-results = toptrading(utils = u)
+results = toptrading.matching(utils = u)
 results
 }
 \author{
