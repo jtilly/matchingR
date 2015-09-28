@@ -81,7 +81,7 @@ roommate.validate = function(pref = NULL, utils = NULL) {
 }
 
 #' Check if a roommate matching is stable
-#' 
+#'
 #' @param pref An n-1xn matrix, with each column representing the ordinal
 #' utilities of each agent over matches with the other agents, so that, e.g.,
 #' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
@@ -160,11 +160,11 @@ stableRoommateMatching = function(pref) {
 #' uses R style indexing. If no stable matching exists, it returns NULL.
 onesided = function(pref = NULL, utils = NULL) {
    .Deprecated("roommate")
-    roommate(pref, utils)
+    roommate.matching(pref, utils)
 }
 
 #' Check if a roommate matching is stable (Deprecated)
-#' 
+#'
 #' @param pref An n-1xn matrix, with each column representing the ordinal
 #' utilities of each agent over matches with the other agents, so that, e.g.,
 #' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
@@ -190,7 +190,7 @@ checkStabilityRoommate = function(pref, matchings) {
 #' of the agents.
 #' @return The validated inputs, ready to be sent to C++ code.
 validateInputsOneSided = function(pref = NULL, utils = NULL) {
-    .Deprecated("roommate.validate")   
+    .Deprecated("roommate.validate")
     roommate.validate(pref, utils)
 }
 
