@@ -4,7 +4,7 @@
 \alias{roommate.checkStability}
 \title{Check if a roommate matching is stable}
 \usage{
-roommate.checkStability(pref, matchings)
+roommate.checkStability(pref = NULL, matching, utils = NULL)
 }
 \arguments{
 \item{pref}{An n-1xn matrix, with each column representing the ordinal
@@ -13,7 +13,10 @@ if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
 matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
 style).}
 
-\item{matchings}{is a matrix with matchings (R style indexing)}
+\item{matching}{is a matrix with matchings (R style indexing)}
+
+\item{utils}{A n-1xn matrix with each column representing the cardinal
+utilities of each agent over matches with the other agents}
 }
 \value{
 true if stable, false if not
