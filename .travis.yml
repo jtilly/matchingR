@@ -59,12 +59,9 @@ install:
 script:
   - R CMD build . --no-manual --no-build-vignettes
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
-  - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes #--use-valgrind
+  - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes --use-valgrind
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
-  - cd "matchingR.Rcheck/tests"
-  - R -d valgrind --no-save < testthat.R
-  - cd ../..
 
 # report coverage rate to coveralls
 after_success:
