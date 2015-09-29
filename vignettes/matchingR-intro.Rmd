@@ -130,7 +130,7 @@ matching$engagements
 The first element in the vector tells us that woman `1` is matched to man `2`, woman `2` will be matched to man `1`, and woman `3` will be matched to man `3`.
 
 We can then check if the computed matching is stable using the function `checkStability`. To check if a matching is stable, we check for each assignment `(m,w)` if there is some other woman `w'` that man `m` would rather be matched with and who would rather be matched to man `m`. This function will return `true` if the matching is stable and `false` otherwise.
-```{r, results = "hide", message=FALSE}
+```{r}
 galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
 For the simple 3-by-3 example, we can perform this check by hand:
@@ -145,7 +145,7 @@ The following examples illustrate some additional features of this package.
 
 ### Example: Marriage Market
 The following is an example of `galeShapley.marriageMarket` with different numbers of participants on each side of the market. There are 2,500 women and 2,000 men. By construction, 500 men will remain unmatched. We randomly generate payoff matrices `uM` and `uW` which are drawn from a uniform distribution (`runif`). We then compute the male-optimal (i.e. men are proposing) and the female-optimal (i.e. woman are proposing) matching.
-```{r, results = "hide"}
+```{r}
 # set seed
 set.seed(1)
 # set number of men
@@ -155,18 +155,19 @@ nwomen = 2000
 # generate preferences
 uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
 uW = matrix(runif(nmen*nwomen), nrow = nmen, ncol = nwomen)
-# male optimal matching
+# male-optimal matching
 resultsM = galeShapley.marriageMarket(uM, uW)
-# female optimal matching
-resultsW = galeShapley.marriageMarket(uW, uM)
-# check if matchings are stable
+str(resultsM)
 galeShapley.checkStability(uM, uW, resultsM$proposals, resultsM$engagements)
+# female-optimal matching
+resultsW = galeShapley.marriageMarket(uW, uM)
+str(resultsW)
 galeShapley.checkStability(uW, uM, resultsW$proposals, resultsW$engagements)
 ```
 
 ### Example: College Admissions Problem
 The following is an example of `galeShapley.collegeAdmissions` where 1000 students get matched to 400 colleges, where each college has two slots. By construction, 200 students will remain unmatched. We draw students' and colleges' preferences, `uStudents` and `uColleges`, respectively, by from a uniform distribution. 
-```{r, results = "hide"}
+```{r}
 # set seed
 set.seed(1)
 # set number of students
@@ -176,8 +177,9 @@ ncolleges = 400
 # generate preferences
 uStudents = matrix(runif(ncolleges*nstudents), nrow = ncolleges, ncol = nstudents)
 uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncolleges)
-# worker optimal matching
+# student-optimal matching
 results = galeShapley.collegeAdmissions(studentUtils =  uStudents, collegeUtils =  uColleges, slots = 2)
+str(results)
 # check if matching is stable
 galeShapley.checkStability(uStudents, uColleges, results$proposals, results$engagements)
 ```
@@ -197,6 +199,11 @@ pref = matrix(c(3, 6, 2, 5, 3, 5,
                 5, 3, 6, 1, 6, 2), nrow = 5, ncol = 6, byrow = TRUE)
 ```
 Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
+
+The function `roommate.checkPreferences` checks if a given preference order is complete, i.e. if all preferences are fully specified. If the preference order is complete, it will return the proper preference order using `C++` style indexing (beginning at `0` instead of at `1`). If the preference order is incomplete, the function will return an error.
+```{r}
+roommate.checkPreferences(pref)
+```
 
 The algorithm proceeds in two phases.
 
@@ -253,6 +260,10 @@ Therefore, a stable matching is for `1` and `6` to match, `2` and `4` to match, 
 results = roommate.matching(pref = pref)
 results
 ```
+The function `roommate.checkStability` can be used to check if the resulting matching is stable:
+```{r}
+roommate.checkStability(pref = pref, matching = results)
+```
 
 ### Example: Roommate problem
 
@@ -264,6 +275,7 @@ N = 10
 u = matrix(runif(N^2),  nrow = N, ncol = N)
 results = roommate.matching(utils = u)
 results
+roommate.checkStability(utils = u, matching = results)
 ```
 
 ### Example: Roommate problem when no stable matching exists
@@ -326,6 +338,9 @@ Therefore, the final matching is that agent `1` swaps with agent `2`, and agents
 ```{r}
 results = toptrading.matching(pref)
 results
+```
+The function `toptrading.checkStability` can be used to check if the resulting allocation is in fact stable: 
+```{r}
 toptrading.checkStability(pref, results)
 ```
 

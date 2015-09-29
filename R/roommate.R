@@ -19,12 +19,12 @@
 #' @examples
 #' results = roommate.matching(utils = replicate(4, rnorm(3)))
 roommate.matching = function(pref = NULL, utils = NULL) {
-    args = roommate.validate(pref = pref, utils = utils);
-    res = cpp_wrapper_irving(args);
-    if (length(res) == NCOL(args)) {
-        return(res + 1)
-    } else {
+    pref.validated = roommate.validate(pref = pref, utils = utils);
+    res = cpp_wrapper_irving(pref.validated);
+    if (all(res == 0)) {
         return(NULL)
+    } else {
+        return(res + 1)
     }
 }
 
@@ -87,11 +87,15 @@ roommate.validate = function(pref = NULL, utils = NULL) {
 #' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
 #' matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
 #' style).
-#' @param matchings is a matrix with matchings (R style indexing)
+#' @param matching is a matrix with matchings (R style indexing)
+#' @param utils A n-1xn matrix with each column representing the cardinal
+#'   utilities of each agent over matches with the other agents
 #' @return true if stable, false if not
-roommate.checkStability = function(pref, matchings) {
-    matchings = matchings - 1
-    cpp_wrapper_irving_check_stability(pref, matchings)
+roommate.checkStability = function(pref=NULL, matching, utils=NULL) {
+    pref.validated = roommate.validate(pref = pref, utils = utils);
+    # turn into C++ style indexing
+    matching = matching - 1
+    cpp_wrapper_irving_check_stability(pref.validated, matching)
 }
 
 #' Check if preference order for a one-sided market is complete.
