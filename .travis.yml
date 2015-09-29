@@ -61,6 +61,11 @@ script:
   - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-intro.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-performance.R
+  - cd "matchingR.Rcheck/tests"
+  - R -d valgrind --no-save < testthat.R
+  - cd ../..
 
 # report coverage rate to coveralls
 after_success:
