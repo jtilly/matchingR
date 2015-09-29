@@ -10,7 +10,7 @@
 #' @aliases validateInputs checkStability checkPreferenceOrder one2many many2one
 #'   one2one galeShapleyMatching stableRoommateMatching onesided
 #'   checkStabilityRoommate validateInputsOneSided checkPreferenceOrderOnesided
-#'   topTradingCycle checkStabilityTopTradingCycle
+#'   topTradingCycle checkStabilityTopTradingCycle toptrading
 #' @section Details:
 #' \tabular{rl}{
 #'   \code{validateInputs} \tab was replaced by \code{\link{galeShapley.validate}}\cr
@@ -27,18 +27,19 @@
 #'   \code{checkPreferenceOrderOnesided} \tab was replaced by \code{\link{roommate.checkPreferences}}\cr
 #'   \code{topTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc}}\cr
 #'   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
+#'   \code{toptrading} \tab was replaced by \code{\link{toptrading.matching}}\cr
 #' }
 #'
 validateInputs = function(...) {
-    .Deprecated(galeShapley.validate)
+    .Deprecated("galeShapley.validate")
     galeShapley.validate(...)
 }
 checkStability = function(...) {
-    .Deprecated(galeShapley.checkStability)
+    .Deprecated("galeShapley.checkStability")
     galeShapley.checkStability(...)
 }
 checkPreferenceOrder = function(...) {
-    .Deprecated(galeShapley.checkPreferences)
+    .Deprecated("galeShapley.checkPreferences")
     galeShapley.checkPreferences(...)
 }
 one2many = function(...) {
@@ -84,5 +85,9 @@ topTradingCycle = function(...) {
 checkStabilityTopTradingCycle = function(...) {
     .Deprecated("cpp_wrapper_ttc_check_stability")
     toptrading.checkStability(...)
+}
+toptrading = function(...) {
+    .Deprecated("toptrading.matching")
+    toptrading.matching(...)
 }
 NULL

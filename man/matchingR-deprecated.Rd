@@ -16,6 +16,7 @@
 \alias{onesided}
 \alias{stableRoommateMatching}
 \alias{topTradingCycle}
+\alias{toptrading}
 \alias{validateInputs}
 \alias{validateInputsOneSided}
 \title{Deprecated Functions in matchingR}
@@ -46,6 +47,7 @@ the matchingR package. Eventually, these functions will be removed.
   \code{checkPreferenceOrderOnesided} \tab was replaced by \code{\link{roommate.checkPreferences}}\cr
   \code{topTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc}}\cr
   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
+  \code{toptrading} \tab was replaced by \code{\link{toptrading.matching}}\cr
 }
 }
 
