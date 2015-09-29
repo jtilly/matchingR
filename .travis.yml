@@ -18,7 +18,7 @@ branches:
   only:
    - master
 
-# install r-base-dev:
+# install r-base:
 # use r-packages-precise (https://cran.r-project.org/bin/linux/ubuntu/precise/) as source
 # which is white listed (https://github.com/travis-ci/apt-source-whitelist/)
 addons:
@@ -30,6 +30,10 @@ addons:
     - r-recommended
     - pandoc
     - valgrind
+    - liblapack-dev
+    - liblapack3
+    - libopenblas-base
+    - libopenblas-dev
 
 # cache local R libraries directory:
 cache:
