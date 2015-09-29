@@ -24,7 +24,7 @@ roommate.matching = function(pref = NULL, utils = NULL) {
     if (all(res == 0)) {
         return(NULL)
     } else {
-        return(res + 1)
+        return(res)
     }
 }
 
@@ -93,8 +93,6 @@ roommate.validate = function(pref = NULL, utils = NULL) {
 #' @return true if stable, false if not
 roommate.checkStability = function(pref=NULL, matching, utils=NULL) {
     pref.validated = roommate.validate(pref = pref, utils = utils);
-    # turn into C++ style indexing
-    matching = matching - 1
     cpp_wrapper_irving_check_stability(pref.validated, matching)
 }
 
