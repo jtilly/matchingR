@@ -13,7 +13,7 @@
 #' results = toptrading.matching(utils = replicate(4, rnorm(4)))
 toptrading.matching = function(pref = NULL, utils = NULL) {
     args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)
-    cpp_wrapper_ttc(args$proposerPref)
+    cpp_wrapper_ttc(args$proposerPref) + 1
 }
 
 #' Check if a one-sided matching for the top trading cycle algorithm is stable

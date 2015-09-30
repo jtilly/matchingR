@@ -7,12 +7,12 @@
 cpp_wrapper_ttc(pref)
 }
 \arguments{
-\item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences.}
+\item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing.}
 }
 \value{
 A vector with the matchings made. The matchings are encoded as follows: The first value
 in the list is the individual to whom agent 1 will be giving his good, the second value in the list
-is the individual to whom agent 2 will be giving his good, etc.
+is the individual to whom agent 2 will be giving his good, etc. C++ indexing.
 }
 \description{
 This function uses the top trading cycle algorithm to find a stable trade between agents,

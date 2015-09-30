@@ -9,8 +9,8 @@
 //' existence nor uniqueness is guaranteed, this algorithm finds one
 //' matching, not all of them. If no matching exists, returns 0.
 //'
-//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-//' @return A vector with the matchings made. Unmatched agents are 'matched' to N.
+//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing
+//' @return A vector with the matchings made. Unmatched agents are 'matched' to N. C++ indexing
 // [[Rcpp::export]]
 uvec cpp_wrapper_irving(const umat pref) {
 
@@ -191,7 +191,6 @@ uvec cpp_wrapper_irving(const umat pref) {
         matchings[n] = table[n][0];
     }
 
-    matchings = matchings + 1;
     return matchings;
 }
 
