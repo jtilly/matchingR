@@ -13,7 +13,7 @@ roommate.validate(pref = NULL, utils = NULL)
 of the agents.}
 }
 \value{
-The validated inputs, ready to be sent to C++ code.
+The validated inputs. C++ style indexing.
 }
 \description{
 This function parses and validates the arguments for one sided preferences

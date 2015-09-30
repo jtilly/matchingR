@@ -7,10 +7,10 @@
 cpp_wrapper_irving(pref)
 }
 \arguments{
-\item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences.}
+\item{pref}{A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing}
 }
 \value{
-A vector with the matchings made. Unmatched agents are 'matched' to N.
+A vector with the matchings made. Unmatched agents are 'matched' to N. C++ indexing
 }
 \description{
 This function computes the Irving (1985) algorithm for finding
