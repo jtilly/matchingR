@@ -37,7 +37,7 @@ roommate.matching = function(pref = NULL, utils = NULL) {
 #' @param pref is an n-1xn matrix, with each row representing an ordinal ranking.
 #' @param utils if an n-1xn matrix, with each row representing the cardinal preferences
 #' of the agents.
-#' @return The validated inputs, ready to be sent to C++ code.
+#' @return The validated inputs. C++ style indexing.
 roommate.validate = function(pref = NULL, utils = NULL) {
 
     if(get("column.major", envir = pkg.env) == FALSE) {
