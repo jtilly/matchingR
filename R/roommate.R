@@ -24,7 +24,7 @@ roommate.matching = function(pref = NULL, utils = NULL) {
     if (all(res == 0)) {
         return(NULL)
     } else {
-        return(res)
+        return(res + 1)
     }
 }
 

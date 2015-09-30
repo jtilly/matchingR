@@ -51,8 +51,8 @@ cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils
 #' existence nor uniqueness is guaranteed, this algorithm finds one
 #' matching, not all of them. If no matching exists, returns 0.
 #'
-#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
-#' @return A vector with the matchings made. Unmatched agents are 'matched' to N.
+#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing
+#' @return A vector with the matchings made. Unmatched agents are 'matched' to N. C++ indexing
 cpp_wrapper_irving <- function(pref) {
     .Call('matchingR_cpp_wrapper_irving', PACKAGE = 'matchingR', pref)
 }
@@ -78,10 +78,10 @@ cpp_wrapper_irving_check_stability <- function(pref, matchings) {
 #' agent is matched to one other agent, and matchings are not necessarily two-way. Agents may
 #' be matched with themselves.
 #'
-#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences.
+#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing.
 #' @return A vector with the matchings made. The matchings are encoded as follows: The first value
 #' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
-#' is the individual to whom agent 2 will be giving his good, etc.
+#' is the individual to whom agent 2 will be giving his good, etc. C++ indexing.
 cpp_wrapper_ttc <- function(pref) {
     .Call('matchingR_cpp_wrapper_ttc', PACKAGE = 'matchingR', pref)
 }
