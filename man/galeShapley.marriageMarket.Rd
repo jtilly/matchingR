@@ -2,62 +2,98 @@
 % Please edit documentation in R/galeshapley.R
 \name{galeShapley.marriageMarket}
 \alias{galeShapley.marriageMarket}
-\title{Computes Gale-Shapley algorithm to find solution to the stable marriage
-problem}
+\title{Gale-Shapley Algorithm: Stable Marriage Problem}
 \usage{
 galeShapley.marriageMarket(proposerUtils = NULL, reviewerUtils = NULL,
   proposerPref = NULL, reviewerPref = NULL)
 }
 \arguments{
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
-side of the market. If there are \code{n} proposers and \code{m} reviewers
-in the market, then this matrix will be of dimension \code{m} by \code{n}.
-The \code{i,j}th element refers to the payoff that individual \code{j}
-receives from being matched to individual \code{i}.}
+side of the market. If there are \code{n} proposers and \code{m} reviewers,
+then this matrix will be of dimension \code{m} by \code{n}. The
+\code{i,j}th element refers to the payoff that individual \code{j} receives
+from being matched to individual \code{i}.}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
-of the market. If there are \code{n} proposers and \code{m} reviewers
-in the market, then this matrix will be of dimension \code{n} by \code{m}.
-The \code{i,j}th element refers to the payoff that individual \code{j}
-receives from being matched to individual \code{i}.}
+of the market. If there are \code{n} proposers and \code{m} reviewers, then
+this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+element refers to the payoff that individual \code{j} receives from being
+matched to individual \code{i}.}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
 side of the market (only required when \code{proposerUtils} is not
-provided). If there are \code{n} proposers and \code{m} reviewers
-in the market, then this matrix will be of dimension \code{m} by \code{n}.
-The \code{i,j}th element refers to the ID of individual \code{j}'s
-\code{i}th most favorite partner.}
+provided). If there are \code{n} proposers and \code{m} reviewers in the
+market, then this matrix will be of dimension \code{m} by \code{n}. The
+\code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
 of the market (only required when \code{reviewerUtils} is not provided). If
 there are \code{n} proposers and \code{m} reviewers in the market, then
 this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-element refers to the ID of individual \code{j}'s \code{i}th most favorite
-partner.}
+element refers to individual \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 }
 \value{
 A list with the successful proposals and engagements:
-  \code{proposals} is a vector whose nth element contains the id of the
-  reviewer that proposer n is matched to. \code{engagements} is a vector
-  whose nth element contains the id of the proposer that reviewer n is
-  matched to. \code{single.proposers} is a vector that lists the ids of
-  remaining single proposers. \code{single.reviewers} is a vector that lists
-  the ids of remaining single reviewers.
+  \code{proposals} is a vector of length \code{n} whose \code{i}th element
+  contains the number of the reviewer that proposer \code{i} is matched to.
+  \code{engagements} is a vector of length \code{m} whose \code{j}th element
+  contains the number of the proposer that reviewer \code{j} is matched to.
+  \code{single.proposers} is a vector that lists the remaining single
+  proposers. \code{single.reviewers} is a vector that lists the remaining
+  single reviewers. By construction, either \code{single.proposers} or
+  \code{single.reviewers} will be empty. If there is an equal number of
+  individuals on both sides of the market, then both vectors will be empty.
 }
 \description{
-This function returns the one-to-one matching. The function needs some
-description of individuals preferences as inputs. That can be in the form of
-cardinal utilities or preference orders (or both).
+This function computes the Gale-Shapley algorithm and finds a solution to the
+stable marriage problem.
+}
+\details{
+The Gale-Shapley algorithm works as follows: Single men ("the proposers")
+sequentially make proposals to each of their most preferred available women
+("the reviewers"). A woman can hold on to at most one proposal at a time. A
+single woman will accept any proposal that is made to her. A woman that
+already holds on to a proposal will reject any proposal by a man that she
+values less than her current match. If a woman receives a proposal from a man
+that she values more than her current match, then she will accept the
+proposal and her previous match will join the line of bachelors. This process
+continues until all men are matched to women.
+
+The Gale-Shapley Algorithm requires a complete specification of proposers'
+and reviewers' preference orders over each other. A preference order can be
+passed on to the algorithm in ordinal form (e.g. man 3 prefers woman 1 over
+woman 3 over woman 2) or in cardinal form (e.g. man 3 receives payoff 3 from
+being matched to woman 1, payoff 2.5 from being matched to woman 3 and payoff
+2.1 from being matched to woman 2). Preference orders must be complete, i.e.
+all proposers must have fully specified preferences over all reviewers and
+vice versa.
+
+In the version of the algorithm that is implemented here, all individuals --
+proposers and reviewers -- prefer being matched to anyone to not being
+matched at all.
+
+The algorithm still works with an unequal number of proposers and reviewers.
+In that case some agents will remain unmatched.
 }
 \examples{
 nmen = 5
 nwomen = 4
+# generate cardinal utilities
 uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
 uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
+# run the algorithm using cardinal utilities as inputs
 results = galeShapley.marriageMarket(uM, uW)
+results
 
+# transform the cardinal utilities into preference orders
 prefM = sortIndex(uM)
 prefW = sortIndex(uW)
+# run the algorithm using preference orders as inputs
 results = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
+results
 }
 

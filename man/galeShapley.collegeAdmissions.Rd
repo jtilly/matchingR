@@ -2,74 +2,134 @@
 % Please edit documentation in R/galeshapley.R
 \name{galeShapley.collegeAdmissions}
 \alias{galeShapley.collegeAdmissions}
-\title{Uses the Gale-Shapley Algorithm to find solution to the college admission
-problem}
+\title{Gale-Shapley Algorithm: College Admissions Problem}
 \usage{
 galeShapley.collegeAdmissions(studentUtils = NULL, collegeUtils = NULL,
   studentPref = NULL, collegePref = NULL, slots = 1,
   studentOptimal = TRUE)
 }
 \arguments{
-\item{studentUtils}{is a matrix with cardinal utilities of the proposing side
-of the market. If there are \code{n} students and \code{m} colleges
-in the market, then this matrix will be of dimension \code{m} by \code{n}.
-The \code{i,j}th element refers to the payoff that student \code{j}
-receives from being matched to college \code{i}.}
+\item{studentUtils}{is a matrix with cardinal utilities of the students. If
+there are \code{n} students and \code{m} colleges, then this matrix will be
+of dimension \code{m} by \code{n}. The \code{i,j}th element refers to the
+payoff that student \code{j} receives from being matched to college
+\code{i}.}
 
-\item{collegeUtils}{is a matrix with cardinal utilities of the courted side
-of the market. If there are \code{n} students and \code{m} colleges
-in the market, then this matrix will be of dimension \code{n} by \code{m}.
-The \code{i,j}th element refers to the payoff that college \code{j}
-receives from being matched to student \code{i}.}
+\item{collegeUtils}{is a matrix with cardinal utilities of colleges. If there
+are \code{n} students and \code{m} colleges, then this matrix will be of
+dimension \code{n} by \code{m}. The \code{i,j}th element refers to the
+payoff that individual \code{j} receives from being matched to individual
+\code{i}.}
 
-\item{studentPref}{is a matrix with the preference order of the students
-(only required when \code{studentUtils} is not provided). If there are
-\code{n} students and \code{m} colleges in the market, then this matrix
-will be of dimension \code{m} by \code{n}. The \code{i,j}th element refers
-to the ID of student \code{j}'s \code{i}th most favorite college.}
+\item{studentPref}{is a matrix with the preference order of the proposing
+side of the market (only required when \code{studentUtils} is not
+provided). If there are \code{n} students and \code{m} colleges in the
+market, then this matrix will be of dimension \code{m} by \code{n}. The
+\code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 
-\item{collegePref}{is a matrix with the preference order of the colleges
-(only required when \code{collegeUtils} is not provided).  If there are
-\code{n} students and \code{m} colleges in the market, then this matrix
-will be of dimension \code{n} by \code{m}. The \code{i,j}th element refers
-to the ID of college \code{j}'s \code{i}th most favorite student}
+\item{collegePref}{is a matrix with the preference order of the courted side
+of the market (only required when \code{collegeUtils} is not provided). If
+there are \code{n} students and \code{m} colleges in the market, then this
+matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th element
+refers to individual \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 
-\item{slots}{is the number of slots per college (this is an integer, i.e. all
-colleges have the same number of slots)}
+\item{slots}{is the number of slots that each college has available. If this
+is 1, then the algorithm is identical to
+\code{\link{galeShapley.marriageMarket}}.}
 
-\item{studentOptimal}{is a boolean indicating the proposing side in this
-market. If true, students propose and the resulting allocation will be
-student-optimal. If false, colleges propose and the resulting allocation
-will be college-optimal.}
+\item{studentOptimal}{is \code{TRUE} if students apply to colleges. The
+resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
+if colleges apply to students. The resulting match is college-optimal.}
 }
 \value{
 A list with the successful proposals and engagements:
-  \code{proposals} is a vector whose nth element contains the id of the
-  reviewer that proposer n is matched to. \code{engagements} is a vector
-  whose nth element contains the id of the proposer that reviewer n is
-  matched to. \code{unmatched.students} is a vector that lists the ids of
-  remaining unmatched students \code{unmatched.colleges} is a vector that
-  lists the ids of remaining unmatched colleges (if a college has two slots
-  left it will be listed twice)
+  \code{proposals} is a vector of length \code{n} whose \code{i}th element
+  contains the number of the college that student \code{i} is matched to.
+  \code{engagements} is a vector of length \code{m} whose \code{j}th element
+  contains the number of the student that college \code{j} is matched to.
+  \code{unmatched.students} is a vector that lists the remaining unmatched
+  students. \code{unmatched.colleges} is a vector that lists all colleges
+  with open remaining slots. If a college has multiple open slots, it will be
+  listed multiple times. By construction, either \code{unmatched.students} or
+  \code{unmatched.colleges} will be empty. If there is an equal number of
+  individuals on both sides of the market, then both vectors will be empty.
 }
 \description{
-This function uses the Gale-Shapley algorithm to compute the solution to the
-college admissions problem. The function needs some description of
-individuals preferences as inputs. That can be in the form of cardinal
-utilities or preference orders (or both).
+This function computes the Gale-Shapley algorithm and finds a solution to the
+college admissions problem. In the student-optimal college admissions problem,
+\code{n} students apply to \code{m} colleges, where each college has \code{s} slots.
+}
+\details{
+The algorithm works analogously to \link{galeShapley.marriageMarket}. The
+Gale-Shapley algorithm works as follows: Students ("the proposers")
+sequentially make proposals to each of their most preferred available
+colleges ("the reviewers"). A college can hold on to at most \code{s}
+proposals at a time. A college with an open slot will accept any application
+that it receives. A college that already holds on to \code{s} applications
+will reject any application by a student that it values less than her current
+set of applicants. If a college receives an application from a student that
+it values more than its current set of applicants, then it will accept the
+application and drop its least preferred current applicant. This process
+continues until all students are matched to colleges.
+
+The Gale-Shapley Algorithm requires a complete specification of students'
+and colleges' preference orders over each other. A preference order can be
+passed on to the algorithm in ordinal form (e.g. student 3 prefers college 1 over
+college 3 over college 2) or in cardinal form (e.g. student 3 receives payoff 3 from
+being matched to college 1, payoff 2.5 from being matched to college 3 and payoff
+2.1 from being matched to college 2). Preference orders must be complete, i.e.
+all students must have fully specified preferences over all colleges and
+vice versa.
+
+In the version of the algorithm that is implemented here, all individuals --
+colleges and students -- prefer being matched to anyone to not being
+matched at all.
+
+The algorithm still works with an unequal number of students and slots. In
+that case some students will remain unmatched or some slots will remain open.
 }
 \examples{
 ncolleges = 10
 nstudents = 25
+
+# randomly generate cardinal preferences of colleges and students
 collegeUtils = matrix(runif(ncolleges*nstudents), nrow=nstudents, ncol=ncolleges)
 studentUtils = matrix(runif(ncolleges*nstudents), nrow=ncolleges, ncol=nstudents)
+
+# run the student-optimal algorithm
 results.studentoptimal = galeShapley.collegeAdmissions(studentUtils = studentUtils,
                                                        collegeUtils = collegeUtils,
                                                        slots = 2,
                                                        studentOptimal = TRUE)
+results.studentoptimal
+
+# run the college-optimal algorithm
 results.collegeoptimal = galeShapley.collegeAdmissions(studentUtils = studentUtils,
                                                        collegeUtils = collegeUtils,
                                                        slots = 2,
                                                        studentOptimal = FALSE)
+results.collegeoptimal
+
+# transform the cardinal utilities into preference orders
+collegePref = sortIndex(collegeUtils)
+studentPref = sortIndex(studentUtils)
+
+# run the student-optimal algorithm
+results.studentoptimal = galeShapley.collegeAdmissions(studentPref = studentPref,
+                                                       collegePref = collegePref,
+                                                       slots = 2,
+                                                       studentOptimal = TRUE)
+results.studentoptimal
+
+# run the college-optimal algorithm
+results.collegeoptimal = galeShapley.collegeAdmissions(studentPref = studentPref,
+                                                       collegePref = collegePref,
+                                                       slots = 2,
+                                                       studentOptimal = FALSE)
+results.collegeoptimal
 }
 

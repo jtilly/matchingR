@@ -2,34 +2,80 @@
 % Please edit documentation in R/galeshapley.R
 \name{galeShapley.validate}
 \alias{galeShapley.validate}
-\title{Input validation}
+\title{Input validation of preferences}
 \usage{
-galeShapley.validate(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
+galeShapley.validate(proposerUtils = NULL, reviewerUtils = NULL,
+  proposerPref = NULL, reviewerPref = NULL)
 }
 \arguments{
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
-side of the market}
+side of the market. If there are \code{n} proposers and \code{m} reviewers,
+then this matrix will be of dimension \code{m} by \code{n}. The
+\code{i,j}th element refers to the payoff that individual \code{j} receives
+from being matched to individual \code{i}.}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
-of the market}
+of the market. If there are \code{n} proposers and \code{m} reviewers, then
+this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+element refers to the payoff that individual \code{j} receives from being
+matched to individual \code{i}.}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
 side of the market (only required when \code{proposerUtils} is not
-provided)}
+provided). If there are \code{n} proposers and \code{m} reviewers in the
+market, then this matrix will be of dimension \code{m} by \code{n}. The
+\code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
-of the market (only required when \code{reviewerUtils} is not provided)}
+of the market (only required when \code{reviewerUtils} is not provided). If
+there are \code{n} proposers and \code{m} reviewers in the market, then
+this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+element refers to individual \code{j}'s \code{i}th most favorite partner.
+Preference orders can either be specified using R-indexing (starting at 1)
+or C++ indexing (starting at 0).}
 }
 \value{
-a list containing proposerUtils, reviewerUtils, proposerPref
-  (reviewerPref are not required after they are translated into
-  reviewerUtils).
+a list containing \code{proposerUtils}, \code{reviewerUtils},
+  \code{proposerPref} (\code{reviewerPref} are not required after they are
+  translated into \code{reviewerUtils}).
 }
 \description{
 This function parses and validates the arguments that are passed on to the
-functions one2one, one2many, and many2one. In particular, it checks if
-user-defined preference orders are complete. If user-defined orderings are
-given in terms of R indices (starting at 1), then these are transformed into
-C++ indices (starting at zero).
+Gale-Shapley Algorithm. In particular, it checks if user-defined preference
+orders are complete and returns an error otherwise. If user-defined orderings
+are given in terms of R indices (starting at 1), then these are transformed
+into C++ indices (starting at zero).
+}
+\examples{
+# market size
+nmen = 5
+nwomen = 4
+
+# generate cardinal utilities
+uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
+uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
+
+# turn cardinal utilities into ordinal preferences
+prefM = sortIndex(uM)
+prefW = sortIndex(uW)
+
+# validate cardinal preferences
+preferences = galeShapley.validate(uM, uW)
+preferences
+
+# validate ordinal preferences
+preferences = galeShapley.validate(proposerPref = prefM, reviewerPref = prefW)
+preferences
+
+# validate ordinal preferences when these are in R style indexing
+# (instead of C++ style indexing)
+preferences = galeShapley.validate(proposerPref = prefM + 1, reviewerPref = prefW + 1)
+preferences
+
+# validate preferences when proposer-side is cardinal and reviewer-side is ordinal
+preferences = galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
+preferences
 }
 

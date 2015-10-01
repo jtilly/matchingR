@@ -14,7 +14,7 @@ a matrix with preference orderings with proper C++ indices or NULL
 if the preference order is not complete.
 }
 \description{
-This function checks if a given preference ordering is complete. If needed
+This function checks if a given preference ordering is complete. If needed,
 it transforms the indices from R indices (starting at 1) to C++ indices
 (starting at zero).
 }
