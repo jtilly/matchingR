@@ -66,11 +66,11 @@ A list with elements that specify which student is matched to which
    \item{\code{matched.students} is a vector of length \code{n} whose \code{i}th
    element contains college that student \code{i} is
    matched to. Students that remain unmatched will be listed as being
-   matched to college \code{m+1}.}
+   matched to college \code{NA}.}
    \item{\code{matched.colleges} is a matrix of dimension \code{m} by
    \code{s} whose \code{j}th row contains the students that were admitted to
    college \code{j}. Slots that remain open show up as being matched to
-   student to \code{n+1}.}
+   student to \code{NA}.}
    \item{\code{unmatched.students} is a vector that lists the remaining unmatched
    students This vector will be empty whenever \code{n<=m*s}}.
    \item{\code{unmatched.colleges} is a vector that lists colleges with open

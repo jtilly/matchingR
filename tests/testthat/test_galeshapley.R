@@ -46,7 +46,7 @@ test_that(
         uW = matrix(runif(16 * 14), nrow = 14, ncol = 16)
         matching1 = galeShapley.marriageMarket(uM, uW)
         matching2 = galeShapley.marriageMarket(proposerPref = sortIndex(uM) + 1, reviewerPref = sortIndex(uW) + 1)
-        expect_true(all(matching1$engagements == matching2$engagements))
+        expect_true(identical(matching1$engagements, matching2$engagements))
     }
 )
 
@@ -105,8 +105,8 @@ test_that("Check outcome from galeShapley.marriageMarket matching", {
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.marriageMarket(uM, uW)
-    expect_true(all(matching$engagements == c(1,2) + 1))
-    expect_true(all(matching$proposals == c(2, 0, 1) + 1))
+    expect_true(identical(matching$engagements, matrix(c(2,3), ncol = 1)))
+    expect_true(identical(matching$proposals, matrix(c(NA, 1, 2), ncol = 1)))
 })
 
 test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matching", {
@@ -116,8 +116,8 @@ test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matc
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 2, studentOptimal = TRUE)
-    expect_true(all(matching$matched.colleges == c(1,2, 3, 0) + 1))
-    expect_true(all(matching$matched.students == c(1, 0, 1) + 1))
+    expect_true(identical(matching$matched.colleges, matrix(c(2, 3, NA, 1), ncol = 2)))
+    expect_true(identical(matching$matched.students, matrix(c(2, 1, 2), ncol = 1)))
 })
 
 test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions matching", {
@@ -127,8 +127,8 @@ test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions match
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.collegeAdmissions(uW, uM, slots = 2, studentOptimal = FALSE)
-    expect_true(all(matching$matched.students == c(1,2) + 1))
-    expect_true(all(matching$matched.colleges == c(2, 2, 2, 2, 0, 1) + 1))
+    expect_true(identical(matching$matched.students, matrix(c(2,3), ncol = 1)))
+    expect_true(identical(matching$matched.colleges, matrix(c(NA, NA, NA, NA, 1, 2), ncol = 2)))
 })
 
 test_that("Check checkStability", {
