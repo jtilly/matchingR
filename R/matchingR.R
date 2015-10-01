@@ -50,7 +50,7 @@
 #' uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
 #' results = galeShapley.collegeAdmissions(studentUtils = uStudents, collegeUtils = uColleges, slots=4)
 #' results
-#' galeShapley.checkStability(uStudents, uColleges, results$proposals, results$engagements)
+#' galeShapley.checkStability(uStudents, uColleges, results$matched.students, results$matched.colleges)
 #'
 #' # stable roommate problem
 #' N = 10

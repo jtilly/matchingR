@@ -181,7 +181,7 @@ uColleges = matrix(runif(nstudents*ncolleges), nrow = nstudents, ncol = ncollege
 results = galeShapley.collegeAdmissions(studentUtils =  uStudents, collegeUtils =  uColleges, slots = 2)
 str(results)
 # check if matching is stable
-galeShapley.checkStability(uStudents, uColleges, results$proposals, results$engagements)
+galeShapley.checkStability(uStudents, uColleges, results$matched.students, results$matched.colleges)
 ```
 
 # One-sided Matching Markets: Irving's Algorithm

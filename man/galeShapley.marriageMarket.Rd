@@ -21,32 +21,39 @@ element refers to the payoff that individual \code{j} receives from being
 matched to individual \code{i}.}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (only required when \code{proposerUtils} is not
-provided). If there are \code{n} proposers and \code{m} reviewers in the
-market, then this matrix will be of dimension \code{m} by \code{n}. The
-\code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
-Preference orders can either be specified using R-indexing (starting at 1)
-or C++ indexing (starting at 0).}
+side of the market. This argument is only required when
+\code{proposerUtils} is not provided. If there are \code{n} proposers and
+\code{m} reviewers in the market, then this matrix will be of dimension
+\code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0).}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
-of the market (only required when \code{reviewerUtils} is not provided). If
-there are \code{n} proposers and \code{m} reviewers in the market, then
-this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-element refers to individual \code{j}'s \code{i}th most favorite partner.
-Preference orders can either be specified using R-indexing (starting at 1)
-or C++ indexing (starting at 0).}
+of the market. This argument is only required when \code{reviewerUtils} is
+not provided. If there are \code{n} proposers and \code{m} reviewers in the
+market, then this matrix will be of dimension \code{n} by \code{m}. The
+\code{i,j}th element refers to individual \code{j}'s \code{i}th most
+favorite partner. Preference orders can either be specified using
+R-indexing (starting at 1) or C++ indexing (starting at 0).}
 }
 \value{
-A list with the successful proposals and engagements:
-  \code{proposals} is a vector of length \code{n} whose \code{i}th element
-  contains the number of the reviewer that proposer \code{i} is matched to.
-  \code{engagements} is a vector of length \code{m} whose \code{j}th element
-  contains the number of the proposer that reviewer \code{j} is matched to.
-  \code{single.proposers} is a vector that lists the remaining single
-  proposers. \code{single.reviewers} is a vector that lists the remaining
-  single reviewers. By construction, either \code{single.proposers} or
-  \code{single.reviewers} will be empty. If there is an equal number of
-  individuals on both sides of the market, then both vectors will be empty.
+A list with elements that specify who is matched to whom and who
+  remains unmatched. Suppose there are \code{n} proposers and \code{m}
+  reviewers. The list contains the following items:
+  \itemize{
+   \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
+   element contains the number of the reviewer that proposer \code{i} is
+   matched to. Proposers that remain unmatched will be listed as being
+   matched to \code{m+1}.}
+   \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
+   element contains the number of the proposer that reviewer \code{j} is
+   matched to. Reviwers that remain unmatched will be listed as being matched
+   to \code{n+1}.}
+   \item{\code{single.proposers} is a vector that lists the remaining single
+   proposers. This vector will be empty whenever \code{n<=m}}.
+   \item{\code{single.reviewers} is a vector that lists the remaining single
+   reviewers. This vector will be empty whenever \code{m<=n}}.
+  }
 }
 \description{
 This function computes the Gale-Shapley algorithm and finds a solution to the
@@ -64,11 +71,11 @@ proposal and her previous match will join the line of bachelors. This process
 continues until all men are matched to women.
 
 The Gale-Shapley Algorithm requires a complete specification of proposers'
-and reviewers' preference orders over each other. A preference order can be
+and reviewers' preferences over each other. Preferences can be
 passed on to the algorithm in ordinal form (e.g. man 3 prefers woman 1 over
-woman 3 over woman 2) or in cardinal form (e.g. man 3 receives payoff 3 from
-being matched to woman 1, payoff 2.5 from being matched to woman 3 and payoff
-2.1 from being matched to woman 2). Preference orders must be complete, i.e.
+woman 3 over woman 2) or in cardinal form (e.g. man 3 receives payoff 3.14 from
+being matched to woman 1, payoff 2.51 from being matched to woman 3, and payoff
+2.15 from being matched to woman 2). Preferences must be complete, i.e.
 all proposers must have fully specified preferences over all reviewers and
 vice versa.
 
@@ -95,5 +102,8 @@ prefW = sortIndex(uW)
 # run the algorithm using preference orders as inputs
 results = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
 results
+}
+\seealso{
+\code{\link{galeShapley.collegeAdmissions}}
 }
 

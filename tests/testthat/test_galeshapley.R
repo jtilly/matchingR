@@ -16,18 +16,18 @@ test_that("Check if galeShapley.collegeAdmissions matching is stable", {
     uM = matrix(runif(16), nrow = 2, ncol = 8)
     uW = matrix(runif(16), nrow = 8, ncol = 2)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 4)
-    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$matched.students, matching$matched.colleges))
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 8)
-    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$matched.students, matching$matched.colleges))
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 10)
-    expect_true(galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uM, uW, matching$matched.students, matching$matched.colleges))
 })
 
 test_that("Check if college-optimal galeShapley.collegeAdmissions matching is stable", {
     uM = matrix(runif(6), nrow = 3, ncol = 2)
     uW = matrix(runif(6), nrow = 2, ncol = 3)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 2, studentOptimal = FALSE)
-    expect_true(galeShapley.checkStability(uW, uM, matching$proposals, matching$engagements))
+    expect_true(galeShapley.checkStability(uW, uM, matching$matched.colleges, matching$matched.students))
 })
 
 test_that(
@@ -115,9 +115,9 @@ test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matc
                   0, 1), nrow = 2, ncol = 3)
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
-    matching = galeShapley.collegeAdmissions(uM, uW, slots = 2)
-    expect_true(all(matching$engagements == c(1,2, 3, 0) + 1))
-    expect_true(all(matching$proposals == c(1, 0, 1) + 1))
+    matching = galeShapley.collegeAdmissions(uM, uW, slots = 2, studentOptimal = TRUE)
+    expect_true(all(matching$matched.colleges == c(1,2, 3, 0) + 1))
+    expect_true(all(matching$matched.students == c(1, 0, 1) + 1))
 })
 
 test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions matching", {
@@ -127,8 +127,8 @@ test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions match
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.collegeAdmissions(uW, uM, slots = 2, studentOptimal = FALSE)
-    expect_true(all(matching$engagements == c(1,2) + 1))
-    expect_true(all(matching$proposals == c(2, 2, 2, 2, 0, 1) + 1))
+    expect_true(all(matching$matched.students == c(1,2) + 1))
+    expect_true(all(matching$matched.colleges == c(2, 2, 2, 2, 0, 1) + 1))
 })
 
 test_that("Check checkStability", {
@@ -187,21 +187,21 @@ test_that("Check if we can store preferences in row-major order:", {
 test_that("Marriage Market and College Admissions Problem Should Be Identical When Slots = 1", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
     uW = matrix(runif(12), nrow = 3, ncol = 4)
-    
+
     # student-optimal
     matching.marriageMarket = galeShapley.marriageMarket(uM, uW)
-    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1)
-    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$proposals)
-    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$engagements)
+    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1, studentOptimal = TRUE)
+    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$matched.students)
+    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$matched.colleges)
     expect_equal(matching.marriageMarket$single.proposers, matching.collegeAdmissions$unmatched.students)
     expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.colleges)
-    
-    # college-optimal  
+
+    # college-optimal
     matching.marriageMarket = galeShapley.marriageMarket(uW, uM)
-    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1, studentOptimal = TRUE)
-    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$engagements)
-    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$proposals)
+    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1, studentOptimal = FALSE)
+    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$matched.colleges)
+    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$matched.students)
     expect_equal(matching.marriageMarket$single.proposers, matching.collegeAdmissions$unmatched.colleges)
-    expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.students)  
-      
+    expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.students)
+
 })
