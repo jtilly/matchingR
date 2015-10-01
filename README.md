@@ -135,6 +135,7 @@ results
 ```
 
 ## Documentation
-* [Reference Manual](https://cran.r-project.org/web/packages/matchingR/matchingR.pdf "Computing Stable Matchings in R: Reference Manual for matchingR")
+* [Reference Manual v. 1.2 (Github)](http://jtilly.io/matchingR/matchingR-documentation.pdf "Computing Stable Matchings in R: Reference Manual for matchingR 1.2 (Current version)")
+* [Reference Manual v. 1.1.1 (CRAN)](https://cran.r-project.org/web/packages/matchingR/matchingR.pdf "Computing Stable Matchings in R: Reference Manual for matchingR 1.1.1 (CRAN release)")
 * [Vignette: Matching Algorithms in R: An Introduction to matchingR](https://cran.r-project.org/web/packages/matchingR/vignettes/matchingR-intro.html "Matching Algorithms in R: An Introduction to matchingR")
 * [Vignette: Matching Algorithms in R: Computational Performance](https://cran.r-project.org/web/packages/matchingR/vignettes/matchingR-performance.html "Matching Algorithms in R: Computational Performance")
