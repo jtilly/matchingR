@@ -182,3 +182,26 @@ test_that("Check if we can store preferences in row-major order:", {
     expect_true(identical(matching.column.major$proposals, matching.row.major$proposals))
     expect_true(identical(matching.column.major$engagements, matching.row.major$engagements))
 })
+
+
+test_that("Marriage Market and College Admissions Problem Should Be Identical When Slots = 1", {
+    uM = matrix(runif(12), nrow = 4, ncol = 3)
+    uW = matrix(runif(12), nrow = 3, ncol = 4)
+    
+    # student-optimal
+    matching.marriageMarket = galeShapley.marriageMarket(uM, uW)
+    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1)
+    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$proposals)
+    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$engagements)
+    expect_equal(matching.marriageMarket$single.proposers, matching.collegeAdmissions$unmatched.students)
+    expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.colleges)
+    
+    # college-optimal  
+    matching.marriageMarket = galeShapley.marriageMarket(uW, uM)
+    matching.collegeAdmissions = galeShapley.collegeAdmissions(uM, uW, slots = 1, studentOptimal = TRUE)
+    expect_equal(matching.marriageMarket$proposals, matching.collegeAdmissions$engagements)
+    expect_equal(matching.marriageMarket$engagements, matching.collegeAdmissions$proposals)
+    expect_equal(matching.marriageMarket$single.proposers, matching.collegeAdmissions$unmatched.colleges)
+    expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.students)  
+      
+})
