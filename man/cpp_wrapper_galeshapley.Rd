@@ -2,28 +2,44 @@
 % Please edit documentation in R/RcppExports.R
 \name{cpp_wrapper_galeshapley}
 \alias{cpp_wrapper_galeshapley}
-\title{C++ wrapper for Gale-Shapley algorithm}
+\title{C++ wrapper for Gale-Shapley Algorithm}
 \usage{
 cpp_wrapper_galeshapley(proposerPref, reviewerUtils)
 }
 \arguments{
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market (using C++ indexing that starts at zero)}
+side of the market. This argument is only required when
+\code{proposerUtils} is not provided. If there are \code{n} proposers and
+\code{m} reviewers in the market, then this matrix will be of dimension
+\code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders must be complete and specified
+using C++ indexing (starting at 0).}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
-of the market}
+ of the market. If there are \code{n} proposers and \code{m} reviewers, then
+ this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+ element refers to the payoff that individual \code{j} receives from being
+ matched to individual \code{i}.}
 }
 \value{
-A list with the successful proposals and engagements.
-  \code{proposals} is a vector whose nth element contains the id of the
-  reviewer that proposer n is matched to (using C++ indexing that starts at
-  zero). \code{engagements} is a vector whose nth element contains the id of
-  the proposer that reviewer n is matched to (using C++ indexing that starts
-  at zero).
+A list with elements that specify who is matched to whom. Suppose
+   there are \code{n} proposers and \code{m} reviewers. The list contains
+   the following items:
+  \itemize{
+   \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
+   element contains the number of the reviewer that proposer \code{i} is
+   matched to using C++ indexing. Proposers that remain unmatched will be
+   listed as being matched to \code{m}.}
+   \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
+   element contains the number of the proposer that reviewer \code{j} is
+   matched to using C++ indexing. Reviwers that remain unmatched will be
+   listed as being matched to \code{n}.}
+  }
 }
 \description{
 This function provides an R wrapper for the C++ backend. Users should not
 call this function directly and instead use
-\code{galeShapley.marriageMarket} or \code{galeShapley.collegeAdmissions}.
+\code{\link{galeShapley.marriageMarket}} or
+\code{\link{galeShapley.collegeAdmissions}}.
 }
 
