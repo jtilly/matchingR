@@ -4,20 +4,32 @@
 \alias{roommate.validate}
 \title{Input validation for one-sided markets}
 \usage{
-roommate.validate(pref = NULL, utils = NULL)
+roommate.validate(utils = NULL, pref = NULL)
 }
 \arguments{
-\item{pref}{is an n-1xn matrix, with each row representing an ordinal ranking.}
+\item{utils}{is a matrix with cardinal utilities for each individual in the
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+individual \code{j} receives from being matched to individual \code{1, 2,
+..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then
+the main diagonal will be removed.}
 
-\item{utils}{if an n-1xn matrix, with each row representing the cardinal preferences
-of the agents.}
+\item{pref}{is a matrix with the preference order of each individual in the
+market. This argument is only required when \code{utils} is not provided.
+If there are \code{n} individuals, then this matrix will be of dimension
+\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
+the function will throw an error.}
 }
 \value{
-The validated inputs. C++ style indexing.
+The validated preference ordering using C++ indexing.
 }
 \description{
 This function parses and validates the arguments for one sided preferences
-for the function onesided. If it uses R-style indexing (i.e., beginning at
-1), then it re-numbers the preference matrix to use C++ style indexing.
+for the function onesided. It returns the validates arguments. This function
+is called as part of \code{\link{roommate.matching}}. Only one of the
+arguments needs to be provided.
 }
 

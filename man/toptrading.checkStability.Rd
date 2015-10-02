@@ -7,15 +7,32 @@
 toptrading.checkStability(pref, matchings)
 }
 \arguments{
-\item{pref}{is a matrix with ordinal rankings of the participants}
+\item{pref}{is a matrix with the preference order of all individuals in the
+market. This argument is only required when \code{utils} is not provided.
+If there are \code{n} individuals, then this matrix will be of dimension
+\code{n} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0).}
 
-\item{matchings}{is an nx1 matrix encoding who is matched to whom using
-R style indexing}
+\item{matchings}{is a vector of length \code{n} corresponding to the
+matchings being made, so that e.g. if the \code{4}th element is \code{6}
+then agent \code{4} was matched to agent \code{6}.}
 }
 \value{
 true if the matching is stable, false otherwise
 }
 \description{
-Check if a one-sided matching for the top trading cycle algorithm is stable
+A matching is stable if there is no pair of agents who would rather swap
+houses with each other than with their two current respective partners.
+}
+\examples{
+pref = matrix(c(2, 4, 3, 4,
+                3, 3, 4, 2,
+                4, 2, 2, 1,
+                1, 1, 1, 3), byrow = TRUE, nrow = 4)
+pref
+results = toptrading.matching(pref = pref)
+results
+toptrading.checkStability(pref, results)
 }
 

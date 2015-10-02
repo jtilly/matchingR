@@ -4,24 +4,49 @@
 \alias{roommate.checkStability}
 \title{Check if a roommate matching is stable}
 \usage{
-roommate.checkStability(pref = NULL, matching, utils = NULL)
+roommate.checkStability(utils = NULL, pref = NULL, matching)
 }
 \arguments{
-\item{pref}{An n-1xn matrix, with each column representing the ordinal
-utilities of each agent over matches with the other agents, so that, e.g.,
-if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
-matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
-style).}
+\item{utils}{is a matrix with cardinal utilities for each individual in the
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+individual \code{j} receives from being matched to individual \code{1, 2,
+..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then
+the main diagonal will be removed.}
 
-\item{matching}{is a matrix with matchings (R style indexing)}
+\item{pref}{is a matrix with the preference order of each individual in the
+market. This argument is only required when \code{utils} is not provided.
+If there are \code{n} individuals, then this matrix will be of dimension
+\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
+the function will throw an error.}
 
-\item{utils}{A n-1xn matrix with each column representing the cardinal
-utilities of each agent over matches with the other agents}
+\item{matching}{is a vector of length \code{n} corresponding to the matchings
+that were formed. E.g. if the \code{4}th element of this vector is \code{6}
+then individual \code{4} was matched with individual \code{6}.}
 }
 \value{
 true if stable, false if not
 }
 \description{
-Check if a roommate matching is stable
+This function checks if a particular roommate matching is stable. A matching
+is stable if there is no roommate \code{r1} that would rather be matched to
+some other roommate \code{d2} than to his current roommate \code{r2} and the
+other roommate \code{d2} would rather be matched to \code{r1} than to his
+current roommate \code{d1}.
+}
+\examples{
+# define preferences
+pref = matrix(c(3, 1, 2, 3,
+                4, 3, 4, 2,
+                2, 4, 1, 1), byrow = TRUE, ncol = 4)
+pref
+# compute matching
+results = roommate.matching(pref = pref)
+results
+# check if matching is stable
+roommate.checkStability(pref = pref, matching = results)
 }
 

@@ -85,17 +85,11 @@ test_that("Check null inputs", {
 test_that("Check if incorrect dimensions result in error", {
     uM = matrix(runif(16 * 14), nrow = 16, ncol = 14)
     uW = matrix(runif(15 * 15), nrow = 15, ncol = 15)
-    expect_error(galeShapley.marriageMarket(uM, uW), "preference orderings must be symmetric")
-    expect_error(
-        galeShapley.marriageMarket(proposerPref = sortIndex(uM), reviewerUtils = uW),
-        "preference orderings must be symmetric"
-    )
+    expect_error(galeShapley.marriageMarket(uM, uW))
+    expect_error(galeShapley.marriageMarket(proposerPref = sortIndex(uM), reviewerUtils = uW)    )
     uM = matrix(runif(16 * 16), nrow = 16, ncol = 16)
     uW = matrix(runif(15 * 16), nrow = 15, ncol = 16)
-    expect_error(
-        galeShapley.marriageMarket(proposerPref = sortIndex(uM), reviewerUtils = uW),
-        "preference orderings must be symmetric"
-    )
+    expect_error(galeShapley.marriageMarket(proposerPref = sortIndex(uM), reviewerUtils = uW))
 })
 
 test_that("Check outcome from galeShapley.marriageMarket matching", {

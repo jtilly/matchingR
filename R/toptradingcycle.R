@@ -1,28 +1,83 @@
 #' Compute the top trading cycle algorithm
-#'
-#' @param pref An nxn matrix, each column representing each agent's ordinal preferences
-#' over other agents. E.g., if the jth row of the ith column is 4, then agent i ranks
-#' agent 4 jth.
-#' @param utils An nxn matrix, each column representing each agent's cardinal preferences
-#' over other agents. E.g., if the jth row of the ith column is 2.3, then agent i gets
-#' utility of 2.3 from being matched to agent j.
-#' @return A vector of length n corresponding to the matchings being made, so that
-#' e.g. if the 4th element is 6 then agent 4 was matched to agent 6. This vector
-#' uses R style indexing.
+#' 
+#' This package implements the top trading cycle algorithm.
+#' 
+#' Consider the following problem: A set of \code{n} agents each currently own
+#' their own home, and have preferences over the homes of other agents. The
+#' problem is to trade the homes between the agents in such a way so that no two
+#' agents want to swap homes.
+#' 
+#' Roughly speaking, the top trading cycle proceeds by identifying cycles of 
+#' agents, then eliminating those cycles until no agents remain. A cycle is a 
+#' sequence of agents such that each agent most prefers the next agent’s home 
+#' (out of the remaining unmmatched agents), and the last agent in the sequence 
+#' most prefers the first agent in the sequence’s home.
+#' 
+#' @param utils is a matrix with cardinal utilities of all individuals in the 
+#'   market. If there are \code{n} individuals, then this matrix will be of 
+#'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to the 
+#'   payoff that individual \code{j} receives from being matched to individual 
+#'   \code{i}.
+#' @param pref is a matrix with the preference order of all individuals in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0).
+#' @return A vector of length \code{n} corresponding to the matchings being 
+#'   made, so that e.g. if the \code{4}th element is \code{6} then agent 
+#'   \code{4} was matched to agent \code{6}.
 #' @examples
-#' results = toptrading.matching(utils = replicate(4, rnorm(4)))
-toptrading.matching = function(pref = NULL, utils = NULL) {
+#' # example using cardinal utilities
+#' utils = matrix(c(-1.4, -0.66, -0.45, 0.03, 
+#'                  0.72, 1.71, 0.59, 0.07, 
+#'                  0.44, 1.76, 1.71, -0.27, 
+#'                  0.26, 2.18, 1.4, 0.12), byrow = TRUE, nrow = 4)
+#' utils
+#' results = toptrading.matching(utils = utils)
+#' results
+#' 
+#' # example using ordinal preferences
+#' pref = matrix(c(2, 4, 3, 4, 
+#'                 3, 3, 4, 2, 
+#'                 4, 2, 2, 1, 
+#'                 1, 1, 1, 3), byrow = TRUE, nrow = 4)
+#' pref
+#' results = toptrading.matching(pref = pref)
+#' results       
+toptrading.matching = function(utils = NULL, pref = NULL) {
     args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)
     cpp_wrapper_ttc(args$proposerPref) + 1
 }
 
 #' Check if a one-sided matching for the top trading cycle algorithm is stable
+#' 
+#' A matching is stable if there is no pair of agents who would rather swap
+#' houses with each other than with their two current respective partners.
 #'
-#' @param pref is a matrix with ordinal rankings of the participants
-#' @param matchings is an nx1 matrix encoding who is matched to whom using
-#' R style indexing
+#' @param pref is a matrix with the preference order of all individuals in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0).
+#' @param matchings is a vector of length \code{n} corresponding to the
+#'   matchings being made, so that e.g. if the \code{4}th element is \code{6}
+#'   then agent \code{4} was matched to agent \code{6}.
 #' @return true if the matching is stable, false otherwise
+#' @examples 
+#' pref = matrix(c(2, 4, 3, 4, 
+#'                 3, 3, 4, 2, 
+#'                 4, 2, 2, 1, 
+#'                 1, 1, 1, 3), byrow = TRUE, nrow = 4)
+#' pref
+#' results = toptrading.matching(pref = pref)
+#' results     
+#' toptrading.checkStability(pref, results)
 toptrading.checkStability = function(pref, matchings) {
-    args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = NULL, reviewerUtils = NULL)
+    args = galeShapley.validate(proposerPref = pref, 
+                                reviewerPref = pref, 
+                                proposerUtils = NULL, 
+                                reviewerUtils = NULL)
     cpp_wrapper_ttc_check_stability(args$proposerPref, matchings-1)
 }

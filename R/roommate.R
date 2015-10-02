@@ -1,44 +1,101 @@
 #' Compute matching for one-sided markets
+#' 
+#' This function computes the Irving (1985) algorithm for finding a stable
+#' matching in a one-sided matching market.
+#' 
+#' Consider the following example: A set of \code{n} potential roommates, each 
+#' with ranked preferences over all the other potential roommates, are to be 
+#' matched to rooms, two roommates per room. A matching is stable if there is no
+#' roommate \code{r1} that would rather be matched to some other roommate 
+#' \code{d2} than to his current roommate \code{r2} and the other roommate 
+#' \code{d2} would rather be matched to \code{r1} than to his current roommate 
+#' \code{d1}.
+#' 
+#' Note that neither existence nor uniqueness is guaranteed, this algorithm 
+#' finds one matching, not all of them. If no matching exists, this function
+#' returns \code{NULL}.
 #'
-#' This function returns a stable roommate matching for a one-sided market
-#' using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
-#' to exist, nor to be unique. If no stable matching exists, 0 is returned.
-#'
-#' @param pref An n-1xn matrix, with each column representing the ordinal
-#' utilities of each agent over matches with the other agents, so that, e.g.,
-#' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
-#' matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
-#' style).
-#' @param utils An n-1xn matrix, each column representing cardinal preferences
-#' of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. For example, if
-#' element (4, 6) of this matrix is 2, then agent 4 gets utility 2 from agent
-#' 6.
-#' @return A vector of length n corresponding to the matchings being made, so that
-#' e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
-#' uses R style indexing. If no stable matching exists, it returns NULL.
+#' @param utils is a matrix with cardinal utilities for each individual in the 
+#'   market. If there are \code{n} individuals, then this matrix will be of 
+#'   dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+#'   individual \code{j} receives from being matched to individual \code{1, 2, 
+#'   ..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then 
+#'   the main diagonal will be removed.
+#' @param pref is a matrix with the preference order of each individual in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+#'   matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
+#'   the function will throw an error.
+#' @return A vector of length \code{n} corresponding to the matchings that were
+#'   formed. E.g. if the \code{4}th element of this vector is \code{6} then
+#'   individual \code{4} was matched with individual \code{6}. If no stable
+#'   matching exists, then this function returns \code{NULL}.
 #' @examples
-#' results = roommate.matching(utils = replicate(4, rnorm(3)))
-roommate.matching = function(pref = NULL, utils = NULL) {
+#' # example using cardinal utilities
+#' utils = matrix(c(-1.63, 0.69, -1.38, -0.03, 
+#'                   2.91, -0.52, 0.52, 0.22, 
+#'                   0.53, -0.52, -1.18, 0.53), byrow=TRUE, ncol = 4, nrow = 3)
+#' utils
+#' results = roommate.matching(utils = utils)
+#' results
+#' 
+#' # example using preference orders
+#' pref = matrix(c(3, 1, 2, 3, 
+#'                 4, 3, 4, 2, 
+#'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
+#' pref
+#' results = roommate.matching(pref = pref)                 
+#' results
+roommate.matching = function(utils = NULL, pref = NULL) {
     pref.validated = roommate.validate(pref = pref, utils = utils);
     res = cpp_wrapper_irving(pref.validated);
     if (all(res == 0)) {
+        # if the C++ code returns all zeros, then no matching exists
         return(NULL)
     } else {
+        # otherwise, add one to turn C++ indexing into R style indexing
         return(res + 1)
     }
 }
 
 #' Input validation for one-sided markets
+#' 
+#' This function parses and validates the arguments for one sided preferences 
+#' for the function onesided. It returns the validates arguments. This function 
+#' is called as part of \code{\link{roommate.matching}}. Only one of the
+#' arguments needs to be provided.
 #'
-#' This function parses and validates the arguments for one sided preferences
-#' for the function onesided. If it uses R-style indexing (i.e., beginning at
-#' 1), then it re-numbers the preference matrix to use C++ style indexing.
-#'
-#' @param pref is an n-1xn matrix, with each row representing an ordinal ranking.
-#' @param utils if an n-1xn matrix, with each row representing the cardinal preferences
-#' of the agents.
-#' @return The validated inputs. C++ style indexing.
-roommate.validate = function(pref = NULL, utils = NULL) {
+#' @param utils is a matrix with cardinal utilities for each individual in the 
+#'   market. If there are \code{n} individuals, then this matrix will be of 
+#'   dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+#'   individual \code{j} receives from being matched to individual \code{1, 2, 
+#'   ..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then 
+#'   the main diagonal will be removed.
+#' @param pref is a matrix with the preference order of each individual in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+#'   matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
+#'   the function will throw an error.
+#' @return The validated preference ordering using C++ indexing. 
+roommate.validate = function(utils = NULL, pref = NULL) {
+    
+    # Convert cardinal utility to ordinal, if necessary
+    if (is.null(utils) && is.null(pref)) {
+        stop("Preferences need to be specified: either utils or pref must be provided.")
+    }
+    
+    # Convert cardinal utility to ordinal, if necessary
+    if (!is.null(utils) && !is.null(pref)) {
+        warning("Preferences were specified using both cardinal utilities ",
+                "and ordinal preferences. The algorithm will proceed by ",
+                "only using the ordinal preferences.")
+    }
 
     if(get("column.major", envir = pkg.env) == FALSE) {
         if(!is.null(pref)) {
@@ -81,28 +138,59 @@ roommate.validate = function(pref = NULL, utils = NULL) {
 }
 
 #' Check if a roommate matching is stable
-#'
-#' @param pref An n-1xn matrix, with each column representing the ordinal
-#' utilities of each agent over matches with the other agents, so that, e.g.,
-#' if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
-#' matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
-#' style).
-#' @param matching is a matrix with matchings (R style indexing)
-#' @param utils A n-1xn matrix with each column representing the cardinal
-#'   utilities of each agent over matches with the other agents
+#' 
+#' This function checks if a particular roommate matching is stable. A matching
+#' is stable if there is no roommate \code{r1} that would rather be matched to
+#' some other roommate \code{d2} than to his current roommate \code{r2} and the
+#' other roommate \code{d2} would rather be matched to \code{r1} than to his
+#' current roommate \code{d1}.
+#' 
+#' @param utils is a matrix with cardinal utilities for each individual in the 
+#'   market. If there are \code{n} individuals, then this matrix will be of 
+#'   dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+#'   individual \code{j} receives from being matched to individual \code{1, 2, 
+#'   ..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then 
+#'   the main diagonal will be removed.
+#' @param pref is a matrix with the preference order of each individual in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0). The 
+#'   matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise, 
+#'   the function will throw an error.
+#' @param matching is a vector of length \code{n} corresponding to the matchings
+#'   that were formed. E.g. if the \code{4}th element of this vector is \code{6}
+#'   then individual \code{4} was matched with individual \code{6}.
 #' @return true if stable, false if not
-roommate.checkStability = function(pref=NULL, matching, utils=NULL) {
+#' @examples
+#' # define preferences
+#' pref = matrix(c(3, 1, 2, 3, 
+#'                 4, 3, 4, 2, 
+#'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
+#' pref
+#' # compute matching
+#' results = roommate.matching(pref = pref)                 
+#' results
+#' # check if matching is stable
+#' roommate.checkStability(pref = pref, matching = results)
+roommate.checkStability = function(utils = NULL, pref = NULL, matching) {
     pref.validated = roommate.validate(pref = pref, utils = utils);
     cpp_wrapper_irving_check_stability(pref.validated, matching)
 }
 
-#' Check if preference order for a one-sided market is complete.
-#'
-#' @param pref is a matrix with a preference ordering for a one-sided market.
-#' If necessary transforms the indices from R indices (starting at 1) to C++
-#' indices (starting at 0).
-#' @return a matrix with preference orderings with proper C++ indices or NULL
-#' if the preference order is not complete.
+#' Check if preference order for a one-sided market is complete
+#' 
+#' @param pref is a matrix with the preference order of each individual in the 
+#'   market. This argument is only required when \code{utils} is not provided. 
+#'   If there are \code{n} individuals, then this matrix will be of dimension 
+#'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0). The 
+#'   matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise, 
+#'   the function will throw an error.
+#' @return a matrix with preference orderings with proper C++ indices or NULL if
+#'   the preference order is not complete.
 roommate.checkPreferences = function(pref) {
 
     # check if pref is using R instead of C++ indexing

@@ -4,13 +4,22 @@
 
 //' Computes a stable roommate matching
 //'
-//' This function computes the Irving (1985) algorithm for finding
-//' a stable matching in a one-sided matching market. Note that neither
-//' existence nor uniqueness is guaranteed, this algorithm finds one
-//' matching, not all of them. If no matching exists, returns 0.
+//' This is the C++ wrapper for the stable roommate problem. Users should not
+//' call this function directly, but instead use 
+//' \code{link{roommate.matching()}}.
 //'
-//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing
-//' @return A vector with the matchings made. Unmatched agents are 'matched' to N. C++ indexing
+//' @param pref is a matrix with the preference order of each individual in the 
+//'   market. This argument is only required when \code{utils} is not provided. 
+//'   If there are \code{n} individuals, then this matrix will be of dimension 
+//'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+//'   \code{i}th most favorite partner. Preference orders must be specified
+//'   using C++ indexing (starting at 0). The matrix \code{pref} must be of
+//'   dimension \code{n-1} by \code{n}.
+//' @return A vector of length \code{n} corresponding to the matchings that were
+//'   formed (using C++ indexing). E.g. if the \code{4}th element of this vector
+//'   is \code{0} then individual \code{4} was matched with individual \code{1}.
+//'   If no stable matching exists, then this function returns a vector of
+//'   zeros.
 // [[Rcpp::export]]
 uvec cpp_wrapper_irving(const umat pref) {
     

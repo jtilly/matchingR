@@ -4,31 +4,63 @@
 \alias{roommate.matching}
 \title{Compute matching for one-sided markets}
 \usage{
-roommate.matching(pref = NULL, utils = NULL)
+roommate.matching(utils = NULL, pref = NULL)
 }
 \arguments{
-\item{pref}{An n-1xn matrix, with each column representing the ordinal
-utilities of each agent over matches with the other agents, so that, e.g.,
-if element (4, 6) of this matrix is 2, then agent 4 ranks agent 2 6th. The
-matrix accepts either 0-based indexing (C++ style) or 1-based indexing (R
-style).}
+\item{utils}{is a matrix with cardinal utilities for each individual in the
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n-1} by \code{n}. Column \code{j} refers to the payoff that
+individual \code{j} receives from being matched to individual \code{1, 2,
+..., j-1, j+1, ...n}. If a square matrix is passed as \code{utils}, then
+the main diagonal will be removed.}
 
-\item{utils}{An n-1xn matrix, each column representing cardinal preferences
-of each agent over agents 1, 2, ..., i-1, i+1, i+2, ... n. For example, if
-element (4, 6) of this matrix is 2, then agent 4 gets utility 2 from agent
-6.}
+\item{pref}{is a matrix with the preference order of each individual in the
+market. This argument is only required when \code{utils} is not provided.
+If there are \code{n} individuals, then this matrix will be of dimension
+\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s
+\code{i}th most favorite partner. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
+the function will throw an error.}
 }
 \value{
-A vector of length n corresponding to the matchings being made, so that
-e.g. if the 4th element is 6 then agent 4 was matched with agent 6. This vector
-uses R style indexing. If no stable matching exists, it returns NULL.
+A vector of length \code{n} corresponding to the matchings that were
+  formed. E.g. if the \code{4}th element of this vector is \code{6} then
+  individual \code{4} was matched with individual \code{6}. If no stable
+  matching exists, then this function returns \code{NULL}.
 }
 \description{
-This function returns a stable roommate matching for a one-sided market
-using Irving (1985)'s algorithm. Stable matchings are neither guaranteed
-to exist, nor to be unique. If no stable matching exists, 0 is returned.
+This function computes the Irving (1985) algorithm for finding a stable
+matching in a one-sided matching market.
+}
+\details{
+Consider the following example: A set of \code{n} potential roommates, each
+with ranked preferences over all the other potential roommates, are to be
+matched to rooms, two roommates per room. A matching is stable if there is no
+roommate \code{r1} that would rather be matched to some other roommate
+\code{d2} than to his current roommate \code{r2} and the other roommate
+\code{d2} would rather be matched to \code{r1} than to his current roommate
+\code{d1}.
+
+Note that neither existence nor uniqueness is guaranteed, this algorithm
+finds one matching, not all of them. If no matching exists, this function
+returns \code{NULL}.
 }
 \examples{
-results = roommate.matching(utils = replicate(4, rnorm(3)))
+# example using cardinal utilities
+utils = matrix(c(-1.63, 0.69, -1.38, -0.03,
+                  2.91, -0.52, 0.52, 0.22,
+                  0.53, -0.52, -1.18, 0.53), byrow=TRUE, ncol = 4, nrow = 3)
+utils
+results = roommate.matching(utils = utils)
+results
+
+# example using preference orders
+pref = matrix(c(3, 1, 2, 3,
+                4, 3, 4, 2,
+                2, 4, 1, 1), byrow = TRUE, ncol = 4)
+pref
+results = roommate.matching(pref = pref)
+results
 }
 
