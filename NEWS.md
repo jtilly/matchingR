@@ -1,3 +1,10 @@
+# matchingR 1.2
+
+ * Fixed a bug in the stable roommate matching algorithm that caused
+   problems on Mac OS X / clang. 
+ * Changed function names throughout the package (deprecated old function names)
+ * Updated documentation
+
 # matchingR 1.1.1
 
 This is a minor update. 
