@@ -188,17 +188,13 @@ uvec cpp_wrapper_irving(const umat pref) {
                         // Check to see if it removed x[i] or not (whether the table's the same size)
                         if (tab_size == table[table[x[i]].back()].size()) { return matchings.zeros(); }
                         
-                        // Remove table[table[x[i]].back()][x[i]] from table[x[i]] (it should be at the end).
-                        if (table[x[i]].empty()) { 
+                        // Check to see if there's only one element remaining (if so, no stable matching.)
+                        if (table[x[i]].size() == 1) { 
                             return matchings.zeros(); 
                         }
                         
+                        // Remove table[table[x[i]].back()][x[i]] from table[x[i]] (it should be at the end).
                         table[x[i]].pop_back();
-                        
-                        // Check if size is zero after pop_back: if so quit
-                        if(table[x[i]].size() == 0) {
-                            return matchings.zeros();
-                        }
                     }
                 }
             }
