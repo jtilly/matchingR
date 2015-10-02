@@ -2,7 +2,8 @@
 % Please edit documentation in R/toptradingcycle.R
 \name{toptrading.checkStability}
 \alias{toptrading.checkStability}
-\title{Check if a one-sided matching for the top trading cycle algorithm is stable}
+\title{Check if there are any pairs of agents who would rather swap houses with
+each other rather than be with their own two current respective partners.}
 \usage{
 toptrading.checkStability(utils = NULL, pref = NULL, matchings)
 }
@@ -28,8 +29,8 @@ then agent \code{4} was matched to agent \code{6}.}
 true if the matching is stable, false otherwise
 }
 \description{
-A matching is stable if there is no pair of agents who would rather swap
-houses with each other than with their two current respective partners.
+Check if there are any pairs of agents who would rather swap houses with
+each other rather than be with their own two current respective partners.
 }
 \examples{
 pref = matrix(c(2, 4, 3, 4,
