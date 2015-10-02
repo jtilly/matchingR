@@ -336,12 +336,12 @@ Now, a rotation is $\{1, 2\}$, because `1` most prefers `2`s house, and `2` most
 Therefore, the final matching is that agent `1` swaps with agent `2`, and agents `3` and `4` keep their own homes.
 
 ```{r}
-results = toptrading.matching(pref)
+results = toptrading.matching(pref = pref)
 results
 ```
 The function `toptrading.checkStability` can be used to check if the resulting allocation is in fact stable: 
 ```{r}
-toptrading.checkStability(pref, results)
+toptrading.checkStability(pref = pref, matchings = results)
 ```
 
 # Literature
