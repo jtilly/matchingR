@@ -187,7 +187,7 @@ uvec cpp_wrapper_irving(const umat pref) {
                         table[x[i]].pop_back();
                         
                         // Check if size is zero after pop_back: if so quit
-                        if(table[x[i]].size() == 0) {
+                        if(table[x[i]].empty()) {
                             return matchings.zeros();
                         }
                     }
