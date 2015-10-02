@@ -29,16 +29,16 @@ A vector of length \code{n} corresponding to the matchings being
 This package implements the top trading cycle algorithm.
 }
 \details{
-Consider the following problem: A set of \code{n} agents each currently own their
-own home, and have preferences over the homes of other agents. The problem is
-to trade the homes between the agents in such a way so that no two agents
-want to swap homes.
+Consider the following problem: A set of \code{n} agents each currently own
+their own home, and have preferences over the homes of other agents. The
+problem is to trade the homes between the agents in such a way so that no two
+agents want to swap homes.
 
 Roughly speaking, the top trading cycle proceeds by identifying cycles of
 agents, then eliminating those cycles until no agents remain. A cycle is a
-sequence of agents such that each agent most prefers the next agent’s home
+sequence of agents such that each agent most prefers the next agent's home
 (out of the remaining unmmatched agents), and the last agent in the sequence
-most prefers the first agent in the sequence’s home.
+most prefers the first agent in the sequence's home.
 }
 \examples{
 # example using cardinal utilities

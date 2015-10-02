@@ -9,9 +9,9 @@
 #' 
 #' Roughly speaking, the top trading cycle proceeds by identifying cycles of 
 #' agents, then eliminating those cycles until no agents remain. A cycle is a 
-#' sequence of agents such that each agent most prefers the next agent’s home 
+#' sequence of agents such that each agent most prefers the next agent's home 
 #' (out of the remaining unmmatched agents), and the last agent in the sequence 
-#' most prefers the first agent in the sequence’s home.
+#' most prefers the first agent in the sequence's home.
 #' 
 #' @param utils is a matrix with cardinal utilities of all individuals in the 
 #'   market. If there are \code{n} individuals, then this matrix will be of 
