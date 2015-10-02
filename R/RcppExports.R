@@ -138,7 +138,7 @@ cpp_wrapper_ttc <- function(pref) {
 #'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to
 #'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
 #'   specified using C++ indexing (starting at 0).
-#' @param matching is a vector of length \code{n} corresponding to the
+#' @param matchings is a vector of length \code{n} corresponding to the
 #'   matchings being made, so that e.g. if the \code{4}th element is \code{5}
 #'   then agent \code{4} was matched to agent \code{6}. This vector uses C++
 #'   indexing that starts at 0.

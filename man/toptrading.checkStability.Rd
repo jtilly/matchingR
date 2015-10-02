@@ -39,6 +39,6 @@ pref = matrix(c(2, 4, 3, 4,
 pref
 results = toptrading.matching(pref = pref)
 results
-toptrading.checkStability(pref, results)
+toptrading.checkStability(pref = pref, matchings = results)
 }
 

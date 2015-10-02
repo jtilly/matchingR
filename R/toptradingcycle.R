@@ -78,7 +78,7 @@ toptrading.matching = function(utils = NULL, pref = NULL) {
 #' pref
 #' results = toptrading.matching(pref = pref)
 #' results
-#' toptrading.checkStability(pref, results)
+#' toptrading.checkStability(pref = pref, matchings = results)
 toptrading.checkStability = function(utils = NULL, pref = NULL, matchings) {
     args = galeShapley.validate(proposerPref = pref,
                                 reviewerPref = pref,
