@@ -7,10 +7,18 @@
 cpp_wrapper_irving_check_stability(pref, matchings)
 }
 \arguments{
-\item{pref}{is a matrix with ordinal rankings of the participants}
+\item{pref}{is a matrix with the preference order of each individual in the
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
+\code{j}'s \code{i}th most favorite partner. Preference orders must be
+specified using C++ indexing (starting at 0). The matrix \code{pref} must
+be of dimension \code{n-1} by \code{n}.}
 
-\item{matchings}{is an nx1 matrix encoding who is matched to whom using
-C++ style indexing}
+\item{matchings}{is a vector of length \code{n} corresponding to the
+matchings that were formed (using C++ indexing). E.g. if the \code{4}th
+element of this vector is \code{0} then individual \code{4} was matched
+with individual \code{1}. If no stable matching exists, then this function
+returns a vector of zeros.}
 }
 \value{
 true if the matching is stable, false otherwise

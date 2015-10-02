@@ -8,12 +8,11 @@ cpp_wrapper_galeshapley(proposerPref, reviewerUtils)
 }
 \arguments{
 \item{proposerPref}{is a matrix with the preference order of the proposing
-side of the market. This argument is only required when
-\code{proposerUtils} is not provided. If there are \code{n} proposers and
-\code{m} reviewers in the market, then this matrix will be of dimension
-\code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
-\code{i}th most favorite partner. Preference orders must be complete and specified
-using C++ indexing (starting at 0).}
+side of the market. If there are \code{n} proposers and \code{m} reviewers
+in the market, then this matrix will be of dimension \code{m} by \code{n}.
+The \code{i,j}th element refers to \code{j}'s \code{i}th most favorite
+partner. Preference orders must be complete and specified using C++
+indexing (starting at 0).}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
  of the market. If there are \code{n} proposers and \code{m} reviewers, then

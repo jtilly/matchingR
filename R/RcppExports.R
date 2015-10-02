@@ -9,12 +9,11 @@
 #' \code{\link{galeShapley.collegeAdmissions}}.
 #'
 #' @param proposerPref is a matrix with the preference order of the proposing
-#'   side of the market. This argument is only required when
-#'   \code{proposerUtils} is not provided. If there are \code{n} proposers and
-#'   \code{m} reviewers in the market, then this matrix will be of dimension
-#'   \code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
-#'   \code{i}th most favorite partner. Preference orders must be complete and specified
-#'   using C++ indexing (starting at 0).
+#'   side of the market. If there are \code{n} proposers and \code{m} reviewers
+#'   in the market, then this matrix will be of dimension \code{m} by \code{n}.
+#'   The \code{i,j}th element refers to \code{j}'s \code{i}th most favorite
+#'   partner. Preference orders must be complete and specified using C++
+#'   indexing (starting at 0).
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side
 #'   of the market. If there are \code{n} proposers and \code{m} reviewers, then
 #'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
@@ -71,16 +70,15 @@ cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils
 #' Computes a stable roommate matching
 #'
 #' This is the C++ wrapper for the stable roommate problem. Users should not
-#' call this function directly, but instead use 
+#' call this function directly, but instead use
 #' \code{link{roommate.matching()}}.
 #'
-#' @param pref is a matrix with the preference order of each individual in the 
-#'   market. This argument is only required when \code{utils} is not provided. 
-#'   If there are \code{n} individuals, then this matrix will be of dimension 
-#'   \code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
-#'   \code{i}th most favorite partner. Preference orders must be specified
-#'   using C++ indexing (starting at 0). The matrix \code{pref} must be of
-#'   dimension \code{n-1} by \code{n}.
+#' @param pref is a matrix with the preference order of each individual in the
+#'   market. If there are \code{n} individuals, then this matrix will be of
+#'   dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
+#'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+#'   specified using C++ indexing (starting at 0). The matrix \code{pref} must
+#'   be of dimension \code{n-1} by \code{n}.
 #' @return A vector of length \code{n} corresponding to the matchings that were
 #'   formed (using C++ indexing). E.g. if the \code{4}th element of this vector
 #'   is \code{0} then individual \code{4} was matched with individual \code{1}.
@@ -96,9 +94,17 @@ cpp_wrapper_irving <- function(pref) {
 #' preferences. This function checks if there's an unmatched pair that would
 #' rather be matched with each other than with their assigned partners.
 #'
-#' @param pref is a matrix with ordinal rankings of the participants
-#' @param matchings is an nx1 matrix encoding who is matched to whom using
-#' C++ style indexing
+#' @param pref is a matrix with the preference order of each individual in the
+#'   market. If there are \code{n} individuals, then this matrix will be of
+#'   dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
+#'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+#'   specified using C++ indexing (starting at 0). The matrix \code{pref} must
+#'   be of dimension \code{n-1} by \code{n}.
+#' @param matchings is a vector of length \code{n} corresponding to the
+#'   matchings that were formed (using C++ indexing). E.g. if the \code{4}th
+#'   element of this vector is \code{0} then individual \code{4} was matched
+#'   with individual \code{1}. If no stable matching exists, then this function
+#'   returns a vector of zeros.
 #' @return true if the matching is stable, false otherwise
 cpp_wrapper_irving_check_stability <- function(pref, matchings) {
     .Call('matchingR_cpp_wrapper_irving_check_stability', PACKAGE = 'matchingR', pref, matchings)
@@ -106,24 +112,36 @@ cpp_wrapper_irving_check_stability <- function(pref, matchings) {
 
 #' Computes the top trading cycle algorithm
 #'
-#' This function uses the top trading cycle algorithm to find a stable trade between agents,
-#' each with some indivisible good, and with preferences over the goods of other agents. Each
-#' agent is matched to one other agent, and matchings are not necessarily two-way. Agents may
-#' be matched with themselves.
+#' This function uses the top trading cycle algorithm to find a stable trade
+#' between agents, each with some indivisible good, and with preferences over
+#' the goods of other agents. Each agent is matched to one other agent, and
+#' matchings are not necessarily two-way. Agents may be matched with
+#' themselves.
 #'
-#' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing.
-#' @return A vector with the matchings made. The matchings are encoded as follows: The first value
-#' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
-#' is the individual to whom agent 2 will be giving his good, etc. C++ indexing.
+#' @param pref is a matrix with the preference order of all individuals in the
+#'   market. If there are \code{n} individuals, then this matrix will be of
+#'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to
+#'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+#'   specified using C++ indexing (starting at 0).
+#' @return A vector of length \code{n} corresponding to the matchings being
+#'   made, so that e.g. if the \code{4}th element is \code{5} then agent
+#'   \code{4} was matched to agent \code{6}. This vector uses C++ indexing that
+#'   starts at 0.
 cpp_wrapper_ttc <- function(pref) {
     .Call('matchingR_cpp_wrapper_ttc', PACKAGE = 'matchingR', pref)
 }
 
 #' Check if a one-sided matching for the top trading cycle algorithm is stable
 #'
-#' @param pref is a matrix with ordinal rankings of the participants
-#' @param matchings is an nx1 matrix encoding who is matched to whom using
-#' C++ style indexing
+#' @param pref is a matrix with the preference order of all individuals in the
+#'   market. If there are \code{n} individuals, then this matrix will be of
+#'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to
+#'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+#'   specified using C++ indexing (starting at 0).
+#' @param matching is a vector of length \code{n} corresponding to the
+#'   matchings being made, so that e.g. if the \code{4}th element is \code{5}
+#'   then agent \code{4} was matched to agent \code{6}. This vector uses C++
+#'   indexing that starts at 0.
 #' @return true if the matching is stable, false otherwise
 cpp_wrapper_ttc_check_stability <- function(pref, matchings) {
     .Call('matchingR_cpp_wrapper_ttc_check_stability', PACKAGE = 'matchingR', pref, matchings)
@@ -136,19 +154,19 @@ cpp_wrapper_ttc_check_stability <- function(pref, matchings) {
 #'
 #' @param u is the input matrix with cardinal preferences
 #' @return a matrix with sorted indices (the agents' ordinal preferences)
-#'
 sortIndex <- function(u) {
     .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
 }
 
 #' Ranks elements with column of a matrix, assuming a one-sided market.
 #'
-#' Returns the rank of each element with each column of a matrix. So,
-#' if row 34 is the highest number for column 3, then the first row of
-#' column 3 will be 34 -- unless it is column 34, in which case it will
-#' be 35, to adjust for the fact that this is a single-sided market.
+#' Returns the rank of each element with each column of a matrix. So, if row 34
+#' is the highest number for column 3, then the first row of column 3 will be
+#' 34 -- unless it is column 34, in which case it will be 35, to adjust for the
+#' fact that this is a single-sided market.
 #'
-#' @param u A matrix with agents' cardinal preferences. Column i is agent i's preferences.
+#' @param u A matrix with agents' cardinal preferences. Column i is agent i's
+#'   preferences.
 #' @return a matrix with the agents' ordinal preferences
 sortIndexOneSided <- function(u) {
     .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
@@ -156,12 +174,11 @@ sortIndexOneSided <- function(u) {
 
 #' Rank elements within column of a matrix
 #'
-#' This function returns the rank of each element within each column of a matrix.
-#' The highest element receives the highest rank.
+#' This function returns the rank of each element within each column of a
+#' matrix. The highest element receives the highest rank.
 #'
 #' @param sortedIdx is the input matrix
 #' @return a rank matrix
-#'
 rankIndex <- function(sortedIdx) {
     .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }

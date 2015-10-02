@@ -4,15 +4,21 @@
 
 //' Computes the top trading cycle algorithm
 //'
-//' This function uses the top trading cycle algorithm to find a stable trade between agents,
-//' each with some indivisible good, and with preferences over the goods of other agents. Each
-//' agent is matched to one other agent, and matchings are not necessarily two-way. Agents may
-//' be matched with themselves.
+//' This function uses the top trading cycle algorithm to find a stable trade
+//' between agents, each with some indivisible good, and with preferences over
+//' the goods of other agents. Each agent is matched to one other agent, and
+//' matchings are not necessarily two-way. Agents may be matched with
+//' themselves.
 //'
-//' @param pref A matrix with agent's cardinal preferences. Column i is agent i's preferences. C++ indexing.
-//' @return A vector with the matchings made. The matchings are encoded as follows: The first value
-//' in the list is the individual to whom agent 1 will be giving his good, the second value in the list
-//' is the individual to whom agent 2 will be giving his good, etc. C++ indexing.
+//' @param pref is a matrix with the preference order of all individuals in the
+//'   market. If there are \code{n} individuals, then this matrix will be of
+//'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to
+//'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+//'   specified using C++ indexing (starting at 0).
+//' @return A vector of length \code{n} corresponding to the matchings being
+//'   made, so that e.g. if the \code{4}th element is \code{5} then agent
+//'   \code{4} was matched to agent \code{6}. This vector uses C++ indexing that
+//'   starts at 0.
 // [[Rcpp::export]]
 uvec cpp_wrapper_ttc(const umat pref) {
 
@@ -136,9 +142,15 @@ uvec cpp_wrapper_ttc(const umat pref) {
 
 //' Check if a one-sided matching for the top trading cycle algorithm is stable
 //'
-//' @param pref is a matrix with ordinal rankings of the participants
-//' @param matchings is an nx1 matrix encoding who is matched to whom using
-//' C++ style indexing
+//' @param pref is a matrix with the preference order of all individuals in the
+//'   market. If there are \code{n} individuals, then this matrix will be of
+//'   dimension \code{n} by \code{n}. The \code{i,j}th element refers to
+//'   \code{j}'s \code{i}th most favorite partner. Preference orders must be
+//'   specified using C++ indexing (starting at 0).
+//' @param matching is a vector of length \code{n} corresponding to the
+//'   matchings being made, so that e.g. if the \code{4}th element is \code{5}
+//'   then agent \code{4} was matched to agent \code{6}. This vector uses C++
+//'   indexing that starts at 0.
 //' @return true if the matching is stable, false otherwise
 // [[Rcpp::export]]
 bool cpp_wrapper_ttc_check_stability(umat pref, uvec matchings) {

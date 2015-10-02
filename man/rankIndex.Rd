@@ -13,7 +13,7 @@ rankIndex(sortedIdx)
 a rank matrix
 }
 \description{
-This function returns the rank of each element within each column of a matrix.
-The highest element receives the highest rank.
+This function returns the rank of each element within each column of a
+matrix. The highest element receives the highest rank.
 }
 

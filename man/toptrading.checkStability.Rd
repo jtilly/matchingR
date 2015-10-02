@@ -4,9 +4,15 @@
 \alias{toptrading.checkStability}
 \title{Check if a one-sided matching for the top trading cycle algorithm is stable}
 \usage{
-toptrading.checkStability(pref, matchings)
+toptrading.checkStability(utils = NULL, pref = NULL, matchings)
 }
 \arguments{
+\item{utils}{is a matrix with cardinal utilities of all individuals in the
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n} by \code{n}. The \code{i,j}th element refers to the
+payoff that individual \code{j} receives from being matched to individual
+\code{i}.}
+
 \item{pref}{is a matrix with the preference order of all individuals in the
 market. This argument is only required when \code{utils} is not provided.
 If there are \code{n} individuals, then this matrix will be of dimension

@@ -8,12 +8,11 @@ cpp_wrapper_irving(pref)
 }
 \arguments{
 \item{pref}{is a matrix with the preference order of each individual in the
-market. This argument is only required when \code{utils} is not provided.
-If there are \code{n} individuals, then this matrix will be of dimension
-\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s
-\code{i}th most favorite partner. Preference orders must be specified
-using C++ indexing (starting at 0). The matrix \code{pref} must be of
-dimension \code{n-1} by \code{n}.}
+market. If there are \code{n} individuals, then this matrix will be of
+dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
+\code{j}'s \code{i}th most favorite partner. Preference orders must be
+specified using C++ indexing (starting at 0). The matrix \code{pref} must
+be of dimension \code{n-1} by \code{n}.}
 }
 \value{
 A vector of length \code{n} corresponding to the matchings that were
