@@ -22,12 +22,14 @@ matchingR is an R package that efficiently computes the
 
   Matching markets are very common in practice and widely studied by
   economists. Popular examples include
-
-  the National Resident Matching Program that matches graduates from medical
+  \itemize{
+  \item{the National Resident Matching Program that matches graduates from medical
   school to residency programs at teaching hospitals throughout the United
-  States the matching of students to schools including the New York City High
-  School Match or the the Boston Public School Match (and many more) the
-  matching of kidney donors to recipients in kidney exchanges.
+  States}
+  \item{the matching of students to schools including the New York City High
+  School Match or the the Boston Public School Match (and many more)}
+  \item{the  matching of kidney donors to recipients in kidney exchanges.}
+  }
 }
 \examples{
 # stable marriage problem
