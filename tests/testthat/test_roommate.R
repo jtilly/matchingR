@@ -12,9 +12,10 @@ test_that("Stable roommate?", {
 
 test_that("Check preference orderings for one sided matching", {
     p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
+    expect_error(roommate.validate())
     expect_error(roommate.validate(pref = p))
     expect_error(roommate.validate(utils = p))
-    expect_error(roommate.validate(utils = p, pref =))
+    expect_error(roommate.validate(utils = p, pref = p))
 })
 
 
