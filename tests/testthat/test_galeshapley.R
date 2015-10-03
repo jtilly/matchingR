@@ -80,12 +80,12 @@ test_that("Check if validate function", {
     prefW = sortIndex(uW)
     
     # expect errors
-    set.column.major()
+    set.row.major()
     expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
     expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
     
     # expect errors
-    set.row.major()
+    set.column.major()
     expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
     expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
     
