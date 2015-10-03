@@ -178,17 +178,6 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
 #'   refers to individual \code{j}'s \code{i}th most favorite partner.
 #'   Preference orders can either be specified using R-indexing (starting at 1)
 #'   or C++ indexing (starting at 0).
-#' @return  A list of matstudents
-#'   \code{proposals} is a vector of length \code{n} whose \code{i}th element
-#'   contains the number of the college that student \code{i} is matched to.
-#'   \code{engagements} is a vector of length \code{m} whose \code{j}th element
-#'   contains the number of the student that college \code{j} is matched to.
-#'   \code{unmatched.students} is a vector that lists the remaining unmatched
-#'   students. \code{unmatched.colleges} is a vector that lists all colleges
-#'   with open remaining slots. If a college has multiple open slots, it will be
-#'   listed multiple times. By construction, either \code{unmatched.students} or
-#'   \code{unmatched.colleges} will be empty. If there is an equal number of
-#'   individuals on both sides of the market, then both vectors will be empty.
 #' @param slots is the number of slots that each college has available. If this
 #'   is 1, then the algorithm is identical to
 #'   \code{\link{galeShapley.marriageMarket}}.
