@@ -73,34 +73,6 @@ cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils
 #' call this function directly, but instead use
 #' \code{\link{roommate.matching}}.
 #' 
-#' The algorithm works in two stages. In the first stage, all participants begin
-#' unmmatched, then, in sequence, begin making proposals to other potential roommates,
-#' beginning with their most preferred roommate. If a roommate receives a proposal,
-#' he either accepts it if he has no other proposal which is better, or rejects it
-#' otherwise. If this stage ends with a roommate who has no proposals, then there
-#' is no stable matching and the algorithm terminates.
-#' 
-#' In the second stage, the algorithm proceeds by finding and eliminating 
-#' rotations. Roughly speaking, a rotation is a sequence of pairs of agents,
-#' such that the first agent in each pair is least preferred by the second
-#' agent in that pair (of all the agents remaining to be matched), the second
-#' agent in each pair is most preferred by the first agent in each pair (of
-#' all the agents remaining to be matched) and the second agent in the 
-#' successive pair is the second most preferred agent (of the agents 
-#' remaining to be matched) of the first agent in the succeeding 
-#' pair, where here 'successive' is taken to mean 'modulo \code{m}',
-#' where \code{m} is the length of the rotation. Once a rotation has been
-#' identified, it can be eliminated in the following way: For each pair, the
-#' second agent in the pair rejects the first agent in the pair (recall that the
-#' second agent hates the first agent, while the first agent loves the second
-#' agent), and the first agent then proceeds to propose to the second agent
-#' in the succeeding pair. If at any point during this process, an agent
-#' no longer has any agents left to propose to or be proposed to from, then
-#' there is no stable matching and the algorithm terminates.
-#' 
-#' Otherwise, at the end, every agent is left proposing to an agent who is also
-#' proposing back to them, which results in a stable matching. 
-#'
 #' @param pref is a matrix with the preference order of each individual in the
 #'   market. If there are \code{n} individuals, then this matrix will be of
 #'   dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
@@ -145,12 +117,6 @@ cpp_wrapper_irving_check_stability <- function(pref, matchings) {
 #' the goods of other agents. Each agent is matched to one other agent, and
 #' matchings are not necessarily two-way. Agents may be matched with
 #' themselves.
-#' 
-#' Roughly speaking, the top trading cycle proceeds by identifying cycles of
-#' agents, then eliminating those cycles until no agents remain. A cycle is a
-#' sequence of agents such that each agent most prefers the next agent's home
-#' (out of the remaining unmmatched agents), and the last agent in the sequence
-#' most prefers the first agent in the sequence's home. 
 #'
 #' @param pref is a matrix with the preference order of all individuals in the
 #'   market. If there are \code{n} individuals, then this matrix will be of

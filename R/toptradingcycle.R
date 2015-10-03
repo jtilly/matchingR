@@ -8,8 +8,11 @@
 #' a set of trades between agents so that no subset of agents can defect from the
 #' rest of the group, and by trading within themselves improve their own payoffs.
 #'
-#' For a verbal description of how the algorithm is implemented, see the 
-#' documentation for \code{cpp_wrapper_ttc}.
+#' Roughly speaking, the top trading cycle proceeds by identifying cycles of
+#' agents, then eliminating those cycles until no agents remain. A cycle is a
+#' sequence of agents such that each agent most prefers the next agent's home
+#' (out of the remaining unmmatched agents), and the last agent in the sequence
+#' most prefers the first agent in the sequence's home. 
 #' 
 #' The top trading cycle is guaranteed to produce a unique outcome, and that
 #' outcome is the unique outcome in the core, meaning there is no other outcome
