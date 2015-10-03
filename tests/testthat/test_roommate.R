@@ -11,11 +11,33 @@ test_that("Stable roommate?", {
 })
 
 test_that("Check preference orderings for one sided matching", {
-    p = as.matrix(c(0, 1, 2), nrow = 1, ncol = 3)
+    
+    # generate error
     expect_error(roommate.validate())
+    
+    # generate error
+    p = matrix(c(0, 1, 2), nrow = 1, ncol = 3)
     expect_error(roommate.validate(pref = p))
-    expect_error(roommate.validate(utils = p))
-    expect_error(roommate.validate(utils = p, pref = p))
+    
+    # generate error
+    u = matrix(c(3, 2, 1), nrow = 1, ncol = 3)
+    expect_error(roommate.validate(utils = u))
+    
+    # generate warning
+    u = matrix(runif(6), nrow = 2, ncol = 3)
+    p = sortIndexOneSided(u)
+    expect_warning(roommate.validate(utils = u, pref = p))
+    
+    # incomplete preferences
+    p = matrix(c(1, 0, 1, 
+                 3, 2, 0), nrow = 2, byrow = TRUE)
+    expect_error(roommate.validate(pref = p))
+
+    # check C++ vs R style indexing
+    p = matrix(c(1, 0, 1, 
+                 2, 2, 0), nrow = 2, byrow = TRUE)
+    expect_identical(roommate.checkPreferences(p), 
+                     roommate.checkPreferences(p + 1))
 })
 
 

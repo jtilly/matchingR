@@ -72,6 +72,25 @@ test_that("Check if incorrect preference orders result in an error", {
     )
 })
 
+test_that("Check if validate function", {
+    # generate cardinal and ordinal preferences
+    uM = matrix(runif(12), nrow = 4, ncol = 3)
+    uW = matrix(runif(12), nrow = 4, ncol = 3)
+    prefM = sortIndex(uM)
+    prefW = sortIndex(uW)
+    
+    # expect errors
+    set.column.major()
+    expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
+    expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
+    
+    # expect errors
+    set.row.major()
+    expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
+    expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
+    
+})
+
 test_that("Check null inputs", {
     expect_error(galeShapley.marriageMarket(),
                  "missing proposer preferences")
