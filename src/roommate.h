@@ -1,9 +1,7 @@
 #ifndef roommate_h
 #define roommate_h
 
-#include <queue>
 #include <deque>
-#include <string>
 #include "matchingR.h"
 
 uvec cpp_wrapper_irving(const umat pref);
