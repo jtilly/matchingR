@@ -39,3 +39,14 @@ test_that("Check preference orderings for one sided matching", {
     expect_identical(roommate.checkPreferences(p), 
                      roommate.checkPreferences(p + 1))
 })
+
+test_that("Check if roommate can handle square matrices for cardinal utilities", {
+    set.seed(2)
+    utils1 = matrix(rnorm(16), nrow=4, ncol = 4)
+    results1 = roommate.matching(utils = utils1)  
+    
+    utils2 = matrix(utils1[-c(1,6,11,16)], nrow=3, ncol=4)
+    results2 = roommate.matching(utils = utils2)  
+    
+    expect_identical(results1, results2)
+})
