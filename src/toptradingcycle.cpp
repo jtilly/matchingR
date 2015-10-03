@@ -9,6 +9,12 @@
 //' the goods of other agents. Each agent is matched to one other agent, and
 //' matchings are not necessarily two-way. Agents may be matched with
 //' themselves.
+//' 
+//' Roughly speaking, the top trading cycle proceeds by identifying cycles of
+//' agents, then eliminating those cycles until no agents remain. A cycle is a
+//' sequence of agents such that each agent most prefers the next agent's home
+//' (out of the remaining unmmatched agents), and the last agent in the sequence
+//' most prefers the first agent in the sequence's home. 
 //'
 //' @param pref is a matrix with the preference order of all individuals in the
 //'   market. If there are \code{n} individuals, then this matrix will be of

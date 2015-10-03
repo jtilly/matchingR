@@ -26,4 +26,33 @@ This is the C++ wrapper for the stable roommate problem. Users should not
 call this function directly, but instead use
 \code{\link{roommate.matching}}.
 }
+\details{
+The algorithm works in two stages. In the first stage, all participants begin
+unmmatched, then, in sequence, begin making proposals to other potential roommates,
+beginning with their most preferred roommate. If a roommate receives a proposal,
+he either accepts it if he has no other proposal which is better, or rejects it
+otherwise. If this stage ends with a roommate who has no proposals, then there
+is no stable matching and the algorithm terminates.
+
+In the second stage, the algorithm proceeds by finding and eliminating
+rotations. Roughly speaking, a rotation is a sequence of pairs of agents,
+such that the first agent in each pair is least preferred by the second
+agent in that pair (of all the agents remaining to be matched), the second
+agent in each pair is most preferred by the first agent in each pair (of
+all the agents remaining to be matched) and the second agent in the
+successive pair is the second most preferred agent (of the agents
+remaining to be matched) of the first agent in the succeeding
+pair, where here 'successive' is taken to mean 'modulo \code{m}',
+where \code{m} is the length of the rotation. Once a rotation has been
+identified, it can be eliminated in the following way: For each pair, the
+second agent in the pair rejects the first agent in the pair (recall that the
+second agent hates the first agent, while the first agent loves the second
+agent), and the first agent then proceeds to propose to the second agent
+in the succeeding pair. If at any point during this process, an agent
+no longer has any agents left to propose to or be proposed to from, then
+there is no stable matching and the algorithm terminates.
+
+Otherwise, at the end, every agent is left proposing to an agent who is also
+proposing back to them, which results in a stable matching.
+}
 

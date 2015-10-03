@@ -6,8 +6,8 @@ language: c
 # use containers
 sudo: false
 
-# define environmental variables for R CMD check 
-env: 
+# define environmental variables for R CMD check
+env:
   global:
    - _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
    - _R_CHECK_CRAN_INCOMING_=FALSE
@@ -65,7 +65,7 @@ script:
 
 # report coverage rate to coveralls
 after_success:
-  - Rscript -e 'covr::coveralls(exclusions = "src/RcppExports.cpp")'
+  - Rscript -e 'covr::coveralls(exclusions = list("src/RcppExports.cpp", "R/deprecated.R"))'
 
 # send e-mails if stuff changes
 notifications:

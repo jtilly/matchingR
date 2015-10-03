@@ -40,7 +40,8 @@ matched to rooms, two roommates per room. A matching is stable if there is no
 roommate \code{r1} that would rather be matched to some other roommate
 \code{d2} than to his current roommate \code{r2} and the other roommate
 \code{d2} would rather be matched to \code{r1} than to his current roommate
-\code{d1}.
+\code{d1}. For a verbal description of how the algorithm is implemented, see
+the documentation for \code{cpp_wrapper_irving}.
 
 Note that neither existence nor uniqueness is guaranteed, this algorithm
 finds one matching, not all of them. If no matching exists, this function
