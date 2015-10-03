@@ -46,18 +46,6 @@ resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
 if colleges apply to students. The resulting match is college-optimal.}
 }
 \value{
-A list of matstudents
-  \code{proposals} is a vector of length \code{n} whose \code{i}th element
-  contains the number of the college that student \code{i} is matched to.
-  \code{engagements} is a vector of length \code{m} whose \code{j}th element
-  contains the number of the student that college \code{j} is matched to.
-  \code{unmatched.students} is a vector that lists the remaining unmatched
-  students. \code{unmatched.colleges} is a vector that lists all colleges
-  with open remaining slots. If a college has multiple open slots, it will be
-  listed multiple times. By construction, either \code{unmatched.students} or
-  \code{unmatched.colleges} will be empty. If there is an equal number of
-  individuals on both sides of the market, then both vectors will be empty.
-
 A list with elements that specify which student is matched to which
   college and who remains unmatched. Suppose there are \code{n} students and
   \code{m} colleges with \code{s} slots. The list contains the following
