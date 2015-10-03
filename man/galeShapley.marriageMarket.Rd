@@ -11,29 +11,29 @@ galeShapley.marriageMarket(proposerUtils = NULL, reviewerUtils = NULL,
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
 side of the market. If there are \code{n} proposers and \code{m} reviewers,
 then this matrix will be of dimension \code{m} by \code{n}. The
-\code{i,j}th element refers to the payoff that individual \code{j} receives
-from being matched to individual \code{i}.}
+\code{i,j}th element refers to the payoff that proposer \code{j} receives
+from being matched to proposer \code{i}.}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
 of the market. If there are \code{n} proposers and \code{m} reviewers, then
 this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-element refers to the payoff that individual \code{j} receives from being
-matched to individual \code{i}.}
+element refers to the payoff that reviewer \code{j} receives from being
+matched to proposer \code{i}.}
 
 \item{proposerPref}{is a matrix with the preference order of the proposing
 side of the market. This argument is only required when
 \code{proposerUtils} is not provided. If there are \code{n} proposers and
 \code{m} reviewers in the market, then this matrix will be of dimension
-\code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
-\code{i}th most favorite partner. Preference orders can either be specified
+\code{m} by \code{n}. The \code{i,j}th element refers to proposer \code{j}'s
+\code{i}th most favorite reviewer. Preference orders can either be specified
 using R-indexing (starting at 1) or C++ indexing (starting at 0).}
 
 \item{reviewerPref}{is a matrix with the preference order of the courted side
 of the market. This argument is only required when \code{reviewerUtils} is
 not provided. If there are \code{n} proposers and \code{m} reviewers in the
 market, then this matrix will be of dimension \code{n} by \code{m}. The
-\code{i,j}th element refers to individual \code{j}'s \code{i}th most
-favorite partner. Preference orders can either be specified using
+\code{i,j}th element refers to reviewer \code{j}'s \code{i}th most
+favorite proposer. Preference orders can either be specified using
 R-indexing (starting at 1) or C++ indexing (starting at 0).}
 }
 \value{

@@ -18,16 +18,16 @@ payoff that student \code{j} receives from being matched to college
 \item{collegeUtils}{is a matrix with cardinal utilities of colleges. If there
 are \code{n} students and \code{m} colleges, then this matrix will be of
 dimension \code{n} by \code{m}. The \code{i,j}th element refers to the
-payoff that individual \code{j} receives from being matched to individual
+payoff that college \code{j} receives from being matched to student
 \code{i}.}
 
 \item{studentPref}{is a matrix with the preference order of the proposing
 side of the market (only required when \code{studentUtils} is not
 provided). If there are \code{n} students and \code{m} colleges in the
 market, then this matrix will be of dimension \code{m} by \code{n}. The
-\code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
-Preference orders can either be specified using R-indexing (starting at 1)
-or C++ indexing (starting at 0).}
+\code{i,j}th element refers to student \code{j}'s \code{i}th most favorite
+college. Preference orders can either be specified using R-indexing
+(starting at 1) or C++ indexing (starting at 0).}
 
 \item{collegePref}{is a matrix with the preference order of the courted side
 of the market (only required when \code{collegeUtils} is not provided). If

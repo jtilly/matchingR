@@ -32,26 +32,26 @@
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
 #'   then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to the payoff that individual \code{j} receives
-#'   from being matched to individual \code{i}.
+#'   \code{i,j}th element refers to the payoff that proposer \code{j} receives
+#'   from being matched to proposer \code{i}.
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side
 #'   of the market. If there are \code{n} proposers and \code{m} reviewers, then
 #'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-#'   element refers to the payoff that individual \code{j} receives from being
-#'   matched to individual \code{i}.
+#'   element refers to the payoff that reviewer \code{j} receives from being
+#'   matched to proposer \code{i}.
 #' @param proposerPref is a matrix with the preference order of the proposing
 #'   side of the market. This argument is only required when
 #'   \code{proposerUtils} is not provided. If there are \code{n} proposers and
 #'   \code{m} reviewers in the market, then this matrix will be of dimension
-#'   \code{m} by \code{n}. The \code{i,j}th element refers to \code{j}'s
-#'   \code{i}th most favorite partner. Preference orders can either be specified
+#'   \code{m} by \code{n}. The \code{i,j}th element refers to proposer \code{j}'s
+#'   \code{i}th most favorite reviewer. Preference orders can either be specified
 #'   using R-indexing (starting at 1) or C++ indexing (starting at 0).
 #' @param reviewerPref is a matrix with the preference order of the courted side
 #'   of the market. This argument is only required when \code{reviewerUtils} is
 #'   not provided. If there are \code{n} proposers and \code{m} reviewers in the
 #'   market, then this matrix will be of dimension \code{n} by \code{m}. The
-#'   \code{i,j}th element refers to individual \code{j}'s \code{i}th most
-#'   favorite partner. Preference orders can either be specified using
+#'   \code{i,j}th element refers to reviewer \code{j}'s \code{i}th most
+#'   favorite proposer. Preference orders can either be specified using
 #'   R-indexing (starting at 1) or C++ indexing (starting at 0).
 #' @return  A list with elements that specify who is matched to whom and who
 #'   remains unmatched. Suppose there are \code{n} proposers and \code{m}
@@ -154,35 +154,35 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
 #' The algorithm still works with an unequal number of students and slots. In
 #' that case some students will remain unmatched or some slots will remain open.
 #'
-#' @param studentUtils is a matrix with cardinal utilities of the students. If
+#' @param studentUtils is a matrix with cardinal utilities of the students. If 
 #'   there are \code{n} students and \code{m} colleges, then this matrix will be
-#'   of dimension \code{m} by \code{n}. The \code{i,j}th element refers to the
-#'   payoff that student \code{j} receives from being matched to college
+#'   of dimension \code{m} by \code{n}. The \code{i,j}th element refers to the 
+#'   payoff that student \code{j} receives from being matched to college 
 #'   \code{i}.
 #' @param collegeUtils is a matrix with cardinal utilities of colleges. If there
-#'   are \code{n} students and \code{m} colleges, then this matrix will be of
-#'   dimension \code{n} by \code{m}. The \code{i,j}th element refers to the
-#'   payoff that individual \code{j} receives from being matched to individual
+#'   are \code{n} students and \code{m} colleges, then this matrix will be of 
+#'   dimension \code{n} by \code{m}. The \code{i,j}th element refers to the 
+#'   payoff that college \code{j} receives from being matched to student 
 #'   \code{i}.
-#' @param studentPref is a matrix with the preference order of the proposing
-#'   side of the market (only required when \code{studentUtils} is not
-#'   provided). If there are \code{n} students and \code{m} colleges in the
-#'   market, then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
-#'   Preference orders can either be specified using R-indexing (starting at 1)
+#' @param studentPref is a matrix with the preference order of the proposing 
+#'   side of the market (only required when \code{studentUtils} is not 
+#'   provided). If there are \code{n} students and \code{m} colleges in the 
+#'   market, then this matrix will be of dimension \code{m} by \code{n}. The 
+#'   \code{i,j}th element refers to student \code{j}'s \code{i}th most favorite
+#'   college. Preference orders can either be specified using R-indexing
+#'   (starting at 1) or C++ indexing (starting at 0).
+#' @param collegePref is a matrix with the preference order of the courted side 
+#'   of the market (only required when \code{collegeUtils} is not provided). If 
+#'   there are \code{n} students and \code{m} colleges in the market, then this 
+#'   matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th element 
+#'   refers to individual \code{j}'s \code{i}th most favorite partner. 
+#'   Preference orders can either be specified using R-indexing (starting at 1) 
 #'   or C++ indexing (starting at 0).
-#' @param collegePref is a matrix with the preference order of the courted side
-#'   of the market (only required when \code{collegeUtils} is not provided). If
-#'   there are \code{n} students and \code{m} colleges in the market, then this
-#'   matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th element
-#'   refers to individual \code{j}'s \code{i}th most favorite partner.
-#'   Preference orders can either be specified using R-indexing (starting at 1)
-#'   or C++ indexing (starting at 0).
-#' @param slots is the number of slots that each college has available. If this
-#'   is 1, then the algorithm is identical to
+#' @param slots is the number of slots that each college has available. If this 
+#'   is 1, then the algorithm is identical to 
 #'   \code{\link{galeShapley.marriageMarket}}.
-#' @param studentOptimal is \code{TRUE} if students apply to colleges. The
-#'   resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
+#' @param studentOptimal is \code{TRUE} if students apply to colleges. The 
+#'   resulting match is student-optimal. \code{studentOptimal} is \code{FALSE} 
 #'   if colleges apply to students. The resulting match is college-optimal.
 #' @return  A list with elements that specify which student is matched to which
 #'   college and who remains unmatched. Suppose there are \code{n} students and
@@ -359,26 +359,26 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
 #'   then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to the payoff that individual \code{j} receives
-#'   from being matched to individual \code{i}.
+#'   \code{i,j}th element refers to the payoff that proposer \code{j} receives
+#'   from being matched to reviewer \code{i}.
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side
 #'   of the market. If there are \code{n} proposers and \code{m} reviewers, then
 #'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-#'   element refers to the payoff that individual \code{j} receives from being
-#'   matched to individual \code{i}.
-#' @param proposerPref is a matrix with the preference order of the proposing
-#'   side of the market (only required when \code{proposerUtils} is not
-#'   provided). If there are \code{n} proposers and \code{m} reviewers in the
-#'   market, then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to \code{j}'s \code{i}th most favorite partner.
-#'   Preference orders can either be specified using R-indexing (starting at 1)
-#'   or C++ indexing (starting at 0).
+#'   element refers to the payoff that reviewer \code{j} receives from being
+#'   matched to proposer \code{i}.
+#' @param proposerPref is a matrix with the preference order of the proposing 
+#'   side of the market (only required when \code{proposerUtils} is not 
+#'   provided). If there are \code{n} proposers and \code{m} reviewers in the 
+#'   market, then this matrix will be of dimension \code{m} by \code{n}. The 
+#'   \code{i,j}th element refers to proposer \code{j}'s \code{i}th most favorite
+#'   reviewer. Preference orders can either be specified using R-indexing
+#'   (starting at 1) or C++ indexing (starting at 0).
 #' @param reviewerPref is a matrix with the preference order of the courted side
 #'   of the market (only required when \code{reviewerUtils} is not provided). If
-#'   there are \code{n} proposers and \code{m} reviewers in the market, then
-#'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-#'   element refers to individual \code{j}'s \code{i}th most favorite partner.
-#'   Preference orders can either be specified using R-indexing (starting at 1)
+#'   there are \code{n} proposers and \code{m} reviewers in the market, then 
+#'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th 
+#'   element refers to reviewer \code{j}'s \code{i}th most favorite proposer. 
+#'   Preference orders can either be specified using R-indexing (starting at 1) 
 #'   or C++ indexing (starting at 0).
 #' @return a list containing \code{proposerUtils}, \code{reviewerUtils},
 #'   \code{proposerPref} (\code{reviewerPref} are not required after they are
@@ -511,13 +511,13 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
 #'   then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to the payoff that individual \code{j} receives
-#'   from being matched to individual \code{i}.
+#'   \code{i,j}th element refers to the payoff that proposer \code{j} receives
+#'   from being matched to reviewer \code{i}.
 #' @param reviewerUtils is a matrix with cardinal utilities of the courted side
 #'   of the market. If there are \code{n} proposers and \code{m} reviewers, then
 #'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-#'   element refers to the payoff that individual \code{j} receives from being
-#'   matched to individual \code{i}.
+#'   element refers to the payoff that reviewer \code{j} receives from being
+#'   matched to proposer \code{i}.
 #' @param proposals is a matrix that contains the number of the reviewer that a
 #'   given proposer is matched to: the first row contains the reviewer that is
 #'   matched to the first proposer, the second row contains the reviewer that is
@@ -527,6 +527,39 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 #'   a given reviewer is matched to. The column dimension accommodates reviewers
 #'   with multiple slots.
 #' @return true if the matching is stable, false otherwise
+#' @examples
+#' # define cardinal utilities
+#' uM = matrix(c(0.52, 0.85, 
+#'               0.96, 0.63, 
+#'               0.82, 0.08, 
+#'               0.55, 0.34), nrow = 4, byrow = TRUE)
+#' uW = matrix(c(0.76, 0.88, 0.74, 0.02, 
+#'               0.32, 0.21, 0.02, 0.79), ncol = 4, byrow = TRUE)
+#' # define matching
+#' results = list(
+#'      proposals = matrix(c(2, 1), ncol = 1),
+#'      engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+#' # check stability
+#' galeShapley.checkStability(uM, uW, results$proposals, results$engagements) 
+#' 
+#' # if preferences are in ordinal form, we can use galeShapley.validate
+#' # to transform them into cardinal form and then use checkStability()
+#' prefM = matrix(c(2, 1, 
+#'                  3, 2, 
+#'                  4, 4, 
+#'                  1, 3), nrow = 4, byrow = TRUE)
+#' prefW = matrix(c(1, 1, 1, 2, 
+#'                  2, 2, 2, 1), ncol = 4, byrow = TRUE)
+#' # define matching
+#' results = list(proposals = matrix(c(2, 1), ncol = 1),
+#'                engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+#' # check stability
+#' pref.validated = galeShapley.validate(proposerPref = prefM, 
+#'                                       reviewerPref = prefW)
+#' galeShapley.checkStability(pref.validated$proposerUtils, 
+#'                            pref.validated$reviewerUtils, 
+#'                            results$proposals, 
+#'                            results$engagements) 
 galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
 
     # turn proposals and engagements into C++ style indexing
@@ -538,14 +571,40 @@ galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, e
 }
 
 #' Check if preference order is complete
-#'
-#' This function checks if a given preference ordering is complete. If needed,
-#' it transforms the indices from R indices (starting at 1) to C++ indices
+#' 
+#' This function checks if a given preference ordering is complete. If needed, 
+#' it transforms the indices from R indices (starting at 1) to C++ indices 
 #' (starting at zero).
-#'
-#' @param pref is a matrix with a preference ordering
-#' @return a matrix with preference orderings with proper C++ indices or NULL
-#' if the preference order is not complete.
+#' 
+#' @param pref is a matrix with ordinal preference orderings for one side of the
+#'   market. Suppose that \code{pref} refers to the preferences of \code{n} 
+#'   women over \code{m} men. In that case, \code{pref} will be of dimension 
+#'   \code{m} by \code{n}.  The \code{i,j}th element refers to woman \code{j}'s
+#'   \code{i}th most favorite man. Preference orders can either be specified
+#'   using R-indexing (starting at 1) or C++ indexing (starting at 0).
+#' @return a matrix with ordinal preference orderings with proper C++ indices or
+#'   NULL if the preference order is not complete.
+#' @examples
+#' # preferences in proper C++ indexing: galeShapley.checkPreferences(pref)
+#' # will return pref
+#' pref = matrix(c(0, 1, 0, 
+#'                 1, 0, 1), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref
+#' galeShapley.checkPreferences(pref)
+#' 
+#' # preferences in R indexing: galeShapley.checkPreferences(pref)
+#' # will return pref-1
+#' pref = matrix(c(1, 2, 1, 
+#'                 2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref
+#' galeShapley.checkPreferences(pref)
+#' 
+#' # incomplete preferences: galeShapley.checkPreferences(pref) 
+#' # will return NULL
+#' pref = matrix(c(3, 2, 1, 
+#'                 2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref
+#' galeShapley.checkPreferences(pref)
 galeShapley.checkPreferences = function(pref) {
 
     # check if pref is using R instead of C++ indexing

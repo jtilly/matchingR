@@ -7,15 +7,42 @@
 galeShapley.checkPreferences(pref)
 }
 \arguments{
-\item{pref}{is a matrix with a preference ordering}
+\item{pref}{is a matrix with ordinal preference orderings for one side of the
+market. Suppose that \code{pref} refers to the preferences of \code{n}
+women over \code{m} men. In that case, \code{pref} will be of dimension
+\code{m} by \code{n}.  The \code{i,j}th element refers to woman \code{j}'s
+\code{i}th most favorite man. Preference orders can either be specified
+using R-indexing (starting at 1) or C++ indexing (starting at 0).}
 }
 \value{
-a matrix with preference orderings with proper C++ indices or NULL
-if the preference order is not complete.
+a matrix with ordinal preference orderings with proper C++ indices or
+  NULL if the preference order is not complete.
 }
 \description{
 This function checks if a given preference ordering is complete. If needed,
 it transforms the indices from R indices (starting at 1) to C++ indices
 (starting at zero).
+}
+\examples{
+# preferences in proper C++ indexing: galeShapley.checkPreferences(pref)
+# will return pref
+pref = matrix(c(0, 1, 0,
+                1, 0, 1), nrow = 2, ncol = 3, byrow = TRUE)
+pref
+galeShapley.checkPreferences(pref)
+
+# preferences in R indexing: galeShapley.checkPreferences(pref)
+# will return pref-1
+pref = matrix(c(1, 2, 1,
+                2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+pref
+galeShapley.checkPreferences(pref)
+
+# incomplete preferences: galeShapley.checkPreferences(pref)
+# will return NULL
+pref = matrix(c(3, 2, 1,
+                2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+pref
+galeShapley.checkPreferences(pref)
 }
 

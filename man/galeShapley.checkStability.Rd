@@ -10,14 +10,14 @@ galeShapley.checkStability(proposerUtils, reviewerUtils, proposals, engagements)
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
 side of the market. If there are \code{n} proposers and \code{m} reviewers,
 then this matrix will be of dimension \code{m} by \code{n}. The
-\code{i,j}th element refers to the payoff that individual \code{j} receives
-from being matched to individual \code{i}.}
+\code{i,j}th element refers to the payoff that proposer \code{j} receives
+from being matched to reviewer \code{i}.}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
 of the market. If there are \code{n} proposers and \code{m} reviewers, then
 this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-element refers to the payoff that individual \code{j} receives from being
-matched to individual \code{i}.}
+element refers to the payoff that reviewer \code{j} receives from being
+matched to proposer \code{i}.}
 
 \item{proposals}{is a matrix that contains the number of the reviewer that a
 given proposer is matched to: the first row contains the reviewer that is
@@ -39,5 +39,39 @@ problem and the college admission problem. The function requires preferences
 to be specified in cardinal form. If necessary, the function
 \code{\link{rankIndex}} can be used to turn ordinal preferences into cardinal
 utilities.
+}
+\examples{
+# define cardinal utilities
+uM = matrix(c(0.52, 0.85,
+              0.96, 0.63,
+              0.82, 0.08,
+              0.55, 0.34), nrow = 4, byrow = TRUE)
+uW = matrix(c(0.76, 0.88, 0.74, 0.02,
+              0.32, 0.21, 0.02, 0.79), ncol = 4, byrow = TRUE)
+# define matching
+results = list(
+     proposals = matrix(c(2, 1), ncol = 1),
+     engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+# check stability
+galeShapley.checkStability(uM, uW, results$proposals, results$engagements)
+
+# if preferences are in ordinal form, we can use galeShapley.validate
+# to transform them into cardinal form and then use checkStability()
+prefM = matrix(c(2, 1,
+                 3, 2,
+                 4, 4,
+                 1, 3), nrow = 4, byrow = TRUE)
+prefW = matrix(c(1, 1, 1, 2,
+                 2, 2, 2, 1), ncol = 4, byrow = TRUE)
+# define matching
+results = list(proposals = matrix(c(2, 1), ncol = 1),
+               engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+# check stability
+pref.validated = galeShapley.validate(proposerPref = prefM,
+                                      reviewerPref = prefW)
+galeShapley.checkStability(pref.validated$proposerUtils,
+                           pref.validated$reviewerUtils,
+                           results$proposals,
+                           results$engagements)
 }
 
