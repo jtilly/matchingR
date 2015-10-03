@@ -80,12 +80,6 @@ test_that("Check if validate function", {
     prefW = sortIndex(uW)
     
     # expect errors
-    set.row.major()
-    expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
-    expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
-    
-    # expect errors
-    set.column.major()
     expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
     expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
     
@@ -96,15 +90,9 @@ test_that("Check if validate function", {
     prefW = sortIndex(uW)
     
     # expect errors
-    set.row.major()
     expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
     expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
-    
-    # expect errors
-    set.column.major()
-    expect_error(galeShapley.validate(proposerUtils = uM, reviewerUtils = uW))
-    expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
-    
+
 })
 
 test_that("Check null inputs", {
@@ -186,32 +174,6 @@ test_that("Assortative matching?", {
     expect_true(all(matching$proposals == 1:4))
     expect_true(all(matching$engagements == 1:4))
 })
-
-test_that("Check if we can store preferences in row-major order:", {
-
-    # simulate preferences
-    uM = matrix(runif(12), nrow = 4, ncol = 3)
-    uW = matrix(runif(12), nrow = 3, ncol = 4)
-    prefM = sortIndex(uM)
-    prefW = sortIndex(uW)
-
-    # use payoff matrices to define preferences
-    set.row.major()
-    matching.row.major = galeShapley.marriageMarket(t(uM), t(uW))
-    set.column.major()
-    matching.column.major = galeShapley.marriageMarket(uM, uW)
-    expect_true(identical(matching.column.major$proposals, matching.row.major$proposals))
-    expect_true(identical(matching.column.major$engagements, matching.row.major$engagements))
-
-    # repeat the same thing with preference orders as arguments
-    set.row.major()
-    matching.row.major = galeShapley.marriageMarket(proposerPref = t(prefM), reviewerPref = t(prefW))
-    set.column.major()
-    matching.column.major = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
-    expect_true(identical(matching.column.major$proposals, matching.row.major$proposals))
-    expect_true(identical(matching.column.major$engagements, matching.row.major$engagements))
-})
-
 
 test_that("Marriage Market and College Admissions Problem Should Be Identical When Slots = 1", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)

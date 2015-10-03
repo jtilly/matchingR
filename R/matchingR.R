@@ -85,27 +85,3 @@
 #' # check stability
 #' toptrading.checkStability(utils = u, matching = results)
 NULL
-
-#' Make a package environmental variable with the storage order
-#'
-#' \code{pkg.env} is a package environment that contains the variable
-#' \code{column.major} that indicates if preferences are stored in column
-#' major order (default) or row major order.
-pkg.env = new.env()
-assign("column.major", TRUE, envir = pkg.env)
-
-#' Store preference in row major order
-#'
-#' After calling this functions, all preferences should be stored in row major
-#' order.
-set.row.major = function() {
-    assign("column.major", FALSE, envir = pkg.env)
-}
-
-#' Store preferences in column major order
-#'
-#' After calling this functions, all preferences should be stored in column major
-#' order. This is the default.
-set.column.major = function() {
-    assign("column.major", TRUE, envir = pkg.env)
-}

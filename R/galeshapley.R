@@ -414,21 +414,6 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 #' preferences
 galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL, reviewerPref = NULL) {
 
-    if(get("column.major", envir = pkg.env) == FALSE) {
-        if(!is.null(proposerUtils)) {
-            proposerUtils = t(proposerUtils)
-        }
-        if(!is.null(reviewerUtils)) {
-            reviewerUtils = t(reviewerUtils)
-        }
-        if(!is.null(proposerPref)) {
-            proposerPref = t(proposerPref)
-        }
-        if(!is.null(reviewerPref)){
-            reviewerPref = t(reviewerPref)
-        }
-    }
-
     if (!is.null(reviewerPref)) {
         reviewerPref = galeShapley.checkPreferences(reviewerPref)
         if (is.null(reviewerPref)) {
@@ -468,26 +453,15 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 
     # check inputs
     if (NROW(proposerPref) != NCOL(reviewerUtils)) {
-        if(get("column.major", envir = pkg.env) == TRUE) {
-            stop("The number of rows in the matrix of proposers' ",
-                 "preferences must equal the number of columns in ",
-                 "the matrix of reviewers' preferences")    
-        } else {
-            stop("The number of columns in the matrix of proposers' ",
-                 "preferences must equal the number of rows in the ",
-                 "matrix of reviewers' preferences")    
-        }
+        stop("The number of rows in the matrix of proposers' ",
+             "preferences must equal the number of columns in ",
+             "the matrix of reviewers' preferences")    
     }
+    
     if (NCOL(proposerPref) != NROW(reviewerUtils)) {
-        if(get("column.major", envir = pkg.env) == TRUE) {
-            stop("The number of columns in the matrix of proposers' ",
-                 "preferences must equal the number of rows in the ",
-                 "matrix of reviewers' preferences")    
-        } else {
-            stop("The number of rows in the matrix of proposers' ",
-                 "preferences must equal the number of columns ",
-                 "in the matrix of reviewers' preferences")    
-        }
+        stop("The number of columns in the matrix of proposers' ",
+             "preferences must equal the number of rows in the ",
+             "matrix of reviewers' preferences")    
     }
 
     return(

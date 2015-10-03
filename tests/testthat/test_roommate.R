@@ -39,26 +39,3 @@ test_that("Check preference orderings for one sided matching", {
     expect_identical(roommate.checkPreferences(p), 
                      roommate.checkPreferences(p + 1))
 })
-
-
-test_that("Row vs column major?", {
-    # generate preferences
-    set.seed(1)
-    utils = matrix(rnorm(100), ncol=10, nrow=10)
-    p = roommate.validate(utils = utils)
-
-    # use preference orderings
-    set.row.major()
-    results.row.major = roommate.matching(pref = t(p))
-    set.column.major()
-    results.column.major = roommate.matching(pref = p)
-    expect_true(identical(results.row.major, results.column.major))
-
-    # do the same with payoff matrices instead of preference orderings
-    set.row.major()
-    results.row.major = roommate.matching(utils = t(utils))
-    set.column.major()
-    results.column.major = roommate.matching(utils = utils)
-    expect_true(identical(results.row.major, results.column.major))
-
-})

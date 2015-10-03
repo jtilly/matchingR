@@ -123,15 +123,6 @@ roommate.validate = function(utils = NULL, pref = NULL) {
                 "only using the ordinal preferences.")
     }
 
-    if(get("column.major", envir = pkg.env) == FALSE) {
-        if(!is.null(pref)) {
-            pref = t(pref)
-        }
-        if(!is.null(utils)) {
-            utils = t(utils)
-        }
-    }
-
     # Convert cardinal utility to ordinal, if necessary
     if (is.null(pref) && !is.null(utils)) {
 
