@@ -16,14 +16,14 @@ library(matchingR)
 # Introduction
 
 `matchingR` is an R package that efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726) [@gale1962college], [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331) [@irving1985roommates], and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) [@shapley1973cores] for large matching markets. The package provides functions to compute the solutions to the
-  [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), to the
+  [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), the
   [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
   [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the
   [house allocation problem](http://web.stanford.edu/~niederle/HouseAllocation.pdf).
   
-The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The Gale-Shapley function of this package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
+The package may be useful when the number of market participants is large or when many matchings need to be computed (e.g., for simulation or estimation purposes). It has been used in practice to compute the Gale-Shapley stable matching with 30,000 participants on each side of the market.
 
-Matching markets are very common in practice and widely studied by economists. Popular examples include
+Matching markets are common in practice and widely studied by economists. Popular examples include
 
  * the [National Resident Matching Program](http://www.nrmp.org/) that matches graduates from medical school to residency programs at teaching hospitals throughout the United States
  * the matching of students to schools including the [New York City High School Match](http://www.jstor.org/stable/4132848) or the the [Boston Public School Match](http://www.jstor.org/stable/4132849) (and many more)
@@ -31,9 +31,11 @@ Matching markets are very common in practice and widely studied by economists. P
 
 # Two-sided Matching Markets: Gale-Shapley Algorithm
 
-Consider the following example of the marriage market. Suppose there are `N` men and `N` women. A matching assigns men to women such that each man is assigned to exactly one woman and each woman is assigned to exactly one man. A matching is **stable** if there is no man `m` that would rather be matched to some other woman `w'` than to his current spouse `w` and this other woman `w'` would rather be matched to man `m` than to her current spouse `m'`. In other words, a matching is stable when there does not exist a pair `(m, w')` for which both `m` and `w'` are better off than they are with their respective spouses `w`  and `m'`.
+Consider the following marriage market: There are `N` men and `N` women. Each man, `m`, receives utility `uM(w, m)` from a match with woman `w`, and similarly each woman receives a payoff of `uW(m, w)` from being matched with a man. 
 
-We first need to introduce notation to specify men's and women's preferences. Men's payoffs from being matched are given by the payoff matrix `uM`. Columns in the matrix correspond to men, rows to women. For example: 
+A matching assigns men to women such that each man is assigned to one woman and each woman is assigned to one man. A matching is **stable** if there is no man and woman who would jointly prefer to be matched to each other over their current spouses. In other words, a matching is stable if there are no pairs `(m, w'), (m', w)`, such that `m` is matched with `w'`, `m'` is matched with `w`, and both `uW(m, w) > uW(m', w)` and `uM(m, w) > uM(m, w')`. 
+
+For example, we might have preferences for men given by
 ```{r}
 uM = matrix(c(1.0, 0.5, 0.0,
               0.5, 0.0, 0.5,
@@ -43,7 +45,7 @@ uM = matrix(c(1.0, 0.5, 0.0,
 dimnames(uM) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
 uM
 ```
-In this example, man `1` receives a payoff of `1.0` from being matched to woman `1`, a payoff of `0.5` from being matched to woman `2` and a payoff of `0.0` from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, let the payoff matrix for women be given by
+In this example, man `1` receives a payoff of `1.0` from being matched to woman `1`, a payoff of `0.5` from being matched to woman `2` and a payoff of `0.0` from being matched to woman 3 (same logic applies to men `2` and `3`). Similarly, we might have preferences for women given by
 ```{r}
 uW = matrix(c(0.0, 1.0, 0.0,
               0.5, 0.0, 0.5,
@@ -77,7 +79,7 @@ prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
 
-The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
+The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman who already has a proposal will reject any proposal she values less than her current proposal in hand. If a woman receives a proposal from a man that she values more than her current proposal, she will accept the proposal and her previous match will rejoin the line of proposers. This process continues until all men are matched to all women. 
 
 For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single.
 
@@ -188,7 +190,7 @@ galeShapley.checkStability(uStudents, uColleges, results$matched.students, resul
 
 This package implements the algorithm by @irving1985roommates for one-sided matching markets.
 
-Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
+Consider the following example: A set of `n` potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
 
 Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$, 
 ```{r}
@@ -198,7 +200,7 @@ pref = matrix(c(3, 6, 2, 5, 3, 5,
                 6, 1, 1, 6, 4, 4,
                 5, 3, 6, 1, 6, 2), nrow = 5, ncol = 6, byrow = TRUE)
 ```
-Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
+Column `i` represents the preferences of the `i`th roommate, and row `j` represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
 
 The function `roommate.checkPreferences` checks if a given preference order is complete, i.e. if all preferences are fully specified. If the preference order is complete, it will return the proper preference order using `C++` style indexing (beginning at `0` instead of at `1`). If the preference order is incomplete, the function will return an error.
 ```{r}
