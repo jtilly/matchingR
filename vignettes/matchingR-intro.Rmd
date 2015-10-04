@@ -79,7 +79,7 @@ prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
 
-The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman that already holds on to a proposal will reject any proposal by a man that she values less than her current match. If a woman receives a proposal from a man that she values more than her current match, then she will accept the proposal and her previous match will join the line of bachelors. This process continues until all men are matched to women. 
+The Gale-Shapley algorithm works as follows: Single men ("the proposers") sequentially make proposals to each of their most preferred available women ("the reviewers"). A woman can hold on to at most one proposal at a time. A *single* woman will accept any proposal that is made to her. A woman who already has a proposal will reject any proposal she values less than her current proposal in hand. If a woman receives a proposal from a man that she values more than her current proposal, she will accept the proposal and her previous match will rejoin the line of proposers. This process continues until all men are matched to all women. 
 
 For the preferences specified in `uM` and `uW`, we can compute the Gale-Shapley Algorithm by hand. Initially, all men are single.
 
@@ -190,7 +190,7 @@ galeShapley.checkStability(uStudents, uColleges, results$matched.students, resul
 
 This package implements the algorithm by @irving1985roommates for one-sided matching markets.
 
-Consider the following example: A set of $n$ potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
+Consider the following example: A set of `n` potential roommates, each with ranked preferences over all the other potential roommates, are to be matched to rooms, two roommates per room. A matching is **stable** if there is no roommate `r1` that would rather be matched to some other roommate `d2` than to his current roommate `r2` and the other roommate `d2` would rather be matched to `r1` than to his current roommate `d1`.
 
 Preferences of potential roommates are summarized by an $n-1 \times n$ dimensional matrix, e.g., if $n = 6$, 
 ```{r}
@@ -200,7 +200,7 @@ pref = matrix(c(3, 6, 2, 5, 3, 5,
                 6, 1, 1, 6, 4, 4,
                 5, 3, 6, 1, 6, 2), nrow = 5, ncol = 6, byrow = TRUE)
 ```
-Column $i$ represents the preferences of the $i$th roommate, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
+Column `i` represents the preferences of the `i`th roommate, and row `j` represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, roommate `1` most prefers to be matched with roommate `3`, followed by `4`, followed by `2`.
 
 The function `roommate.checkPreferences` checks if a given preference order is complete, i.e. if all preferences are fully specified. If the preference order is complete, it will return the proper preference order using `C++` style indexing (beginning at `0` instead of at `1`). If the preference order is incomplete, the function will return an error.
 ```{r}
