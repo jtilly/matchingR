@@ -16,7 +16,7 @@ test_that("Check if galeShapley is an alias for galeShapley.marriageMarket", {
     uW = matrix(runif(12), nrow = 3, ncol = 4)
     matching1 = galeShapley(uM, uW)
     matching2 = galeShapley.marriageMarket(uM, uW)
-    expect_true(identitical(matching1, matching2))
+    expect_true(identical(matching1, matching2))
 })
 
 
