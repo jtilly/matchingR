@@ -11,6 +11,14 @@ test_that("Check if galeShapley.marriageMarket matching is stable", {
     expect_true(identical(matching.marriageMarket, matching.one2one))
 })
 
+test_that("Check if galeShapley is an alias for galeShapley.marriageMarket", {
+    uM = matrix(runif(12), nrow = 4, ncol = 3)
+    uW = matrix(runif(12), nrow = 3, ncol = 4)
+    matching1 = galeShapley(uM, uW)
+    matching2 = galeShapley.marriageMarket(uM, uW)
+    expect_true(identitical(matching1, matching2))
+})
+
 
 test_that("Check if galeShapley.collegeAdmissions matching is stable", {
     uM = matrix(runif(16), nrow = 2, ncol = 8)
