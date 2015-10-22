@@ -3,6 +3,10 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 //' Computes the top trading cycle algorithm
+//' 
+//' This is the C++ wrapper for the top trading cycle algorithm. Users should not
+//' call this function directly, but instead use
+//' \code{\link{toptrading}}.
 //'
 //' This function uses the top trading cycle algorithm to find a stable trade
 //' between agents, each with some indivisible good, and with preferences over

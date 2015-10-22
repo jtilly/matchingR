@@ -6,7 +6,7 @@
 //'
 //' This is the C++ wrapper for the stable roommate problem. Users should not
 //' call this function directly, but instead use
-//' \code{\link{roommate.matching}}.
+//' \code{\link{roommate}}.
 //' 
 //' @param pref is a matrix with the preference order of each individual in the
 //'   market. If there are \code{n} individuals, then this matrix will be of

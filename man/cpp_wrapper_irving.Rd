@@ -24,6 +24,6 @@ A vector of length \code{n} corresponding to the matchings that were
 \description{
 This is the C++ wrapper for the stable roommate problem. Users should not
 call this function directly, but instead use
-\code{\link{roommate.matching}}.
+\code{\link{roommate}}.
 }
 

@@ -71,7 +71,7 @@ cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils
 #'
 #' This is the C++ wrapper for the stable roommate problem. Users should not
 #' call this function directly, but instead use
-#' \code{\link{roommate.matching}}.
+#' \code{\link{roommate}}.
 #' 
 #' @param pref is a matrix with the preference order of each individual in the
 #'   market. If there are \code{n} individuals, then this matrix will be of
@@ -111,6 +111,10 @@ cpp_wrapper_irving_check_stability <- function(pref, matchings) {
 }
 
 #' Computes the top trading cycle algorithm
+#' 
+#' This is the C++ wrapper for the top trading cycle algorithm. Users should not
+#' call this function directly, but instead use
+#' \code{\link{toptrading}}.
 #'
 #' This function uses the top trading cycle algorithm to find a stable trade
 #' between agents, each with some indivisible good, and with preferences over

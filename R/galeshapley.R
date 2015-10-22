@@ -28,6 +28,8 @@
 #'
 #' The algorithm still works with an unequal number of proposers and reviewers.
 #' In that case some agents will remain unmatched.
+#' 
+#' This function can also be called using \code{galeShapley}.
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
@@ -87,6 +89,7 @@
 #' results = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
 #' results
 #' @seealso \code{\link{galeShapley.collegeAdmissions}}
+#' @aliases galeShapley
 galeShapley.marriageMarket = function(proposerUtils = NULL,
                    reviewerUtils = NULL,
                    proposerPref = NULL,
@@ -118,51 +121,7 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
     return(res)
 }
 
-#' Gale-Shapley Algorithm: Stable Marriage Problem
-#'
-#' This function is a wrapper around \code{\link{galeShapley.marriageMarket}}.
-#'
-#' @param proposerUtils is a matrix with cardinal utilities of the proposing
-#'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
-#'   then this matrix will be of dimension \code{m} by \code{n}. The
-#'   \code{i,j}th element refers to the payoff that proposer \code{j} receives
-#'   from being matched to proposer \code{i}.
-#' @param reviewerUtils is a matrix with cardinal utilities of the courted side
-#'   of the market. If there are \code{n} proposers and \code{m} reviewers, then
-#'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
-#'   element refers to the payoff that reviewer \code{j} receives from being
-#'   matched to proposer \code{i}.
-#' @param proposerPref is a matrix with the preference order of the proposing
-#'   side of the market. This argument is only required when
-#'   \code{proposerUtils} is not provided. If there are \code{n} proposers and
-#'   \code{m} reviewers in the market, then this matrix will be of dimension
-#'   \code{m} by \code{n}. The \code{i,j}th element refers to proposer \code{j}'s
-#'   \code{i}th most favorite reviewer. Preference orders can either be specified
-#'   using R-indexing (starting at 1) or C++ indexing (starting at 0).
-#' @param reviewerPref is a matrix with the preference order of the courted side
-#'   of the market. This argument is only required when \code{reviewerUtils} is
-#'   not provided. If there are \code{n} proposers and \code{m} reviewers in the
-#'   market, then this matrix will be of dimension \code{n} by \code{m}. The
-#'   \code{i,j}th element refers to reviewer \code{j}'s \code{i}th most
-#'   favorite proposer. Preference orders can either be specified using
-#'   R-indexing (starting at 1) or C++ indexing (starting at 0).
-#' @return  A list with elements that specify who is matched to whom and who
-#'   remains unmatched. Suppose there are \code{n} proposers and \code{m}
-#'   reviewers. The list contains the following items:
-#'   \itemize{
-#'    \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
-#'    element contains the number of the reviewer that proposer \code{i} is
-#'    matched to. Proposers that remain unmatched will be listed as being
-#'    matched to \code{NA}.}
-#'    \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
-#'    element contains the number of the proposer that reviewer \code{j} is
-#'    matched to. Reviwers that remain unmatched will be listed as being matched
-#'    to \code{NA}.}
-#'    \item{\code{single.proposers} is a vector that lists the remaining single
-#'    proposers. This vector will be empty whenever \code{n<=m}}.
-#'    \item{\code{single.reviewers} is a vector that lists the remaining single
-#'    reviewers. This vector will be empty whenever \code{m<=n}}.
-#'   }
+# see galeShapley.marriageMarket
 galeShapley = function(proposerUtils = NULL,
                        reviewerUtils = NULL,
                        proposerPref = NULL,
