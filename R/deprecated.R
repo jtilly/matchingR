@@ -10,7 +10,7 @@
 #' @aliases validateInputs checkStability checkPreferenceOrder one2many many2one
 #'   one2one galeShapleyMatching stableRoommateMatching onesided
 #'   checkStabilityRoommate validateInputsOneSided checkPreferenceOrderOnesided
-#'   topTradingCycle checkStabilityTopTradingCycle toptrading
+#'   topTradingCycle checkStabilityTopTradingCycle
 #' @section Details:
 #' \tabular{rl}{
 #'   \code{validateInputs} \tab was replaced by \code{\link{galeShapley.validate}}\cr
@@ -21,13 +21,12 @@
 #'   \code{one2one} \tab was replaced by \code{\link{galeShapley.marriageMarket}}\cr
 #'   \code{galeShapleyMatching} \tab was replaced by \code{\link{cpp_wrapper_galeshapley}}\cr
 #'   \code{stableRoommateMatching} \tab was replaced by \code{\link{cpp_wrapper_irving}}\cr
-#'   \code{onesided} \tab was replaced by \code{\link{roommate.matching}}\cr
+#'   \code{onesided} \tab was replaced by \code{\link{roommate}}\cr
 #'   \code{checkStabilityRoommate} \tab was replaced by \code{\link{cpp_wrapper_irving_check_stability}}\cr
 #'   \code{validateInputsOneSided} \tab was replaced by \code{\link{roommate.validate}}\cr
 #'   \code{checkPreferenceOrderOnesided} \tab was replaced by \code{\link{roommate.checkPreferences}}\cr
 #'   \code{topTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc}}\cr
 #'   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
-#'   \code{toptrading} \tab was replaced by \code{\link{toptrading.matching}}\cr
 #' }
 #'
 validateInputs = function(...) {
@@ -63,8 +62,8 @@ stableRoommateMatching = function(...) {
     cpp_wrapper_irving(...)
 }
 onesided = function(...) {
-    .Deprecated("roommate.matching")
-    roommate.matching(...)
+    .Deprecated("roommate")
+    roommate(...)
 }
 checkStabilityRoommate = function(...) {
     .Deprecated("cpp_wrapper_irving_check_stability")
@@ -87,7 +86,7 @@ checkStabilityTopTradingCycle = function(...) {
     toptrading.checkStability(...)
 }
 toptrading = function(...) {
-    .Deprecated("toptrading.matching")
-    toptrading.matching(...)
+    .Deprecated("toptrading")
+    toptrading(...)
 }
 NULL

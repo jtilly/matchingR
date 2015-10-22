@@ -72,7 +72,7 @@
 #' set.seed(2)
 #' N = 10
 #' u = matrix(runif(N^2),  nrow = N, ncol = N)
-#' results = roommate.matching(utils = u)
+#' results = roommate(utils = u)
 #' results
 #' # check stability
 #' roommate.checkStability(utils = u, matching = results)
@@ -80,7 +80,7 @@
 #' # top trading cycle algorithm
 #' N = 10
 #' u = matrix(runif(N^2),  nrow = N, ncol = N)
-#' results = toptrading.matching(utils = u)
+#' results = toptrading(utils = u)
 #' results
 #' # check stability
 #' toptrading.checkStability(utils = u, matching = results)

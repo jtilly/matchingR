@@ -39,7 +39,7 @@
 #'                  0.44, 1.76, 1.71, -0.27,
 #'                  0.26, 2.18, 1.4, 0.12), byrow = TRUE, nrow = 4)
 #' utils
-#' results = toptrading.matching(utils = utils)
+#' results = toptrading(utils = utils)
 #' results
 #'
 #' # example using ordinal preferences
@@ -48,9 +48,9 @@
 #'                 4, 2, 2, 1,
 #'                 1, 1, 1, 3), byrow = TRUE, nrow = 4)
 #' pref
-#' results = toptrading.matching(pref = pref)
+#' results = toptrading(pref = pref)
 #' results
-toptrading.matching = function(utils = NULL, pref = NULL) {
+toptrading = function(utils = NULL, pref = NULL) {
     args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)
     cpp_wrapper_ttc(args$proposerPref) + 1
 }
@@ -79,7 +79,7 @@ toptrading.matching = function(utils = NULL, pref = NULL) {
 #'                 4, 2, 2, 1,
 #'                 1, 1, 1, 3), byrow = TRUE, nrow = 4)
 #' pref
-#' results = toptrading.matching(pref = pref)
+#' results = toptrading(pref = pref)
 #' results
 #' toptrading.checkStability(pref = pref, matchings = results)
 toptrading.checkStability = function(utils = NULL, pref = NULL, matchings) {
