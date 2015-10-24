@@ -50,7 +50,7 @@ install:
   - echo 'options(repos = "http://cran.rstudio.com")' > .Rprofile
   - echo '.travis.yml' > .Rbuildignore
   - mkdir -p ~/.R
-  - echo 'CXX=clang++' > ~/.R/Makevars
+  - echo -e 'CC=clang \nCXX=clang++' > ~/.R/Makevars
   - Rscript -e 'if(!"devtools" %in% rownames(installed.packages())) { install.packages("devtools", dependencies=TRUE, repos="http://cran.rstudio.com/", lib="~/Rlib") }'
   - Rscript -e 'if(!"covr" %in% rownames(installed.packages())) { install.packages("covr", dependencies=TRUE, repos="http://cran.rstudio.com/", lib="~/Rlib") }'
   - Rscript -e 'if(!"testthat" %in% rownames(installed.packages())) { install.packages("testthat", dependencies=TRUE, repos="http://cran.rstudio.com/", lib="~/Rlib") }'
