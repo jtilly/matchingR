@@ -32,6 +32,7 @@ addons:
     - texlive-xetex
     - aspell 
     - aspell-en
+    - qpdf
     - valgrind
 
 # cache local R libraries directory:
@@ -62,9 +63,11 @@ install:
 script:
   - R CMD build . 
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
-  - R CMD check "${PKG_FILE_NAME}" --as-cran --use-valgrind
+  - R CMD check "${PKG_FILE_NAME}" --as-cran 
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-intro.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-performance.R
 
 # report coverage rate to coveralls
 after_success:
