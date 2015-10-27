@@ -54,7 +54,6 @@ uvec cpp_wrapper_irving(const umat pref) {
                 uword proposee = pref(proposed_to(n), n);
 
                 // proposee's preferences
-                //const uword * prop_call = pref.colptr(proposee);
                 const uvec prop_call = pref.col(proposee);
 
                 // find proposee's opinion of the proposer (lower is better)

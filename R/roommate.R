@@ -12,7 +12,7 @@
 #' \code{d1}.
 #' 
 #' The algorithm works in two stages. In the first stage, all participants begin
-#' unmmatched, then, in sequence, begin making proposals to other potential roommates,
+#' unmatched, then, in sequence, begin making proposals to other potential roommates,
 #' beginning with their most preferred roommate. If a roommate receives a proposal,
 #' he either accepts it if he has no other proposal which is better, or rejects it
 #' otherwise. If this stage ends with a roommate who has no proposals, then there
@@ -89,8 +89,8 @@ roommate = function(utils = NULL, pref = NULL) {
 
 #' Input validation for one-sided markets
 #' 
-#' This function parses and validates the arguments for one sided preferences 
-#' for the function onesided. It returns the validates arguments. This function 
+#' This function parses and validates the arguments for the function
+#' \code{\link{roommate}}. It returns the validates arguments. This function 
 #' is called as part of \code{\link{roommate}}. Only one of the
 #' arguments needs to be provided.
 #'

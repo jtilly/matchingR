@@ -308,7 +308,7 @@ pref = matrix(c(4, 4, 2, 4,
 
 Column $i$ represents the preferences of the $i$th agent, and row $j$ represents the ranking of the roommate whose index is encoded in that row. For example, in the above preference matrix, agent `1` most prefers the home of agent `4`, followed by `2`, followed by `1`, followed by `3`.
 
-Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home. 
+Roughly speaking, the top trading cycle proceeds by identifying cycles of agents, then eliminating those cycles until no agents remain. A cycle is a sequence of agents such that each agent most prefers the next agent's home (out of the remaining unmatched agents), and the last agent in the sequence most prefers the first agent in the sequence's home. 
 
 ```
 4,  4,  2,  4
@@ -317,7 +317,7 @@ Roughly speaking, the top trading cycle proceeds by identifying cycles of agents
 3,  3,  4,  2
 ```
 
-For example, for the above preference matrix, when all the agents are unmmatched, the only rotation is $\{4\}$, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
+For example, for the above preference matrix, when all the agents are unmatched, the only rotation is $\{4\}$, representing the fact that agent `4` most prefers his own house. Therefore, the algorithm begins by matching agent `4` to himself, and then removing him from the pool:
 
 ```
         2

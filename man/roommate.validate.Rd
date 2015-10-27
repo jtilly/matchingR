@@ -27,8 +27,8 @@ the function will throw an error.}
 The validated preference ordering using C++ indexing.
 }
 \description{
-This function parses and validates the arguments for one sided preferences
-for the function onesided. It returns the validates arguments. This function
+This function parses and validates the arguments for the function
+\code{\link{roommate}}. It returns the validates arguments. This function
 is called as part of \code{\link{roommate}}. Only one of the
 arguments needs to be provided.
 }

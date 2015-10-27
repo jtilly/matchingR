@@ -4,11 +4,8 @@
 test_that("Check if galeShapley.marriageMarket matching is stable", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
     uW = matrix(runif(12), nrow = 3, ncol = 4)
-    matching.one2one = one2one(uM, uW)
-    expect_true(galeShapley.checkStability(uM, uW, matching.one2one$proposals, matching.one2one$engagements))
     matching.marriageMarket = galeShapley.marriageMarket(uM, uW)
     expect_true(galeShapley.checkStability(uM, uW, matching.marriageMarket$proposals, matching.marriageMarket$engagements))
-    expect_true(identical(matching.marriageMarket, matching.one2one))
 })
 
 test_that("Check if galeShapley is an alias for galeShapley.marriageMarket", {
