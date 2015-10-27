@@ -8,23 +8,24 @@ Matching Algorithms in R
 [!["You know that I'll never leave you. Not as long as she's with someone."](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
 
 
-`matchingR` is an R package that efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726), [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331), and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) for large matching markets. The package provides functions to compute the solutions to the
-  [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), to the
+`matchingR` is an R package which efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726), [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331), and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) for large matching markets. The package provides functions to compute the solutions to the
+  [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), the
   [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
   [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the
   [house allocation problem](http://web.stanford.edu/~niederle/HouseAllocation.pdf).
   
-The package can be useful when the number of market participants is large or when very many matchings need to be computed (e.g. for extensive simulations or for estimation purposes). The Gale-Shapley function of this package has successfully been used to simulate preferences and compute the matching with 30,000 participants on each side of the market.
+The package may be useful when the number of market participants is large or when many matchings need to be computed (e.g., for simulation or estimation purposes). It has been used in practice to compute the Gale-Shapley stable matching with 30,000 participants on each side of the market.
 
-Matching markets are very common in practice and widely studied by economists. Popular examples include
-* the [National Resident Matching Program](http://www.nrmp.org/) that matches graduates from medical school to residency programs at teaching hospitals throughout the United States
-* the matching of students to schools including the [New York City High School Match](http://www.jstor.org/stable/4132848) or the the [Boston Public School Match](http://www.jstor.org/stable/4132849) (and many more)
-* the matching of kidney donors to recipients in [kidney exchanges](http://www.jstor.org/stable/4132851).
- 
+Matching markets are common in practice and widely studied by economists. Popular examples include
+
+ * the [National Resident Matching Program](http://www.nrmp.org/) which matches graduates from medical school to residency programs at teaching hospitals throughout the United States
+ * the matching of students to schools including the [New York City High School Match](http://www.jstor.org/stable/4132848) or the [Boston Public School Match](http://www.jstor.org/stable/4132849) (and many more)
+ * the matching of kidney donors to recipients in [kidney exchanges](http://www.jstor.org/stable/4132851).
+
 Installation
 ------------
 
-`matchingR` can be installed from [CRAN](http://cran.r-project.org/package=matchingR):
+`matchingR` may be installed from [CRAN](http://cran.r-project.org/package=matchingR):
 ```R
 install.packages("matchingR")
 ```
