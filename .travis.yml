@@ -3,10 +3,6 @@
 # use c as catch-all language
 language: c
 
-# use clang and gcc
-compiler:
-  - gcc
-
 # use containers
 sudo: false
 
@@ -15,7 +11,6 @@ env:
   global:
    - _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
    - _R_CHECK_CRAN_INCOMING_=FALSE
-   - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 # only run for pushes to master branch
 branches:
@@ -33,6 +28,10 @@ addons:
     - r-base-dev
     - r-recommended
     - pandoc
+    - texlive-full 
+    - texlive-xetex
+    - aspell 
+    - aspell-en
     - valgrind
 
 # cache local R libraries directory:
@@ -61,9 +60,9 @@ install:
 
 # build and check package
 script:
-  - R CMD build . --no-manual --no-build-vignettes
+  - R CMD build . 
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
-  - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes
+  - R CMD check "${PKG_FILE_NAME}" --as-cran --use-valgrind
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
 
