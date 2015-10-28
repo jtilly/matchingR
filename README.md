@@ -1,4 +1,4 @@
-Matching Algorithms in R
+Matching Algorithms in R and C++
 ===============
 [![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR) 
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
@@ -8,7 +8,7 @@ Matching Algorithms in R
 [!["You know that I'll never leave you. Not as long as she's with someone."](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
 
 
-`matchingR` is an R package which efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726), [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331), and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) for large matching markets. The package provides functions to compute the solutions to the
+`matchingR` is an R package which quickly computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726), [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331), and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) for large matching markets. The package provides functions to compute the solutions to the
   [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), the
   [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
   [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the
