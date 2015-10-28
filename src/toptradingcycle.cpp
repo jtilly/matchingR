@@ -3,6 +3,10 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 //' Computes the top trading cycle algorithm
+//' 
+//' This is the C++ wrapper for the top trading cycle algorithm. Users should not
+//' call this function directly, but instead use
+//' \code{\link{toptrading}}.
 //'
 //' This function uses the top trading cycle algorithm to find a stable trade
 //' between agents, each with some indivisible good, and with preferences over
@@ -22,19 +26,16 @@
 // [[Rcpp::export]]
 uvec cpp_wrapper_ttc(const umat pref) {
 
-    // logger logg(QUIET);
-
     // maximum value of uword
     uword NULL_VAL = static_cast<uword>(-1);
 
     // the number of participants
     uword N = pref.n_cols;
 
-    // logg.info() << "There are " << N << " participants.";
 
     // a vector of zeros and ones, encodes whether a
     // participant has been matched or not
-    // everyone begins unmmatched.
+    // everyone begins unmatched.
     uvec is_matched(N);
     is_matched.zeros();
 
@@ -45,18 +46,16 @@ uvec cpp_wrapper_ttc(const umat pref) {
     // used for the algorithm below
     uword current_agent = NULL_VAL;
 
-    // logg.info() << "Ready to begin!";
 
     // loop until everyone's been matched
     while (true) {
 
-        // if current_agent = -1, then set current_agent to be the first unmmatched guy
+        // if current_agent = -1, then set current_agent to be the first unmatched guy
         if (current_agent == NULL_VAL) {
-            // find the first unmmatched guy
+            // find the first unmatched guy
             current_agent = as_scalar(find(is_matched == 0, 1));
         }
 
-        // logg.info() << "Beginning outer loop.";
 
         // now identify rotations
         while(true) {
@@ -71,13 +70,9 @@ uvec cpp_wrapper_ttc(const umat pref) {
                 }
             }
 
-            // logg.info() << "Current agent is " << current_agent << ".";
-
-            // logg.info() << "Agent " << current_agent << " most prefers " << matchings(current_agent) << ".";
-
             // check if p has already shown up in this chain by checking if
             // matchings[p] is larger than -1. if it is larger than -1, then
-            // that agent, who we know is unmmatched, must already have shown up
+            // that agent, who we know is unmatched, must already have shown up
             // somewhere in this loop. if matchings[p] is equal to -1, then that agent
             // has never shown up in a loop and we can continue
 
@@ -91,11 +86,6 @@ uvec cpp_wrapper_ttc(const umat pref) {
             current_agent = matchings(current_agent);
         }
 
-        // logg.info() << "Rotation found! Starts with agent " << matchings(current_agent) << " and ends with " << current_agent << ".";
-
-        // logg.info() << "Removing identified rotation...";
-        // logg.info() << "Current status:";
-
         // loop through, starting with p, then matchings[p], etc., and
         // ending with current_agent. for each agent, set is_matched to
         // 1.
@@ -105,14 +95,10 @@ uvec cpp_wrapper_ttc(const umat pref) {
         is_matched(current_agent) = 1;
 
         for (uword i = 0; i < N; i++) {
-            // logg.info() << "Agent " << i << " match status is " << is_matched(i) << ".";
-            // logg.info() << "   -- He's matched to " << matchings(i) << ".";
         }
 
         // check if everyone's matched, if so, we're done, so break
         if (sum(is_matched) == N) break;
-
-        // logg.info() << "But we're not done yet!";
 
         // otherwise, we need to set current_agent in such a way so as to continue
         // looking for rotations
@@ -120,7 +106,6 @@ uvec cpp_wrapper_ttc(const umat pref) {
         // one way to do this would be to check if (1-is_matched) .* matchings = -1*sum(1-is_matched)
         // if true, then set current_agent equal to -1 to reset the rotation finding process
         if (sum((1-is_matched)%matchings) == -1*sum(1-is_matched)) {
-            // logg.info() << "We completely removed that rotation, so now the current_agent is reset!";
             current_agent = -1;
         } else {
             // otherwise, we just cut off the 'tail' when we removed the rotation, and the body
@@ -133,7 +118,6 @@ uvec cpp_wrapper_ttc(const umat pref) {
                     break;
                 }
             }
-            // logg.info() << "We only cut off the tail, so the current agent has been reset to " << current_agent << ".";
         }
     }
 

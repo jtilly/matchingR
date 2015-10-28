@@ -5,7 +5,7 @@ test_that("Stable roommate?", {
     set.seed(1)
     for (i in c(4, 8, 16, 32, 128, 256)) {
         p = roommate.validate(utils = replicate(i, rnorm(i-1)))
-        results = roommate.matching(pref = p)
+        results = roommate(pref = p)
         expect_true(roommate.checkStability(pref = p, matching = results))
     }
 })
@@ -43,10 +43,10 @@ test_that("Check preference orderings for one sided matching", {
 test_that("Check if roommate can handle square matrices for cardinal utilities", {
     set.seed(2)
     utils1 = matrix(rnorm(16), nrow=4, ncol = 4)
-    results1 = roommate.matching(utils = utils1)  
+    results1 = roommate(utils = utils1)  
     
     utils2 = matrix(utils1[-c(1,6,11,16)], nrow=3, ncol=4)
-    results2 = roommate.matching(utils = utils2)  
+    results2 = roommate(utils = utils2)  
     
     expect_identical(results1, results2)
 })

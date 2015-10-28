@@ -28,6 +28,8 @@
 #'
 #' The algorithm still works with an unequal number of proposers and reviewers.
 #' In that case some agents will remain unmatched.
+#' 
+#' This function can also be called using \code{galeShapley}.
 #'
 #' @param proposerUtils is a matrix with cardinal utilities of the proposing
 #'   side of the market. If there are \code{n} proposers and \code{m} reviewers,
@@ -87,6 +89,7 @@
 #' results = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
 #' results
 #' @seealso \code{\link{galeShapley.collegeAdmissions}}
+#' @aliases galeShapley
 galeShapley.marriageMarket = function(proposerUtils = NULL,
                    reviewerUtils = NULL,
                    proposerPref = NULL,
@@ -116,6 +119,18 @@ galeShapley.marriageMarket = function(proposerUtils = NULL,
     res$engagements[res$engagements == (M + 1)] = NA
 
     return(res)
+}
+
+# see galeShapley.marriageMarket
+galeShapley = function(proposerUtils = NULL,
+                       reviewerUtils = NULL,
+                       proposerPref = NULL,
+                       reviewerPref = NULL) {
+    
+    return(galeShapley.marriageMarket(proposerUtils = proposerUtils, 
+                                      reviewerUtils = reviewerUtils, 
+                                      proposerPref = proposerPref, 
+                                      reviewerPref = reviewerPref))
 }
 
 

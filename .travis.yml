@@ -9,9 +9,7 @@ sudo: false
 # define environmental variables for R CMD check
 env:
   global:
-   - _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE
    - _R_CHECK_CRAN_INCOMING_=FALSE
-   - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 # only run for pushes to master branch
 branches:
@@ -21,6 +19,7 @@ branches:
 # install r-base-dev:
 # use r-packages-precise (https://cran.r-project.org/bin/linux/ubuntu/precise/) as source
 # which is white listed (https://github.com/travis-ci/apt-source-whitelist/)
+# also install latex, pandoc, qpdf and valgrind
 addons:
   apt:
     sources:
@@ -29,6 +28,17 @@ addons:
     - r-base-dev
     - r-recommended
     - pandoc
+    - texlive-base
+    - texlive-latex-base
+    - texlive-generic-recommended
+    - texlive-fonts-recommended
+    - texlive-fonts-extra
+    - texlive-extra-utils 
+    - texlive-latex-recommended 
+    - texlive-latex-extra
+    - texinfo
+    - lmodern
+    - qpdf
     - valgrind
 
 # cache local R libraries directory:
@@ -55,13 +65,16 @@ install:
   - Rscript -e 'update.packages(ask = FALSE, instlib = "~/Rlib")'
   - Rscript -e 'devtools::install_deps(pkg = ".", dependencies = TRUE)'
 
-# build and check package
+# build, check, and install package
+# run all examples and the vignettes through valgrind
 script:
-  - R CMD build . --no-manual --no-build-vignettes
+  - R CMD build . 
   - PKG_FILE_NAME=$(ls -1t *.tar.gz | head -n 1)
-  - R CMD check "${PKG_FILE_NAME}" --as-cran --no-manual --no-build-vignettes --use-valgrind
+  - R CMD check "${PKG_FILE_NAME}" --as-cran 
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-intro.R
+  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-performance.R
 
 # report coverage rate to coveralls
 after_success:

@@ -20,6 +20,11 @@ A vector of length \code{n} corresponding to the matchings being
   starts at 0.
 }
 \description{
+This is the C++ wrapper for the top trading cycle algorithm. Users should not
+call this function directly, but instead use
+\code{\link{toptrading}}.
+}
+\details{
 This function uses the top trading cycle algorithm to find a stable trade
 between agents, each with some indivisible good, and with preferences over
 the goods of other agents. Each agent is matched to one other agent, and

@@ -12,7 +12,7 @@
 #' \code{d1}.
 #' 
 #' The algorithm works in two stages. In the first stage, all participants begin
-#' unmmatched, then, in sequence, begin making proposals to other potential roommates,
+#' unmatched, then, in sequence, begin making proposals to other potential roommates,
 #' beginning with their most preferred roommate. If a roommate receives a proposal,
 #' he either accepts it if he has no other proposal which is better, or rejects it
 #' otherwise. If this stage ends with a roommate who has no proposals, then there
@@ -67,7 +67,7 @@
 #'                   2.91, -0.52, 0.52, 0.22, 
 #'                   0.53, -0.52, -1.18, 0.53), byrow=TRUE, ncol = 4, nrow = 3)
 #' utils
-#' results = roommate.matching(utils = utils)
+#' results = roommate(utils = utils)
 #' results
 #' 
 #' # example using preference orders
@@ -75,9 +75,9 @@
 #'                 4, 3, 4, 2, 
 #'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
 #' pref
-#' results = roommate.matching(pref = pref)                 
+#' results = roommate(pref = pref)                 
 #' results
-roommate.matching = function(utils = NULL, pref = NULL) {
+roommate = function(utils = NULL, pref = NULL) {
     pref.validated = roommate.validate(pref = pref, utils = utils);
     res = cpp_wrapper_irving(pref.validated);
     
@@ -89,9 +89,9 @@ roommate.matching = function(utils = NULL, pref = NULL) {
 
 #' Input validation for one-sided markets
 #' 
-#' This function parses and validates the arguments for one sided preferences 
-#' for the function onesided. It returns the validates arguments. This function 
-#' is called as part of \code{\link{roommate.matching}}. Only one of the
+#' This function parses and validates the arguments for the function
+#' \code{\link{roommate}}. It returns the validates arguments. This function 
+#' is called as part of \code{\link{roommate}}. Only one of the
 #' arguments needs to be provided.
 #'
 #' @param utils is a matrix with cardinal utilities for each individual in the 
@@ -187,7 +187,7 @@ roommate.validate = function(utils = NULL, pref = NULL) {
 #'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
 #' pref
 #' # compute matching
-#' results = roommate.matching(pref = pref)                 
+#' results = roommate(pref = pref)                 
 #' results
 #' # check if matching is stable
 #' roommate.checkStability(pref = pref, matching = results)
