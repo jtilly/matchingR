@@ -5,7 +5,7 @@ bibliography: bibliography.bib
 ---
 <!--
 %\VignetteEngine{knitr::rmarkdown}  
-%\VignetteIndexEntry{Matching Algorithms in R: An Introduction to matchingR}
+%\VignetteIndexEntry{Matching Algorithms in R and C++: An Introduction to matchingR}
 %\usepackage[utf8]{inputenc}
 -->
 
@@ -15,7 +15,7 @@ library(matchingR)
 
 # Introduction
 
-`matchingR` is an R package that efficiently computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726) [@gale1962college], [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331) [@irving1985roommates], and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) [@shapley1973cores] for large matching markets. The package provides functions to compute the solutions to the
+`matchingR` is an R package which quickly computes the [Gale-Shapley algorithm](http://www.jstor.org/stable/2312726) [@gale1962college], [Irving's algorithm for the stable roommate problem](http://www.sciencedirect.com/science/article/pii/0196677485900331) [@irving1985roommates], and the [top trading cycle algorithm](http://pareto.uab.es/jmasso/pdf/ShapleyScarfJME1974.pdf) [@shapley1973cores] for large matching markets. The package provides functions to compute the solutions to the
   [stable marriage problem](http://en.wikipedia.org/wiki/Stable_matching), the
   [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
   [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the

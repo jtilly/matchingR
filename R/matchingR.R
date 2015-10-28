@@ -17,8 +17,7 @@
 
 #' @name matchingR-package
 #' @docType package
-#' @title matchingR: Efficient Computation of Matching Algorithms in R
-#'   and C++
+#' @title matchingR: Matching Algorithms in R and C++
 #' @description matchingR is an R package which quickly computes a variety of
 #'   matching algorithms for one-sided and two-sided markets. This package
 #'   implements
@@ -32,14 +31,14 @@
 #'   problem.}
 #'   }
 #'
-#'   All matching algorithms are implemented in \code{C++} and can therefore be 
-#'   computed quickly. The package may be useful when the number of market 
+#'   All matching algorithms are implemented in \code{C++} and can therefore be
+#'   computed quickly. The package may be useful when the number of market
 #'   participants is large or when many matchings need to be computed (e.g. for
-#'   extensive simulations or for estimation purposes). The Gale-Shapley 
+#'   extensive simulations or for estimation purposes). The Gale-Shapley
 #'   function of this package has successfully been used to simulate preferences
-#'   and compute the matching with 30,000 participants on each side of the 
+#'   and compute the matching with 30,000 participants on each side of the
 #'   market.
-#'   
+#'
 #'   Matching markets are common in practice and widely studied by
 #'   economists. Popular examples include
 #'   \itemize{

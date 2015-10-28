@@ -3,8 +3,7 @@
 \docType{package}
 \name{matchingR-package}
 \alias{matchingR-package}
-\title{matchingR: Efficient Computation of Matching Algorithms in R
-  and C++}
+\title{matchingR: Matching Algorithms in R and C++}
 \description{
 matchingR is an R package which quickly computes a variety of
   matching algorithms for one-sided and two-sided markets. This package
