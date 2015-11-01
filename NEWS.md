@@ -2,7 +2,7 @@
 
 This is a minor update. 
 
-* Fixed bug in galeShapley.checkStability that resulted in UBSAN throwing an error
+ * Fixed bug in galeShapley.checkStability that resulted in UBSAN throwing an error
 
 # matchingR 1.2
 
