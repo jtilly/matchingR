@@ -1,3 +1,9 @@
+# matchingR 1.2.1
+
+This is a minor update. 
+
+* Fixed bug in galeShapley.checkStability that resulted in UBSAN throwing an error
+
 # matchingR 1.2
 
  * Fixed a bug in the stable roommate matching algorithm that caused
