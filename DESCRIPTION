@@ -1,8 +1,8 @@
 Package: matchingR
 Type: Package
 Title: Matching Algorithms in R and C++
-Version: 1.2
-Date: 2015-10-28
+Version: 1.2.1
+Date: 2015-10-31
 Author: Jan Tilly, Nick Janetos
 Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
 Description: Computes matching algorithms quickly using Rcpp.
