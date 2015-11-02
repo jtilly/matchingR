@@ -64,14 +64,14 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ``` r
 # college admissions problem with five students and two colleges with two slots each
 set.seed(1)
-nstudents = 5
-ncolleges = 2
-uStudents = matrix(runif(nstudents*ncolleges), nrow=ncolleges, ncol=nstudents)
+nStudents = 5
+nColleges = 2
+uStudents = matrix(runif(nStudents*nColleges), nrow=nColleges, ncol=nStudents)
 uStudents
 #>           [,1]      [,2]      [,3]      [,4]       [,5]
 #> [1,] 0.2655087 0.5728534 0.2016819 0.9446753 0.62911404
 #> [2,] 0.3721239 0.9082078 0.8983897 0.6607978 0.06178627
-uColleges = matrix(runif(nstudents*ncolleges), nrow=nstudents, ncol=ncolleges)
+uColleges = matrix(runif(nStudents*nColleges), nrow=nStudents, ncol=nColleges)
 uColleges
 #>           [,1]      [,2]
 #> [1,] 0.2059746 0.4976992
