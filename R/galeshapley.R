@@ -282,12 +282,20 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
                     studentOptimal = TRUE) {
 
     if (studentOptimal) {
-
+        
         # validate the inputs
         args = galeShapley.validate(studentUtils, collegeUtils, studentPref, collegePref)
 
+        # number of students
+        number_of_students = NROW(args$reviewerUtils)
+        
         # number of colleges
-        number_of_colleges = NROW(args$reviewerUtils)
+        number_of_colleges = NCOL(args$reviewerUtils)
+        
+        # make slots a vector if it isn't
+        if(length(slots) == 1) {
+            slots = rep(slots, number_of_colleges)
+        }
 
         # expand cardinal utilities corresponding to the slot size
         proposerUtils = reprow(args$proposerUtils, slots)
@@ -299,7 +307,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         # use galeShapleyMatching to compute matching
         res = cpp_wrapper_galeshapley(proposerPref, reviewerUtils)
 
-        # number of workers
+        # number of students
         M = length(res$proposals)
 
         # number of positions
@@ -312,28 +320,44 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         ))
 
         # collapse engagements (turn these into R indices by adding +1)
-        res$matched.colleges = matrix(res$engagements, ncol = slots, byrow = TRUE) + 1
+        res$matched.colleges = list()
+        
+        # map engagements back into slots
+        cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
+        cumsum.slotsUpper = cumsum(slots)
+        for(jX in 1:number_of_colleges) {
+            # fill slots with student ids
+            res$matched.colleges[[jX]] = res$engagements[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
+            # set vacant slots to NA
+            res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (nStudents+1)] = NA
+            # unmatched colleges
+            res$unmatched.colleges[res$unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
+        }
+        # remove engagements (all relevant information is stored in res$matched.colleges)
         res$engagements = NULL
 
         # translate proposals into the id of the original firm (turn these into R indices by adding +1)
-        college.ids = reprow(matrix(seq(from = 0, to = number_of_colleges), ncol = 1), slots)
-        res$matched.students = matrix(college.ids[res$proposals + 1], ncol = 1) + 1
+        res$matched.students = matrix(NA, nrow = nStudents, ncol=1)
+        for(jX in 1:number_of_colleges) {
+            res$matched.students[res$matched.colleges[[jX]]] = jX    
+        }
+        # remove proposals (all relevant information is stored in res$matched.students)
         res$proposals = NULL
-
-        # translate single colleges into the id of the original college (turn these into R indices by adding +1)
-        res$unmatched.colleges = college.ids[res$unmatched.colleges] + 1
-
-        # unmatched students / colleges are matched to NA
-        res$matched.colleges[res$matched.colleges == (M + 1)] = NA
-        res$matched.students[res$matched.students == (N/slots + 1)] = NA
+        
+        if(all(slots == slots[1])) {
+            res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1])
+        }
 
     } else {
 
         # validate the inputs
         args = galeShapley.validate(collegeUtils, studentUtils, collegePref, studentPref)
 
+        # number of students
+        number_of_students = NROW(args$proposerUtils)
+        
         # number of colleges
-        number_of_colleges = NROW(args$proposerUtils)
+        number_of_colleges = NCOL(args$proposerUtils)
 
         # expand cardinal utilities corresponding to the slot size
         proposerUtils = repcol(args$proposerUtils, slots)
@@ -345,10 +369,10 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         # use galeShapleyMatching to compute matching
         res = cpp_wrapper_galeshapley(as.matrix(proposerPref), as.matrix(reviewerUtils))
 
-        # number of firms
+        # number of slots
         M = length(res$proposals)
 
-        # number of workers
+        # number of students
         N = length(res$engagements)
 
         # collect results
@@ -357,21 +381,34 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
             "unmatched.students" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
         ))
 
-        # collapse proposals (turn these into R indices by adding +1)
-        res$matched.colleges = matrix(res$proposals, ncol = slots, byrow = TRUE) + 1
+        # assemble results
+        res$matched.colleges = list()
+        
+        # map proposals back into slots
+        cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
+        cumsum.slotsUpper = cumsum(slots)
+        for(jX in 1:number_of_colleges) {
+            # fill slots with student ids
+            res$matched.colleges[[jX]] = res$proposals[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
+            # set vacant slots to NA
+            res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (nStudents+1)] = NA
+            # unmatched colleges
+            res$unmatched.colleges[res$unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
+        }
+        # remove proposals (all relevant information is stored in res$matched.colleges)
         res$proposals = NULL
-
+        
         # translate engagements into the id of the original firm (turn these into R indices by adding +1)
-        college.ids = reprow(matrix(seq(from = 0, to = number_of_colleges), ncol = 1), slots)
-        res$matched.students = matrix(college.ids[res$engagements + 1], ncol = 1) + 1
+        res$matched.students = matrix(NA, nrow = nStudents, ncol=1)
+        for(jX in 1:number_of_colleges) {
+            res$matched.students[res$matched.colleges[[jX]]] = jX    
+        }
+        # remove proposals (all relevant information is stored in res$matched.students)
         res$engagements = NULL
-
-        # translate unmatched college slots into the id of the original college (turn these into R indices by adding +1)
-        res$unmatched.colleges = college.ids[res$unmatched.colleges] + 1
-
-        # unmatched students / colleges are matched to NA
-        res$matched.colleges[res$matched.colleges == (N + 1)] = NA
-        res$matched.students[res$matched.students == (M/slots + 1)] = NA
+        
+        if(all(slots == slots[1])) {
+            res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1])
+        }
 
     }
 
