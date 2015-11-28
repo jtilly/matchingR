@@ -180,7 +180,7 @@ test_that("Assortative matching?", {
     expect_true(all(matching$engagements == 1:4))
 })
 
-test_that("Marriage Market and College Admissions Problem Should Be all.equal When Slots = 1", {
+test_that("Marriage Market and College Admissions Problem Should Be Identical When Slots = 1", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
     uW = matrix(runif(12), nrow = 3, ncol = 4)
 
@@ -208,4 +208,52 @@ test_that("Check if galeShapley.collegeAdmissions matching returns the same resu
     matching1 = galeShapley.collegeAdmissions(uM, uW, slots = 4)
     matching2 = galeShapley.collegeAdmissions(uM, uW, slots = c(4,4))
     expect_true(identical(matching1, matching2))
+})
+
+test_that("Check student-optimal galeShapley.collegeAdmissions with differnet numbers of slots", {
+    
+    # four students, two colleges, slots c(1,2)
+    uStudents = matrix(runif(8), nrow = 2, ncol = 4)
+    uColleges = matrix(runif(8), nrow = 4, ncol = 2)
+    
+    matching1 = galeShapley.collegeAdmissions(uStudents, uColleges, slots = c(1,2))
+    
+    # now, expand students and college preferences and use galeShapley() instead
+    uStudents = rbind(uStudents[1,], uStudents[2,], uStudents[2,])
+    uColleges = cbind(uColleges[,1], uColleges[,2], uColleges[,2])
+    
+    matching2 = galeShapley(uStudents, uColleges)
+    
+    expect_true(all.equal(matching1$unmatched.students, matching2$single.proposers))
+    expect_equal(matching1$matched.colleges[[1]], matching2$engagements[1])
+    expect_equal(sort(matching1$matched.colleges[[2]]), sort(matching2$engagements[2:3]))
+    
+    # college 3 gets mapped into college 2
+    matching2$proposals[matching2$proposals==3] = 2
+    expect_equal(matching1$matched.students, matching2$proposals)
+    
+})
+
+test_that("Check college-optimal galeShapley.collegeAdmissions with differnet numbers of slots", {
+    
+    # four students, two colleges, slots c(1,2)
+    uStudents = matrix(runif(8), nrow = 2, ncol = 4)
+    uColleges = matrix(runif(8), nrow = 4, ncol = 2)
+    
+    matching1 = galeShapley.collegeAdmissions(uStudents, uColleges, slots = c(1,2), studentOptimal = FALSE)
+    
+    # now, expand students and college preferences and use galeShapley() instead
+    uStudents = rbind(uStudents[1,], uStudents[2,], uStudents[2,])
+    uColleges = cbind(uColleges[,1], uColleges[,2], uColleges[,2])
+    
+    matching2 = galeShapley(uColleges, uStudents)
+    
+    expect_true(all.equal(matching1$unmatched.students, matching2$single.reviewers))
+    expect_equal(matching1$matched.colleges[[1]], matching2$proposals[1])
+    expect_equal(sort(matching1$matched.colleges[[2]]), sort(matching2$proposals[2:3]))
+    
+    # college 3 gets mapped into college 2
+    matching2$engagements[matching2$engagements==3] = 2
+    expect_equal(matching1$matched.students, matching2$engagements)
+    
 })
