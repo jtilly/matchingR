@@ -316,10 +316,11 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         # collect results
         res = c(res, list(
             "unmatched.students" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-            "unmatched.colleges" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
+            "unmatched.colleges" = rep(NA, length = sum(res$engagements == M))
         ))
+        unmatched.colleges = seq(from = 0, to = N - 1)[res$engagements == M] + 1
 
-        # collapse engagements (turn these into R indices by adding +1)
+        # assemble results
         res$matched.colleges = list()
         
         # map engagements back into slots
@@ -331,10 +332,11 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
             # set vacant slots to NA
             res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (nStudents+1)] = NA
             # unmatched colleges
-            res$unmatched.colleges[res$unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
+            res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
         }
         # remove engagements (all relevant information is stored in res$matched.colleges)
         res$engagements = NULL
+        unmatched.colleges = NULL
 
         # translate proposals into the id of the original firm (turn these into R indices by adding +1)
         res$matched.students = matrix(NA, nrow = nStudents, ncol=1)
@@ -377,10 +379,11 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 
         # collect results
         res = c(res, list(
-            "unmatched.colleges" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+            "unmatched.colleges" = rep(NA, length = sum(res$proposals == N)),
             "unmatched.students" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
         ))
-
+        unmatched.colleges = seq(from = 0, to = M - 1)[res$proposals == N] + 1
+        
         # assemble results
         res$matched.colleges = list()
         
@@ -393,7 +396,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
             # set vacant slots to NA
             res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (nStudents+1)] = NA
             # unmatched colleges
-            res$unmatched.colleges[res$unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
+            res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
         }
         # remove proposals (all relevant information is stored in res$matched.colleges)
         res$proposals = NULL
