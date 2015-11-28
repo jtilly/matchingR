@@ -13,7 +13,7 @@ test_that("Check if galeShapley is an alias for galeShapley.marriageMarket", {
     uW = matrix(runif(12), nrow = 3, ncol = 4)
     matching1 = galeShapley(uM, uW)
     matching2 = galeShapley.marriageMarket(uM, uW)
-    expect_true(identical(matching1, matching2))
+    expect_true(all.equal(matching1, matching2))
 })
 
 
@@ -51,7 +51,7 @@ test_that(
         uW = matrix(runif(16 * 14), nrow = 14, ncol = 16)
         matching1 = galeShapley.marriageMarket(uM, uW)
         matching2 = galeShapley.marriageMarket(proposerPref = sortIndex(uM) + 1, reviewerPref = sortIndex(uW) + 1)
-        expect_true(identical(matching1$engagements, matching2$engagements))
+        expect_true(all.equal(matching1$engagements, matching2$engagements))
     }
 )
 
@@ -127,8 +127,8 @@ test_that("Check outcome from galeShapley.marriageMarket matching", {
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.marriageMarket(uM, uW)
-    expect_true(identical(matching$engagements, matrix(c(2,3), ncol = 1)))
-    expect_true(identical(matching$proposals, matrix(c(NA, 1, 2), ncol = 1)))
+    expect_true(all.equal(matching$engagements, matrix(c(2,3), ncol = 1)))
+    expect_true(all.equal(matching$proposals, matrix(c(NA, 1, 2), ncol = 1)))
 })
 
 test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matching", {
@@ -138,8 +138,8 @@ test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matc
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.collegeAdmissions(uM, uW, slots = 2, studentOptimal = TRUE)
-    expect_true(identical(matching$matched.colleges, matrix(c(2, 3, NA, 1), ncol = 2)))
-    expect_true(identical(matching$matched.students, matrix(c(2, 1, 2), ncol = 1)))
+    expect_true(all.equal(matching$matched.colleges, matrix(c(2, 3, NA, 1), ncol = 2)))
+    expect_true(all.equal(matching$matched.students, matrix(c(2, 1, 2), ncol = 1)))
 })
 
 test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions matching", {
@@ -149,8 +149,8 @@ test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions match
     uW = matrix(c(0, 2, 1,
                   1, 0, 2), nrow = 3, ncol = 2)
     matching = galeShapley.collegeAdmissions(uW, uM, slots = 2, studentOptimal = FALSE)
-    expect_true(identical(matching$matched.students, matrix(c(2,3), ncol = 1)))
-    expect_true(identical(matching$matched.colleges, matrix(c(NA, NA, NA, NA, 1, 2), ncol = 2)))
+    expect_true(all.equal(matching$matched.students, matrix(c(2,3), ncol = 1)))
+    expect_true(all.equal(matching$matched.colleges, matrix(c(NA, NA, NA, NA, 1, 2), ncol = 2)))
 })
 
 test_that("Check checkStability", {
@@ -180,7 +180,7 @@ test_that("Assortative matching?", {
     expect_true(all(matching$engagements == 1:4))
 })
 
-test_that("Marriage Market and College Admissions Problem Should Be Identical When Slots = 1", {
+test_that("Marriage Market and College Admissions Problem Should Be all.equal When Slots = 1", {
     uM = matrix(runif(12), nrow = 4, ncol = 3)
     uW = matrix(runif(12), nrow = 3, ncol = 4)
 

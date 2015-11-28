@@ -25,7 +25,7 @@
 repcol = function(x, n){
     s = NCOL(x)
     if(length(n) == 1) {
-        n = rep(n, s)
+        return(matrix(x[,rep(1:s, each = n)], nrow = NROW(x), ncol = sum(NCOL(x)*n)))
     }
     matrix(x[,rep(1:s, n)], nrow = NROW(x), ncol = sum(NCOL(x)*n))
 }
@@ -40,7 +40,7 @@ repcol = function(x, n){
 reprow = function(x, n){
     s = NROW(x)
     if(length(n) == 1) {
-        n = rep(n, s)
+        return(matrix(x[rep(1:s, each = n),], nrow = sum(NROW(x)*n), ncol = NCOL(x)))
     }
     matrix(x[rep(1:s, n),], nrow = sum(NROW(x)*n), ncol = NCOL(x))
 }
