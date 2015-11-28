@@ -298,6 +298,11 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         
         # number of colleges
         number_of_colleges = NCOL(args$reviewerUtils)
+        
+        # expand slots
+        if(length(slots)==1) { 
+            slots = rep(slots, number_of_colleges)    
+        }
 
         # expand cardinal utilities corresponding to the slot size
         proposerUtils = reprow(args$proposerUtils, slots)
@@ -326,10 +331,6 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         res$matched.colleges = list()
         
         # map engagements back into slots
-        if(length(slots)==1) { 
-            slots = rep(slots, number_of_colleges)    
-        }
-        
         cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
         cumsum.slotsUpper = cumsum(slots)
  
@@ -341,21 +342,9 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
             # unmatched colleges
             res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
         }
-        # remove engagements (all relevant information is stored in res$matched.colleges)
+        # remove unused information from res
         res$engagements = NULL
-        unmatched.colleges = NULL
-
-        # translate proposals into the id of the original firm (turn these into R indices by adding +1)
-        res$matched.students = matrix(NA, nrow = number_of_students, ncol=1)
-        for(jX in 1:number_of_colleges) {
-            res$matched.students[res$matched.colleges[[jX]]] = jX    
-        }
-        # remove proposals (all relevant information is stored in res$matched.students)
         res$proposals = NULL
-        
-        if(all(slots == slots[1])) {
-            res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1], byrow = TRUE)
-        }
 
     } else {
 
@@ -367,6 +356,11 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         
         # number of colleges
         number_of_colleges = NCOL(args$proposerUtils)
+        
+        # expand slots
+        if(length(slots)==1) { 
+            slots = rep(slots, number_of_colleges)    
+        }
 
         # expand cardinal utilities corresponding to the slot size
         proposerUtils = repcol(args$proposerUtils, slots)
@@ -394,13 +388,10 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
         # assemble results
         res$matched.colleges = list()
         
-        if(length(slots)==1) { 
-            slots = rep(slots, number_of_colleges)    
-        }
-        
         # map proposals back into slots
         cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
         cumsum.slotsUpper = cumsum(slots)
+        
         for(jX in 1:number_of_colleges) {
             # fill slots with student ids
             res$matched.colleges[[jX]] = res$proposals[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
@@ -409,21 +400,25 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
             # unmatched colleges
             res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
         }
-        # remove proposals (all relevant information is stored in res$matched.colleges)
+        
+        # remove unused information from res
+        res$engagements = NULL
         res$proposals = NULL
         
-        # translate engagements into the id of the original firm (turn these into R indices by adding +1)
-        res$matched.students = matrix(NA, nrow = number_of_students, ncol=1)
-        for(jX in 1:number_of_colleges) {
-            res$matched.students[res$matched.colleges[[jX]]] = jX    
-        }
-        # remove proposals (all relevant information is stored in res$matched.students)
-        res$engagements = NULL
-        
-        if(all(slots == slots[1])) {
-            res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1], byrow = TRUE)
-        }
-
+    }
+    
+    # make a vector with matched students
+    res$matched.students = matrix(NA, nrow = number_of_students, ncol=1)
+    for(jX in 1:number_of_colleges) {
+        res$matched.students[res$matched.colleges[[jX]]] = jX    
+    }
+    # remove proposals (all relevant information is stored in res$matched.students)
+    res$engagements = NULL
+    
+    # if all colleges have the same number of slots return matched.colleges as matrix 
+    # (otherwise it's a list)
+    if(all(slots == slots[1])) {
+        res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1], byrow = TRUE)
     }
 
 
