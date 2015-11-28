@@ -10,6 +10,9 @@ sudo: false
 env:
   global:
    - _R_CHECK_CRAN_INCOMING_=FALSE
+   
+before_install:
+  - export PATH=$HOME/bin:$HOME/texlive/bin/x86_64-linux:$PATH
 
 # only run for pushes to master branch
 branches:
@@ -27,15 +30,6 @@ addons:
     packages:
     - r-base-dev
     - r-recommended
-    - pandoc
-    - texlive-base
-    - texlive-latex-base
-    - texlive-generic-recommended
-    - texlive-fonts-recommended
-    - texlive-fonts-extra
-    - texlive-extra-utils 
-    - texlive-latex-recommended 
-    - texlive-latex-extra
     - texinfo
     - lmodern
     - qpdf
@@ -45,16 +39,15 @@ addons:
 cache:
   directories:
     - ~/Rlib
+    - $HOME/texlive
+    - $HOME/bin
 
 # install the package and dependencies:
-# - create directory for R libraries (if not already exists)
-# - create .Renviron with location of R libraries
-# - define R repository in .Rprofile
-# - add .travis.yml to .Rbuildignore
-# - install devtools if not already installed
-# - install covr if not already installed
-# - install dependencies
+# use Yihue's compiled texlive and pandoc versions (https://github.com/yihui/knitR/blob/master/.travis.yml)
 install:
+  - "[ ! -d ~/bin ] && mkdir ~/bin || true"
+  - "wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash"
+  - "wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash"
   - mkdir -p ~/Rlib
   - echo 'R_LIBS=~/Rlib' > .Renviron
   - echo 'options(repos = "http://cran.rstudio.com")' > .Rprofile

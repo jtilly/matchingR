@@ -20,11 +20,14 @@
 #' This function repeats each column of a matrix n times
 #'
 #' @param x is the input matrix
-#' @param n is the number of repetitions
+#' @param n is the number of repetitions (can be a vector)
 #' @return matrix with repeated columns
-repcol<-function(x,n){
+repcol = function(x, n){
     s = NCOL(x)
-    matrix(x[,rep(1:s, each=n)], nrow=NROW(x), ncol=NCOL(x)*n)
+    if(length(n) == 1) {
+        return(matrix(x[,rep(1:s, each = n)], nrow = NROW(x), ncol = s*n))
+    }
+    matrix(x[,rep(1:s, n)], nrow = NROW(x), ncol = sum(n))
 }
 
 #' Repeat each row of a matrix n times
@@ -32,10 +35,13 @@ repcol<-function(x,n){
 #' This function repeats each row of a matrix n times
 #'
 #' @param x is the input matrix
-#' @param n is the number of repetitions
+#' @param n is the number of repetitions (can be a vector)
 #' @return matrix with repeated rows
-reprow<-function(x,n){
+reprow = function(x, n){
     s = NROW(x)
-    matrix(x[rep(1:s, each=n),], nrow=NROW(x)*n, ncol=NCOL(x))
+    if(length(n) == 1) {
+        return(matrix(x[rep(1:s, each = n),], nrow = s*n, ncol = NCOL(x)))
+    }
+    matrix(x[rep(1:s, n),], nrow = sum(n), ncol = NCOL(x))
 }
 

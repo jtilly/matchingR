@@ -39,7 +39,11 @@ or C++ indexing (starting at 0).}
 
 \item{slots}{is the number of slots that each college has available. If this
 is 1, then the algorithm is identical to
-\code{\link{galeShapley.marriageMarket}}.}
+\code{\link{galeShapley.marriageMarket}}. \code{slots} can either be a
+integer or a vector. If it is an integer, then all colleges have the
+same number of slots. If it is a vector, it must have as many elements
+as there are colleges where each element refers to the number of slots
+at a particular college.}
 
 \item{studentOptimal}{is \code{TRUE} if students apply to colleges. The
 resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
@@ -60,10 +64,10 @@ A list with elements that specify which student is matched to which
    college \code{j}. Slots that remain open show up as being matched to
    student to \code{NA}.}
    \item{\code{unmatched.students} is a vector that lists the remaining unmatched
-   students This vector will be empty whenever \code{n<=m*s}}.
+   students This vector will be empty when all students get matched.}
    \item{\code{unmatched.colleges} is a vector that lists colleges with open
    slots. If a college has multiple open slots, it will show up multiple
-   times. This vector will be empty whenever \code{m*s<=n}}.
+   times. This vector will be empty whenever all college slots get filled.}
   }
 }
 \description{
