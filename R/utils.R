@@ -25,9 +25,9 @@
 repcol = function(x, n){
     s = NCOL(x)
     if(length(n) == 1) {
-        return(matrix(x[,rep(1:s, each = n)], nrow = NROW(x), ncol = sum(NCOL(x)*n)))
+        return(matrix(x[,rep(1:s, each = n)], nrow = NROW(x), ncol = s*n))
     }
-    matrix(x[,rep(1:s, n)], nrow = NROW(x), ncol = sum(NCOL(x)*n))
+    matrix(x[,rep(1:s, n)], nrow = NROW(x), ncol = sum(n))
 }
 
 #' Repeat each row of a matrix n times
@@ -40,8 +40,8 @@ repcol = function(x, n){
 reprow = function(x, n){
     s = NROW(x)
     if(length(n) == 1) {
-        return(matrix(x[rep(1:s, each = n),], nrow = sum(NROW(x)*n), ncol = NCOL(x)))
+        return(matrix(x[rep(1:s, each = n),], nrow = s*n, ncol = NCOL(x)))
     }
-    matrix(x[rep(1:s, n),], nrow = sum(NROW(x)*n), ncol = NCOL(x))
+    matrix(x[rep(1:s, n),], nrow = sum(n), ncol = NCOL(x))
 }
 
