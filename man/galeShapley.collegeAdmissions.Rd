@@ -64,10 +64,10 @@ A list with elements that specify which student is matched to which
    college \code{j}. Slots that remain open show up as being matched to
    student to \code{NA}.}
    \item{\code{unmatched.students} is a vector that lists the remaining unmatched
-   students This vector will be empty whenever \code{n<=m*s}}.
+   students This vector will be empty when all students get matched.}
    \item{\code{unmatched.colleges} is a vector that lists colleges with open
    slots. If a college has multiple open slots, it will show up multiple
-   times. This vector will be empty whenever \code{m*s<=n}}.
+   times. This vector will be empty whenever all college slots get filled.}
   }
 }
 \description{

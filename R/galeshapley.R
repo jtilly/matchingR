@@ -234,10 +234,10 @@ galeShapley = function(proposerUtils = NULL,
 #'    college \code{j}. Slots that remain open show up as being matched to
 #'    student to \code{NA}.}
 #'    \item{\code{unmatched.students} is a vector that lists the remaining unmatched
-#'    students This vector will be empty whenever \code{n<=m*s}}.
+#'    students This vector will be empty when all students get matched.}
 #'    \item{\code{unmatched.colleges} is a vector that lists colleges with open
 #'    slots. If a college has multiple open slots, it will show up multiple
-#'    times. This vector will be empty whenever \code{m*s<=n}}.
+#'    times. This vector will be empty whenever all college slots get filled.}
 #'   }
 #' @examples
 #' ncolleges = 10
@@ -617,6 +617,10 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 #'                            results$proposals,
 #'                            results$engagements)
 galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
+    
+    if(is.list(proposals) | is.list(engagements)) {
+        stop("Proposals and engagements must be vectors/matrices.")  
+    }
 
     # replace NA for unmatched proposers (they are now matched to the number of reviewers + 1)
     proposals[is.na(proposals)] = NROW(proposerUtils) + 1
