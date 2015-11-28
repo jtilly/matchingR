@@ -201,3 +201,11 @@ test_that("Marriage Market and College Admissions Problem Should Be all.equal Wh
     expect_equal(matching.marriageMarket$single.reviewers, matching.collegeAdmissions$unmatched.students)
 
 })
+
+test_that("Check if galeShapley.collegeAdmissions matching returns the same results when the slots are constant across colleges", {
+    uM = matrix(runif(16), nrow = 2, ncol = 8)
+    uW = matrix(runif(16), nrow = 8, ncol = 2)
+    matching1 = galeShapley.collegeAdmissions(uM, uW, slots = 4)
+    matching2 = galeShapley.collegeAdmissions(uM, uW, slots = c(4,4))
+    expect_true(identical(matching1, matching2))
+})
