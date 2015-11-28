@@ -9,7 +9,7 @@ reprow(x, n)
 \arguments{
 \item{x}{is the input matrix}
 
-\item{n}{is the number of repetitions}
+\item{n}{is the number of repetitions (can be a vector)}
 }
 \value{
 matrix with repeated rows

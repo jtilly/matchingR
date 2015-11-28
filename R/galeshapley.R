@@ -212,7 +212,11 @@ galeShapley = function(proposerUtils = NULL,
 #'   or C++ indexing (starting at 0).
 #' @param slots is the number of slots that each college has available. If this
 #'   is 1, then the algorithm is identical to
-#'   \code{\link{galeShapley.marriageMarket}}.
+#'   \code{\link{galeShapley.marriageMarket}}. \code{slots} can either be a
+#'   integer or a vector. If it is an integer, then all colleges have the
+#'   same number of slots. If it is a vector, it must have as many elements
+#'   as there are colleges where each element refers to the number of slots
+#'   at a particular college. 
 #' @param studentOptimal is \code{TRUE} if students apply to colleges. The
 #'   resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
 #'   if colleges apply to students. The resulting match is college-optimal.
