@@ -3,6 +3,7 @@ Matching Algorithms in R and C++
 [![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR) 
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/matchingR)](http://cran.r-project.org/package=matchingR)
+[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](http://cran.r-project.org/package=matchingR)
 
 
 [!["You know that I'll never leave you. Not as long as she's with someone."](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
