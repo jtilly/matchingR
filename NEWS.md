@@ -1,3 +1,9 @@
+# matchingR 1.2.2
+
+This is a minor update. 
+
+ * Colleges may have different numbers of slots in the college admissions problem ([#30](https://github.com/jtilly/matchingR/issues/30))
+
 # matchingR 1.2.1
 
 This is a minor update. 
