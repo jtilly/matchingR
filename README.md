@@ -32,8 +32,8 @@ install.packages("matchingR")
 ```
 The latest development release is available from GitHub:
 ```R
-#install.packages("devtools")
-devtools::install_github("jtilly/matchingR")
+source("http://jtilly.io/install_github/install_github.R")
+install_github("jtilly/matchingR")
 ```
 
 ## Examples
@@ -67,12 +67,12 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 set.seed(1)
 nStudents = 5
 nColleges = 2
-uStudents = matrix(runif(nStudents*nColleges), nrow=nColleges, ncol=nStudents)
+uStudents = matrix(runif(nStudents * nColleges), nrow = nColleges, ncol = nStudents)
 uStudents
 #>           [,1]      [,2]      [,3]      [,4]       [,5]
 #> [1,] 0.2655087 0.5728534 0.2016819 0.9446753 0.62911404
 #> [2,] 0.3721239 0.9082078 0.8983897 0.6607978 0.06178627
-uColleges = matrix(runif(nStudents*nColleges), nrow=nStudents, ncol=nColleges)
+uColleges = matrix(runif(nStudents * nColleges), nrow = nStudents, ncol = nColleges)
 uColleges
 #>           [,1]      [,2]
 #> [1,] 0.2059746 0.4976992
@@ -80,7 +80,7 @@ uColleges
 #> [3,] 0.6870228 0.9919061
 #> [4,] 0.3841037 0.3800352
 #> [5,] 0.7698414 0.7774452
-matching = galeShapley.collegeAdmissions(uStudents, uColleges, slots=2)
+matching = galeShapley.collegeAdmissions(uStudents, uColleges, slots = c(2, 2))
 matching$matched.students
 #>      [,1]
 #> [1,]   NA
@@ -101,7 +101,7 @@ galeShapley.checkStability(uStudents, uColleges, matching$matched.students, matc
 # stable roommate problem with four students and two rooms
 set.seed(2)
 n = 4
-u = matrix(runif(n^2),  nrow = n, ncol = n)
+u = matrix(runif(n ^ 2),  nrow = n, ncol = n)
 u
 #>           [,1]      [,2]      [,3]      [,4]
 #> [1,] 0.1848823 0.9438393 0.4680185 0.7605133
@@ -122,7 +122,7 @@ results
 # top trading cycle algorithm with four houses
 set.seed(2)
 n = 4
-u = matrix(runif(n^2),  nrow = n, ncol = n)
+u = matrix(runif(n ^ 2),  nrow = n, ncol = n)
 u
 #>           [,1]      [,2]      [,3]      [,4]
 #> [1,] 0.1848823 0.9438393 0.4680185 0.7605133
