@@ -64,7 +64,7 @@ prefM = matrix(c(1, 3, 3,
                  3, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
-dimnames(prefM) = list(rows = c('Woman 1', 'Woman 2', 'Woman 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
+dimnames(prefM) = list(rows = c('Rank 1', 'Rank 2', 'Rank 3'), cols = c('Man 1', 'Man 2', 'Man 3'))
 prefM
 ```
 `prefM` states that man `1` prefers woman `1` over woman `2` over woman `3`, etc. The preference ordering that corresponds to `uW` is given by
@@ -74,7 +74,7 @@ prefW = matrix(c(3, 1, 3,
                  1, 2, 1), nrow = 3, ncol = 3, byrow = TRUE)
 ```
 ```{r, echo=FALSE}
-dimnames(prefW) = list(rows = c('Man 1', 'Man 2', 'Man 3'), cols = c('Woman 1', 'Woman 2', 'Woman 3'))
+dimnames(prefW) = list(rows = c('Rank 1', 'Rank 2', 'Rank 3'), cols = c('Woman 1', 'Woman 2', 'Woman 3'))
 prefW
 ```
 The matching algorithm discussed below can take either payoff matrices of the type `uM` and `uW` or preference orderings of the type `prefM` and `prefW` as arguments.
