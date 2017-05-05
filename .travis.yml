@@ -73,7 +73,6 @@ script:
   - R CMD INSTALL "${PKG_FILE_NAME}"
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR-Ex.R
   - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-intro.R
-  - R -d valgrind --no-save < matchingR.Rcheck/matchingR/doc/matchingR-performance.R
 
 # report coverage rate to coveralls
 after_success:
