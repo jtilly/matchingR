@@ -141,4 +141,3 @@ results
 ## Documentation
 * [Reference Manual](https://cran.r-project.org/web/packages/matchingR/matchingR.pdf "Matching Algorithms in R and C++: Reference Manual")
 * [Vignette: Matching Algorithms in R and C++: An Introduction to matchingR](https://cran.r-project.org/web/packages/matchingR/vignettes/matchingR-intro.html "Matching Algorithms in R and C++: An Introduction to matchingR")
-* [Vignette: Matching Algorithms in R and C++: Computational Performance](https://cran.r-project.org/web/packages/matchingR/vignettes/matchingR-performance.html "Matching Algorithms in R and C++: Computational Performance")
