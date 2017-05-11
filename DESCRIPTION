@@ -4,7 +4,7 @@ Title: Matching Algorithms in R and C++
 Version: 1.3.0
 Date: 2017-05-05
 Author: Jan Tilly, Nick Janetos
-Maintainer: Jan Tilly <jtilly@econ.upenn.edu>
+Maintainer: Jan Tilly <jantilly@gmail.com>
 Description: Computes matching algorithms quickly using Rcpp.
     Implements the Gale-Shapley Algorithm to compute the stable
     matching for two-sided markets, such as the stable marriage
