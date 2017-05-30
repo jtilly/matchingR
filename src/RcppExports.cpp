@@ -112,3 +112,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"matchingR_cpp_wrapper_galeshapley", (DL_FUNC) &matchingR_cpp_wrapper_galeshapley, 2},
+    {"matchingR_cpp_wrapper_galeshapley_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_galeshapley_check_stability, 4},
+    {"matchingR_cpp_wrapper_irving", (DL_FUNC) &matchingR_cpp_wrapper_irving, 1},
+    {"matchingR_cpp_wrapper_irving_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_irving_check_stability, 2},
+    {"matchingR_cpp_wrapper_ttc", (DL_FUNC) &matchingR_cpp_wrapper_ttc, 1},
+    {"matchingR_cpp_wrapper_ttc_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_ttc_check_stability, 2},
+    {"matchingR_sortIndex", (DL_FUNC) &matchingR_sortIndex, 1},
+    {"matchingR_sortIndexOneSided", (DL_FUNC) &matchingR_sortIndexOneSided, 1},
+    {"matchingR_rankIndex", (DL_FUNC) &matchingR_rankIndex, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_matchingR(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
