@@ -1,9 +1,9 @@
 Matching Algorithms in R and C++
 ===============
-[![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR) 
+[![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR)
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/matchingR)](http://cran.r-project.org/package=matchingR)
-[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](http://cran.r-project.org/package=matchingR)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/matchingR)](https://cran.r-project.org/package=matchingR)
+[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](https://cran.r-project.org/package=matchingR)
 
 
 [!["You know that I'll never leave you. Not as long as she's with someone."](http://imgs.xkcd.com/comics/all_the_girls.png)](http://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
@@ -14,7 +14,7 @@ Matching Algorithms in R and C++
   [college admission problem](http://en.wikipedia.org/wiki/Hospital_resident), the
   [stable roommates problem](http://en.wikipedia.org/wiki/Stable_roommates_problem), and the
   [house allocation problem](http://web.stanford.edu/~niederle/HouseAllocation.pdf).
-  
+
 The package may be useful when the number of market participants is large or when many matchings need to be computed (e.g., for simulation or estimation purposes). It has been used in practice to compute the Gale-Shapley stable matching with 30,000 participants on each side of the market.
 
 Matching markets are common in practice and widely studied by economists. Popular examples include
@@ -26,7 +26,7 @@ Matching markets are common in practice and widely studied by economists. Popula
 Installation
 ------------
 
-`matchingR` may be installed from [CRAN](http://cran.r-project.org/package=matchingR):
+`matchingR` may be installed from [CRAN](https://cran.r-project.org/package=matchingR):
 ```R
 install.packages("matchingR")
 ```
