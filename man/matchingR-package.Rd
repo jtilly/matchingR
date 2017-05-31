@@ -2,6 +2,7 @@
 % Please edit documentation in R/matchingR.R
 \docType{package}
 \name{matchingR-package}
+\alias{matchingR}
 \alias{matchingR-package}
 \title{matchingR: Matching Algorithms in R and C++}
 \description{
@@ -89,6 +90,14 @@ Irving, R. W. (1985). An efficient algorithm for the "stable
 
 Shapley, L., & Scarf, H. (1974). On cores and indivisibility.
   \emph{Journal of Mathematical Economics}, 1(1), 23-37.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/jtilly/matchingR/}
+  \item Report bugs at \url{https://github.com/jtilly/matchingR/issues/}
+}
+
 }
 \author{
 Jan Tilly, Nick Janetos

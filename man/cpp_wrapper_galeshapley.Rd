@@ -15,23 +15,25 @@ partner. Preference orders must be complete and specified using C++
 indexing (starting at 0).}
 
 \item{reviewerUtils}{is a matrix with cardinal utilities of the courted side
- of the market. If there are \code{n} proposers and \code{m} reviewers, then
- this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
- element refers to the payoff that individual \code{j} receives from being
- matched to individual \code{i}.
-@return  A list with elements that specify who is matched to whom. Suppose
+of the market. If there are \code{n} proposers and \code{m} reviewers, then
+this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
+element refers to the payoff that individual \code{j} receives from being
+matched to individual \code{i}.}
+}
+\value{
+A list with elements that specify who is matched to whom. Suppose
   there are \code{n} proposers and \code{m} reviewers. The list contains
   the following items:
  \itemize{
-  \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
-  element contains the number of the reviewer that proposer \code{i} is
-  matched to using C++ indexing. Proposers that remain unmatched will be
-  listed as being matched to \code{m}.}
-  \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
-  element contains the number of the proposer that reviewer \code{j} is
-  matched to using C++ indexing. Reviwers that remain unmatched will be
-  listed as being matched to \code{n}.}
- }}
+   \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
+   element contains the number of the reviewer that proposer \code{i} is
+   matched to using C++ indexing. Proposers that remain unmatched will be
+   listed as being matched to \code{m}.}
+   \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
+   element contains the number of the proposer that reviewer \code{j} is
+   matched to using C++ indexing. Reviwers that remain unmatched will be
+   listed as being matched to \code{n}.}
+ }
 }
 \description{
 This function provides an R wrapper for the C++ backend. Users should not

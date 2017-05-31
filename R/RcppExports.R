@@ -19,10 +19,10 @@
 #'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
 #'   element refers to the payoff that individual \code{j} receives from being
 #'   matched to individual \code{i}.
-#'  @return  A list with elements that specify who is matched to whom. Suppose
-#'    there are \code{n} proposers and \code{m} reviewers. The list contains
-#'    the following items:
-#'   \itemize{
+#' @return  A list with elements that specify who is matched to whom. Suppose
+#'   there are \code{n} proposers and \code{m} reviewers. The list contains
+#'   the following items:
+#'  \itemize{
 #'    \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
 #'    element contains the number of the reviewer that proposer \code{i} is
 #'    matched to using C++ indexing. Proposers that remain unmatched will be
@@ -31,9 +31,10 @@
 #'    element contains the number of the proposer that reviewer \code{j} is
 #'    matched to using C++ indexing. Reviwers that remain unmatched will be
 #'    listed as being matched to \code{n}.}
-#'   }
+#'  }
+#' @export
 cpp_wrapper_galeshapley <- function(proposerPref, reviewerUtils) {
-    .Call(matchingR_cpp_wrapper_galeshapley, proposerPref, reviewerUtils)
+    .Call('matchingR_cpp_wrapper_galeshapley', PACKAGE = 'matchingR', proposerPref, reviewerUtils)
 }
 
 #' C++ Wrapper to Check Stability of Two-sided Matching
@@ -63,8 +64,9 @@ cpp_wrapper_galeshapley <- function(proposerPref, reviewerUtils) {
 #'   a given reviewer is matched to (using C++ indexing). The column dimension
 #'   accommodates reviewers with multiple slots.
 #' @return true if the matching is stable, false otherwise
+#' @export
 cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
-    .Call(matchingR_cpp_wrapper_galeshapley_check_stability, proposerUtils, reviewerUtils, proposals, engagements)
+    .Call('matchingR_cpp_wrapper_galeshapley_check_stability', PACKAGE = 'matchingR', proposerUtils, reviewerUtils, proposals, engagements)
 }
 
 #' Computes a stable roommate matching
@@ -84,8 +86,9 @@ cpp_wrapper_galeshapley_check_stability <- function(proposerUtils, reviewerUtils
 #'   is \code{0} then individual \code{4} was matched with individual \code{1}.
 #'   If no stable matching exists, then this function returns a vector of
 #'   zeros.
+#'  @export
 cpp_wrapper_irving <- function(pref) {
-    .Call(matchingR_cpp_wrapper_irving, pref)
+    .Call('matchingR_cpp_wrapper_irving', PACKAGE = 'matchingR', pref)
 }
 
 #' Check if a matching solves the stable roommate problem
@@ -106,8 +109,9 @@ cpp_wrapper_irving <- function(pref) {
 #'   with individual \code{1}. If no stable matching exists, then this function
 #'   returns a vector of zeros.
 #' @return true if the matching is stable, false otherwise
+#'  @export
 cpp_wrapper_irving_check_stability <- function(pref, matchings) {
-    .Call(matchingR_cpp_wrapper_irving_check_stability, pref, matchings)
+    .Call('matchingR_cpp_wrapper_irving_check_stability', PACKAGE = 'matchingR', pref, matchings)
 }
 
 #' Computes the top trading cycle algorithm
@@ -131,8 +135,9 @@ cpp_wrapper_irving_check_stability <- function(pref, matchings) {
 #'   made, so that e.g. if the \code{4}th element is \code{5} then agent
 #'   \code{4} was matched to agent \code{6}. This vector uses C++ indexing that
 #'   starts at 0.
+#' @export
 cpp_wrapper_ttc <- function(pref) {
-    .Call(matchingR_cpp_wrapper_ttc, pref)
+    .Call('matchingR_cpp_wrapper_ttc', PACKAGE = 'matchingR', pref)
 }
 
 #' Check if a one-sided matching for the top trading cycle algorithm is stable
@@ -147,8 +152,9 @@ cpp_wrapper_ttc <- function(pref) {
 #'   then agent \code{4} was matched to agent \code{6}. This vector uses C++
 #'   indexing that starts at 0.
 #' @return true if the matching is stable, false otherwise
+#' @export
 cpp_wrapper_ttc_check_stability <- function(pref, matchings) {
-    .Call(matchingR_cpp_wrapper_ttc_check_stability, pref, matchings)
+    .Call('matchingR_cpp_wrapper_ttc_check_stability', PACKAGE = 'matchingR', pref, matchings)
 }
 
 #' Sort indices of a matrix within a column
@@ -158,8 +164,9 @@ cpp_wrapper_ttc_check_stability <- function(pref, matchings) {
 #'
 #' @param u is the input matrix with cardinal preferences
 #' @return a matrix with sorted indices (the agents' ordinal preferences)
+#' @export
 sortIndex <- function(u) {
-    .Call(matchingR_sortIndex, u)
+    .Call('matchingR_sortIndex', PACKAGE = 'matchingR', u)
 }
 
 #' Ranks elements with column of a matrix, assuming a one-sided market.
@@ -172,8 +179,9 @@ sortIndex <- function(u) {
 #' @param u A matrix with agents' cardinal preferences. Column i is agent i's
 #'   preferences.
 #' @return a matrix with the agents' ordinal preferences
+#' @export
 sortIndexOneSided <- function(u) {
-    .Call(matchingR_sortIndexOneSided, u)
+    .Call('matchingR_sortIndexOneSided', PACKAGE = 'matchingR', u)
 }
 
 #' Rank elements within column of a matrix
@@ -183,7 +191,8 @@ sortIndexOneSided <- function(u) {
 #'
 #' @param sortedIdx is the input matrix
 #' @return a rank matrix
+#' @export
 rankIndex <- function(sortedIdx) {
-    .Call(matchingR_rankIndex, sortedIdx)
+    .Call('matchingR_rankIndex', PACKAGE = 'matchingR', sortedIdx)
 }
 

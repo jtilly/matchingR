@@ -27,6 +27,7 @@
 //'
 //' @param u is the input matrix with cardinal preferences
 //' @return a matrix with sorted indices (the agents' ordinal preferences)
+//' @export
 // [[Rcpp::export]]
 umat sortIndex(const mat& u) {
     int N = u.n_rows;
@@ -48,6 +49,7 @@ umat sortIndex(const mat& u) {
 //' @param u A matrix with agents' cardinal preferences. Column i is agent i's
 //'   preferences.
 //' @return a matrix with the agents' ordinal preferences
+//' @export
 // [[Rcpp::export]]
 umat sortIndexOneSided(const mat& u) {
     uword N = u.n_rows;
@@ -75,6 +77,7 @@ umat sortIndexOneSided(const mat& u) {
 //'
 //' @param sortedIdx is the input matrix
 //' @return a rank matrix
+//' @export
 // [[Rcpp::export]]
 umat rankIndex(const umat& sortedIdx) {
     int N = sortedIdx.n_rows;

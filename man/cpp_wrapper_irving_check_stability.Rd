@@ -22,6 +22,7 @@ returns a vector of zeros.}
 }
 \value{
 true if the matching is stable, false otherwise
+ @export
 }
 \description{
 This function checks if a given matching is stable for a particular set of

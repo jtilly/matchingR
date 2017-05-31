@@ -41,10 +41,10 @@
 //'   this matrix will be of dimension \code{n} by \code{m}. The \code{i,j}th
 //'   element refers to the payoff that individual \code{j} receives from being
 //'   matched to individual \code{i}.
-//'  @return  A list with elements that specify who is matched to whom. Suppose
-//'    there are \code{n} proposers and \code{m} reviewers. The list contains
-//'    the following items:
-//'   \itemize{
+//' @return  A list with elements that specify who is matched to whom. Suppose
+//'   there are \code{n} proposers and \code{m} reviewers. The list contains
+//'   the following items:
+//'  \itemize{
 //'    \item{\code{proposals} is a vector of length \code{n} whose \code{i}th
 //'    element contains the number of the reviewer that proposer \code{i} is
 //'    matched to using C++ indexing. Proposers that remain unmatched will be
@@ -53,7 +53,8 @@
 //'    element contains the number of the proposer that reviewer \code{j} is
 //'    matched to using C++ indexing. Reviwers that remain unmatched will be
 //'    listed as being matched to \code{n}.}
-//'   }
+//'  }
+//' @export
 // [[Rcpp::export]]
 List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils) {
 
@@ -164,6 +165,7 @@ List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils)
 //'   a given reviewer is matched to (using C++ indexing). The column dimension
 //'   accommodates reviewers with multiple slots.
 //' @return true if the matching is stable, false otherwise
+//' @export
 // [[Rcpp::export]]
 bool cpp_wrapper_galeshapley_check_stability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements) {
 

@@ -36,6 +36,7 @@
 //'   is \code{0} then individual \code{4} was matched with individual \code{1}.
 //'   If no stable matching exists, then this function returns a vector of
 //'   zeros.
+//'  @export
 // [[Rcpp::export]]
 uvec cpp_wrapper_irving(const umat pref) {
 
@@ -244,6 +245,7 @@ uvec cpp_wrapper_irving(const umat pref) {
 //'   with individual \code{1}. If no stable matching exists, then this function
 //'   returns a vector of zeros.
 //' @return true if the matching is stable, false otherwise
+//'  @export
 // [[Rcpp::export]]
 bool cpp_wrapper_irving_check_stability(umat& pref, umat& matchings) {
 

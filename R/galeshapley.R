@@ -107,6 +107,7 @@
 #' results
 #' @seealso \code{\link{galeShapley.collegeAdmissions}}
 #' @aliases galeShapley
+#' @export
 galeShapley.marriageMarket = function(proposerUtils = NULL,
                    reviewerUtils = NULL,
                    proposerPref = NULL,
@@ -278,6 +279,7 @@ galeShapley = function(proposerUtils = NULL,
 #'                              slots = 2,
 #'                              studentOptimal = FALSE)
 #' results.collegeoptimal
+#' @export
 galeShapley.collegeAdmissions = function(studentUtils = NULL,
                     collegeUtils = NULL,
                     studentPref = NULL,
@@ -494,6 +496,7 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 #' # validate preferences when proposer-side is cardinal and reviewer-side is ordinal
 #' preferences = galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
 #' preferences
+#' @export
 galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL, reviewerPref = NULL) {
 
     if (!is.null(reviewerPref)) {
@@ -616,6 +619,7 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 #'                            pref.validated$reviewerUtils,
 #'                            results$proposals,
 #'                            results$engagements)
+#' @export
 galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
     
     if(is.list(proposals) | is.list(engagements)) {
@@ -671,6 +675,7 @@ galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, e
 #'                 2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
 #' pref
 #' galeShapley.checkPreferences(pref)
+#' @export
 galeShapley.checkPreferences = function(pref) {
 
     # check if pref is using R instead of C++ indexing

@@ -19,8 +19,8 @@
 #'
 #' This package implements the top trading cycle algorithm.
 #'
-#' The top trading algorithm solves the following problem: A set of \code{n} agents 
-#' each currently own their own home, and have preferences over the homes of other 
+#' The top trading algorithm solves the following problem: A set of \code{n} agents
+#' each currently own their own home, and have preferences over the homes of other
 #' agents. The agents may trade their homes in some way, the problem is to identify
 #' a set of trades between agents so that no subset of agents can defect from the
 #' rest of the group, and by trading within themselves improve their own payoffs.
@@ -29,11 +29,11 @@
 #' agents, then eliminating those cycles until no agents remain. A cycle is a
 #' sequence of agents such that each agent most prefers the next agent's home
 #' (out of the remaining unmatched agents), and the last agent in the sequence
-#' most prefers the first agent in the sequence's home. 
-#' 
+#' most prefers the first agent in the sequence's home.
+#'
 #' The top trading cycle is guaranteed to produce a unique outcome, and that
 #' outcome is the unique outcome in the core, meaning there is no other outcome
-#' with the stability property described above. 
+#' with the stability property described above.
 #'
 #' @param utils is a matrix with cardinal utilities of all individuals in the
 #'   market. If there are \code{n} individuals, then this matrix will be of
@@ -67,6 +67,7 @@
 #' pref
 #' results = toptrading(pref = pref)
 #' results
+#' @export
 toptrading = function(utils = NULL, pref = NULL) {
     args = galeShapley.validate(proposerPref = pref, reviewerPref = pref, proposerUtils = utils, reviewerUtils = utils)
     cpp_wrapper_ttc(args$proposerPref) + 1
@@ -99,6 +100,7 @@ toptrading = function(utils = NULL, pref = NULL) {
 #' results = toptrading(pref = pref)
 #' results
 #' toptrading.checkStability(pref = pref, matchings = results)
+#' @export
 toptrading.checkStability = function(utils = NULL, pref = NULL, matchings) {
     args = galeShapley.validate(proposerPref = pref,
                                 reviewerPref = pref,

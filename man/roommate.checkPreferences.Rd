@@ -7,13 +7,13 @@
 roommate.checkPreferences(pref)
 }
 \arguments{
-\item{pref}{is a matrix with the preference order of each individual in the 
-market. This argument is only required when \code{utils} is not provided. 
-If there are \code{n} individuals, then this matrix will be of dimension 
-\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s 
+\item{pref}{is a matrix with the preference order of each individual in the
+market. This argument is only required when \code{utils} is not provided.
+If there are \code{n} individuals, then this matrix will be of dimension
+\code{n-1} by \code{n}. The \code{i,j}th element refers to \code{j}'s
 \code{i}th most favorite partner. Preference orders can either be specified
-using R-indexing (starting at 1) or C++ indexing (starting at 0). The 
-matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise, 
+using R-indexing (starting at 1) or C++ indexing (starting at 0). The
+matrix \code{pref} must be of dimension \code{n-1} by \code{n}. Otherwise,
 the function will throw an error.}
 }
 \value{

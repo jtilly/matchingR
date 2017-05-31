@@ -20,6 +20,7 @@ A vector of length \code{n} corresponding to the matchings that were
   is \code{0} then individual \code{4} was matched with individual \code{1}.
   If no stable matching exists, then this function returns a vector of
   zeros.
+ @export
 }
 \description{
 This is the C++ wrapper for the stable roommate problem. Users should not

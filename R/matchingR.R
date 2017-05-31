@@ -98,4 +98,5 @@
 #' results
 #' # check stability
 #' toptrading.checkStability(utils = u, matching = results)
-NULL
+#' @useDynLib matchingR
+"_PACKAGE"

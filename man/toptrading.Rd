@@ -29,8 +29,8 @@ A vector of length \code{n} corresponding to the matchings being
 This package implements the top trading cycle algorithm.
 }
 \details{
-The top trading algorithm solves the following problem: A set of \code{n} agents 
-each currently own their own home, and have preferences over the homes of other 
+The top trading algorithm solves the following problem: A set of \code{n} agents
+each currently own their own home, and have preferences over the homes of other
 agents. The agents may trade their homes in some way, the problem is to identify
 a set of trades between agents so that no subset of agents can defect from the
 rest of the group, and by trading within themselves improve their own payoffs.

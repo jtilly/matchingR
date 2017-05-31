@@ -40,6 +40,7 @@
 //'   made, so that e.g. if the \code{4}th element is \code{5} then agent
 //'   \code{4} was matched to agent \code{6}. This vector uses C++ indexing that
 //'   starts at 0.
+//' @export
 // [[Rcpp::export]]
 uvec cpp_wrapper_ttc(const umat pref) {
 
@@ -153,6 +154,7 @@ uvec cpp_wrapper_ttc(const umat pref) {
 //'   then agent \code{4} was matched to agent \code{6}. This vector uses C++
 //'   indexing that starts at 0.
 //' @return true if the matching is stable, false otherwise
+//' @export
 // [[Rcpp::export]]
 bool cpp_wrapper_ttc_check_stability(umat pref, uvec matchings) {
 
