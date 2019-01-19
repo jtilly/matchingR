@@ -96,6 +96,7 @@
 #' results
 #' @export
 roommate = function(utils = NULL, pref = NULL) {
+    
     pref.validated = roommate.validate(pref = pref, utils = utils)
     
     # when n is odd, add a dummy roommate that nobody likes
@@ -105,7 +106,6 @@ roommate = function(utils = NULL, pref = NULL) {
         pref.validated = cbind(pref.validated, matrix(seq(n) - 1, ncol = 1))
     }
     
-    print(pref.validated)
     res = cpp_wrapper_irving(pref.validated)
     
     # when n is odd, remove the dummy roommate again
