@@ -96,8 +96,23 @@
 #' results
 #' @export
 roommate = function(utils = NULL, pref = NULL) {
-    pref.validated = roommate.validate(pref = pref, utils = utils);
-    res = cpp_wrapper_irving(pref.validated);
+    
+    pref.validated = roommate.validate(pref = pref, utils = utils)
+    
+    # when n is odd, add a dummy roommate that nobody likes
+    n = ncol(pref.validated)
+    if (n %% 2 == 1) {
+        pref.validated = rbind(pref.validated, rep(n, n))
+        pref.validated = cbind(pref.validated, matrix(seq(n) - 1, ncol = 1))
+    }
+    
+    res = cpp_wrapper_irving(pref.validated)
+    
+    # when n is odd, remove the dummy roommate again
+    if (n %% 2 == 1) {
+        res = matrix(res[-(n + 1), ], nrow = n)
+        res[res == n] = NA_integer_
+    }
 
     # if the C++ code returns all zeros, then no matching exists, return NULL
     # otherwise, add one to turn C++ indexing into R style indexing
@@ -212,7 +227,7 @@ roommate.validate = function(utils = NULL, pref = NULL) {
 #' roommate.checkStability(pref = pref, matching = results)
 #' @export
 roommate.checkStability = function(utils = NULL, pref = NULL, matching) {
-    pref.validated = roommate.validate(pref = pref, utils = utils);
+    pref.validated = roommate.validate(pref = pref, utils = utils)
     cpp_wrapper_irving_check_stability(pref.validated, matching)
 }
 
@@ -241,7 +256,7 @@ roommate.checkPreferences = function(pref) {
     for (i in 1:NROW(comp)) {
         for (j in 1:NCOL(comp)) {
             if (i >= j) {
-                comp[i, j] = comp[i, j] + 1;
+                comp[i, j] = comp[i, j] + 1
             }
         }
     }
