@@ -54,10 +54,14 @@ test_that("Check if roommate can handle square matrices for cardinal utilities",
 test_that("Check against previous results", {
   set.seed(3)
   
-  # test with even number of roommates
+  # tests with even number of roommates
   pref = matrix(c(2, 3, 4, 1, 3, 4, 1, 2, 4, 1, 2, 3), ncol=4)
   results = roommate(pref=pref)
   expect_identical(results, matrix(c(2, 1, 4, 3), ncol=1))
+  
+  pref = matrix(c(4, 3, 2, 1, 3, 4, 2, 1, 4, 1, 2, 3), ncol=4)
+  results = roommate(pref=pref)
+  expect_identical(results, matrix(c(4, 3, 2, 1), ncol=1))
   
   # test with odd number of roommates
   pref = matrix(c(2, 3, 1, 3, 1, 2), ncol=3)
