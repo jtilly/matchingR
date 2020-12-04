@@ -1,6 +1,6 @@
 Matching Algorithms in R and C++
 ===============
-[![Build Status](https://travis-ci.org/jtilly/matchingR.png)](https://travis-ci.org/jtilly/matchingR)
+[![GitHub Actions](https://github.com/jtilly/matchingR/workflows/Test%20Package/badge.svg)](https://github.com/jtilly/matchingR/actions)
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/r/jtilly/matchingR?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/matchingR)](https://cran.r-project.org/package=matchingR)
 [![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](https://cran.r-project.org/package=matchingR)
