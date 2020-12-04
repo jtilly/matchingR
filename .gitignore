@@ -5,3 +5,4 @@
 .Rhistory
 *.RData
 *.rds
+matchingR*

@@ -1,4 +1,7 @@
-.gitignore
+^\.gitignore$
 ^\.Rproj\.user$
 ^.*\.Rproj$
-^\.travis\.yml$
+^\.github$
+^environment\.yml$
+^matchingR.*\.tar\.gz$
+^.*\.Rcheck$

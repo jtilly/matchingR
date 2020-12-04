@@ -9,7 +9,7 @@ using namespace Rcpp;
 
 // cpp_wrapper_galeshapley
 List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils);
-RcppExport SEXP matchingR_cpp_wrapper_galeshapley(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_galeshapley(SEXP proposerPrefSEXP, SEXP reviewerUtilsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // cpp_wrapper_galeshapley_check_stability
 bool cpp_wrapper_galeshapley_check_stability(mat proposerUtils, mat reviewerUtils, umat proposals, umat engagements);
-RcppExport SEXP matchingR_cpp_wrapper_galeshapley_check_stability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_galeshapley_check_stability(SEXP proposerUtilsSEXP, SEXP reviewerUtilsSEXP, SEXP proposalsSEXP, SEXP engagementsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -35,7 +35,7 @@ END_RCPP
 }
 // cpp_wrapper_irving
 uvec cpp_wrapper_irving(const umat pref);
-RcppExport SEXP matchingR_cpp_wrapper_irving(SEXP prefSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_irving(SEXP prefSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -46,7 +46,7 @@ END_RCPP
 }
 // cpp_wrapper_irving_check_stability
 bool cpp_wrapper_irving_check_stability(umat& pref, umat& matchings);
-RcppExport SEXP matchingR_cpp_wrapper_irving_check_stability(SEXP prefSEXP, SEXP matchingsSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_irving_check_stability(SEXP prefSEXP, SEXP matchingsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -58,7 +58,7 @@ END_RCPP
 }
 // cpp_wrapper_ttc
 uvec cpp_wrapper_ttc(const umat pref);
-RcppExport SEXP matchingR_cpp_wrapper_ttc(SEXP prefSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_ttc(SEXP prefSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -69,7 +69,7 @@ END_RCPP
 }
 // cpp_wrapper_ttc_check_stability
 bool cpp_wrapper_ttc_check_stability(umat pref, uvec matchings);
-RcppExport SEXP matchingR_cpp_wrapper_ttc_check_stability(SEXP prefSEXP, SEXP matchingsSEXP) {
+RcppExport SEXP _matchingR_cpp_wrapper_ttc_check_stability(SEXP prefSEXP, SEXP matchingsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -81,7 +81,7 @@ END_RCPP
 }
 // sortIndex
 umat sortIndex(const mat& u);
-RcppExport SEXP matchingR_sortIndex(SEXP uSEXP) {
+RcppExport SEXP _matchingR_sortIndex(SEXP uSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -92,7 +92,7 @@ END_RCPP
 }
 // sortIndexOneSided
 umat sortIndexOneSided(const mat& u);
-RcppExport SEXP matchingR_sortIndexOneSided(SEXP uSEXP) {
+RcppExport SEXP _matchingR_sortIndexOneSided(SEXP uSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -103,7 +103,7 @@ END_RCPP
 }
 // rankIndex
 umat rankIndex(const umat& sortedIdx);
-RcppExport SEXP matchingR_rankIndex(SEXP sortedIdxSEXP) {
+RcppExport SEXP _matchingR_rankIndex(SEXP sortedIdxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -114,15 +114,15 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"matchingR_cpp_wrapper_galeshapley", (DL_FUNC) &matchingR_cpp_wrapper_galeshapley, 2},
-    {"matchingR_cpp_wrapper_galeshapley_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_galeshapley_check_stability, 4},
-    {"matchingR_cpp_wrapper_irving", (DL_FUNC) &matchingR_cpp_wrapper_irving, 1},
-    {"matchingR_cpp_wrapper_irving_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_irving_check_stability, 2},
-    {"matchingR_cpp_wrapper_ttc", (DL_FUNC) &matchingR_cpp_wrapper_ttc, 1},
-    {"matchingR_cpp_wrapper_ttc_check_stability", (DL_FUNC) &matchingR_cpp_wrapper_ttc_check_stability, 2},
-    {"matchingR_sortIndex", (DL_FUNC) &matchingR_sortIndex, 1},
-    {"matchingR_sortIndexOneSided", (DL_FUNC) &matchingR_sortIndexOneSided, 1},
-    {"matchingR_rankIndex", (DL_FUNC) &matchingR_rankIndex, 1},
+    {"_matchingR_cpp_wrapper_galeshapley", (DL_FUNC) &_matchingR_cpp_wrapper_galeshapley, 2},
+    {"_matchingR_cpp_wrapper_galeshapley_check_stability", (DL_FUNC) &_matchingR_cpp_wrapper_galeshapley_check_stability, 4},
+    {"_matchingR_cpp_wrapper_irving", (DL_FUNC) &_matchingR_cpp_wrapper_irving, 1},
+    {"_matchingR_cpp_wrapper_irving_check_stability", (DL_FUNC) &_matchingR_cpp_wrapper_irving_check_stability, 2},
+    {"_matchingR_cpp_wrapper_ttc", (DL_FUNC) &_matchingR_cpp_wrapper_ttc, 1},
+    {"_matchingR_cpp_wrapper_ttc_check_stability", (DL_FUNC) &_matchingR_cpp_wrapper_ttc_check_stability, 2},
+    {"_matchingR_sortIndex", (DL_FUNC) &_matchingR_sortIndex, 1},
+    {"_matchingR_sortIndexOneSided", (DL_FUNC) &_matchingR_sortIndexOneSided, 1},
+    {"_matchingR_rankIndex", (DL_FUNC) &_matchingR_rankIndex, 1},
     {NULL, NULL, 0}
 };
 

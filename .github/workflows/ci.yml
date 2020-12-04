@@ -1,0 +1,32 @@
+name: Test Package
+on: [push]
+jobs:
+  build-linux:
+    name: CI
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          python-version: 3.9
+          mamba-version: "*"
+          channels: conda-forge,r,defaults
+          channel-priority: true
+      - shell: bash -l {0}
+        run: |
+          conda info
+          conda list
+          conda config --show-sources
+          conda config --show
+          printenv | sort
+      - shell: bash -l {0}
+        run: |
+          mamba env create
+          source $CONDA/bin/activate matchingR
+          R CMD build .
+          R CMD INSTALL matchingR_*.tar.gz
+          _R_CHECK_CRAN_INCOMING_=false R CMD check --as-cran --no-vignettes --no-manual matchingR_*.tar.gz
+          if cat matchingR.Rcheck/00check.log | grep -q "WARNING"; then
+            echo "Found warnings, treated as errors."
+            exit 1
+          fi
