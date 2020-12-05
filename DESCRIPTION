@@ -1,8 +1,8 @@
 Package: matchingR
 Type: Package
 Title: Matching Algorithms in R and C++
-Version: 1.3.0
-Date: 2018-01-26
+Version: 1.3.1
+Date: 2020-12-05
 Author: Jan Tilly, Nick Janetos
 Maintainer: Jan Tilly <jantilly@gmail.com>
 Description: Computes matching algorithms quickly using Rcpp.
@@ -18,4 +18,4 @@ Depends: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
 Suggests: testthat, knitr
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1

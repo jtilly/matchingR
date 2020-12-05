@@ -90,65 +90,66 @@
 #'    reviewers. This vector will be empty whenever \code{m<=n}}.
 #'   }
 #' @examples
-#' nmen = 5
-#' nwomen = 4
+#' nmen <- 5
+#' nwomen <- 4
 #' # generate cardinal utilities
-#' uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
-#' uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
+#' uM <- matrix(runif(nmen * nwomen), nrow = nwomen, ncol = nmen)
+#' uW <- matrix(runif(nwomen * nmen), nrow = nmen, ncol = nwomen)
 #' # run the algorithm using cardinal utilities as inputs
-#' results = galeShapley.marriageMarket(uM, uW)
+#' results <- galeShapley.marriageMarket(uM, uW)
 #' results
 #'
 #' # transform the cardinal utilities into preference orders
-#' prefM = sortIndex(uM)
-#' prefW = sortIndex(uW)
+#' prefM <- sortIndex(uM)
+#' prefW <- sortIndex(uW)
 #' # run the algorithm using preference orders as inputs
-#' results = galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
+#' results <- galeShapley.marriageMarket(proposerPref = prefM, reviewerPref = prefW)
 #' results
 #' @seealso \code{\link{galeShapley.collegeAdmissions}}
 #' @aliases galeShapley
 #' @export
-galeShapley.marriageMarket = function(proposerUtils = NULL,
-                   reviewerUtils = NULL,
-                   proposerPref = NULL,
-                   reviewerPref = NULL) {
-    # validate the inputs
-    args = galeShapley.validate(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
+galeShapley.marriageMarket <- function(proposerUtils = NULL,
+                                       reviewerUtils = NULL,
+                                       proposerPref = NULL,
+                                       reviewerPref = NULL) {
+  # validate the inputs
+  args <- galeShapley.validate(proposerUtils, reviewerUtils, proposerPref, reviewerPref)
 
-    # use galeShapleyMatching to compute matching
-    res = cpp_wrapper_galeshapley(args$proposerPref, args$reviewerUtils)
+  # use galeShapleyMatching to compute matching
+  res <- cpp_wrapper_galeshapley(args$proposerPref, args$reviewerUtils)
 
-    # number of proposals
-    M = length(res$proposals)
+  # number of proposals
+  M <- length(res$proposals)
 
-    # number of engagements
-    N = length(res$engagements)
+  # number of engagements
+  N <- length(res$engagements)
 
-    # turn these into R indices by adding +1
-    res = c(res, list(
-        "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-        "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
-    ))
-    res$proposals = matrix(res$proposals, ncol = 1) + 1
-    res$engagements = matrix(res$engagements, ncol = 1) + 1
+  # turn these into R indices by adding +1
+  res <- c(res, list(
+    "single.proposers" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+    "single.reviewers" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
+  ))
+  res$proposals <- matrix(res$proposals, ncol = 1) + 1
+  res$engagements <- matrix(res$engagements, ncol = 1) + 1
 
-    # return unmatched proposers and reviewers as matched to NA
-    res$proposals[res$proposals == (N + 1)] = NA
-    res$engagements[res$engagements == (M + 1)] = NA
+  # return unmatched proposers and reviewers as matched to NA
+  res$proposals[res$proposals == (N + 1)] <- NA
+  res$engagements[res$engagements == (M + 1)] <- NA
 
-    return(res)
+  return(res)
 }
 
 # see galeShapley.marriageMarket
-galeShapley = function(proposerUtils = NULL,
-                       reviewerUtils = NULL,
-                       proposerPref = NULL,
-                       reviewerPref = NULL) {
-
-    return(galeShapley.marriageMarket(proposerUtils = proposerUtils,
-                                      reviewerUtils = reviewerUtils,
-                                      proposerPref = proposerPref,
-                                      reviewerPref = reviewerPref))
+galeShapley <- function(proposerUtils = NULL,
+                        reviewerUtils = NULL,
+                        proposerPref = NULL,
+                        reviewerPref = NULL) {
+  return(galeShapley.marriageMarket(
+    proposerUtils = proposerUtils,
+    reviewerUtils = reviewerUtils,
+    proposerPref = proposerPref,
+    reviewerPref = reviewerPref
+  ))
 }
 
 
@@ -217,7 +218,7 @@ galeShapley = function(proposerUtils = NULL,
 #'   integer or a vector. If it is an integer, then all colleges have the
 #'   same number of slots. If it is a vector, it must have as many elements
 #'   as there are colleges where each element refers to the number of slots
-#'   at a particular college. 
+#'   at a particular college.
 #' @param studentOptimal is \code{TRUE} if students apply to colleges. The
 #'   resulting match is student-optimal. \code{studentOptimal} is \code{FALSE}
 #'   if colleges apply to students. The resulting match is college-optimal.
@@ -241,194 +242,199 @@ galeShapley = function(proposerUtils = NULL,
 #'    times. This vector will be empty whenever all college slots get filled.}
 #'   }
 #' @examples
-#' ncolleges = 10
-#' nstudents = 25
+#' ncolleges <- 10
+#' nstudents <- 25
 #'
 #' # randomly generate cardinal preferences of colleges and students
-#' collegeUtils = matrix(runif(ncolleges*nstudents), nrow=nstudents, ncol=ncolleges)
-#' studentUtils = matrix(runif(ncolleges*nstudents), nrow=ncolleges, ncol=nstudents)
+#' collegeUtils <- matrix(runif(ncolleges * nstudents), nrow = nstudents, ncol = ncolleges)
+#' studentUtils <- matrix(runif(ncolleges * nstudents), nrow = ncolleges, ncol = nstudents)
 #'
 #' # run the student-optimal algorithm
-#' results.studentoptimal = galeShapley.collegeAdmissions(studentUtils = studentUtils,
-#'                               collegeUtils = collegeUtils,
-#'                               slots = 2,
-#'                               studentOptimal = TRUE)
+#' results.studentoptimal <- galeShapley.collegeAdmissions(
+#'   studentUtils = studentUtils,
+#'   collegeUtils = collegeUtils,
+#'   slots = 2,
+#'   studentOptimal = TRUE
+#' )
 #' results.studentoptimal
 #'
 #' # run the college-optimal algorithm
-#' results.collegeoptimal = galeShapley.collegeAdmissions(studentUtils = studentUtils,
-#'                               collegeUtils = collegeUtils,
-#'                               slots = 2,
-#'                               studentOptimal = FALSE)
+#' results.collegeoptimal <- galeShapley.collegeAdmissions(
+#'   studentUtils = studentUtils,
+#'   collegeUtils = collegeUtils,
+#'   slots = 2,
+#'   studentOptimal = FALSE
+#' )
 #' results.collegeoptimal
 #'
 #' # transform the cardinal utilities into preference orders
-#' collegePref = sortIndex(collegeUtils)
-#' studentPref = sortIndex(studentUtils)
+#' collegePref <- sortIndex(collegeUtils)
+#' studentPref <- sortIndex(studentUtils)
 #'
 #' # run the student-optimal algorithm
-#' results.studentoptimal = galeShapley.collegeAdmissions(studentPref = studentPref,
-#'                              collegePref = collegePref,
-#'                              slots = 2,
-#'                              studentOptimal = TRUE)
+#' results.studentoptimal <- galeShapley.collegeAdmissions(
+#'   studentPref = studentPref,
+#'   collegePref = collegePref,
+#'   slots = 2,
+#'   studentOptimal = TRUE
+#' )
 #' results.studentoptimal
 #'
 #' # run the college-optimal algorithm
-#' results.collegeoptimal = galeShapley.collegeAdmissions(studentPref = studentPref,
-#'                              collegePref = collegePref,
-#'                              slots = 2,
-#'                              studentOptimal = FALSE)
+#' results.collegeoptimal <- galeShapley.collegeAdmissions(
+#'   studentPref = studentPref,
+#'   collegePref = collegePref,
+#'   slots = 2,
+#'   studentOptimal = FALSE
+#' )
 #' results.collegeoptimal
 #' @export
-galeShapley.collegeAdmissions = function(studentUtils = NULL,
-                    collegeUtils = NULL,
-                    studentPref = NULL,
-                    collegePref = NULL,
-                    slots = 1,
-                    studentOptimal = TRUE) {
-    
-    if(length(slots) > 1) {
-        if(!is.null((collegePref)) & (length(slots) != NCOL(collegePref)) | 
-           !is.null((collegeUtils)) & (length(slots) != NCOL(collegeUtils))) {
-            stop("slots must either be a scalar or have the same length as there are colleges.")
-        }
+galeShapley.collegeAdmissions <- function(studentUtils = NULL,
+                                          collegeUtils = NULL,
+                                          studentPref = NULL,
+                                          collegePref = NULL,
+                                          slots = 1,
+                                          studentOptimal = TRUE) {
+  if (length(slots) > 1) {
+    if (!is.null((collegePref)) & (length(slots) != NCOL(collegePref)) |
+      !is.null((collegeUtils)) & (length(slots) != NCOL(collegeUtils))) {
+      stop("slots must either be a scalar or have the same length as there are colleges.")
+    }
+  }
+
+  if (studentOptimal) {
+
+    # validate the inputs
+    args <- galeShapley.validate(studentUtils, collegeUtils, studentPref, collegePref)
+
+    # number of students
+    number_of_students <- NROW(args$reviewerUtils)
+
+    # number of colleges
+    number_of_colleges <- NCOL(args$reviewerUtils)
+
+    # expand slots
+    if (length(slots) == 1) {
+      slots <- rep(slots, number_of_colleges)
     }
 
-    if (studentOptimal) {
-        
-        # validate the inputs
-        args = galeShapley.validate(studentUtils, collegeUtils, studentPref, collegePref)
+    # expand cardinal utilities corresponding to the slot size
+    proposerUtils <- reprow(args$proposerUtils, slots)
+    reviewerUtils <- repcol(args$reviewerUtils, slots)
 
-        # number of students
-        number_of_students = NROW(args$reviewerUtils)
-        
-        # number of colleges
-        number_of_colleges = NCOL(args$reviewerUtils)
-        
-        # expand slots
-        if(length(slots)==1) { 
-            slots = rep(slots, number_of_colleges)    
-        }
+    # create preference ordering
+    proposerPref <- sortIndex(as.matrix(proposerUtils))
 
-        # expand cardinal utilities corresponding to the slot size
-        proposerUtils = reprow(args$proposerUtils, slots)
-        reviewerUtils = repcol(args$reviewerUtils, slots)
+    # use galeShapleyMatching to compute matching
+    res <- cpp_wrapper_galeshapley(proposerPref, reviewerUtils)
 
-        # create preference ordering
-        proposerPref = sortIndex(as.matrix(proposerUtils));
+    # number of students
+    M <- length(res$proposals)
 
-        # use galeShapleyMatching to compute matching
-        res = cpp_wrapper_galeshapley(proposerPref, reviewerUtils)
+    # number of positions
+    N <- length(res$engagements)
 
-        # number of students
-        M = length(res$proposals)
+    # collect results
+    res <- c(res, list(
+      "unmatched.students" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
+      "unmatched.colleges" = rep(NA, length = sum(res$engagements == M))
+    ))
+    unmatched.colleges <- seq(from = 0, to = N - 1)[res$engagements == M] + 1
 
-        # number of positions
-        N = length(res$engagements)
+    # assemble results
+    res$matched.colleges <- list()
 
-        # collect results
-        res = c(res, list(
-            "unmatched.students" = seq(from = 0, to = M - 1)[res$proposals == N] + 1,
-            "unmatched.colleges" = rep(NA, length = sum(res$engagements == M))
-        ))
-        unmatched.colleges = seq(from = 0, to = N - 1)[res$engagements == M] + 1
+    # map engagements back into slots
+    cumsum.slotsLower <- cumsum(c(0, slots[-length(slots)])) + 1
+    cumsum.slotsUpper <- cumsum(slots)
 
-        # assemble results
-        res$matched.colleges = list()
-        
-        # map engagements back into slots
-        cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
-        cumsum.slotsUpper = cumsum(slots)
- 
-        for(jX in 1:number_of_colleges) {
-            # fill slots with student ids
-            res$matched.colleges[[jX]] = res$engagements[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
-            # set vacant slots to NA
-            res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (number_of_students + 1)] = NA
-            # unmatched colleges
-            res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
-        }
-        # remove unused information from res
-        res$engagements = NULL
-        res$proposals = NULL
-
-    } else {
-
-        # validate the inputs
-        args = galeShapley.validate(collegeUtils, studentUtils, collegePref, studentPref)
-
-        # number of students
-        number_of_students = NROW(args$proposerUtils)
-        
-        # number of colleges
-        number_of_colleges = NCOL(args$proposerUtils)
-        
-        # expand slots
-        if(length(slots)==1) { 
-            slots = rep(slots, number_of_colleges)    
-        }
-
-        # expand cardinal utilities corresponding to the slot size
-        proposerUtils = repcol(args$proposerUtils, slots)
-        reviewerUtils = reprow(args$reviewerUtils, slots)
-
-        # create preference ordering
-        proposerPref = sortIndex(as.matrix(proposerUtils));
-
-        # use galeShapleyMatching to compute matching
-        res = cpp_wrapper_galeshapley(as.matrix(proposerPref), as.matrix(reviewerUtils))
-
-        # number of slots
-        M = length(res$proposals)
-
-        # number of students
-        N = length(res$engagements)
-
-        # collect results
-        res = c(res, list(
-            "unmatched.colleges" = rep(NA, length = sum(res$proposals == N)),
-            "unmatched.students" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
-        ))
-        unmatched.colleges = seq(from = 0, to = M - 1)[res$proposals == N] + 1
-        
-        # assemble results
-        res$matched.colleges = list()
-        
-        # map proposals back into slots
-        cumsum.slotsLower = cumsum(c(0, slots[-length(slots)]))+1
-        cumsum.slotsUpper = cumsum(slots)
-        
-        for(jX in 1:number_of_colleges) {
-            # fill slots with student ids
-            res$matched.colleges[[jX]] = res$proposals[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
-            # set vacant slots to NA
-            res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (number_of_students + 1)] = NA
-            # unmatched colleges
-            res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] = jX
-        }
-        
-        # remove unused information from res
-        res$engagements = NULL
-        res$proposals = NULL
-        
+    for (jX in 1:number_of_colleges) {
+      # fill slots with student ids
+      res$matched.colleges[[jX]] <- res$engagements[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
+      # set vacant slots to NA
+      res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (number_of_students + 1)] <- NA
+      # unmatched colleges
+      res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] <- jX
     }
-    
-    # make a vector with matched students
-    res$matched.students = matrix(NA, nrow = number_of_students, ncol=1)
-    for(jX in 1:number_of_colleges) {
-        res$matched.students[res$matched.colleges[[jX]]] = jX    
-    }
-    # remove proposals (all relevant information is stored in res$matched.students)
-    res$engagements = NULL
-    
-    # if all colleges have the same number of slots return matched.colleges as matrix 
-    # (otherwise it's a list)
-    if(all(slots == slots[1])) {
-        res$matched.colleges = matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1], byrow = TRUE)
+    # remove unused information from res
+    res$engagements <- NULL
+    res$proposals <- NULL
+  } else {
+
+    # validate the inputs
+    args <- galeShapley.validate(collegeUtils, studentUtils, collegePref, studentPref)
+
+    # number of students
+    number_of_students <- NROW(args$proposerUtils)
+
+    # number of colleges
+    number_of_colleges <- NCOL(args$proposerUtils)
+
+    # expand slots
+    if (length(slots) == 1) {
+      slots <- rep(slots, number_of_colleges)
     }
 
+    # expand cardinal utilities corresponding to the slot size
+    proposerUtils <- repcol(args$proposerUtils, slots)
+    reviewerUtils <- reprow(args$reviewerUtils, slots)
 
-    return(res)
+    # create preference ordering
+    proposerPref <- sortIndex(as.matrix(proposerUtils))
+
+    # use galeShapleyMatching to compute matching
+    res <- cpp_wrapper_galeshapley(as.matrix(proposerPref), as.matrix(reviewerUtils))
+
+    # number of slots
+    M <- length(res$proposals)
+
+    # number of students
+    N <- length(res$engagements)
+
+    # collect results
+    res <- c(res, list(
+      "unmatched.colleges" = rep(NA, length = sum(res$proposals == N)),
+      "unmatched.students" = seq(from = 0, to = N - 1)[res$engagements == M] + 1
+    ))
+    unmatched.colleges <- seq(from = 0, to = M - 1)[res$proposals == N] + 1
+
+    # assemble results
+    res$matched.colleges <- list()
+
+    # map proposals back into slots
+    cumsum.slotsLower <- cumsum(c(0, slots[-length(slots)])) + 1
+    cumsum.slotsUpper <- cumsum(slots)
+
+    for (jX in 1:number_of_colleges) {
+      # fill slots with student ids
+      res$matched.colleges[[jX]] <- res$proposals[cumsum.slotsLower[jX]:cumsum.slotsUpper[jX]] + 1
+      # set vacant slots to NA
+      res$matched.colleges[[jX]][res$matched.colleges[[jX]] == (number_of_students + 1)] <- NA
+      # unmatched colleges
+      res$unmatched.colleges[unmatched.colleges %in% (cumsum.slotsLower[jX]:cumsum.slotsUpper[jX])] <- jX
+    }
+
+    # remove unused information from res
+    res$engagements <- NULL
+    res$proposals <- NULL
+  }
+
+  # make a vector with matched students
+  res$matched.students <- matrix(NA, nrow = number_of_students, ncol = 1)
+  for (jX in 1:number_of_colleges) {
+    res$matched.students[res$matched.colleges[[jX]]] <- jX
+  }
+  # remove proposals (all relevant information is stored in res$matched.students)
+  res$engagements <- NULL
+
+  # if all colleges have the same number of slots return matched.colleges as matrix
+  # (otherwise it's a list)
+  if (all(slots == slots[1])) {
+    res$matched.colleges <- matrix(unlist(res$matched.colleges), nrow = number_of_colleges, ncol = slots[1], byrow = TRUE)
+  }
+
+
+  return(res)
 }
 
 
@@ -469,93 +475,96 @@ galeShapley.collegeAdmissions = function(studentUtils = NULL,
 #'   translated into \code{reviewerUtils}).
 #' @examples
 #' # market size
-#' nmen = 5
-#' nwomen = 4
+#' nmen <- 5
+#' nwomen <- 4
 #'
 #' # generate cardinal utilities
-#' uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
-#' uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
+#' uM <- matrix(runif(nmen * nwomen), nrow = nwomen, ncol = nmen)
+#' uW <- matrix(runif(nwomen * nmen), nrow = nmen, ncol = nwomen)
 #'
 #' # turn cardinal utilities into ordinal preferences
-#' prefM = sortIndex(uM)
-#' prefW = sortIndex(uW)
+#' prefM <- sortIndex(uM)
+#' prefW <- sortIndex(uW)
 #'
 #' # validate cardinal preferences
-#' preferences = galeShapley.validate(uM, uW)
+#' preferences <- galeShapley.validate(uM, uW)
 #' preferences
 #'
 #' # validate ordinal preferences
-#' preferences = galeShapley.validate(proposerPref = prefM, reviewerPref = prefW)
+#' preferences <- galeShapley.validate(proposerPref = prefM, reviewerPref = prefW)
 #' preferences
 #'
 #' # validate ordinal preferences when these are in R style indexing
 #' # (instead of C++ style indexing)
-#' preferences = galeShapley.validate(proposerPref = prefM + 1, reviewerPref = prefW + 1)
+#' preferences <- galeShapley.validate(proposerPref = prefM + 1, reviewerPref = prefW + 1)
 #' preferences
 #'
 #' # validate preferences when proposer-side is cardinal and reviewer-side is ordinal
-#' preferences = galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
+#' preferences <- galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
 #' preferences
 #' @export
-galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL, reviewerPref = NULL) {
-
-    if (!is.null(reviewerPref)) {
-        reviewerPref = galeShapley.checkPreferences(reviewerPref)
-        if (is.null(reviewerPref)) {
-            stop(
-                "reviewerPref was defined by the user but is not a complete list of preference orderings."
-            )
-        }
+galeShapley.validate <- function(proposerUtils = NULL, reviewerUtils = NULL, proposerPref = NULL, reviewerPref = NULL) {
+  if (!is.null(reviewerPref)) {
+    reviewerPref <- galeShapley.checkPreferences(reviewerPref)
+    if (is.null(reviewerPref)) {
+      stop(
+        "reviewerPref was defined by the user but is not a complete list of preference orderings."
+      )
     }
+  }
 
-    if (!is.null(proposerPref)) {
-        proposerPref = galeShapley.checkPreferences(proposerPref)
-        if (is.null(proposerPref)) {
-            stop("proposerPref was defined by the user but is not a complete list of preference orderings.")
-        }
-    }
-
-    # parse inputs
-    if (is.null(proposerPref) && !is.null(proposerUtils)) {
-        proposerPref = sortIndex(as.matrix(proposerUtils))
-    }
-
-    if (is.null(proposerUtils) && !is.null(proposerPref)) {
-        proposerUtils = -rankIndex(as.matrix(proposerPref))
-    }
-
-    if (is.null(reviewerUtils) && !is.null(reviewerPref)) {
-        reviewerUtils = -rankIndex(as.matrix(reviewerPref))
-    }
-
+  if (!is.null(proposerPref)) {
+    proposerPref <- galeShapley.checkPreferences(proposerPref)
     if (is.null(proposerPref)) {
-        stop("missing proposer preferences")
+      stop("proposerPref was defined by the user but is not a complete list of preference orderings.")
     }
+  }
 
-    if (is.null(reviewerUtils)) {
-        stop("missing reviewer utilities")
-    }
+  # parse inputs
+  if (is.null(proposerPref) && !is.null(proposerUtils)) {
+    proposerPref <- sortIndex(as.matrix(proposerUtils))
+  }
 
-    # check inputs
-    if (NROW(proposerPref) != NCOL(reviewerUtils)) {
-        stop("The number of rows in the matrix of proposers' ",
-             "preferences must equal the number of columns in ",
-             "the matrix of reviewers' preferences")
-    }
+  if (is.null(proposerUtils) && !is.null(proposerPref)) {
+    proposerUtils <- -rankIndex(as.matrix(proposerPref))
+  }
 
-    if (NCOL(proposerPref) != NROW(reviewerUtils)) {
-        stop("The number of columns in the matrix of proposers' ",
-             "preferences must equal the number of rows in the ",
-             "matrix of reviewers' preferences")
-    }
+  if (is.null(reviewerUtils) && !is.null(reviewerPref)) {
+    reviewerUtils <- -rankIndex(as.matrix(reviewerPref))
+  }
 
-    return(
-        list(
-            proposerPref = as.matrix(proposerPref),
-            proposerUtils = as.matrix(proposerUtils),
-            reviewerUtils = as.matrix(reviewerUtils)
-        )
+  if (is.null(proposerPref)) {
+    stop("missing proposer preferences")
+  }
+
+  if (is.null(reviewerUtils)) {
+    stop("missing reviewer utilities")
+  }
+
+  # check inputs
+  if (NROW(proposerPref) != NCOL(reviewerUtils)) {
+    stop(
+      "The number of rows in the matrix of proposers' ",
+      "preferences must equal the number of columns in ",
+      "the matrix of reviewers' preferences"
     )
+  }
+
+  if (NCOL(proposerPref) != NROW(reviewerUtils)) {
+    stop(
+      "The number of columns in the matrix of proposers' ",
+      "preferences must equal the number of rows in the ",
+      "matrix of reviewers' preferences"
+    )
+  }
+
+  return(
+    list(
+      proposerPref = as.matrix(proposerPref),
+      proposerUtils = as.matrix(proposerUtils),
+      reviewerUtils = as.matrix(reviewerUtils)
+    )
+  )
 }
 
 #' Check if a two-sided matching is stable
@@ -588,56 +597,70 @@ galeShapley.validate = function(proposerUtils = NULL, reviewerUtils = NULL, prop
 #' @return true if the matching is stable, false otherwise
 #' @examples
 #' # define cardinal utilities
-#' uM = matrix(c(0.52, 0.85,
-#'               0.96, 0.63,
-#'               0.82, 0.08,
-#'               0.55, 0.34), nrow = 4, byrow = TRUE)
-#' uW = matrix(c(0.76, 0.88, 0.74, 0.02,
-#'               0.32, 0.21, 0.02, 0.79), ncol = 4, byrow = TRUE)
+#' uM <- matrix(c(
+#'   0.52, 0.85,
+#'   0.96, 0.63,
+#'   0.82, 0.08,
+#'   0.55, 0.34
+#' ), nrow = 4, byrow = TRUE)
+#' uW <- matrix(c(
+#'   0.76, 0.88, 0.74, 0.02,
+#'   0.32, 0.21, 0.02, 0.79
+#' ), ncol = 4, byrow = TRUE)
 #' # define matching
-#' results = list(
-#'      proposals = matrix(c(2, 1), ncol = 1),
-#'      engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+#' results <- list(
+#'   proposals = matrix(c(2, 1), ncol = 1),
+#'   engagements = matrix(c(2, 1, NA, NA), ncol = 1)
+#' )
 #' # check stability
 #' galeShapley.checkStability(uM, uW, results$proposals, results$engagements)
 #'
 #' # if preferences are in ordinal form, we can use galeShapley.validate
 #' # to transform them into cardinal form and then use checkStability()
-#' prefM = matrix(c(2, 1,
-#'                  3, 2,
-#'                  4, 4,
-#'                  1, 3), nrow = 4, byrow = TRUE)
-#' prefW = matrix(c(1, 1, 1, 2,
-#'                  2, 2, 2, 1), ncol = 4, byrow = TRUE)
+#' prefM <- matrix(c(
+#'   2, 1,
+#'   3, 2,
+#'   4, 4,
+#'   1, 3
+#' ), nrow = 4, byrow = TRUE)
+#' prefW <- matrix(c(
+#'   1, 1, 1, 2,
+#'   2, 2, 2, 1
+#' ), ncol = 4, byrow = TRUE)
 #' # define matching
-#' results = list(proposals = matrix(c(2, 1), ncol = 1),
-#'                engagements = matrix(c(2, 1, NA, NA), ncol = 1))
+#' results <- list(
+#'   proposals = matrix(c(2, 1), ncol = 1),
+#'   engagements = matrix(c(2, 1, NA, NA), ncol = 1)
+#' )
 #' # check stability
-#' pref.validated = galeShapley.validate(proposerPref = prefM,
-#'                                       reviewerPref = prefW)
-#' galeShapley.checkStability(pref.validated$proposerUtils,
-#'                            pref.validated$reviewerUtils,
-#'                            results$proposals,
-#'                            results$engagements)
+#' pref.validated <- galeShapley.validate(
+#'   proposerPref = prefM,
+#'   reviewerPref = prefW
+#' )
+#' galeShapley.checkStability(
+#'   pref.validated$proposerUtils,
+#'   pref.validated$reviewerUtils,
+#'   results$proposals,
+#'   results$engagements
+#' )
 #' @export
-galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, engagements) {
-    
-    if(is.list(proposals) | is.list(engagements)) {
-        stop("Proposals and engagements must be vectors/matrices.")  
-    }
+galeShapley.checkStability <- function(proposerUtils, reviewerUtils, proposals, engagements) {
+  if (is.list(proposals) | is.list(engagements)) {
+    stop("Proposals and engagements must be vectors/matrices.")
+  }
 
-    # replace NA for unmatched proposers (they are now matched to the number of reviewers + 1)
-    proposals[is.na(proposals)] = NROW(proposerUtils) + 1
+  # replace NA for unmatched proposers (they are now matched to the number of reviewers + 1)
+  proposals[is.na(proposals)] <- NROW(proposerUtils) + 1
 
-    # replace NA for unmatched reviewers (they are now matched to the number of proposers + 1)
-    engagements[is.na(engagements)] = NROW(reviewerUtils) + 1
+  # replace NA for unmatched reviewers (they are now matched to the number of proposers + 1)
+  engagements[is.na(engagements)] <- NROW(reviewerUtils) + 1
 
-    # turn proposals and engagements into C++ style indexing
-    proposals = proposals - 1
-    engagements = engagements - 1
+  # turn proposals and engagements into C++ style indexing
+  proposals <- proposals - 1
+  engagements <- engagements - 1
 
-    # call the C++ wrapper
-    cpp_wrapper_galeshapley_check_stability(proposerUtils, reviewerUtils, proposals, engagements)
+  # call the C++ wrapper
+  cpp_wrapper_galeshapley_check_stability(proposerUtils, reviewerUtils, proposals, engagements)
 }
 
 #' Check if preference order is complete
@@ -657,36 +680,42 @@ galeShapley.checkStability = function(proposerUtils, reviewerUtils, proposals, e
 #' @examples
 #' # preferences in proper C++ indexing: galeShapley.checkPreferences(pref)
 #' # will return pref
-#' pref = matrix(c(0, 1, 0,
-#'                 1, 0, 1), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref <- matrix(c(
+#'   0, 1, 0,
+#'   1, 0, 1
+#' ), nrow = 2, ncol = 3, byrow = TRUE)
 #' pref
 #' galeShapley.checkPreferences(pref)
 #'
 #' # preferences in R indexing: galeShapley.checkPreferences(pref)
 #' # will return pref-1
-#' pref = matrix(c(1, 2, 1,
-#'                 2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref <- matrix(c(
+#'   1, 2, 1,
+#'   2, 1, 2
+#' ), nrow = 2, ncol = 3, byrow = TRUE)
 #' pref
 #' galeShapley.checkPreferences(pref)
 #'
 #' # incomplete preferences: galeShapley.checkPreferences(pref)
 #' # will return NULL
-#' pref = matrix(c(3, 2, 1,
-#'                 2, 1, 2), nrow = 2, ncol = 3, byrow = TRUE)
+#' pref <- matrix(c(
+#'   3, 2, 1,
+#'   2, 1, 2
+#' ), nrow = 2, ncol = 3, byrow = TRUE)
 #' pref
 #' galeShapley.checkPreferences(pref)
 #' @export
-galeShapley.checkPreferences = function(pref) {
+galeShapley.checkPreferences <- function(pref) {
 
-    # check if pref is using R instead of C++ indexing
-    if(all(apply(pref,2,sort) == array(1:(NROW(pref)), dim = dim(pref)))) {
-        return(pref-1)
-    }
+  # check if pref is using R instead of C++ indexing
+  if (all(apply(pref, 2, sort) == array(1:(NROW(pref)), dim = dim(pref)))) {
+    return(pref - 1)
+  }
 
-    # check if pref has a complete listing otherwise given an error
-    if(all(apply(pref,2,sort) == (array(1:(NROW(pref)), dim = dim(pref)))-1)) {
-        return(pref)
-    }
+  # check if pref has a complete listing otherwise given an error
+  if (all(apply(pref, 2, sort) == (array(1:(NROW(pref)), dim = dim(pref))) - 1)) {
+    return(pref)
+  }
 
-    return(NULL)
+  return(NULL)
 }

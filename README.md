@@ -64,14 +64,14 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ``` r
 # college admissions problem with five students and two colleges with two slots each
 set.seed(1)
-nStudents = 5
-nColleges = 2
-uStudents = matrix(runif(nStudents * nColleges), nrow = nColleges, ncol = nStudents)
+nStudents <- 5
+nColleges <- 2
+uStudents <- matrix(runif(nStudents * nColleges), nrow = nColleges, ncol = nStudents)
 uStudents
 #>           [,1]      [,2]      [,3]      [,4]       [,5]
 #> [1,] 0.2655087 0.5728534 0.2016819 0.9446753 0.62911404
 #> [2,] 0.3721239 0.9082078 0.8983897 0.6607978 0.06178627
-uColleges = matrix(runif(nStudents * nColleges), nrow = nStudents, ncol = nColleges)
+uColleges <- matrix(runif(nStudents * nColleges), nrow = nStudents, ncol = nColleges)
 uColleges
 #>           [,1]      [,2]
 #> [1,] 0.2059746 0.4976992
@@ -79,7 +79,7 @@ uColleges
 #> [3,] 0.6870228 0.9919061
 #> [4,] 0.3841037 0.3800352
 #> [5,] 0.7698414 0.7774452
-matching = galeShapley.collegeAdmissions(uStudents, uColleges, slots = c(2, 2))
+matching <- galeShapley.collegeAdmissions(uStudents, uColleges, slots = c(2, 2))
 matching$matched.students
 #>      [,1]
 #> [1,]   NA
@@ -99,15 +99,15 @@ galeShapley.checkStability(uStudents, uColleges, matching$matched.students, matc
 ``` r
 # stable roommate problem with four students and two rooms
 set.seed(2)
-n = 4
-u = matrix(runif(n ^ 2),  nrow = n, ncol = n)
+n <- 4
+u <- matrix(runif(n ^ 2),  nrow = n, ncol = n)
 u
 #>           [,1]      [,2]      [,3]      [,4]
 #> [1,] 0.1848823 0.9438393 0.4680185 0.7605133
 #> [2,] 0.7023740 0.9434750 0.5499837 0.1808201
 #> [3,] 0.5733263 0.1291590 0.5526741 0.4052822
 #> [4,] 0.1680519 0.8334488 0.2388948 0.8535485
-results = roommate(utils = u)
+results <- roommate(utils = u)
 results
 #>      [,1]
 #> [1,]    2
@@ -120,15 +120,15 @@ results
 ``` r
 # top trading cycle algorithm with four houses
 set.seed(2)
-n = 4
-u = matrix(runif(n ^ 2),  nrow = n, ncol = n)
+n <- 4
+u <- matrix(runif(n ^ 2),  nrow = n, ncol = n)
 u
 #>           [,1]      [,2]      [,3]      [,4]
 #> [1,] 0.1848823 0.9438393 0.4680185 0.7605133
 #> [2,] 0.7023740 0.9434750 0.5499837 0.1808201
 #> [3,] 0.5733263 0.1291590 0.5526741 0.4052822
 #> [4,] 0.1680519 0.8334488 0.2388948 0.8535485
-results = toptrading(utils = u)
+results <- toptrading(utils = u)
 results
 #>      [,1]
 #> [1,]    2

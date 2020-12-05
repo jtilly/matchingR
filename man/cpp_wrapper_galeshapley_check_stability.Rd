@@ -4,8 +4,12 @@
 \alias{cpp_wrapper_galeshapley_check_stability}
 \title{C++ Wrapper to Check Stability of Two-sided Matching}
 \usage{
-cpp_wrapper_galeshapley_check_stability(proposerUtils, reviewerUtils, proposals,
-  engagements)
+cpp_wrapper_galeshapley_check_stability(
+  proposerUtils,
+  reviewerUtils,
+  proposals,
+  engagements
+)
 }
 \arguments{
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
