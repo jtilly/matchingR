@@ -5,3 +5,5 @@
 ^environment\.yml$
 ^matchingR.*\.tar\.gz$
 ^.*\.Rcheck$
+^doc$
+^Meta$

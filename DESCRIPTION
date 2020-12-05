@@ -16,6 +16,6 @@ URL: https://github.com/jtilly/matchingR/
 BugReports: https://github.com/jtilly/matchingR/issues/
 Depends: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
-Suggests: testthat, knitr
+Suggests: testthat, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1

@@ -6,3 +6,5 @@
 *.RData
 *.rds
 matchingR*
+doc
+Meta
