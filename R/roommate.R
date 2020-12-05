@@ -113,7 +113,7 @@ roommate <- function(utils = NULL, pref = NULL) {
 
   # when n is odd, remove the dummy roommate again
   if (n %% 2 == 1) {
-    res <- matrix(res[- (n + 1), ], nrow = n)
+    res <- matrix(res[-(n + 1), ], nrow = n)
     res[res == n] <- NA_integer_
   }
 
