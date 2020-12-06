@@ -1,13 +1,11 @@
 ---
 title: 'Matching Algorithms in R and C++: An Introduction to matchingR'
-output: html_document
+output: knitr:::html_vignette
 bibliography: bibliography.bib
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Not an Introduction to knitr}
 ---
-<!--
-%\VignetteEngine{knitr::rmarkdown}  
-%\VignetteIndexEntry{Matching Algorithms in R and C++: An Introduction to matchingR}
-%\usepackage[utf8]{inputenc}
--->
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
 library(matchingR)
