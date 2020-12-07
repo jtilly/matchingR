@@ -4,8 +4,12 @@
 \alias{galeShapley.validate}
 \title{Input validation of preferences}
 \usage{
-galeShapley.validate(proposerUtils = NULL, reviewerUtils = NULL,
-  proposerPref = NULL, reviewerPref = NULL)
+galeShapley.validate(
+  proposerUtils = NULL,
+  reviewerUtils = NULL,
+  proposerPref = NULL,
+  reviewerPref = NULL
+)
 }
 \arguments{
 \item{proposerUtils}{is a matrix with cardinal utilities of the proposing
@@ -50,31 +54,31 @@ into C++ indices (starting at zero).
 }
 \examples{
 # market size
-nmen = 5
-nwomen = 4
+nmen <- 5
+nwomen <- 4
 
 # generate cardinal utilities
-uM = matrix(runif(nmen*nwomen), nrow = nwomen, ncol = nmen)
-uW = matrix(runif(nwomen*nmen), nrow = nmen, ncol = nwomen)
+uM <- matrix(runif(nmen * nwomen), nrow = nwomen, ncol = nmen)
+uW <- matrix(runif(nwomen * nmen), nrow = nmen, ncol = nwomen)
 
 # turn cardinal utilities into ordinal preferences
-prefM = sortIndex(uM)
-prefW = sortIndex(uW)
+prefM <- sortIndex(uM)
+prefW <- sortIndex(uW)
 
 # validate cardinal preferences
-preferences = galeShapley.validate(uM, uW)
+preferences <- galeShapley.validate(uM, uW)
 preferences
 
 # validate ordinal preferences
-preferences = galeShapley.validate(proposerPref = prefM, reviewerPref = prefW)
+preferences <- galeShapley.validate(proposerPref = prefM, reviewerPref = prefW)
 preferences
 
 # validate ordinal preferences when these are in R style indexing
 # (instead of C++ style indexing)
-preferences = galeShapley.validate(proposerPref = prefM + 1, reviewerPref = prefW + 1)
+preferences <- galeShapley.validate(proposerPref = prefM + 1, reviewerPref = prefW + 1)
 preferences
 
 # validate preferences when proposer-side is cardinal and reviewer-side is ordinal
-preferences = galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
+preferences <- galeShapley.validate(proposerUtils = uM, reviewerPref = prefW)
 preferences
 }

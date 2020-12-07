@@ -80,44 +80,46 @@
 #'   matching exists, then this function returns \code{NULL}.
 #' @examples
 #' # example using cardinal utilities
-#' utils = matrix(c(-1.63, 0.69, -1.38, -0.03,
-#'                   2.91, -0.52, 0.52, 0.22,
-#'                   0.53, -0.52, -1.18, 0.53), byrow=TRUE, ncol = 4, nrow = 3)
+#' utils <- matrix(c(
+#'   -1.63, 0.69, -1.38, -0.03,
+#'   2.91, -0.52, 0.52, 0.22,
+#'   0.53, -0.52, -1.18, 0.53
+#' ), byrow = TRUE, ncol = 4, nrow = 3)
 #' utils
-#' results = roommate(utils = utils)
+#' results <- roommate(utils = utils)
 #' results
 #'
 #' # example using preference orders
-#' pref = matrix(c(3, 1, 2, 3,
-#'                 4, 3, 4, 2,
-#'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
+#' pref <- matrix(c(
+#'   3, 1, 2, 3,
+#'   4, 3, 4, 2,
+#'   2, 4, 1, 1
+#' ), byrow = TRUE, ncol = 4)
 #' pref
-#' results = roommate(pref = pref)
+#' results <- roommate(pref = pref)
 #' results
 #' @export
-roommate = function(utils = NULL, pref = NULL) {
-    
-    pref.validated = roommate.validate(pref = pref, utils = utils)
-    
-    # when n is odd, add a dummy roommate that nobody likes
-    n = ncol(pref.validated)
-    if (n %% 2 == 1) {
-        pref.validated = rbind(pref.validated, rep(n, n))
-        pref.validated = cbind(pref.validated, matrix(seq(n) - 1, ncol = 1))
-    }
-    
-    res = cpp_wrapper_irving(pref.validated)
-    
-    # when n is odd, remove the dummy roommate again
-    if (n %% 2 == 1) {
-        res = matrix(res[-(n + 1), ], nrow = n)
-        res[res == n] = NA_integer_
-    }
+roommate <- function(utils = NULL, pref = NULL) {
+  pref.validated <- roommate.validate(pref = pref, utils = utils)
 
-    # if the C++ code returns all zeros, then no matching exists, return NULL
-    # otherwise, add one to turn C++ indexing into R style indexing
-    ifelse (all(res == 0), return(NULL), return(res + 1))
+  # when n is odd, add a dummy roommate that nobody likes
+  n <- ncol(pref.validated)
+  if (n %% 2 == 1) {
+    pref.validated <- rbind(pref.validated, rep(n, n))
+    pref.validated <- cbind(pref.validated, matrix(seq(n) - 1, ncol = 1))
+  }
 
+  res <- cpp_wrapper_irving(pref.validated)
+
+  # when n is odd, remove the dummy roommate again
+  if (n %% 2 == 1) {
+    res <- matrix(res[-(n + 1), ], nrow = n)
+    res[res == n] <- NA_integer_
+  }
+
+  # if the C++ code returns all zeros, then no matching exists, return NULL
+  # otherwise, add one to turn C++ indexing into R style indexing
+  ifelse(all(res == 0), return(NULL), return(res + 1))
 }
 
 #' Input validation for one-sided markets
@@ -143,49 +145,52 @@ roommate = function(utils = NULL, pref = NULL) {
 #'   the function will throw an error.
 #' @return The validated preference ordering using C++ indexing.
 #' @export
-roommate.validate = function(utils = NULL, pref = NULL) {
+roommate.validate <- function(utils = NULL, pref = NULL) {
 
-    # Convert cardinal utility to ordinal, if necessary
-    if (is.null(utils) && is.null(pref)) {
-        stop("Preferences need to be specified: either utils or pref must be provided.")
+  # Convert cardinal utility to ordinal, if necessary
+  if (is.null(utils) && is.null(pref)) {
+    stop("Preferences need to be specified: either utils or pref must be provided.")
+  }
+
+  # Convert cardinal utility to ordinal, if necessary
+  if (!is.null(utils) && !is.null(pref)) {
+    warning(
+      "Preferences were specified using both cardinal utilities ",
+      "and ordinal preferences. The algorithm will proceed by ",
+      "only using the ordinal preferences."
+    )
+  }
+
+  # Convert cardinal utility to ordinal, if necessary
+  if (is.null(pref) && !is.null(utils)) {
+
+    # remove main diagonal from matrix if NROW = NCOL
+    if (NROW(utils) == NCOL(utils)) {
+      utils <- matrix(
+        utils[-c(seq(from = 1, to = NROW(utils)^2, length.out = NROW(utils)))],
+        nrow = NROW(utils) - 1, ncol = NCOL(utils)
+      )
     }
 
-    # Convert cardinal utility to ordinal, if necessary
-    if (!is.null(utils) && !is.null(pref)) {
-        warning("Preferences were specified using both cardinal utilities ",
-                "and ordinal preferences. The algorithm will proceed by ",
-                "only using the ordinal preferences.")
+    if (NROW(utils) + 1 != NCOL(utils)) {
+      stop("preference matrix must be n-1xn")
     }
 
-    # Convert cardinal utility to ordinal, if necessary
-    if (is.null(pref) && !is.null(utils)) {
+    pref <- sortIndexOneSided(as.matrix(utils))
+  }
 
-        # remove main diagonal from matrix if NROW = NCOL
-        if (NROW(utils) == NCOL(utils)) {
-            utils = matrix(
-                utils[-c(seq(from = 1, to = NROW(utils) ^ 2, length.out = NROW(utils)))],
-                nrow = NROW(utils) - 1, ncol = NCOL(utils))
-        }
+  if (NROW(pref) + 1 != NCOL(pref)) {
+    stop("preference matrix must be n-1xn")
+  }
 
-        if (NROW(utils) + 1 != NCOL(utils)) {
-            stop("preference matrix must be n-1xn")
-        }
+  pref <- roommate.checkPreferences(pref)
+  if (is.null(pref)) {
+    stop(
+      "preferences are not a complete list of preference orderings"
+    )
+  }
 
-        pref = sortIndexOneSided(as.matrix(utils))
-    }
-
-    if (NROW(pref) + 1 != NCOL(pref)) {
-        stop("preference matrix must be n-1xn")
-    }
-
-    pref = roommate.checkPreferences(pref)
-    if (is.null(pref)) {
-        stop(
-            "preferences are not a complete list of preference orderings"
-        )
-    }
-
-    return(pref)
+  return(pref)
 }
 
 #' Check if a roommate matching is stable
@@ -216,19 +221,21 @@ roommate.validate = function(utils = NULL, pref = NULL) {
 #' @return true if stable, false if not
 #' @examples
 #' # define preferences
-#' pref = matrix(c(3, 1, 2, 3,
-#'                 4, 3, 4, 2,
-#'                 2, 4, 1, 1), byrow = TRUE, ncol = 4)
+#' pref <- matrix(c(
+#'   3, 1, 2, 3,
+#'   4, 3, 4, 2,
+#'   2, 4, 1, 1
+#' ), byrow = TRUE, ncol = 4)
 #' pref
 #' # compute matching
-#' results = roommate(pref = pref)
+#' results <- roommate(pref = pref)
 #' results
 #' # check if matching is stable
 #' roommate.checkStability(pref = pref, matching = results)
 #' @export
-roommate.checkStability = function(utils = NULL, pref = NULL, matching) {
-    pref.validated = roommate.validate(pref = pref, utils = utils)
-    cpp_wrapper_irving_check_stability(pref.validated, matching)
+roommate.checkStability <- function(utils = NULL, pref = NULL, matching) {
+  pref.validated <- roommate.validate(pref = pref, utils = utils)
+  cpp_wrapper_irving_check_stability(pref.validated, matching)
 }
 
 #' Check if preference order for a one-sided market is complete
@@ -244,27 +251,27 @@ roommate.checkStability = function(utils = NULL, pref = NULL, matching) {
 #' @return a matrix with preference orderings with proper C++ indices or NULL if
 #'   the preference order is not complete.
 #' @export
-roommate.checkPreferences = function(pref) {
+roommate.checkPreferences <- function(pref) {
 
-    # check if pref is using R instead of C++ indexing
-    if (all(apply(rbind(pref, c(1:NCOL(pref))), 2, sort) ==
-                matrix(1:NCOL(pref), nrow = NCOL(pref), ncol = NCOL(pref)))) {
-        return(pref - 1)
+  # check if pref is using R instead of C++ indexing
+  if (all(apply(rbind(pref, seq_len(NCOL(pref))), 2, sort) ==
+    matrix(seq_len(NCOL(pref)), nrow = NCOL(pref), ncol = NCOL(pref)))) {
+    return(pref - 1)
+  }
+
+  comp <- array(seq_len(NROW(pref)), dim = dim(pref)) - 1
+  for (i in seq_len(NROW(comp))) {
+    for (j in seq_len(NCOL(comp))) {
+      if (i >= j) {
+        comp[i, j] <- comp[i, j] + 1
+      }
     }
+  }
 
-    comp = array(1:(NROW(pref)), dim = dim(pref)) - 1
-    for (i in 1:NROW(comp)) {
-        for (j in 1:NCOL(comp)) {
-            if (i >= j) {
-                comp[i, j] = comp[i, j] + 1
-            }
-        }
-    }
+  # check if pref has a complete listing otherwise given an error
+  if (all(apply(pref, 2, sort) == comp)) {
+    return(pref)
+  }
 
-    # check if pref has a complete listing otherwise given an error
-    if (all(apply(pref,2,sort) == comp)) {
-        return(pref)
-    }
-
-    return(NULL)
+  return(NULL)
 }

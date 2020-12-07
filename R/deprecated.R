@@ -46,64 +46,64 @@
 #'   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
 #' }
 #'
-validateInputs = function(...) {
-    .Deprecated("galeShapley.validate")
-    galeShapley.validate(...)
+validateInputs <- function(...) {
+  .Deprecated("galeShapley.validate")
+  galeShapley.validate(...)
 }
-checkStability = function(...) {
-    .Deprecated("galeShapley.checkStability")
-    galeShapley.checkStability(...)
+checkStability <- function(...) {
+  .Deprecated("galeShapley.checkStability")
+  galeShapley.checkStability(...)
 }
-checkPreferenceOrder = function(...) {
-    .Deprecated("galeShapley.checkPreferences")
-    galeShapley.checkPreferences(...)
+checkPreferenceOrder <- function(...) {
+  .Deprecated("galeShapley.checkPreferences")
+  galeShapley.checkPreferences(...)
 }
-one2many = function(...) {
-    .Deprecated("galeShapley.collegeAdmissions")
-    galeShapley.collegeAdmissions(..., studentOptimal = TRUE)
+one2many <- function(...) {
+  .Deprecated("galeShapley.collegeAdmissions")
+  galeShapley.collegeAdmissions(..., studentOptimal = TRUE)
 }
-many2one = function(...) {
-    .Deprecated("galeShapley.collegeAdmissions")
-    galeShapley.collegeAdmissions(..., studentOptimal = FALSE)
+many2one <- function(...) {
+  .Deprecated("galeShapley.collegeAdmissions")
+  galeShapley.collegeAdmissions(..., studentOptimal = FALSE)
 }
-one2one = function(...) {
-    .Deprecated("galeShapley.marriageMarket")
-    galeShapley.marriageMarket(...)
+one2one <- function(...) {
+  .Deprecated("galeShapley.marriageMarket")
+  galeShapley.marriageMarket(...)
 }
-galeShapleyMatching = function(...) {
-    .Deprecated("cpp_wrapper_galeshapley")
-    cpp_wrapper_galeshapley(...)
+galeShapleyMatching <- function(...) {
+  .Deprecated("cpp_wrapper_galeshapley")
+  cpp_wrapper_galeshapley(...)
 }
-stableRoommateMatching = function(...) {
-    .Deprecated("cpp_wrapper_irving")
-    cpp_wrapper_irving(...)
+stableRoommateMatching <- function(...) {
+  .Deprecated("cpp_wrapper_irving")
+  cpp_wrapper_irving(...)
 }
-onesided = function(...) {
-    .Deprecated("roommate")
-    roommate(...)
+onesided <- function(...) {
+  .Deprecated("roommate")
+  roommate(...)
 }
-checkStabilityRoommate = function(...) {
-    .Deprecated("cpp_wrapper_irving_check_stability")
-    cpp_wrapper_irving_check_stability(...)
+checkStabilityRoommate <- function(...) {
+  .Deprecated("cpp_wrapper_irving_check_stability")
+  cpp_wrapper_irving_check_stability(...)
 }
-validateInputsOneSided = function(...) {
-    .Deprecated("roommate.validate")
-    roommate.validate(...)
+validateInputsOneSided <- function(...) {
+  .Deprecated("roommate.validate")
+  roommate.validate(...)
 }
-checkPreferenceOrderOnesided = function(...) {
-    .Deprecated("roommate.checkPreferences")
-    roommate.checkPreferences(...)
+checkPreferenceOrderOnesided <- function(...) {
+  .Deprecated("roommate.checkPreferences")
+  roommate.checkPreferences(...)
 }
-topTradingCycle = function(...) {
-    .Deprecated("cpp_wrapper_ttc")
-    cpp_wrapper_ttc(...)
+topTradingCycle <- function(...) {
+  .Deprecated("cpp_wrapper_ttc")
+  cpp_wrapper_ttc(...)
 }
-checkStabilityTopTradingCycle = function(...) {
-    .Deprecated("cpp_wrapper_ttc_check_stability")
-    toptrading.checkStability(...)
+checkStabilityTopTradingCycle <- function(...) {
+  .Deprecated("cpp_wrapper_ttc_check_stability")
+  toptrading.checkStability(...)
 }
-toptrading = function(...) {
-    .Deprecated("toptrading")
-    toptrading(...)
+toptrading <- function(...) {
+  .Deprecated("toptrading")
+  toptrading(...)
 }
 NULL

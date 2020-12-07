@@ -9,4 +9,5 @@ dependencies:
   - r-testthat
   - r-knitr
   - r-devtools
+  - r-rmarkdown
   - qpdf

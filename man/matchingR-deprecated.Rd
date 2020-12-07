@@ -17,7 +17,6 @@
 \alias{checkPreferenceOrderOnesided}
 \alias{topTradingCycle}
 \alias{checkStabilityTopTradingCycle}
-\alias{matchingR-deprecated-package}
 \title{Deprecated Functions in matchingR}
 \usage{
 validateInputs(...)
