@@ -4,7 +4,7 @@ output: knitr:::html_vignette
 bibliography: bibliography.bib
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Not an Introduction to knitr}
+  %\VignetteIndexEntry{Matching Algorithms in R and C++: An Introduction to matchingR}
 ---
 
 ```{r, results = "hide", echo=FALSE, message = FALSE}
