@@ -1,3 +1,7 @@
+# matchingR 1.3.2
+
+ * Fix vignette index.
+
 # matchingR 1.3.1
 
  * Add dummy roommate when number of roommates is odd [#37](https://github.com/jtilly/matchingR/issues/37)
