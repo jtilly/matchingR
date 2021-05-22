@@ -1,3 +1,7 @@
+# matchingR 1.3.3
+
+ * Fixed unit test for validate functions that caused a CRAN check to fail.
+
 # matchingR 1.3.2
 
  * Fix vignette index.
