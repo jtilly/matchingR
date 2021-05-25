@@ -79,7 +79,7 @@ test_that("Check if incorrect preference orders result in an error", {
   )
 })
 
-test_that("Check if validate function", {
+test_that("Check validate function", {
   # generate cardinal and ordinal preferences
   uM <- matrix(runif(12), nrow = 4, ncol = 3)
   uW <- matrix(runif(12), nrow = 4, ncol = 3)
@@ -91,7 +91,7 @@ test_that("Check if validate function", {
   expect_error(galeShapley.validate(proposerPref = prefM, reviewerPref = prefW))
 
   # generate cardinal and ordinal preferences
-  uM <- matrix(runif(12), nrow = 4, ncol = 4)
+  uM <- matrix(runif(16), nrow = 4, ncol = 4)
   uW <- matrix(runif(12), nrow = 4, ncol = 3)
   prefM <- sortIndex(uM)
   prefW <- sortIndex(uW)
