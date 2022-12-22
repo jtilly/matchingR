@@ -27,11 +27,11 @@ Installation
 ------------
 
 `matchingR` may be installed from [CRAN](https://cran.r-project.org/package=matchingR):
-```R
+```r
 install.packages("matchingR")
 ```
 The latest development release is available from GitHub:
-```R
+```r
 devtools::install_github("jtilly/matchingR")
 ```
 
@@ -40,7 +40,7 @@ devtools::install_github("jtilly/matchingR")
 ### Gale-Shapley Algorithm for Two-Sided Markets
 
 **Stable Marriage Problem**
-``` r
+```r
 # stable marriage problem with three men and two women
 uM = matrix(c(1.0, 0.5, 0.0,
               0.5, 0.0, 0.5), nrow = 2, ncol = 3, byrow = TRUE)
@@ -49,7 +49,7 @@ uW = matrix(c(0.0, 1.0,
               0.5, 0.0,
               1.0, 0.5), nrow = 3, ncol = 2, byrow = TRUE)
 
-matching = galeShapley(uM, uW)
+matching = galeShapley.marriageMarket(uM, uW)
 matching$engagements
 #>      [,1]
 #> [1,]    3
@@ -61,7 +61,7 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
 
 **College Admissions Problem**
-``` r
+```r
 # college admissions problem with five students and two colleges with two slots each
 set.seed(1)
 nStudents <- 5
@@ -96,7 +96,7 @@ galeShapley.checkStability(uStudents, uColleges, matching$matched.students, matc
 ```
 
 ### Irving's Algorithm for the Stable Roommate Problem
-``` r
+```r
 # stable roommate problem with four students and two rooms
 set.seed(2)
 n <- 4
@@ -117,7 +117,7 @@ results
 ```
 
 ### Top-Trading Cycle Algorithm
-``` r
+```r
 # top trading cycle algorithm with four houses
 set.seed(2)
 n <- 4
