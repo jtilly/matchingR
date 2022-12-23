@@ -41,6 +41,8 @@ devtools::install_github("jtilly/matchingR")
 
 **Stable Marriage Problem**
 ```r
+library(matchingR)
+
 # stable marriage problem with three men and two women
 uM = matrix(c(1.0, 0.5, 0.0,
               0.5, 0.0, 0.5), nrow = 2, ncol = 3, byrow = TRUE)
@@ -62,6 +64,8 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 
 **College Admissions Problem**
 ```r
+library(matchingR)
+
 # college admissions problem with five students and two colleges with two slots each
 set.seed(1)
 nStudents <- 5
@@ -97,6 +101,8 @@ galeShapley.checkStability(uStudents, uColleges, matching$matched.students, matc
 
 ### Irving's Algorithm for the Stable Roommate Problem
 ```r
+library(matchingR)
+
 # stable roommate problem with four students and two rooms
 set.seed(2)
 n <- 4
@@ -118,6 +124,8 @@ results
 
 ### Top-Trading Cycle Algorithm
 ```r
+library(matchingR)
+
 # top trading cycle algorithm with four houses
 set.seed(2)
 n <- 4
