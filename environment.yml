@@ -1,10 +1,9 @@
 name: matchingR
 channels:
   - conda-forge
-  - r
-  - nodefaults
 dependencies:
-  - r-rcpp 
+  - r-base=4.2
+  - r-rcpp
   - r-rcpparmadillo
   - r-testthat
   - r-knitr

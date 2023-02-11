@@ -82,7 +82,7 @@
 #'    matched to \code{NA}.}
 #'    \item{\code{engagements} is a vector of length \code{m} whose \code{j}th
 #'    element contains the number of the proposer that reviewer \code{j} is
-#'    matched to. Reviwers that remain unmatched will be listed as being matched
+#'    matched to. Reviewers that remain unmatched will be listed as being matched
 #'    to \code{NA}.}
 #'    \item{\code{single.proposers} is a vector that lists the remaining single
 #'    proposers. This vector will be empty whenever \code{n<=m}}.

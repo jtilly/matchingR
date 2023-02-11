@@ -234,7 +234,7 @@ test_that("Check if galeShapley.collegeAdmissions matching returns the same resu
   expect_true(identical(matching1, matching2))
 })
 
-test_that("Check student-optimal galeShapley.collegeAdmissions with differnet numbers of slots", {
+test_that("Check student-optimal galeShapley.collegeAdmissions with different numbers of slots", {
 
   # four students, two colleges, slots c(1,2)
   uStudents <- matrix(runif(8), nrow = 2, ncol = 4)
@@ -257,7 +257,7 @@ test_that("Check student-optimal galeShapley.collegeAdmissions with differnet nu
   expect_equal(matching1$matched.students, matching2$proposals)
 })
 
-test_that("Check college-optimal galeShapley.collegeAdmissions with differnet numbers of slots", {
+test_that("Check college-optimal galeShapley.collegeAdmissions with different numbers of slots", {
 
   # four students, two colleges, slots c(1,2)
   uStudents <- matrix(runif(8), nrow = 2, ncol = 4)
