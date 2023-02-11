@@ -8,10 +8,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          python-version: 3.10
-          mamba-version: "*"
+          miniforge-version: latest
+          miniforge-variant: Mambaforge
           channels: conda-forge
-          channel-priority: true
       - shell: bash -l {0}
         run: |
           conda info
