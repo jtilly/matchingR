@@ -1,36 +1,36 @@
-Matching Algorithms in R and C++
-===============
+# Matching Algorithms in R and C++
+
 [![GitHub Actions](https://github.com/jtilly/matchingR/workflows/Test%20Package/badge.svg)](https://github.com/jtilly/matchingR/actions)
 [![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/github/jtilly/matchingR)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/matchingR)](https://cran.r-project.org/package=matchingR)
 [![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](https://cran.r-project.org/package=matchingR)
 
-
 [!["You know that I'll never leave you. Not as long as she's with someone."](https://imgs.xkcd.com/comics/all_the_girls.png)](https://xkcd.com/770/ "You know that I'll never leave you. Not as long as she's with someone.")
 
-
 `matchingR` is an R package which quickly computes the [Gale-Shapley algorithm](https://www.jstor.org/stable/2312726), [Irving's algorithm for the stable roommate problem](https://www.sciencedirect.com/science/article/pii/0196677485900331/), and the [top trading cycle algorithm](https://www.sciencedirect.com/science/article/abs/pii/0304406874900330/) for large matching markets. The package provides functions to compute the solutions to the
-  [stable marriage problem](https://en.wikipedia.org/wiki/Stable_matching), the
-  [college admission problem](https://en.wikipedia.org/wiki/Hospital_resident), the
-  [stable roommates problem](https://en.wikipedia.org/wiki/Stable_roommates_problem), and the
-  [house allocation problem](https://web.stanford.edu/~niederle/HouseAllocation.pdf).
+[stable marriage problem](https://en.wikipedia.org/wiki/Stable_matching), the
+[college admission problem](https://en.wikipedia.org/wiki/Hospital_resident), the
+[stable roommates problem](https://en.wikipedia.org/wiki/Stable_roommates_problem), and the
+[house allocation problem](https://web.stanford.edu/~niederle/HouseAllocation.pdf).
 
 The package may be useful when the number of market participants is large or when many matchings need to be computed (e.g., for simulation or estimation purposes). It has been used in practice to compute the Gale-Shapley stable matching with 30,000 participants on each side of the market.
 
 Matching markets are common in practice and widely studied by economists. Popular examples include
 
- * the [National Resident Matching Program](https://www.nrmp.org/) which matches graduates from medical school to residency programs at teaching hospitals throughout the United States
- * the matching of students to schools including the [New York City High School Match](https://www.jstor.org/stable/4132848) or the [Boston Public School Match](https://www.jstor.org/stable/4132849) (and many more)
- * the matching of kidney donors to recipients in [kidney exchanges](https://www.jstor.org/stable/4132851).
+- the [National Resident Matching Program](https://www.nrmp.org/) which matches graduates from medical school to residency programs at teaching hospitals throughout the United States
+- the matching of students to schools including the [New York City High School Match](https://www.jstor.org/stable/4132848) or the [Boston Public School Match](https://www.jstor.org/stable/4132849) (and many more)
+- the matching of kidney donors to recipients in [kidney exchanges](https://www.jstor.org/stable/4132851).
 
-Installation
-------------
+## Installation
 
 `matchingR` may be installed from [CRAN](https://cran.r-project.org/package=matchingR):
+
 ```r
 install.packages("matchingR")
 ```
+
 The latest development release is available from GitHub:
+
 ```r
 devtools::install_github("jtilly/matchingR")
 ```
@@ -40,6 +40,7 @@ devtools::install_github("jtilly/matchingR")
 ### Gale-Shapley Algorithm for Two-Sided Markets
 
 **Stable Marriage Problem**
+
 ```r
 library(matchingR)
 
@@ -63,6 +64,7 @@ galeShapley.checkStability(uM, uW, matching$proposals, matching$engagements)
 ```
 
 **College Admissions Problem**
+
 ```r
 library(matchingR)
 
@@ -100,6 +102,7 @@ galeShapley.checkStability(uStudents, uColleges, matching$matched.students, matc
 ```
 
 ### Irving's Algorithm for the Stable Roommate Problem
+
 ```r
 library(matchingR)
 
@@ -123,6 +126,7 @@ results
 ```
 
 ### Top-Trading Cycle Algorithm
+
 ```r
 library(matchingR)
 
@@ -146,5 +150,6 @@ results
 ```
 
 ## Documentation
-* [Reference Manual](https://jtilly.io/matchingR/matchingR.pdf "Matching Algorithms in R and C++: Reference Manual")
-* [Vignette: Matching Algorithms in R and C++: An Introduction to matchingR](https://jtilly.io/matchingR/vignettes/matchingR-intro.html "Matching Algorithms in R and C++: An Introduction to matchingR")
+
+- [Reference Manual](https://jtilly.io/matchingR/matchingR.pdf "Matching Algorithms in R and C++: Reference Manual")
+- [Vignette: Matching Algorithms in R and C++: An Introduction to matchingR](https://jtilly.io/matchingR/vignettes/matchingR-intro.html "Matching Algorithms in R and C++: An Introduction to matchingR")

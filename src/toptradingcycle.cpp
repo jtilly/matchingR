@@ -20,7 +20,7 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 //' Computes the top trading cycle algorithm
-//' 
+//'
 //' This is the C++ wrapper for the top trading cycle algorithm. Users should not
 //' call this function directly, but instead use
 //' \code{\link{toptrading}}.

@@ -60,24 +60,24 @@ List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils)
 
     // number of proposers (men)
     int M = proposerPref.n_cols;
-    
+
     // number of reviewers (women)
     int N = proposerPref.n_rows;
-    
+
     // initialize engagements, proposals
     vec engagements(N), proposals(M);
-    
-    // create an integer queue of bachelors 
+
+    // create an integer queue of bachelors
     // the idea of using queues for this problem is borrowed from
     // http://rosettacode.org/wiki/Stable_marriage_problem#C.2B.2B
     queue<int> bachelors;
-    
+
     // set all proposals to N (aka no proposals)
     proposals.fill(N);
-    
+
     // set all engagements to M (aka no engagements)
     engagements.fill(M);
-    
+
     // every proposer starts out as a bachelor
     for(int iX=M-1; iX >= 0; iX--) {
         bachelors.push(iX);
@@ -85,49 +85,49 @@ List cpp_wrapper_galeshapley(const umat& proposerPref, const mat& reviewerUtils)
 
     // loop until there are no more proposals to be made
     while (!bachelors.empty()) {
-        
+
         // get the index of the proposer
         int proposer = bachelors.front();
-        
-        // get the proposer's preferences: we use a raw pointer to the memory 
+
+        // get the proposer's preferences: we use a raw pointer to the memory
         // used by the column `proposer` for performance reasons (this is to avoid
         // making a copy of the proposers vector of preferences)
         const uword * proposerPrefcol = proposerPref.colptr(proposer);
-        
+
         // find the best available match for proposer
         for(int jX=0; jX<N; jX++) {
-        
+
             // get the index of the reviewer that the proposer is interested in
             // by dereferencing the pointer; increment the pointer after use (not its value)
             const uword wX = *proposerPrefcol++;
-        
+
             // check if wX is available (`M` means unmatched)
             if(engagements(wX)==M) {
-        
+
                 // if available, then form a match
                 engagements(wX) = proposer;
                 proposals(proposer) = wX;
-        
+
                 // go to the next proposer
                 break;
             }
-          
+
             // wX is already matched, let's see if wX can be poached
             if(reviewerUtils(proposer, wX) > reviewerUtils(engagements(wX), wX)) {
-          
+
                 // wX's previous partner becomes unmatched (`N` means unmatched)
                 proposals(engagements(wX)) = N;
                 bachelors.push(engagements(wX));
-          
+
                 // proposer and wX form a match
                 engagements(wX) = proposer;
                 proposals(proposer) = wX;
-          
+
                 // go to the next proposer
                 break;
             }
         }
-        
+
         // remove proposer from bachelor queue: proposer will remain unmatched
         bachelors.pop();
     }
@@ -171,13 +171,13 @@ bool cpp_wrapper_galeshapley_check_stability(mat proposerUtils, mat reviewerUtil
 
     // number of workers
     const int M = proposerUtils.n_cols;
-    
+
     // number of firms
     const int N = proposerUtils.n_rows;
-    
+
     // number of slots per firm
     const int slotsReviewers = engagements.n_cols;
-    
+
     // number of slots per worker
     const int slotsProposers = proposals.n_cols;
 
@@ -191,19 +191,19 @@ bool cpp_wrapper_galeshapley_check_stability(mat proposerUtils, mat reviewerUtil
         proposerUtils.insert_rows(N, 1);
         proposerUtils.row(N).fill(-1e10);
     }
-    
+
     // loop over workers
     for(int wX=0; wX<M; wX++) {
-    
+
         // loop over firms
         for(int fX=0; fX<N; fX++) {
-    
+
             // loop over multiple "slots" at the same worker
             for(int swX=0;swX<slotsProposers;swX++) {
-    
+
                 // loop over multiple slots at the same firm
                 for(int sfX=0;sfX<slotsReviewers;sfX++) {
-    
+
                     // check if wX and fX would rather be matched with each other than with their actual matches
                     if(reviewerUtils(wX, fX) > reviewerUtils(engagements(fX, sfX), fX) && proposerUtils(fX, wX) > proposerUtils(proposals(wX, swX), wX)) {
                         ::Rf_warning("matching is not stable; worker %d would rather be matched to firm %d and vice versa.\n", wX, fX);

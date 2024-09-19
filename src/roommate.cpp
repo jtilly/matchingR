@@ -24,7 +24,7 @@
 //' This is the C++ wrapper for the stable roommate problem. Users should not
 //' call this function directly, but instead use
 //' \code{\link{roommate}}.
-//' 
+//'
 //' @param pref is a matrix with the preference order of each individual in the
 //'   market. If there are \code{n} individuals, then this matrix will be of
 //'   dimension \code{n-1} by \code{n}. The \code{i,j}th element refers to
