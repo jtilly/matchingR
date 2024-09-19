@@ -47,4 +47,3 @@ the matchingR package. Eventually, these functions will be removed.
   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
 }
 }
-
