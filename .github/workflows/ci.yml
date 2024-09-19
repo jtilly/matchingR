@@ -1,12 +1,32 @@
-name: Test Package
+name: CI
 on: [push]
+
+# Automatically stop old builds on the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -el {0}
+
 jobs:
-  build-linux:
-    name: CI
+  pre-commit-checks:
+    name: Pre-commit checks
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Run pre-commit-conda
+        uses: quantco/pre-commit-conda@v1
+
+  tests:
+    name: Tests
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
-      - uses: conda-incubator/setup-miniconda@v2.2.0
+      - uses: conda-incubator/setup-miniconda@v3.0.4
         with:
           miniforge-version: latest
           miniforge-variant: Mambaforge
