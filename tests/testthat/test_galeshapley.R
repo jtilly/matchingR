@@ -157,7 +157,7 @@ test_that("Check outcome from student-optimal galeShapley.collegeAdmissions matc
   expect_true(all.equal(matching$matched.students, matrix(c(2, 1, 2), ncol = 1)))
 })
 
-test_that("Check outcome from collge-optimal galeShapley.collegeAdmissions matching", {
+test_that("Check outcome from college-optimal galeShapley.collegeAdmissions matching", {
   uM <- matrix(c(
     0, 1,
     1, 0,
