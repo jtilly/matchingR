@@ -2,7 +2,6 @@
 % Please edit documentation in R/matchingR.R
 \docType{package}
 \name{matchingR-package}
-\alias{matchingR}
 \alias{matchingR-package}
 \title{matchingR: Matching Algorithms in R and C++}
 \description{

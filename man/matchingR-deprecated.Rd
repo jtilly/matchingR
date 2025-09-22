@@ -2,6 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \docType{package}
 \name{matchingR-deprecated}
+\alias{-package}
 \alias{matchingR-deprecated}
 \alias{validateInputs}
 \alias{checkStability}
@@ -47,3 +48,4 @@ the matchingR package. Eventually, these functions will be removed.
   \code{checkStabilityTopTradingCycle} \tab was replaced by \code{\link{cpp_wrapper_ttc_check_stability}}\cr
 }
 }
+
