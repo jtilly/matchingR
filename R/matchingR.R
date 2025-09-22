@@ -15,7 +15,7 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 
-#' @name matchingR-package
+#' @name matchingR
 #' @docType package
 #' @title matchingR: Matching Algorithms in R and C++
 #' @description matchingR is an R package which quickly computes a variety of
