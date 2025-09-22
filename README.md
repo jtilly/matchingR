@@ -1,7 +1,7 @@
 # Matching Algorithms in R and C++
 
 [![GitHub Actions](https://github.com/jtilly/matchingR/workflows/Test%20Package/badge.svg)](https://github.com/jtilly/matchingR/actions)
-[![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=master)](https://coveralls.io/github/jtilly/matchingR)
+[![Coverage Status](https://coveralls.io/repos/jtilly/matchingR/badge.svg?branch=main)](https://coveralls.io/github/jtilly/matchingR)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/matchingR)](https://cran.r-project.org/package=matchingR)
 [![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/matchingR?color=brightgreen)](https://cran.r-project.org/package=matchingR)
 

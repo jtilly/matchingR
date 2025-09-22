@@ -1,3 +1,8 @@
+# matchingR 2.0.0
+
+- Remove deprecated functions.
+- Drop `CXX11` standard.
+
 # matchingR 1.3.3
 
 - Fixed unit test for validate functions that caused a CRAN check to fail.
