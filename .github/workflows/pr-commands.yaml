@@ -50,7 +50,7 @@ jobs:
 
 
   compile:
-    if: ${{ github.event.issue.pull_request && (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') && startsWith(github.event.comment.body, '/document') }}
+    if: ${{ github.event.issue.pull_request && (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER') && startsWith(github.event.comment.body, '/compile') }}
     name: compile
     runs-on: ubuntu-latest
     env:
@@ -71,9 +71,9 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::Rcpp
-          needs: pr-document
+          needs: pr-compile
 
-      - name: Document
+      - name: Compile
         run: Rcpp::compileAttributes()
         shell: Rscript {0}
 
