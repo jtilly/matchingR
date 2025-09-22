@@ -3,7 +3,10 @@ Type: Package
 Title: Matching Algorithms in R and C++
 Version: 2.0.0
 Date: 2025-09-22
-Author: Jan Tilly, Nick Janetos
+Authors@R: c(
+               person(given = "Jan", family = "Tilly", role = c("aut", "cre"), email = "jantilly@gmail.com"),
+               person(given = "Nick", family = "Janetos", role = "aut")
+           )
 Maintainer: Jan Tilly <jantilly@gmail.com>
 Description: Computes matching algorithms quickly using Rcpp.
     Implements the Gale-Shapley Algorithm to compute the stable
